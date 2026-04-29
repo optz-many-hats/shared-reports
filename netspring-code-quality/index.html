@@ -107,7 +107,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
 <div class="header">
   <h1>NetSpring — Code Quality & Security Report</h1>
   <p class="meta">
-    Generated 2026-04-29 14:18 UTC &middot;
+    Generated 2026-04-29 16:59 UTC &middot;
     Commit <a href="https://github.com/netspringio/netspring/commit/033b4e13c139706d4cc9a16ac9fc9e75402763bc">033b4e13c1</a> &middot;
     315,490 lines of code
   </p>
@@ -115,7 +115,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
 
 <div class="tabs">
   <div class="tab active" data-tab="all" onclick="switchTab('all')">
-    All Issues <span class="tab-count">2,070</span>
+    All Issues <span class="tab-count">2,168</span>
   </div>
   <div class="tab" data-tab="sonar" onclick="switchTab('sonar')">
     SonarQube <span class="tab-count">2,016</span>
@@ -124,17 +124,17 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     Semgrep <span class="tab-count">54</span>
   </div>
   <div class="tab" data-tab="owasp" onclick="switchTab('owasp')">
-    OWASP Dependency-Check <span class="tab-count">0</span>
+    OWASP Dependency-Check <span class="tab-count">98</span>
   </div>
 </div>
 
 <!-- ==================== ALL ISSUES TAB ==================== -->
 <div class="tab-content active" id="tab-all">
 <div class="cards">
-  <div class="card"><div class="value">2,070</div><div class="label">Total Issues</div></div>
+  <div class="card"><div class="value">2,168</div><div class="label">Total Issues</div></div>
   <div class="card"><div class="value" style="color:var(--accent)">2,016</div><div class="label">SonarQube</div></div>
   <div class="card"><div class="value" style="color:var(--accent2)">54</div><div class="label">Semgrep</div></div>
-  <div class="card"><div class="value" style="color:var(--accent3)">0</div><div class="label">OWASP</div></div>
+  <div class="card"><div class="value" style="color:var(--accent3)">98</div><div class="label">OWASP</div></div>
 </div>
 <div class="section" style="border-color:#00e676">
   <h2 style="color:#00e676">All Issues by File</h2>
@@ -154,15 +154,19 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     <button class="filter-btn" onclick="allSev(this,'BLOCKER')"><span class="badge" style="background:#d4333f">BLOCKER</span></button>
     <button class="filter-btn" onclick="allSev(this,'CRITICAL')"><span class="badge" style="background:#ed7d20">CRITICAL</span></button>
     <button class="filter-btn" onclick="allSev(this,'ERROR')"><span class="badge" style="background:#d4333f">ERROR</span></button>
+    <button class="filter-btn" onclick="allSev(this,'HIGH')"><span class="badge" style="background:#ed7d20">HIGH</span></button>
     <button class="filter-btn" onclick="allSev(this,'MAJOR')"><span class="badge" style="background:#eabe06">MAJOR</span></button>
     <button class="filter-btn" onclick="allSev(this,'WARNING')"><span class="badge" style="background:#eabe06">WARNING</span></button>
     <button class="filter-btn" onclick="allSev(this,'MINOR')"><span class="badge" style="background:#67a513">MINOR</span></button>
+    <button class="filter-btn" onclick="allSev(this,'LOW')"><span class="badge" style="background:#67a513">LOW</span></button>
     <button class="filter-btn" onclick="allSev(this,'INFO')"><span class="badge" style="background:#2a7ab0">INFO</span></button>
+    <button class="filter-btn" onclick="allSev(this,'MODERATE')"><span class="badge" style="background:#999">MODERATE</span></button>
   </div>
   <div class="filter-bar">
     <span style="font-size:0.8em;color:var(--text-muted);min-width:55px">Language:</span>
     <button class="filter-btn active" onclick="allLang(this,'all')">All</button>
     <button class="filter-btn" onclick="allLang(this,'css')">CSS</button>
+    <button class="filter-btn" onclick="allLang(this,'dep')">Dependencies</button>
     <button class="filter-btn" onclick="allLang(this,'java')">Java</button>
     <button class="filter-btn" onclick="allLang(this,'js')">JavaScript</button>
     <button class="filter-btn" onclick="allLang(this,'other')">Other</button>
@@ -618,7 +622,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="common/testpostgres.java" data-sources="sonar semgrep" data-sevs="MINOR BLOCKER MAJOR CRITICAL WARNING" data-langs="java">
+<details class="all-entry" data-path="common/testpostgres.java" data-sources="semgrep sonar" data-sevs="BLOCKER WARNING MINOR MAJOR CRITICAL" data-langs="java">
   <summary><strong>common/TestPostgres.java</strong> (32) <span class="source source-sq">29</span> <span class="source source-sg">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="BLOCKER" data-lang="java">
@@ -761,7 +765,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="springworks/core/timestamp.java" data-sources="sonar" data-sevs="MINOR BLOCKER" data-langs="java">
+<details class="all-entry" data-path="springworks/core/timestamp.java" data-sources="sonar" data-sevs="BLOCKER MINOR" data-langs="java">
   <summary><strong>springworks/core/Timestamp.java</strong> (29) <span class="source source-sq">29</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="BLOCKER" data-lang="java">
@@ -882,7 +886,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/utils/adapters.ts" data-sources="sonar" data-sevs="INFO MAJOR CRITICAL MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/utils/adapters.ts" data-sources="sonar" data-sevs="INFO MAJOR MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/utils/adapters.ts</strong> (22) <span class="source source-sq">22</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -1145,7 +1149,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/editors/dataseteditor/relateddatasetseditor/relateddatasetseditor.tsx" data-sources="sonar" data-sevs="MAJOR INFO CRITICAL MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/editors/dataseteditor/relateddatasetseditor/relateddatasetseditor.tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/editors/DatasetEditor/RelatedDatasetsEditor/RelatedDatasetsEditor.tsx</strong> (19) <span class="source source-sq">19</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -1461,7 +1465,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/utils/funcs.tsx" data-sources="sonar" data-sevs="CRITICAL MINOR INFO MAJOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/utils/funcs.tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/utils/funcs.tsx</strong> (17) <span class="source source-sq">17</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -1603,7 +1607,93 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/editors/editorheaderv2/editorheaderv2.tsx" data-sources="sonar" data-sevs="CRITICAL MINOR INFO MAJOR" data-langs="ts">
+<details class="all-entry" data-path="next:13.5.9" data-sources="owasp" data-sevs="LOW MODERATE HIGH" data-langs="dep">
+  <summary><strong>next:13.5.9</strong> (16) <span class="source source-dc">16</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-5j59-xgg2-r9c4</strong> (CVSS: 7.5)
+      <div class="issue-meta">It was discovered that the fix for [CVE-2025-55184](https://github.com/advisories/GHSA-2m3v-v2m8-q956) in React Server Components was incomplete and did not fully mitigate denial-of-service conditions</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-7gfc-8cq8-jh5f</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Impact
+If a Next.js application is performing authorization in middleware based on pathname, it was possible for this authorization to be bypassed.
+
+### Patches
+This issue was patched in Next.js `</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-fr5h-rqp8-mj6g</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Impact
+A Server-Side Request Forgery (SSRF) vulnerability was identified in Next.js Server Actions by security researchers at Assetnote. If the `Host` header is modified, and the below conditions </div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-h25m-26qc-wcjf</strong> (CVSS: 7.5)
+      <div class="issue-meta">A vulnerability affects certain React Server Components packages for versions 19.0.x, 19.1.x, and 19.2.x and frameworks that use the affected packages, including Next.js 13.x, 14.x, 15.x, and 16.x usi</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-mwv6-3258-q52c</strong> (CVSS: 7.5)
+      <div class="issue-meta">A vulnerability affects certain React packages for versions 19.0.0, 19.0.1, 19.1.0, 19.1.1, 19.1.2, 19.2.0, and 19.2.1 and frameworks that use the affected packages, including Next.js 15.x and 16.x us</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-q4gf-8mx6-v5v3</strong> (CVSS: 7.5)
+      <div class="issue-meta">A vulnerability affects certain React Server Components packages for versions 19.x and frameworks that use the affected packages, including Next.js 13.x, 14.x, 15.x, and 16.x using the App Router. The</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="LOW" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-qpjv-v59x-3qc4</strong> (CVSS: 3.700000047683716)
+      <div class="issue-meta">**Summary**  
+We received a responsible disclosure from Allam Rachid (zhero) for a low-severity race-condition vulnerability in Next.js. This issue only affects the **Pages Router** under certain misc</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="LOW" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-223j-4rm8-mrmf</strong>
+      <div class="issue-meta">## Summary
+In the process of remediating [CVE-2025-29927](https://github.com/advisories/GHSA-f82v-jwr5-mffw), we looked at other possible exploits of Middleware. We independently verified this low sev</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="LOW" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-3h52-269p-cp9r</strong>
+      <div class="issue-meta">## Summary
+
+A low-severity vulnerability in **Next.js** has been fixed in **version 15.2.2**. This issue may have allowed limited source code exposure when the dev server was running with the App Rout</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-4342-x723-ch2f</strong> (CVSS: 6.5)
+      <div class="issue-meta">A vulnerability in **Next.js Middleware** has been fixed in **v14.2.32** and **v15.4.7**. The issue occurred when request headers were directly passed into `NextResponse.next()`. In self-hosted applic</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-g5qg-72qw-gw5v</strong> (CVSS: 6.199999809265137)
+      <div class="issue-meta">A vulnerability in Next.js Image Optimization has been fixed in v15.4.5 and v14.2.31. When images returned from API routes vary based on request headers (such as `Cookie` or `Authorization`), these re</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-9g9p-9gw9-jx7f</strong> (CVSS: 5.900000095367432)
+      <div class="issue-meta">A DoS vulnerability exists in self-hosted Next.js applications that have `remotePatterns` configured for the Image Optimizer. The image optimization endpoint (`/_next/image`) loads external images ent</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-g77x-44xx-532m</strong> (CVSS: 5.900000095367432)
+      <div class="issue-meta">### Impact
+The image optimization feature of Next.js contained a vulnerability which allowed for a potential Denial of Service (DoS) condition which could lead to excessive CPU consumption.
+
+**Not aff</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-xv57-4mr9-wg8v</strong> (CVSS: 4.300000190734863)
+      <div class="issue-meta">A vulnerability in **Next.js Image Optimization** has been fixed in **v15.4.5** and **v14.2.31**. The issue allowed attacker-controlled external image sources to trigger file downloads with arbitrary </div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-3x4c-7xq6-9pq8</strong>
+      <div class="issue-meta">## Summary
+The default Next.js image optimization disk cache (`/_next/image`) did not have a configurable upper bound, allowing unbounded cache growth.
+
+## Impact
+An attacker could generate many uniqu</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-ggv3-7p47-pfv8</strong>
+      <div class="issue-meta">## Summary
+When Next.js rewrites proxy traffic to an external backend, a crafted `DELETE`/`OPTIONS` request using `Transfer-Encoding: chunked` could trigger request boundary disagreement between the p</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="firewatch/src/components/editors/editorheaderv2/editorheaderv2.tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/editors/EditorHeaderV2/EditorHeaderV2.tsx</strong> (15) <span class="source source-sq">15</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -1912,7 +2002,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/shared/entitiestree.tsx" data-sources="sonar" data-sevs="MAJOR INFO CRITICAL MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/shared/entitiestree.tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/shared/EntitiesTree.tsx</strong> (14) <span class="source source-sq">14</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -2258,7 +2348,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/charts/pivotchart/pivotchart.utils.tsx" data-sources="sonar" data-sevs="CRITICAL MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/charts/pivotchart/pivotchart.utils.tsx" data-sources="sonar" data-sevs="INFO MAJOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/charts/PivotChart/PivotChart.utils.tsx</strong> (12) <span class="source source-sq">12</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -2311,7 +2401,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/pages/alerts/alertinbox.tsx" data-sources="sonar" data-sevs="CRITICAL MAJOR INFO MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/pages/alerts/alertinbox.tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/pages/alerts/AlertInbox.tsx</strong> (12) <span class="source source-sq">12</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -2364,7 +2454,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/stores/querycontextstore/querycontextstore.utils.ts" data-sources="sonar" data-sevs="MAJOR INFO CRITICAL MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/stores/querycontextstore/querycontextstore.utils.ts" data-sources="sonar" data-sevs="INFO MAJOR MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/stores/QueryContextStore/QueryContextStore.utils.ts</strong> (12) <span class="source source-sq">12</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -2621,7 +2711,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/charts/rulechart.tsx" data-sources="sonar" data-sevs="MAJOR INFO MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/charts/rulechart.tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR" data-langs="ts">
   <summary><strong>firewatch/src/components/charts/RuleChart.tsx</strong> (10) <span class="source source-sq">10</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -2666,7 +2756,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/charts/chartutils/chartutils.tsx" data-sources="sonar" data-sevs="CRITICAL MINOR INFO MAJOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/charts/chartutils/chartutils.tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/charts/chartUtils/chartUtils.tsx</strong> (10) <span class="source source-sq">10</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -2711,7 +2801,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/shared/vizviseditor/vizpropertyeditors/vizpropertyeditors.tsx" data-sources="sonar" data-sevs="CRITICAL MINOR INFO MAJOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/shared/vizviseditor/vizpropertyeditors/vizpropertyeditors.tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/shared/VizVisEditor/VizPropertyEditors/VizPropertyEditors.tsx</strong> (10) <span class="source source-sq">10</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -2846,7 +2936,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/alerts/forms/alertform.tsx" data-sources="sonar" data-sevs="MAJOR MINOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/alerts/forms/alertform.tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR" data-langs="ts">
   <summary><strong>firewatch/src/components/alerts/forms/AlertForm.tsx</strong> (9) <span class="source source-sq">9</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -2887,7 +2977,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/charts/tablechartv2/tablechartv2.utils.tsx" data-sources="sonar" data-sevs="CRITICAL MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/charts/tablechartv2/tablechartv2.utils.tsx" data-sources="sonar" data-sevs="INFO MAJOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/charts/TableChartV2/TableChartV2.utils.tsx</strong> (9) <span class="source source-sq">9</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -3047,7 +3137,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/tiptapformulaeditor/utils/formulaparsevariablepath.util.ts" data-sources="sonar" data-sevs="MAJOR CRITICAL MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/tiptapformulaeditor/utils/formulaparsevariablepath.util.ts" data-sources="sonar" data-sevs="MAJOR MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/TiptapFormulaEditor/utils/formulaParseVariablePath.util.ts</strong> (8) <span class="source source-sq">8</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -3121,7 +3211,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/editors/exploreeditor/utils/utils.ts" data-sources="sonar" data-sevs="MAJOR INFO MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/editors/exploreeditor/utils/utils.ts" data-sources="sonar" data-sevs="INFO MAJOR MINOR" data-langs="ts">
   <summary><strong>firewatch/src/components/editors/ExploreEditor/utils/utils.ts</strong> (8) <span class="source source-sq">8</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -3229,6 +3319,59 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     <div class="issue-item all-item" data-source="sonar" data-sev="INFO" data-lang="ts">
       <span class="source source-sq">SONAR</span> &#x1f527; <span class="badge" style="background:#2a7ab0">INFO</span> Complete the task associated to this &quot;TODO&quot; comment.
       <div class="issue-meta"><a href="https://github.com/netspringio/netspring/blob/033b4e13c139706d4cc9a16ac9fc9e75402763bc/firewatch/src/pages/data/events.tsx#L514" target="_blank" rel="noopener">L514</a> &middot; <code>typescript:S1135</code><span class="tag">cwe</span> &middot; 0min</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="handlebars:4.7.8" data-sources="owasp" data-sevs="LOW MODERATE HIGH CRITICAL" data-langs="dep">
+  <summary><strong>handlebars:4.7.8</strong> (8) <span class="source source-dc">8</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="CRITICAL" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#d4333f">CRITICAL</span> <strong>GHSA-2w6w-674q-4c4q</strong> (CVSS: 9.800000190734863)
+      <div class="issue-meta">## Summary
+
+`Handlebars.compile()` accepts a pre-parsed AST object in addition to a template string. The `value` field of a `NumberLiteral` AST node is emitted directly into the generated JavaScript w</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-xjpj-3mr7-gcpf</strong> (CVSS: 8.300000190734863)
+      <div class="issue-meta">## Summary
+
+The Handlebars CLI precompiler (`bin/handlebars` / `lib/precompiler.js`) concatenates user-controlled strings — template file names and several CLI options — directly into the JavaScript i</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-3mfm-83xf-c92r</strong> (CVSS: 8.100000381469727)
+      <div class="issue-meta">## Summary
+
+The `@partial-block` special variable is stored in the template data context and is reachable and mutable from within a template via helpers that accept arbitrary objects. When a helper ov</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-xhpv-hc6g-r9c6</strong> (CVSS: 8.100000381469727)
+      <div class="issue-meta">## Summary
+
+A crafted object placed in the template context can bypass all conditional guards in `resolvePartial()` and cause `invokePartial()` to return `undefined`. The Handlebars runtime then treat</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-9cx6-37pm-9jff</strong> (CVSS: 7.5)
+      <div class="issue-meta">## Summary
+
+When a Handlebars template contains decorator syntax referencing an unregistered decorator (e.g. `{{*n}}`), the compiled template calls `lookupProperty(decorators, &quot;n&quot;)`, which returns `un</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="LOW" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-442j-39wm-28r2</strong> (CVSS: 3.700000047683716)
+      <div class="issue-meta">## Summary
+
+In `lib/handlebars/runtime.js`, the `container.lookup()` function uses `container.lookupProperty()` as a gate check to enforce prototype-access controls, but then discards the validated re</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-7rx3-28cr-v5wh</strong> (CVSS: 4.800000190734863)
+      <div class="issue-meta">## Summary
+
+The prototype method blocklist in `lib/handlebars/internal/proto-access.js` blocks `constructor`, `__defineGetter__`, `__defineSetter__`, and `__lookupGetter__`, but omits the symmetric `_</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-2qvq-rjwj-gvw9</strong> (CVSS: 4.699999809265137)
+      <div class="issue-meta">## Summary
+
+`resolvePartial()` in the Handlebars runtime resolves partial names via a plain property lookup on `options.partials` without guarding against prototype-chain traversal. When `Object.proto</div>
     </div>
   </div>
 </details>
@@ -3496,7 +3639,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/shared/tilev2/visualizationtile/usequeryexplore/usequeryexplore.ts" data-sources="sonar" data-sevs="CRITICAL MAJOR MINOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/shared/tilev2/visualizationtile/usequeryexplore/usequeryexplore.ts" data-sources="sonar" data-sevs="INFO MAJOR MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/shared/TileV2/VisualizationTile/useQueryExplore/useQueryExplore.ts</strong> (7) <span class="source source-sq">7</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -3562,7 +3705,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/pages/settings/users/group/[groupid].tsx" data-sources="sonar" data-sevs="MAJOR MINOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/pages/settings/users/group/[groupid].tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR" data-langs="ts">
   <summary><strong>firewatch/src/pages/settings/users/group/[groupId].tsx</strong> (7) <span class="source source-sq">7</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -3661,7 +3804,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="customer/verizon/nonprod/frozen/auth.k8s.yaml" data-sources="semgrep" data-sevs="ERROR WARNING INFO" data-langs="yaml">
+<details class="all-entry" data-path="customer/verizon/nonprod/frozen/auth.k8s.yaml" data-sources="semgrep" data-sevs="INFO ERROR WARNING" data-langs="yaml">
   <summary><strong>customer/verizon/nonprod/frozen/auth.k8s.yaml</strong> (7) <span class="source source-sg">7</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="semgrep" data-sev="ERROR" data-lang="yaml">
@@ -3816,7 +3959,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/editors/exploreeditor/subtypes/experimentscorecardeditor/experimentscorecardeditor.utils.ts" data-sources="sonar" data-sevs="MAJOR CRITICAL MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/editors/exploreeditor/subtypes/experimentscorecardeditor/experimentscorecardeditor.utils.ts" data-sources="sonar" data-sevs="MAJOR MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/editors/ExploreEditor/subtypes/ExperimentScorecardEditor/ExperimentScorecardEditor.utils.ts</strong> (6) <span class="source source-sq">6</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -3845,7 +3988,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/modals/connectiontypemodal/index.tsx" data-sources="sonar" data-sevs="MAJOR INFO MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/modals/connectiontypemodal/index.tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR" data-langs="ts">
   <summary><strong>firewatch/src/components/modals/ConnectionTypeModal/index.tsx</strong> (6) <span class="source source-sq">6</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -4019,7 +4162,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/utils/constants/constants.tsx" data-sources="sonar" data-sevs="MAJOR INFO MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/utils/constants/constants.tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR" data-langs="ts">
   <summary><strong>firewatch/src/utils/constants/constants.tsx</strong> (6) <span class="source source-sq">6</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -4135,7 +4278,46 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/actorlookup/actorlookup.utils.ts" data-sources="sonar" data-sevs="MAJOR INFO CRITICAL" data-langs="ts">
+<details class="all-entry" data-path="immer:7.0.15" data-sources="owasp" data-sevs="HIGH CRITICAL" data-langs="dep">
+  <summary><strong>immer:7.0.15</strong> (6) <span class="source source-dc">6</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="CRITICAL" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#d4333f">CRITICAL</span> <strong>GHSA-33f9-j839-rf8h</strong> (CVSS: 9.800000190734863)
+      <div class="issue-meta">This affects the package immer before 9.0.6. A type confusion vulnerability can lead to a bypass of CVE-2020-28477 when the user-provided keys used in the path parameter are arrays. In particular, thi</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="CRITICAL" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#d4333f">CRITICAL</span> <strong>CVE-2021-23436</strong> (CVSS: 9.8)
+      <div class="issue-meta">This affects the package immer before 9.0.6. A type confusion vulnerability can lead to a bypass of CVE-2020-28477 when the user-provided keys used in the path parameter are arrays. In particular, thi</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="CRITICAL" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#d4333f">CRITICAL</span> <strong>CVE-2021-3757</strong> (CVSS: 9.8)
+      <div class="issue-meta">immer is vulnerable to Improperly Controlled Modification of Object Prototype Attributes (&#x27;Prototype Pollution&#x27;)</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>CVE-2020-28477</strong> (CVSS: 7.5)
+      <div class="issue-meta">This affects all versions of package immer.</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-9qmh-276g-x5pj</strong> (CVSS: 7.5)
+      <div class="issue-meta">## Overview
+
+Affected versions of immer are vulnerable to Prototype Pollution.
+
+## Proof of exploit
+
+```js
+const {applyPatches, enablePatches} = require(&quot;immer&quot;);
+enablePatches();
+let obj = {};
+consol</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-c36v-fmgq-m8hx</strong> (CVSS: 7.5)
+      <div class="issue-meta">immer is vulnerable to Improperly Controlled Modification of Object Prototype Attributes (&#x27;Prototype Pollution&#x27;).</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="firewatch/src/components/actorlookup/actorlookup.utils.ts" data-sources="sonar" data-sevs="INFO MAJOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/ActorLookup/ActorLookup.utils.ts</strong> (5) <span class="source source-sq">5</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -4160,7 +4342,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/paramconfigeditor/paramconfigeditor.tsx" data-sources="sonar" data-sevs="MAJOR INFO MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/paramconfigeditor/paramconfigeditor.tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR" data-langs="ts">
   <summary><strong>firewatch/src/components/ParamConfigEditor/ParamConfigEditor.tsx</strong> (5) <span class="source source-sq">5</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -4210,7 +4392,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/terminalselect/valuessection/valuessection.tsx" data-sources="sonar" data-sevs="CRITICAL MINOR INFO MAJOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/terminalselect/valuessection/valuessection.tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/TerminalSelect/ValuesSection/ValuesSection.tsx</strong> (5) <span class="source source-sq">5</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -4360,7 +4542,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/editors/dataseteditor/utils.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/editors/dataseteditor/utils.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/editors/DatasetEditor/utils.tsx</strong> (5) <span class="source source-sq">5</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -4435,7 +4617,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/editors/exploreeditor/subtypes/eventsegeditorv2/eventsegeditorv2.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/editors/exploreeditor/subtypes/eventsegeditorv2/eventsegeditorv2.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/editors/ExploreEditor/subtypes/EventSegEditorV2/EventSegEditorV2.tsx</strong> (5) <span class="source source-sq">5</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -4510,7 +4692,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/editors/metriceditor/withmetricheader.tsx" data-sources="sonar" data-sevs="MAJOR CRITICAL MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/editors/metriceditor/withmetricheader.tsx" data-sources="sonar" data-sevs="MAJOR MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/editors/MetricEditor/withMetricHeader.tsx</strong> (5) <span class="source source-sq">5</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -4635,7 +4817,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/users/groupmemberslist/groupmemberslist.tsx" data-sources="sonar" data-sevs="MAJOR INFO MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/users/groupmemberslist/groupmemberslist.tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR" data-langs="ts">
   <summary><strong>firewatch/src/components/users/GroupMembersList/GroupMembersList.tsx</strong> (5) <span class="source source-sq">5</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -4660,7 +4842,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/contexts/appcontext/appcontext.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/contexts/appcontext/appcontext.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/contexts/AppContext/AppContext.tsx</strong> (5) <span class="source source-sq">5</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -4710,7 +4892,7 @@ code { background:var(--surface2); padding:1px 4px; border-radius:3px; font-size
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/hooks/usefavorites/usefavorites.ts" data-sources="sonar" data-sevs="MAJOR MINOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/hooks/usefavorites/usefavorites.ts" data-sources="sonar" data-sevs="INFO MAJOR MINOR" data-langs="ts">
   <summary><strong>firewatch/src/hooks/useFavorites/useFavorites.ts</strong> (5) <span class="source source-sq">5</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -4946,7 +5128,7 @@ read any errors on the `error` property on the resolved value instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="common/pubsub/redispubsub.java" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="java">
+<details class="all-entry" data-path="common/pubsub/redispubsub.java" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="java">
   <summary><strong>common/pubsub/RedisPubSub.java</strong> (4) <span class="source source-sq">4</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="java">
@@ -4988,7 +5170,7 @@ read any errors on the `error` property on the resolved value instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/account/accountusage/index.tsx" data-sources="sonar" data-sevs="MAJOR MINOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/account/accountusage/index.tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR" data-langs="ts">
   <summary><strong>firewatch/src/components/Account/AccountUsage/index.tsx</strong> (4) <span class="source source-sq">4</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -5009,7 +5191,7 @@ read any errors on the `error` property on the resolved value instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/appnav/appnavicon/appnavicon.tsx" data-sources="sonar" data-sevs="MAJOR INFO CRITICAL" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/appnav/appnavicon/appnavicon.tsx" data-sources="sonar" data-sevs="INFO MAJOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/AppNav/AppNavIcon/AppNavIcon.tsx</strong> (4) <span class="source source-sq">4</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -5051,7 +5233,7 @@ read any errors on the `error` property on the resolved value instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/entitytooltip/entitytooltip.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/entitytooltip/entitytooltip.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/EntityTooltip/EntityTooltip.tsx</strong> (4) <span class="source source-sq">4</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -5114,7 +5296,7 @@ read any errors on the `error` property on the resolved value instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/catalog/catalogview/catalogview.tsx" data-sources="sonar" data-sevs="INFO CRITICAL MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/catalog/catalogview/catalogview.tsx" data-sources="sonar" data-sevs="INFO MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/catalog/CatalogView/CatalogView.tsx</strong> (4) <span class="source source-sq">4</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -5345,7 +5527,7 @@ read any errors on the `error` property on the resolved value instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/editors/ruleeditor/alertgenerationpolicyeditor.tsx" data-sources="sonar" data-sevs="MAJOR CRITICAL MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/editors/ruleeditor/alertgenerationpolicyeditor.tsx" data-sources="sonar" data-sevs="MAJOR MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/editors/RuleEditor/AlertGenerationPolicyEditor.tsx</strong> (4) <span class="source source-sq">4</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -5408,7 +5590,7 @@ read any errors on the `error` property on the resolved value instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/shared/dashboardrenderer/dashboardrenderer.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/shared/dashboardrenderer/dashboardrenderer.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/shared/DashboardRenderer/DashboardRenderer.tsx</strong> (4) <span class="source source-sq">4</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -5450,7 +5632,7 @@ read any errors on the `error` property on the resolved value instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/shared/tilev2/collectionfiltertile/components/collectionfilterdefaultscontrols/collectionfilterdefaultscontrols.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/shared/tilev2/collectionfiltertile/components/collectionfilterdefaultscontrols/collectionfilterdefaultscontrols.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/shared/TileV2/CollectionFilterTile/components/CollectionFilterDefaultsControls/CollectionFilterDefaultsControls.tsx</strong> (4) <span class="source source-sq">4</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -5534,7 +5716,7 @@ read any errors on the `error` property on the resolved value instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/contexts/experimentresultscontext/experimentresultscontext.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/contexts/experimentresultscontext/experimentresultscontext.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/contexts/ExperimentResultsContext/ExperimentResultsContext.tsx</strong> (4) <span class="source source-sq">4</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -5576,7 +5758,7 @@ read any errors on the `error` property on the resolved value instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/hooks/usebloqqueries/usebloqqueries.ts" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/hooks/usebloqqueries/usebloqqueries.ts" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/hooks/useBloqQueries/useBloqQueries.ts</strong> (4) <span class="source source-sq">4</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -5670,7 +5852,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/utils/routingutils/routingutils.ts" data-sources="sonar" data-sevs="MAJOR CRITICAL MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/utils/routingutils/routingutils.ts" data-sources="sonar" data-sevs="MAJOR MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/utils/routingUtils/routingUtils.ts</strong> (4) <span class="source source-sq">4</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -5691,7 +5873,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="net/netutil.java" data-sources="sonar semgrep" data-sevs="WARNING MAJOR CRITICAL" data-langs="java">
+<details class="all-entry" data-path="net/netutil.java" data-sources="semgrep sonar" data-sevs="MAJOR WARNING CRITICAL" data-langs="java">
   <summary><strong>net/NetUtil.java</strong> (4) <span class="source source-sq">3</span> <span class="source source-sg">1</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="java">
@@ -5733,7 +5915,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="opal/opal-local-scenario-test/engine/claudellmclient.java" data-sources="sonar" data-sevs="MAJOR CRITICAL MINOR" data-langs="java">
+<details class="all-entry" data-path="opal/opal-local-scenario-test/engine/claudellmclient.java" data-sources="sonar" data-sevs="MAJOR MINOR CRITICAL" data-langs="java">
   <summary><strong>opal/opal-local-scenario-test/engine/ClaudeLlmClient.java</strong> (4) <span class="source source-sq">4</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="java">
@@ -5856,6 +6038,74 @@ read any errors on the `error` property resolved from `execute` instead.
 					},
 				});</pre>
       <div class="issue-meta"><a href="https://github.com/netspringio/netspring/blob/033b4e13c139706d4cc9a16ac9fc9e75402763bc/firewatchcomponents/modals/GlobalSearchModal/GlobalSearchMenu/GlobalSearchMenu.tsx#L150" target="_blank" rel="noopener">L150</a> &middot; <code>typescript.nextjs.react-nextjs-router-push.react-nextjs-router-push</code> &middot; CWE: CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') &middot; OWASP: A07:2017 - Cross-Site Scripting (XSS), A03:2021 - Injection, A05:2025 - Injection</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="vite:7.1.9" data-sources="owasp" data-sevs="MODERATE HIGH" data-langs="dep">
+  <summary><strong>vite:7.1.9</strong> (4) <span class="source source-dc">4</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-p9ff-h696-f583</strong>
+      <div class="issue-meta">### Summary
+
+[`server.fs`](https://vite.dev/config/server-options#server-fs-strict) check was not enforced to the `fetchModule` method that is exposed in Vite dev server&#x27;s WebSocket. 
+
+### Impact
+
+Onl</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-v2wj-q39q-566r</strong>
+      <div class="issue-meta">### Summary
+
+The contents of files that are specified by [`server.fs.deny`](https://vite.dev/config/server-options#server-fs-deny) can be returned to the browser.
+
+### Impact
+
+Only apps that match the</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-4w7w-66w2-5vf9</strong>
+      <div class="issue-meta">### Summary
+
+Any files ending with `.map` even out side the project can be returned to the browser.
+
+### Impact
+
+Only apps that match the following conditions are affected:
+
+- explicitly exposes the V</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-93m4-6634-74q7</strong>
+      <div class="issue-meta">### Summary
+Files denied by [`server.fs.deny`](https://vitejs.dev/config/server-options.html#server-fs-deny) were sent if the URL ended with `\` when the dev server is running on Windows.
+
+### Impact
+</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="webpack:5.99.6" data-sources="owasp" data-sevs="LOW" data-langs="dep">
+  <summary><strong>webpack:5.99.6</strong> (4) <span class="source source-dc">4</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="LOW" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-38r7-794h-5758</strong> (CVSS: 3.700000047683716)
+      <div class="issue-meta">### Summary
+When `experiments.buildHttp` is enabled, webpack’s HTTP(S) resolver (`HttpUriPlugin`) enforces `allowedUris` only for the **initial** URL, but **does not re-validate `allowedUris` after fo</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="LOW" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-8fgc-7cc6-rx7x</strong> (CVSS: 3.700000047683716)
+      <div class="issue-meta">### Summary
+When `experiments.buildHttp` is enabled, webpack’s HTTP(S) resolver (`HttpUriPlugin`) can be bypassed to fetch resources from **hosts outside `allowedUris`** by using crafted URLs that inc</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="LOW" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>CVE-2025-68157</strong> (CVSS: 3.7)
+      <div class="issue-meta">Webpack is a module bundler. From version 5.49.0 to before 5.104.0, when experiments.buildHttp is enabled, webpack’s HTTP(S) resolver (HttpUriPlugin) enforces allowedUris only for the initial URL, but</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="LOW" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>CVE-2025-68458</strong> (CVSS: 3.7)
+      <div class="issue-meta">Webpack is a module bundler. From version 5.49.0 to before 5.104.1, when experiments.buildHttp is enabled, webpack’s HTTP(S) resolver (HttpUriPlugin) can be bypassed to fetch resources from hosts outs</div>
     </div>
   </div>
 </details>
@@ -6097,7 +6347,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/singlebloqeditor/singlebloqeditor.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/singlebloqeditor/singlebloqeditor.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/SingleBloqEditor/SingleBloqEditor.tsx</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -6148,7 +6398,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/tiptapformulaeditor/utils/tiptapformulaeditor.util.tsx" data-sources="sonar" data-sevs="MAJOR BLOCKER" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/tiptapformulaeditor/utils/tiptapformulaeditor.util.tsx" data-sources="sonar" data-sevs="BLOCKER MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/TiptapFormulaEditor/utils/TiptapFormulaEditor.util.tsx</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="BLOCKER" data-lang="ts">
@@ -6165,7 +6415,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/alerts/contextvariablefilterseditor/contextvariablefilterseditor.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/alerts/contextvariablefilterseditor/contextvariablefilterseditor.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/alerts/ContextVariableFiltersEditor/ContextVariableFiltersEditor.tsx</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -6233,7 +6483,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/charts/gridchart/cellrenderers/cellrenderers.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/charts/gridchart/cellrenderers/cellrenderers.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/charts/GridChart/CellRenderers/CellRenderers.tsx</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -6386,7 +6636,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/editors/derivedcolumneditor/bloqdcceditor/bloqdcceditor.constants.tsx" data-sources="sonar" data-sevs="MINOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/editors/derivedcolumneditor/bloqdcceditor/bloqdcceditor.constants.tsx" data-sources="sonar" data-sevs="INFO MINOR" data-langs="ts">
   <summary><strong>firewatch/src/components/editors/DerivedColumnEditor/BloqDCCEditor/BloqDCCEditor.constants.tsx</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MINOR" data-lang="ts">
@@ -6556,7 +6806,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/modals/eventeditormodal/eventeditormodal.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/modals/eventeditormodal/eventeditormodal.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/modals/EventEditorModal/EventEditorModal.tsx</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -6573,7 +6823,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/shared/bloqschemafiltertree/bloqpredicate/bloqpropertypredicate/rhsfilterinput/rhsfilterinput.tsx" data-sources="sonar" data-sevs="INFO CRITICAL MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/shared/bloqschemafiltertree/bloqpredicate/bloqpropertypredicate/rhsfilterinput/rhsfilterinput.tsx" data-sources="sonar" data-sevs="INFO MINOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/shared/BloqSchemaFilterTree/BloqPredicate/BloqPropertyPredicate/RhsFilterInput/RhsFilterInput.tsx</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -6709,7 +6959,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/shared/nsselect.tsx" data-sources="sonar" data-sevs="MAJOR INFO MINOR" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/shared/nsselect.tsx" data-sources="sonar" data-sevs="INFO MAJOR MINOR" data-langs="ts">
   <summary><strong>firewatch/src/components/shared/NSSelect.tsx</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -6777,7 +7027,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/shared/segmenteditor/segmentdropdown/segmentdropdown.tsx" data-sources="sonar" data-sevs="MAJOR INFO CRITICAL" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/shared/segmenteditor/segmentdropdown/segmentdropdown.tsx" data-sources="sonar" data-sevs="INFO MAJOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/components/shared/SegmentEditor/SegmentDropdown/SegmentDropdown.tsx</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -6811,7 +7061,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/shared/shareentitymodal/permissionslisting.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/shared/shareentitymodal/permissionslisting.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/shared/ShareEntityModal/PermissionsListing.tsx</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -6845,7 +7095,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/shared/tilev2/visualizationtile/visualizationtile.utils.ts" data-sources="sonar" data-sevs="MINOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/shared/tilev2/visualizationtile/visualizationtile.utils.ts" data-sources="sonar" data-sevs="INFO MINOR" data-langs="ts">
   <summary><strong>firewatch/src/components/shared/TileV2/VisualizationTile/VisualizationTile.utils.ts</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MINOR" data-lang="ts">
@@ -6862,7 +7112,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/shared/vizviseditor/valuecolorpropertyeditor/valuecoloreditor/valuecoloreditor.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/shared/vizviseditor/valuecolorpropertyeditor/valuecoloreditor/valuecoloreditor.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/shared/VizVisEditor/ValueColorPropertyEditor/ValueColorEditor/ValueColorEditor.tsx</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -6879,7 +7129,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/users/userseditor/userseditor.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/users/userseditor/userseditor.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/users/UsersEditor/UsersEditor.tsx</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -6896,7 +7146,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/contexts/clusterconfigcontext.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/contexts/clusterconfigcontext.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/contexts/ClusterConfigContext.tsx</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -6913,7 +7163,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/contexts/usercontext/usercontext.tsx" data-sources="sonar" data-sevs="MAJOR INFO CRITICAL" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/contexts/usercontext/usercontext.tsx" data-sources="sonar" data-sevs="INFO MAJOR CRITICAL" data-langs="ts">
   <summary><strong>firewatch/src/contexts/UserContext/UserContext.tsx</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="CRITICAL" data-lang="ts">
@@ -7015,7 +7265,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/pages/rule/[ruleid].tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/pages/rule/[ruleid].tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/pages/rule/[ruleID].tsx</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -7049,7 +7299,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/stores/chartdatastore/chartdatastore.types.ts" data-sources="sonar" data-sevs="MINOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/stores/chartdatastore/chartdatastore.types.ts" data-sources="sonar" data-sevs="INFO MINOR" data-langs="ts">
   <summary><strong>firewatch/src/stores/ChartDataStore/ChartDataStore.types.ts</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MINOR" data-lang="ts">
@@ -7100,7 +7350,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/utils/beelineutils/beelineutils.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/utils/beelineutils/beelineutils.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/utils/beelineUtils/beelineUtils.tsx</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -7117,7 +7367,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/utils/functional/bloqterminalobjects.ts" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/utils/functional/bloqterminalobjects.ts" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/utils/functional/bloqTerminalObjects.ts</strong> (3) <span class="source source-sq">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -7185,7 +7435,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatchmsw/scripts/cleanfixtures.js" data-sources="semgrep" data-sevs="WARNING INFO" data-langs="js">
+<details class="all-entry" data-path="firewatchmsw/scripts/cleanfixtures.js" data-sources="semgrep" data-sevs="INFO WARNING" data-langs="js">
   <summary><strong>firewatchmsw/scripts/cleanFixtures.js</strong> (3) <span class="source source-sg">3</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="semgrep" data-sev="WARNING" data-lang="js">
@@ -7199,6 +7449,95 @@ read any errors on the `error` property resolved from `execute` instead.
     <div class="issue-item all-item" data-source="semgrep" data-sev="INFO" data-lang="js">
       <span class="source source-sg">SEMGREP</span> <span class="badge" style="background:#2a7ab0">INFO</span> Detected string concatenation with a non-literal variable in a util.format / console.log function. If an attacker injects a format specifier in the string, it will forge the log message. Try to use constant values for the format string.<pre>console.error(`❌ Failed to clean ${fullPath}:`, err.message);</pre>
       <div class="issue-meta"><a href="https://github.com/netspringio/netspring/blob/033b4e13c139706d4cc9a16ac9fc9e75402763bc/firewatchmsw/scripts/cleanFixtures.js#L53" target="_blank" rel="noopener">L53</a> &middot; <code>javascript.lang.security.audit.unsafe-formatstring.unsafe-formatstring</code> &middot; CWE: CWE-134: Use of Externally-Controlled Format String &middot; OWASP: A01:2021 - Broken Access Control, A01:2025 - Broken Access Control</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="lodash-es:4.17.21" data-sources="owasp" data-sevs="MODERATE HIGH" data-langs="dep">
+  <summary><strong>lodash-es:4.17.21</strong> (3) <span class="source source-dc">3</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-r5fr-rjxr-66jc</strong> (CVSS: 8.100000381469727)
+      <div class="issue-meta">### Impact
+
+The fix for [CVE-2021-23337](https://github.com/advisories/GHSA-35jh-r3h4-6jhm) added validation for the `variable` option in `_.template` but did not apply the same validation to `options</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-f23m-r3pf-42rh</strong> (CVSS: 6.5)
+      <div class="issue-meta">### Impact
+
+Lodash versions 4.17.23 and earlier are vulnerable to prototype pollution in the `_.unset` and `_.omit` functions. The fix for [CVE-2025-13465](https://github.com/lodash/lodash/security/ad</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-xxjr-mmjv-4gpg</strong> (CVSS: 6.5)
+      <div class="issue-meta">### Impact
+
+Lodash versions 4.0.0 through 4.17.22 are vulnerable to prototype pollution in the `_.unset` and `_.omit` functions. An attacker can pass crafted paths which cause Lodash to delete methods</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="minimatch:3.1.2" data-sources="owasp" data-sevs="HIGH" data-langs="dep">
+  <summary><strong>minimatch:3.1.2</strong> (3) <span class="source source-dc">3</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-23c5-xmqv-rm74</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Summary
+
+Nested `*()` extglobs produce regexps with nested unbounded quantifiers (e.g. `(?:(?:a|b)*)*`), which exhibit catastrophic backtracking in V8. With a 12-byte pattern `*(*(*(a|b)))` and an</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-7r86-cg39-jmmj</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Summary
+
+`matchOne()` performs unbounded recursive backtracking when a glob pattern contains multiple non-adjacent `**` (GLOBSTAR) segments and the input path does not match. The time complexity i</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-3ppc-4f35-3m26</strong>
+      <div class="issue-meta">### Summary
+`minimatch` is vulnerable to Regular Expression Denial of Service (ReDoS) when a glob pattern contains many consecutive `*` wildcards followed by a literal character that doesn&#x27;t appear in</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="minimatch:4.2.3" data-sources="owasp" data-sevs="HIGH" data-langs="dep">
+  <summary><strong>minimatch:4.2.3</strong> (3) <span class="source source-dc">3</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-23c5-xmqv-rm74</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Summary
+
+Nested `*()` extglobs produce regexps with nested unbounded quantifiers (e.g. `(?:(?:a|b)*)*`), which exhibit catastrophic backtracking in V8. With a 12-byte pattern `*(*(*(a|b)))` and an</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-7r86-cg39-jmmj</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Summary
+
+`matchOne()` performs unbounded recursive backtracking when a glob pattern contains multiple non-adjacent `**` (GLOBSTAR) segments and the input path does not match. The time complexity i</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-3ppc-4f35-3m26</strong>
+      <div class="issue-meta">### Summary
+`minimatch` is vulnerable to Regular Expression Denial of Service (ReDoS) when a glob pattern contains many consecutive `*` wildcards followed by a literal character that doesn&#x27;t appear in</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="minimatch:9.0.5" data-sources="owasp" data-sevs="HIGH" data-langs="dep">
+  <summary><strong>minimatch:9.0.5</strong> (3) <span class="source source-dc">3</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-23c5-xmqv-rm74</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Summary
+
+Nested `*()` extglobs produce regexps with nested unbounded quantifiers (e.g. `(?:(?:a|b)*)*`), which exhibit catastrophic backtracking in V8. With a 12-byte pattern `*(*(*(a|b)))` and an</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-7r86-cg39-jmmj</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Summary
+
+`matchOne()` performs unbounded recursive backtracking when a glob pattern contains multiple non-adjacent `**` (GLOBSTAR) segments and the input path does not match. The time complexity i</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-3ppc-4f35-3m26</strong>
+      <div class="issue-meta">### Summary
+`minimatch` is vulnerable to Regular Expression Denial of Service (ReDoS) when a glob pattern contains many consecutive `*` wildcards followed by a literal character that doesn&#x27;t appear in</div>
     </div>
   </div>
 </details>
@@ -7241,7 +7580,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="customer/dcp/parse_alerts.py" data-sources="sonar" data-sevs="CRITICAL BLOCKER" data-langs="py">
+<details class="all-entry" data-path="customer/dcp/parse_alerts.py" data-sources="sonar" data-sevs="BLOCKER CRITICAL" data-langs="py">
   <summary><strong>customer/dcp/parse_alerts.py</strong> (2) <span class="source source-sq">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="BLOCKER" data-lang="py">
@@ -7423,7 +7762,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/bloqtypes/periodoverbloq/periodoverbloq.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/bloqtypes/periodoverbloq/periodoverbloq.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/BloqTypes/PeriodOverBloq/PeriodOverBloq.tsx</strong> (2) <span class="source source-sq">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -7527,7 +7866,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/eventsequenceeditor/eventsequenceeditor.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/eventsequenceeditor/eventsequenceeditor.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/EventSequenceEditor/EventSequenceEditor.tsx</strong> (2) <span class="source source-sq">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -7735,7 +8074,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/charts/experimentresultscharts/statsmessage.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/charts/experimentresultscharts/statsmessage.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/charts/ExperimentResultsCharts/StatsMessage.tsx</strong> (2) <span class="source source-sq">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -7761,7 +8100,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/charts/metricchartwrapper.tsx" data-sources="sonar" data-sevs="MINOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/charts/metricchartwrapper.tsx" data-sources="sonar" data-sevs="INFO MINOR" data-langs="ts">
   <summary><strong>firewatch/src/components/charts/MetricChartWrapper.tsx</strong> (2) <span class="source source-sq">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MINOR" data-lang="ts">
@@ -7774,7 +8113,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/charts/pivotchart/pivotchart.tsx" data-sources="sonar" data-sevs="MINOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/charts/pivotchart/pivotchart.tsx" data-sources="sonar" data-sevs="INFO MINOR" data-langs="ts">
   <summary><strong>firewatch/src/components/charts/PivotChart/PivotChart.tsx</strong> (2) <span class="source source-sq">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MINOR" data-lang="ts">
@@ -7800,7 +8139,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/charts/rulecharteditorwrapper.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/charts/rulecharteditorwrapper.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/charts/RuleChartEditorWrapper.tsx</strong> (2) <span class="source source-sq">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -7839,7 +8178,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/charts/processors/funnelchartjsprocessor/funnelchartjsprocessor.ts" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/charts/processors/funnelchartjsprocessor/funnelchartjsprocessor.ts" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/charts/processors/funnelChartjsProcessor/funnelChartjsProcessor.ts</strong> (2) <span class="source source-sq">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -7943,7 +8282,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/editors/dataseteditor/datasetsemanticseditor/preferredpropertieseditor/preferredpropertieseditor.tsx" data-sources="sonar" data-sevs="MINOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/editors/dataseteditor/datasetsemanticseditor/preferredpropertieseditor/preferredpropertieseditor.tsx" data-sources="sonar" data-sevs="INFO MINOR" data-langs="ts">
   <summary><strong>firewatch/src/components/editors/DatasetEditor/DatasetSemanticsEditor/PreferredPropertiesEditor/PreferredPropertiesEditor.tsx</strong> (2) <span class="source source-sq">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MINOR" data-lang="ts">
@@ -8099,7 +8438,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/editors/exploreeditor/subtypes/retentioneditorv2/components/retentioneventeditor.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/editors/exploreeditor/subtypes/retentioneditorv2/components/retentioneventeditor.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/editors/ExploreEditor/subtypes/RetentionEditorV2/components/RetentionEventEditor.tsx</strong> (2) <span class="source source-sq">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -8216,7 +8555,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/pages/settings/alerts/dimensionfilterseditor.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/pages/settings/alerts/dimensionfilterseditor.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/pages/settings/alerts/DimensionFiltersEditor.tsx</strong> (2) <span class="source source-sq">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -8333,7 +8672,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/shared/colorpicker/colorpicker.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/shared/colorpicker/colorpicker.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/shared/ColorPicker/ColorPicker.tsx</strong> (2) <span class="source source-sq">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -8593,7 +8932,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/shared/tilev2/visualizationtile/visualizationheadercontrols/datadisplaycontrol/datadisplaycontrol.utils.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/shared/tilev2/visualizationtile/visualizationheadercontrols/datadisplaycontrol/datadisplaycontrol.utils.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/shared/TileV2/VisualizationTile/VisualizationHeaderControls/DataDisplayControl/DataDisplayControl.utils.tsx</strong> (2) <span class="source source-sq">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -8645,7 +8984,7 @@ read any errors on the `error` property resolved from `execute` instead.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/components/shared/timerangeinputv2/timerangeinputv2.tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/components/shared/timerangeinputv2/timerangeinputv2.tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/components/shared/TimeRangeInputV2/TimeRangeInputV2.tsx</strong> (2) <span class="source source-sq">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -8876,7 +9215,7 @@ read the error from the `error` property.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/pages/dashboard/[dashboardid].tsx" data-sources="sonar" data-sevs="MAJOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/pages/dashboard/[dashboardid].tsx" data-sources="sonar" data-sevs="INFO MAJOR" data-langs="ts">
   <summary><strong>firewatch/src/pages/dashboard/[dashboardID].tsx</strong> (2) <span class="source source-sq">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MAJOR" data-lang="ts">
@@ -8941,7 +9280,7 @@ read the error from the `error` property.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="firewatch/src/stores/chartdatastore/chartdatastore.ts" data-sources="sonar" data-sevs="MINOR INFO" data-langs="ts">
+<details class="all-entry" data-path="firewatch/src/stores/chartdatastore/chartdatastore.ts" data-sources="sonar" data-sevs="INFO MINOR" data-langs="ts">
   <summary><strong>firewatch/src/stores/ChartDataStore/ChartDataStore.ts</strong> (2) <span class="source source-sq">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="sonar" data-sev="MINOR" data-lang="ts">
@@ -8980,7 +9319,7 @@ read the error from the `error` property.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="opal/opal-local-scenario-test/recordreplay/toolhttpclient.java" data-sources="sonar semgrep" data-sevs="WARNING MINOR" data-langs="java">
+<details class="all-entry" data-path="opal/opal-local-scenario-test/recordreplay/toolhttpclient.java" data-sources="semgrep sonar" data-sevs="MINOR WARNING" data-langs="java">
   <summary><strong>opal/opal-local-scenario-test/recordreplay/ToolHttpClient.java</strong> (2) <span class="source source-sq">1</span> <span class="source source-sg">1</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="semgrep" data-sev="WARNING" data-lang="java">
@@ -9084,7 +9423,7 @@ read the error from the `error` property.
     </div>
   </div>
 </details>
-<details class="all-entry" data-path="customer/dcp/production/flux-cron.yaml" data-sources="semgrep" data-sevs="WARNING INFO" data-langs="yaml">
+<details class="all-entry" data-path="customer/dcp/production/flux-cron.yaml" data-sources="semgrep" data-sevs="INFO WARNING" data-langs="yaml">
   <summary><strong>customer/dcp/production/flux-cron.yaml</strong> (2) <span class="source source-sg">2</span></summary>
   <div class="issue-list">
     <div class="issue-item all-item" data-source="semgrep" data-sev="WARNING" data-lang="yaml">
@@ -9188,6 +9527,151 @@ read the error from the `error` property.
 											query: { app: router.query.app },
 										});</pre>
       <div class="issue-meta"><a href="https://github.com/netspringio/netspring/blob/033b4e13c139706d4cc9a16ac9fc9e75402763bc/firewatchpages/settings/users/group/[groupId].tsx#L561" target="_blank" rel="noopener">L561</a> &middot; <code>typescript.nextjs.react-nextjs-router-push.react-nextjs-router-push</code> &middot; CWE: CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') &middot; OWASP: A07:2017 - Cross-Site Scripting (XSS), A03:2021 - Injection, A05:2025 - Injection</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="ajv:5.5.2" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>ajv:5.5.2</strong> (2) <span class="source source-dc">2</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-v88g-cgmw-v5xw</strong> (CVSS: 5.599999904632568)
+      <div class="issue-meta">An issue was discovered in ajv.validate() in Ajv (aka Another JSON Schema Validator) 6.12.2. A carefully crafted JSON schema could be provided that allows execution of other code by prototype pollutio</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-2g4f-4pwh-qvx6</strong>
+      <div class="issue-meta">ajv (Another JSON Schema Validator) through version 8.17.1 is vulnerable to Regular Expression Denial of Service (ReDoS) when the `$data` option is enabled. The pattern keyword accepts runtime data vi</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="flatted:3.3.3" data-sources="owasp" data-sevs="HIGH" data-langs="dep">
+  <summary><strong>flatted:3.3.3</strong> (2) <span class="source source-dc">2</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-25h7-pfq9-p65f</strong> (CVSS: 7.5)
+      <div class="issue-meta">## Summary
+
+flatted&#x27;s `parse()` function uses a recursive `revive()` phase to resolve circular references in deserialized JSON. When given a crafted payload with deeply nested or self-referential `$` </div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-rf6f-7fwh-wjgh</strong>
+      <div class="issue-meta">---
+  **Summary**
+
+  The parse() function in flatted can use attacker-controlled string values from the parsed JSON as direct array index
+  keys, without validating that they are numeric. Since the in</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="lodash:4.17.23" data-sources="owasp" data-sevs="MODERATE HIGH" data-langs="dep">
+  <summary><strong>lodash:4.17.23</strong> (2) <span class="source source-dc">2</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-r5fr-rjxr-66jc</strong> (CVSS: 8.100000381469727)
+      <div class="issue-meta">### Impact
+
+The fix for [CVE-2021-23337](https://github.com/advisories/GHSA-35jh-r3h4-6jhm) added validation for the `variable` option in `_.template` but did not apply the same validation to `options</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-f23m-r3pf-42rh</strong> (CVSS: 6.5)
+      <div class="issue-meta">### Impact
+
+Lodash versions 4.17.23 and earlier are vulnerable to prototype pollution in the `_.unset` and `_.omit` functions. The fix for [CVE-2025-13465](https://github.com/lodash/lodash/security/ad</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="path-to-regexp:8.2.0" data-sources="owasp" data-sevs="MODERATE HIGH" data-langs="dep">
+  <summary><strong>path-to-regexp:8.2.0</strong> (2) <span class="source source-dc">2</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-j3q9-mxjg-w52f</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Impact
+
+A bad regular expression is generated any time you have multiple sequential optional groups (curly brace syntax), such as `{a}{b}{c}:z`. The generated regex grows exponentially with the nu</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-27v5-c462-wpq7</strong> (CVSS: 5.900000095367432)
+      <div class="issue-meta">### Impact
+
+When using multiple wildcards, combined with at least one parameter, a regular expression can be generated that is vulnerable to ReDoS. This backtracking vulnerability requires the second </div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="picomatch:2.3.1" data-sources="owasp" data-sevs="MODERATE HIGH" data-langs="dep">
+  <summary><strong>picomatch:2.3.1</strong> (2) <span class="source source-dc">2</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-c2c7-rcm5-vvqj</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Impact
+`picomatch` is vulnerable to Regular Expression Denial of Service (ReDoS) when processing crafted extglob patterns. Certain patterns using extglob quantifiers such as `+()` and `*()`, espec</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-3v7f-55p6-f55p</strong> (CVSS: 5.300000190734863)
+      <div class="issue-meta">### Impact
+picomatch is vulnerable to a **method injection vulnerability (CWE-1321)** affecting the `POSIX_REGEX_SOURCE` object. Because the object inherits from `Object.prototype`, specially crafted </div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="picomatch:4.0.3" data-sources="owasp" data-sevs="MODERATE HIGH" data-langs="dep">
+  <summary><strong>picomatch:4.0.3</strong> (2) <span class="source source-dc">2</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-c2c7-rcm5-vvqj</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Impact
+`picomatch` is vulnerable to Regular Expression Denial of Service (ReDoS) when processing crafted extglob patterns. Certain patterns using extglob quantifiers such as `+()` and `*()`, espec</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-3v7f-55p6-f55p</strong> (CVSS: 5.300000190734863)
+      <div class="issue-meta">### Impact
+picomatch is vulnerable to a **method injection vulnerability (CWE-1321)** affecting the `POSIX_REGEX_SOURCE` object. Because the object inherits from `Object.prototype`, specially crafted </div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="serialize-javascript:6.0.2" data-sources="owasp" data-sevs="MODERATE HIGH" data-langs="dep">
+  <summary><strong>serialize-javascript:6.0.2</strong> (2) <span class="source source-dc">2</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-5c6j-r48x-rmvq</strong> (CVSS: 8.100000381469727)
+      <div class="issue-meta">### Impact
+
+The serialize-javascript npm package (versions &lt;= 7.0.2) contains a code injection vulnerability. It is an incomplete fix for CVE-2020-7660.
+
+While `RegExp.source` is sanitized, `RegExp.fl</div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-qj8w-gfj5-8c6v</strong> (CVSS: 5.900000095367432)
+      <div class="issue-meta">### Impact
+
+**What kind of vulnerability is it?**
+
+It is a **Denial of Service (DoS)** vulnerability caused by CPU exhaustion. When serializing a specially crafted &quot;array-like&quot; object (an object that </div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="ws:7.4.5" data-sources="owasp" data-sevs="MODERATE HIGH" data-langs="dep">
+  <summary><strong>ws:7.4.5</strong> (2) <span class="source source-dc">2</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-3h5v-q93c-6h6q</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Impact
+
+A request with a number of headers exceeding the[`server.maxHeadersCount`][] threshold could be used to crash a ws server.
+
+### Proof of concept
+
+```js
+const http = require(&#x27;http&#x27;);
+const </div>
+    </div>
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-6fc8-4gx4-v693</strong> (CVSS: 5.300000190734863)
+      <div class="issue-meta">### Impact
+
+A specially crafted value of the `Sec-Websocket-Protocol` header can be used to significantly slow down a ws server.
+
+### Proof of concept
+
+```js
+for (const length of [1000, 2000, 4000, 80</div>
     </div>
   </div>
 </details>
@@ -12100,6 +12584,359 @@ read the error from the `error` property.
     <div class="issue-item all-item" data-source="semgrep" data-sev="ERROR" data-lang="other">
       <span class="source source-sg">SEMGREP</span> <span class="badge" style="background:#d4333f">ERROR</span> By not specifying a USER, a program in the container may run as &#x27;root&#x27;. This is a security hazard. If an attacker can control a process running as root, they may have control over the container. Ensure that the last USER in a Dockerfile is a USER other than &#x27;root&#x27;.<pre>ENTRYPOINT [&quot;java&quot;, &quot;-Dorg.springframework.boot.logging.LoggingSystem=none&quot;, &quot;-jar&quot;, &quot;/app/mcp_bridge.jar&quot;]</pre>
       <div class="issue-meta"><a href="https://github.com/netspringio/netspring/blob/033b4e13c139706d4cc9a16ac9fc9e75402763bc/opal/local-mcp-bridge/Dockerfile#L8" target="_blank" rel="noopener">L8</a> &middot; <code>dockerfile.security.missing-user-entrypoint.missing-user-entrypoint</code> &middot; CWE: CWE-269: Improper Privilege Management &middot; OWASP: A04:2021 - Insecure Design, A06:2025 - Insecure Design</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="@babel/runtime:7.22.10" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>@babel/runtime:7.22.10</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-968p-4wvh-cqc8</strong> (CVSS: 6.199999809265137)
+      <div class="issue-meta">### Impact
+
+When using Babel to compile [regular expression named capturing groups](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Named_capturing_group), Babel </div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="@tootallnate/once:2.0.0" data-sources="owasp" data-sevs="LOW" data-langs="dep">
+  <summary><strong>@tootallnate/once:2.0.0</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="LOW" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-vpq2-c234-7xj6</strong> (CVSS: 3.299999952316284)
+      <div class="issue-meta">Versions of the package @tootallnate/once before 3.0.1 are vulnerable to Incorrect Control Flow Scoping in promise resolving when AbortSignal option is used. The Promise remains in a permanently pendi</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="ajv:8.17.1" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>ajv:8.17.1</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-2g4f-4pwh-qvx6</strong>
+      <div class="issue-meta">ajv (Another JSON Schema Validator) through version 8.17.1 is vulnerable to Regular Expression Denial of Service (ReDoS) when the `$data` option is enabled. The pattern keyword accepts runtime data vi</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="babel-traverse:6.26.0" data-sources="owasp" data-sevs="CRITICAL" data-langs="dep">
+  <summary><strong>babel-traverse:6.26.0</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="CRITICAL" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#d4333f">CRITICAL</span> <strong>GHSA-67hx-6x53-jw92</strong> (CVSS: 9.399999618530273)
+      <div class="issue-meta">### Impact
+
+Using Babel to compile code that was specifically crafted by an attacker can lead to arbitrary code execution during compilation, when using plugins that rely on the `path.evaluate()`or `p</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="bn.js:4.12.2" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>bn.js:4.12.2</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-378v-28hj-76wf</strong> (CVSS: 5.300000190734863)
+      <div class="issue-meta">This affects versions of the package bn.js before 4.12.3 and 5.2.3. Calling maskn(0) on any BN instance corrupts the internal state, causing toString(), divmod(), and other methods to enter an infinit</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="bn.js:5.2.2" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>bn.js:5.2.2</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-378v-28hj-76wf</strong> (CVSS: 5.300000190734863)
+      <div class="issue-meta">This affects versions of the package bn.js before 4.12.3 and 5.2.3. Calling maskn(0) on any BN instance corrupts the internal state, causing toString(), divmod(), and other methods to enter an infinit</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="brace-expansion:1.1.12" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>brace-expansion:1.1.12</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-f886-m6hf-6m8v</strong> (CVSS: 6.5)
+      <div class="issue-meta">### Impact
+
+A brace pattern with a zero step value (e.g., `{1..2..0}`) causes the sequence generation loop to run indefinitely, making the process hang for seconds and allocate heaps of memory.
+
+The l</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="brace-expansion:2.0.2" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>brace-expansion:2.0.2</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-f886-m6hf-6m8v</strong> (CVSS: 6.5)
+      <div class="issue-meta">### Impact
+
+A brace pattern with a zero step value (e.g., `{1..2..0}`) causes the sequence generation loop to run indefinitely, making the process hang for seconds and allocate heaps of memory.
+
+The l</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="brace-expansion:5.0.4" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>brace-expansion:5.0.4</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-f886-m6hf-6m8v</strong> (CVSS: 6.5)
+      <div class="issue-meta">### Impact
+
+A brace pattern with a zero step value (e.g., `{1..2..0}`) causes the sequence generation loop to run indefinitely, making the process hang for seconds and allocate heaps of memory.
+
+The l</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="diff:4.0.2" data-sources="owasp" data-sevs="LOW" data-langs="dep">
+  <summary><strong>diff:4.0.2</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="LOW" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-73rr-hh4g-fpgx</strong>
+      <div class="issue-meta">### Impact
+
+Attempting to parse a patch whose filename headers contain the line break characters `\r`, `\u2028`, or `\u2029` can cause the `parsePatch` method to enter an infinite loop. It then consum</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="elliptic:6.6.1" data-sources="owasp" data-sevs="LOW" data-langs="dep">
+  <summary><strong>elliptic:6.6.1</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="LOW" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-848j-6mx2-7j84</strong> (CVSS: 5.599999904632568)
+      <div class="issue-meta">The ECDSA implementation of the Elliptic package generates incorrect signatures if an interim value of &#x27;k&#x27; (as computed based on step 3.2 of  RFC 6979 https://datatracker.ietf.org/doc/html/rfc6979 ) h</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="form-data:2.3.3" data-sources="owasp" data-sevs="CRITICAL" data-langs="dep">
+  <summary><strong>form-data:2.3.3</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="CRITICAL" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#d4333f">CRITICAL</span> <strong>GHSA-fjxv-7rqg-78g4</strong>
+      <div class="issue-meta">### Summary
+
+form-data uses `Math.random()` to select a boundary value for multipart form-encoded data. This can lead to a security issue if an attacker:
+1. can observe other values produced by Math.r</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="form-data:4.0.0" data-sources="owasp" data-sevs="CRITICAL" data-langs="dep">
+  <summary><strong>form-data:4.0.0</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="CRITICAL" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#d4333f">CRITICAL</span> <strong>GHSA-fjxv-7rqg-78g4</strong>
+      <div class="issue-meta">### Summary
+
+form-data uses `Math.random()` to select a boundary value for multipart form-encoded data. This can lead to a security issue if an attacker:
+1. can observe other values produced by Math.r</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="glob:10.4.5" data-sources="owasp" data-sevs="HIGH" data-langs="dep">
+  <summary><strong>glob:10.4.5</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-5j98-mcp5-4vw2</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Summary
+
+The glob CLI contains a command injection vulnerability in its `-c/--cmd` option that allows arbitrary command execution when processing files with malicious names. When `glob -c &lt;command</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="immutable:3.7.6" data-sources="owasp" data-sevs="HIGH" data-langs="dep">
+  <summary><strong>immutable:3.7.6</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-wf6x-7x77-mvgw</strong> (CVSS: 9.800000190734863)
+      <div class="issue-meta">## Impact
+_What kind of vulnerability is it? Who is impacted?_
+
+A Prototype Pollution is possible in immutable via the mergeDeep(), mergeDeepWith(), merge(), Map.toJS(), and Map.toObject() APIs.
+
+## A</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="immutable:5.1.3" data-sources="owasp" data-sevs="HIGH" data-langs="dep">
+  <summary><strong>immutable:5.1.3</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-wf6x-7x77-mvgw</strong> (CVSS: 9.800000190734863)
+      <div class="issue-meta">## Impact
+_What kind of vulnerability is it? Who is impacted?_
+
+A Prototype Pollution is possible in immutable via the mergeDeep(), mergeDeepWith(), merge(), Map.toJS(), and Map.toObject() APIs.
+
+## A</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="js-yaml:3.14.1" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>js-yaml:3.14.1</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-mh29-5h37-fv8m</strong> (CVSS: 5.300000190734863)
+      <div class="issue-meta">### Impact
+
+In js-yaml 4.1.0, 4.0.0, and 3.14.1 and below, it&#x27;s possible for an attacker to modify the prototype of the result of a parsed yaml document via prototype pollution (`__proto__`). All user</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="js-yaml:4.1.0" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>js-yaml:4.1.0</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-mh29-5h37-fv8m</strong> (CVSS: 5.300000190734863)
+      <div class="issue-meta">### Impact
+
+In js-yaml 4.1.0, 4.0.0, and 3.14.1 and below, it&#x27;s possible for an attacker to modify the prototype of the result of a parsed yaml document via prototype pollution (`__proto__`). All user</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="lodash:4.17.21" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>lodash:4.17.21</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-xxjr-mmjv-4gpg</strong> (CVSS: 6.5)
+      <div class="issue-meta">### Impact
+
+Lodash versions 4.0.0 through 4.17.22 are vulnerable to prototype pollution in the `_.unset` and `_.omit` functions. An attacker can pass crafted paths which cause Lodash to delete methods</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="markdown-it:14.1.0" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>markdown-it:14.1.0</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-38c4-r59v-3vqw</strong> (CVSS: 5.300000190734863)
+      <div class="issue-meta">Versions of the package markdown-it from 13.0.0 and before 14.1.1 are vulnerable to Regular Expression Denial of Service (ReDoS) due to the use of the regex /\*+$/ in the linkify function. An attacker</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="minimatch:3.0.4" data-sources="owasp" data-sevs="HIGH" data-langs="dep">
+  <summary><strong>minimatch:3.0.4</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-f8q6-p94x-37v3</strong> (CVSS: 7.5)
+      <div class="issue-meta">A vulnerability was found in the minimatch package. This flaw allows a Regular Expression Denial of Service (ReDoS) when calling the braceExpand function with specific arguments, resulting in a Denial</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="node-fetch:2.6.1" data-sources="owasp" data-sevs="HIGH" data-langs="dep">
+  <summary><strong>node-fetch:2.6.1</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-r683-j2x4-v87g</strong> (CVSS: 8.800000190734863)
+      <div class="issue-meta">node-fetch forwards secure headers such as `authorization`, `www-authenticate`, `cookie`, &amp; `cookie2` when redirecting to a untrusted site.</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="postcss:8.5.6" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>postcss:8.5.6</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-qx2v-qp2m-jg93</strong> (CVSS: 6.099999904632568)
+      <div class="issue-meta"># PostCSS: XSS via Unescaped `&lt;/style&gt;` in CSS Stringify Output
+
+## Summary
+
+PostCSS v8.5.5 (latest) does not escape `&lt;/style&gt;` sequences when stringifying CSS ASTs. When user-submitted CSS is parsed </div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="qs:6.14.0" data-sources="owasp" data-sevs="LOW" data-langs="dep">
+  <summary><strong>qs:6.14.0</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="LOW" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-w7fw-mjwx-w883</strong> (CVSS: 3.700000047683716)
+      <div class="issue-meta">### Summary
+The `arrayLimit` option in qs does not enforce limits for comma-separated values when `comma: true` is enabled, allowing attackers to cause denial-of-service via memory exhaustion. This is</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="qs:6.5.3" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>qs:6.5.3</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-6rw7-vpxm-498p</strong> (CVSS: 3.700000047683716)
+      <div class="issue-meta">### Summary
+
+The `arrayLimit` option in qs did not enforce limits for bracket notation (`a[]=1&amp;a[]=2`), only for indexed notation (`a[0]=1`). This is a consistency bug; `arrayLimit` should apply unifo</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="request:2.88.2" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>request:2.88.2</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-p8p7-x288-28g6</strong> (CVSS: 6.099999904632568)
+      <div class="issue-meta">The `request` package through 2.88.2 for Node.js and the `@cypress/request` package prior to 3.0.0 allow a bypass of SSRF mitigations via an attacker-controller server that does a cross-protocol redir</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="rollup:4.52.4" data-sources="owasp" data-sevs="HIGH" data-langs="dep">
+  <summary><strong>rollup:4.52.4</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-mw96-cpmx-2vgc</strong>
+      <div class="issue-meta">### Summary
+The Rollup module bundler (specifically v4.x and present in current source) is vulnerable to an Arbitrary File Write via Path Traversal. Insecure file name sanitization in the core engine </div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="storybook:8.6.15" data-sources="owasp" data-sevs="HIGH" data-langs="dep">
+  <summary><strong>storybook:8.6.15</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-mjf5-7g4m-gx5w</strong>
+      <div class="issue-meta">### Summary
+
+The WebSocket functionality in Storybook&#x27;s dev server, used to create and update stories, is vulnerable to WebSocket hijacking. This vulnerability **only affects the Storybook dev server;</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="tough-cookie:2.5.0" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>tough-cookie:2.5.0</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-72xf-g2v4-qvf3</strong> (CVSS: 6.5)
+      <div class="issue-meta">Versions of the package tough-cookie before 4.1.3 are vulnerable to Prototype Pollution due to improper handling of Cookies when using CookieJar in `rejectPublicSuffixes=false` mode. This issue arises</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="uuid:8.3.2" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>uuid:8.3.2</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-w5hq-g745-h8pq</strong>
+      <div class="issue-meta">### Summary
+
+`v3`, `v5`, and `v6` accept external output buffers but do not reject out-of-range writes (small `buf` or large `offset`).  
+By contrast, `v4`, `v1`, and `v7` explicitly throw `RangeError</div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="ws:8.13.0" data-sources="owasp" data-sevs="HIGH" data-langs="dep">
+  <summary><strong>ws:8.13.0</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="HIGH" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-3h5v-q93c-6h6q</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Impact
+
+A request with a number of headers exceeding the[`server.maxHeadersCount`][] threshold could be used to crash a ws server.
+
+### Proof of concept
+
+```js
+const http = require(&#x27;http&#x27;);
+const </div>
+    </div>
+  </div>
+</details>
+<details class="all-entry" data-path="yaml:1.10.2" data-sources="owasp" data-sevs="MODERATE" data-langs="dep">
+  <summary><strong>yaml:1.10.2</strong> (1) <span class="source source-dc">1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item all-item" data-source="owasp" data-sev="MODERATE" data-lang="dep">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-48c2-rrv3-qjmp</strong> (CVSS: 4.300000190734863)
+      <div class="issue-meta">Parsing a YAML document with `yaml` may throw a RangeError due to a stack overflow.
+
+The node resolution/composition phase uses recursive function calls without a depth bound. An attacker who can supp</div>
     </div>
   </div>
 </details>
@@ -24186,7 +25023,850 @@ read the error from the `error` property.
 </div>
 </div>
 <div class="tab-content" id="tab-owasp">
-<div class="placeholder"><h3>OWASP Dependency-Check</h3><p>Results not yet available. Run <code>./run-dependency-check.sh</code> first, then regenerate this report.</p><p style="margin-top:10px;font-size:0.85em">Tip: Get a free NVD API key at <code>nvd.nist.gov/developers/request-an-api-key</code> to speed up the scan.</p></div>
+<div class="cards">
+  <div class="card"><div class="value" style="color:#d4333f">7</div><div class="label">Critical</div></div>
+  <div class="card"><div class="value" style="color:#ed7d20">41</div><div class="label">High</div></div>
+  <div class="card"><div class="value" style="color:#eabe06">0</div><div class="label">Medium</div></div>
+  <div class="card"><div class="value" style="color:#67a513">12</div><div class="label">Low</div></div>
+  <div class="card"><div class="value">49</div><div class="label">Vulnerable Deps</div></div>
+  <div class="card"><div class="value">98</div><div class="label">Total CVEs</div></div>
+</div>
+<div class="section dc">
+  <h2>Vulnerable Dependencies</h2>
+<details style="margin-bottom:2px">
+  <summary><strong>next:13.5.9</strong> (16 CVEs) <span class="badge" style="background:#ed7d20">H6</span> <span class="badge" style="background:#67a513">L3</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-5j59-xgg2-r9c4</strong> (CVSS: 7.5)
+      <div class="issue-meta">It was discovered that the fix for [CVE-2025-55184](https://github.com/advisories/GHSA-2m3v-v2m8-q956) in React Server Components was incomplete and did not fully mitigate denial-of-service conditions</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-7gfc-8cq8-jh5f</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Impact
+If a Next.js application is performing authorization in middleware based on pathname, it was possible for this authorization to be bypassed.
+
+### Patches
+This issue was patched in Next.js `</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-fr5h-rqp8-mj6g</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Impact
+A Server-Side Request Forgery (SSRF) vulnerability was identified in Next.js Server Actions by security researchers at Assetnote. If the `Host` header is modified, and the below conditions </div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-h25m-26qc-wcjf</strong> (CVSS: 7.5)
+      <div class="issue-meta">A vulnerability affects certain React Server Components packages for versions 19.0.x, 19.1.x, and 19.2.x and frameworks that use the affected packages, including Next.js 13.x, 14.x, 15.x, and 16.x usi</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-mwv6-3258-q52c</strong> (CVSS: 7.5)
+      <div class="issue-meta">A vulnerability affects certain React packages for versions 19.0.0, 19.0.1, 19.1.0, 19.1.1, 19.1.2, 19.2.0, and 19.2.1 and frameworks that use the affected packages, including Next.js 15.x and 16.x us</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-q4gf-8mx6-v5v3</strong> (CVSS: 7.5)
+      <div class="issue-meta">A vulnerability affects certain React Server Components packages for versions 19.x and frameworks that use the affected packages, including Next.js 13.x, 14.x, 15.x, and 16.x using the App Router. The</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-qpjv-v59x-3qc4</strong> (CVSS: 3.700000047683716)
+      <div class="issue-meta">**Summary**  
+We received a responsible disclosure from Allam Rachid (zhero) for a low-severity race-condition vulnerability in Next.js. This issue only affects the **Pages Router** under certain misc</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-223j-4rm8-mrmf</strong>
+      <div class="issue-meta">## Summary
+In the process of remediating [CVE-2025-29927](https://github.com/advisories/GHSA-f82v-jwr5-mffw), we looked at other possible exploits of Middleware. We independently verified this low sev</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-3h52-269p-cp9r</strong>
+      <div class="issue-meta">## Summary
+
+A low-severity vulnerability in **Next.js** has been fixed in **version 15.2.2**. This issue may have allowed limited source code exposure when the dev server was running with the App Rout</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-4342-x723-ch2f</strong> (CVSS: 6.5)
+      <div class="issue-meta">A vulnerability in **Next.js Middleware** has been fixed in **v14.2.32** and **v15.4.7**. The issue occurred when request headers were directly passed into `NextResponse.next()`. In self-hosted applic</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-g5qg-72qw-gw5v</strong> (CVSS: 6.199999809265137)
+      <div class="issue-meta">A vulnerability in Next.js Image Optimization has been fixed in v15.4.5 and v14.2.31. When images returned from API routes vary based on request headers (such as `Cookie` or `Authorization`), these re</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-9g9p-9gw9-jx7f</strong> (CVSS: 5.900000095367432)
+      <div class="issue-meta">A DoS vulnerability exists in self-hosted Next.js applications that have `remotePatterns` configured for the Image Optimizer. The image optimization endpoint (`/_next/image`) loads external images ent</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-g77x-44xx-532m</strong> (CVSS: 5.900000095367432)
+      <div class="issue-meta">### Impact
+The image optimization feature of Next.js contained a vulnerability which allowed for a potential Denial of Service (DoS) condition which could lead to excessive CPU consumption.
+
+**Not aff</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-xv57-4mr9-wg8v</strong> (CVSS: 4.300000190734863)
+      <div class="issue-meta">A vulnerability in **Next.js Image Optimization** has been fixed in **v15.4.5** and **v14.2.31**. The issue allowed attacker-controlled external image sources to trigger file downloads with arbitrary </div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-3x4c-7xq6-9pq8</strong>
+      <div class="issue-meta">## Summary
+The default Next.js image optimization disk cache (`/_next/image`) did not have a configurable upper bound, allowing unbounded cache growth.
+
+## Impact
+An attacker could generate many uniqu</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-ggv3-7p47-pfv8</strong>
+      <div class="issue-meta">## Summary
+When Next.js rewrites proxy traffic to an external backend, a crafted `DELETE`/`OPTIONS` request using `Transfer-Encoding: chunked` could trigger request boundary disagreement between the p</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>handlebars:4.7.8</strong> (8 CVEs) <span class="badge" style="background:#d4333f">C1</span> <span class="badge" style="background:#ed7d20">H4</span> <span class="badge" style="background:#67a513">L1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#d4333f">CRITICAL</span> <strong>GHSA-2w6w-674q-4c4q</strong> (CVSS: 9.800000190734863)
+      <div class="issue-meta">## Summary
+
+`Handlebars.compile()` accepts a pre-parsed AST object in addition to a template string. The `value` field of a `NumberLiteral` AST node is emitted directly into the generated JavaScript w</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-xjpj-3mr7-gcpf</strong> (CVSS: 8.300000190734863)
+      <div class="issue-meta">## Summary
+
+The Handlebars CLI precompiler (`bin/handlebars` / `lib/precompiler.js`) concatenates user-controlled strings — template file names and several CLI options — directly into the JavaScript i</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-3mfm-83xf-c92r</strong> (CVSS: 8.100000381469727)
+      <div class="issue-meta">## Summary
+
+The `@partial-block` special variable is stored in the template data context and is reachable and mutable from within a template via helpers that accept arbitrary objects. When a helper ov</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-xhpv-hc6g-r9c6</strong> (CVSS: 8.100000381469727)
+      <div class="issue-meta">## Summary
+
+A crafted object placed in the template context can bypass all conditional guards in `resolvePartial()` and cause `invokePartial()` to return `undefined`. The Handlebars runtime then treat</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-9cx6-37pm-9jff</strong> (CVSS: 7.5)
+      <div class="issue-meta">## Summary
+
+When a Handlebars template contains decorator syntax referencing an unregistered decorator (e.g. `{{*n}}`), the compiled template calls `lookupProperty(decorators, &quot;n&quot;)`, which returns `un</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-442j-39wm-28r2</strong> (CVSS: 3.700000047683716)
+      <div class="issue-meta">## Summary
+
+In `lib/handlebars/runtime.js`, the `container.lookup()` function uses `container.lookupProperty()` as a gate check to enforce prototype-access controls, but then discards the validated re</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-7rx3-28cr-v5wh</strong> (CVSS: 4.800000190734863)
+      <div class="issue-meta">## Summary
+
+The prototype method blocklist in `lib/handlebars/internal/proto-access.js` blocks `constructor`, `__defineGetter__`, `__defineSetter__`, and `__lookupGetter__`, but omits the symmetric `_</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-2qvq-rjwj-gvw9</strong> (CVSS: 4.699999809265137)
+      <div class="issue-meta">## Summary
+
+`resolvePartial()` in the Handlebars runtime resolves partial names via a plain property lookup on `options.partials` without guarding against prototype-chain traversal. When `Object.proto</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>immer:7.0.15</strong> (6 CVEs) <span class="badge" style="background:#d4333f">C3</span> <span class="badge" style="background:#ed7d20">H3</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#d4333f">CRITICAL</span> <strong>GHSA-33f9-j839-rf8h</strong> (CVSS: 9.800000190734863)
+      <div class="issue-meta">This affects the package immer before 9.0.6. A type confusion vulnerability can lead to a bypass of CVE-2020-28477 when the user-provided keys used in the path parameter are arrays. In particular, thi</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#d4333f">CRITICAL</span> <strong>CVE-2021-23436</strong> (CVSS: 9.8)
+      <div class="issue-meta">This affects the package immer before 9.0.6. A type confusion vulnerability can lead to a bypass of CVE-2020-28477 when the user-provided keys used in the path parameter are arrays. In particular, thi</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#d4333f">CRITICAL</span> <strong>CVE-2021-3757</strong> (CVSS: 9.8)
+      <div class="issue-meta">immer is vulnerable to Improperly Controlled Modification of Object Prototype Attributes (&#x27;Prototype Pollution&#x27;)</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>CVE-2020-28477</strong> (CVSS: 7.5)
+      <div class="issue-meta">This affects all versions of package immer.</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-9qmh-276g-x5pj</strong> (CVSS: 7.5)
+      <div class="issue-meta">## Overview
+
+Affected versions of immer are vulnerable to Prototype Pollution.
+
+## Proof of exploit
+
+```js
+const {applyPatches, enablePatches} = require(&quot;immer&quot;);
+enablePatches();
+let obj = {};
+consol</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-c36v-fmgq-m8hx</strong> (CVSS: 7.5)
+      <div class="issue-meta">immer is vulnerable to Improperly Controlled Modification of Object Prototype Attributes (&#x27;Prototype Pollution&#x27;).</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>vite:7.1.9</strong> (4 CVEs) <span class="badge" style="background:#ed7d20">H2</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-p9ff-h696-f583</strong>
+      <div class="issue-meta">### Summary
+
+[`server.fs`](https://vite.dev/config/server-options#server-fs-strict) check was not enforced to the `fetchModule` method that is exposed in Vite dev server&#x27;s WebSocket. 
+
+### Impact
+
+Onl</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-v2wj-q39q-566r</strong>
+      <div class="issue-meta">### Summary
+
+The contents of files that are specified by [`server.fs.deny`](https://vite.dev/config/server-options#server-fs-deny) can be returned to the browser.
+
+### Impact
+
+Only apps that match the</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-4w7w-66w2-5vf9</strong>
+      <div class="issue-meta">### Summary
+
+Any files ending with `.map` even out side the project can be returned to the browser.
+
+### Impact
+
+Only apps that match the following conditions are affected:
+
+- explicitly exposes the V</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-93m4-6634-74q7</strong>
+      <div class="issue-meta">### Summary
+Files denied by [`server.fs.deny`](https://vitejs.dev/config/server-options.html#server-fs-deny) were sent if the URL ended with `\` when the dev server is running on Windows.
+
+### Impact
+</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>webpack:5.99.6</strong> (4 CVEs) <span class="badge" style="background:#67a513">L4</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-38r7-794h-5758</strong> (CVSS: 3.700000047683716)
+      <div class="issue-meta">### Summary
+When `experiments.buildHttp` is enabled, webpack’s HTTP(S) resolver (`HttpUriPlugin`) enforces `allowedUris` only for the **initial** URL, but **does not re-validate `allowedUris` after fo</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-8fgc-7cc6-rx7x</strong> (CVSS: 3.700000047683716)
+      <div class="issue-meta">### Summary
+When `experiments.buildHttp` is enabled, webpack’s HTTP(S) resolver (`HttpUriPlugin`) can be bypassed to fetch resources from **hosts outside `allowedUris`** by using crafted URLs that inc</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>CVE-2025-68157</strong> (CVSS: 3.7)
+      <div class="issue-meta">Webpack is a module bundler. From version 5.49.0 to before 5.104.0, when experiments.buildHttp is enabled, webpack’s HTTP(S) resolver (HttpUriPlugin) enforces allowedUris only for the initial URL, but</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>CVE-2025-68458</strong> (CVSS: 3.7)
+      <div class="issue-meta">Webpack is a module bundler. From version 5.49.0 to before 5.104.1, when experiments.buildHttp is enabled, webpack’s HTTP(S) resolver (HttpUriPlugin) can be bypassed to fetch resources from hosts outs</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>lodash-es:4.17.21</strong> (3 CVEs) <span class="badge" style="background:#ed7d20">H1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-r5fr-rjxr-66jc</strong> (CVSS: 8.100000381469727)
+      <div class="issue-meta">### Impact
+
+The fix for [CVE-2021-23337](https://github.com/advisories/GHSA-35jh-r3h4-6jhm) added validation for the `variable` option in `_.template` but did not apply the same validation to `options</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-f23m-r3pf-42rh</strong> (CVSS: 6.5)
+      <div class="issue-meta">### Impact
+
+Lodash versions 4.17.23 and earlier are vulnerable to prototype pollution in the `_.unset` and `_.omit` functions. The fix for [CVE-2025-13465](https://github.com/lodash/lodash/security/ad</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-xxjr-mmjv-4gpg</strong> (CVSS: 6.5)
+      <div class="issue-meta">### Impact
+
+Lodash versions 4.0.0 through 4.17.22 are vulnerable to prototype pollution in the `_.unset` and `_.omit` functions. An attacker can pass crafted paths which cause Lodash to delete methods</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>minimatch:3.1.2</strong> (3 CVEs) <span class="badge" style="background:#ed7d20">H3</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-23c5-xmqv-rm74</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Summary
+
+Nested `*()` extglobs produce regexps with nested unbounded quantifiers (e.g. `(?:(?:a|b)*)*`), which exhibit catastrophic backtracking in V8. With a 12-byte pattern `*(*(*(a|b)))` and an</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-7r86-cg39-jmmj</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Summary
+
+`matchOne()` performs unbounded recursive backtracking when a glob pattern contains multiple non-adjacent `**` (GLOBSTAR) segments and the input path does not match. The time complexity i</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-3ppc-4f35-3m26</strong>
+      <div class="issue-meta">### Summary
+`minimatch` is vulnerable to Regular Expression Denial of Service (ReDoS) when a glob pattern contains many consecutive `*` wildcards followed by a literal character that doesn&#x27;t appear in</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>minimatch:4.2.3</strong> (3 CVEs) <span class="badge" style="background:#ed7d20">H3</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-23c5-xmqv-rm74</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Summary
+
+Nested `*()` extglobs produce regexps with nested unbounded quantifiers (e.g. `(?:(?:a|b)*)*`), which exhibit catastrophic backtracking in V8. With a 12-byte pattern `*(*(*(a|b)))` and an</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-7r86-cg39-jmmj</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Summary
+
+`matchOne()` performs unbounded recursive backtracking when a glob pattern contains multiple non-adjacent `**` (GLOBSTAR) segments and the input path does not match. The time complexity i</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-3ppc-4f35-3m26</strong>
+      <div class="issue-meta">### Summary
+`minimatch` is vulnerable to Regular Expression Denial of Service (ReDoS) when a glob pattern contains many consecutive `*` wildcards followed by a literal character that doesn&#x27;t appear in</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>minimatch:9.0.5</strong> (3 CVEs) <span class="badge" style="background:#ed7d20">H3</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-23c5-xmqv-rm74</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Summary
+
+Nested `*()` extglobs produce regexps with nested unbounded quantifiers (e.g. `(?:(?:a|b)*)*`), which exhibit catastrophic backtracking in V8. With a 12-byte pattern `*(*(*(a|b)))` and an</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-7r86-cg39-jmmj</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Summary
+
+`matchOne()` performs unbounded recursive backtracking when a glob pattern contains multiple non-adjacent `**` (GLOBSTAR) segments and the input path does not match. The time complexity i</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-3ppc-4f35-3m26</strong>
+      <div class="issue-meta">### Summary
+`minimatch` is vulnerable to Regular Expression Denial of Service (ReDoS) when a glob pattern contains many consecutive `*` wildcards followed by a literal character that doesn&#x27;t appear in</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>ajv:5.5.2</strong> (2 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-v88g-cgmw-v5xw</strong> (CVSS: 5.599999904632568)
+      <div class="issue-meta">An issue was discovered in ajv.validate() in Ajv (aka Another JSON Schema Validator) 6.12.2. A carefully crafted JSON schema could be provided that allows execution of other code by prototype pollutio</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-2g4f-4pwh-qvx6</strong>
+      <div class="issue-meta">ajv (Another JSON Schema Validator) through version 8.17.1 is vulnerable to Regular Expression Denial of Service (ReDoS) when the `$data` option is enabled. The pattern keyword accepts runtime data vi</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>flatted:3.3.3</strong> (2 CVEs) <span class="badge" style="background:#ed7d20">H2</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-25h7-pfq9-p65f</strong> (CVSS: 7.5)
+      <div class="issue-meta">## Summary
+
+flatted&#x27;s `parse()` function uses a recursive `revive()` phase to resolve circular references in deserialized JSON. When given a crafted payload with deeply nested or self-referential `$` </div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-rf6f-7fwh-wjgh</strong>
+      <div class="issue-meta">---
+  **Summary**
+
+  The parse() function in flatted can use attacker-controlled string values from the parsed JSON as direct array index
+  keys, without validating that they are numeric. Since the in</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>lodash:4.17.23</strong> (2 CVEs) <span class="badge" style="background:#ed7d20">H1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-r5fr-rjxr-66jc</strong> (CVSS: 8.100000381469727)
+      <div class="issue-meta">### Impact
+
+The fix for [CVE-2021-23337](https://github.com/advisories/GHSA-35jh-r3h4-6jhm) added validation for the `variable` option in `_.template` but did not apply the same validation to `options</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-f23m-r3pf-42rh</strong> (CVSS: 6.5)
+      <div class="issue-meta">### Impact
+
+Lodash versions 4.17.23 and earlier are vulnerable to prototype pollution in the `_.unset` and `_.omit` functions. The fix for [CVE-2025-13465](https://github.com/lodash/lodash/security/ad</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>path-to-regexp:8.2.0</strong> (2 CVEs) <span class="badge" style="background:#ed7d20">H1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-j3q9-mxjg-w52f</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Impact
+
+A bad regular expression is generated any time you have multiple sequential optional groups (curly brace syntax), such as `{a}{b}{c}:z`. The generated regex grows exponentially with the nu</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-27v5-c462-wpq7</strong> (CVSS: 5.900000095367432)
+      <div class="issue-meta">### Impact
+
+When using multiple wildcards, combined with at least one parameter, a regular expression can be generated that is vulnerable to ReDoS. This backtracking vulnerability requires the second </div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>picomatch:2.3.1</strong> (2 CVEs) <span class="badge" style="background:#ed7d20">H1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-c2c7-rcm5-vvqj</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Impact
+`picomatch` is vulnerable to Regular Expression Denial of Service (ReDoS) when processing crafted extglob patterns. Certain patterns using extglob quantifiers such as `+()` and `*()`, espec</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-3v7f-55p6-f55p</strong> (CVSS: 5.300000190734863)
+      <div class="issue-meta">### Impact
+picomatch is vulnerable to a **method injection vulnerability (CWE-1321)** affecting the `POSIX_REGEX_SOURCE` object. Because the object inherits from `Object.prototype`, specially crafted </div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>picomatch:4.0.3</strong> (2 CVEs) <span class="badge" style="background:#ed7d20">H1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-c2c7-rcm5-vvqj</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Impact
+`picomatch` is vulnerable to Regular Expression Denial of Service (ReDoS) when processing crafted extglob patterns. Certain patterns using extglob quantifiers such as `+()` and `*()`, espec</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-3v7f-55p6-f55p</strong> (CVSS: 5.300000190734863)
+      <div class="issue-meta">### Impact
+picomatch is vulnerable to a **method injection vulnerability (CWE-1321)** affecting the `POSIX_REGEX_SOURCE` object. Because the object inherits from `Object.prototype`, specially crafted </div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>serialize-javascript:6.0.2</strong> (2 CVEs) <span class="badge" style="background:#ed7d20">H1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-5c6j-r48x-rmvq</strong> (CVSS: 8.100000381469727)
+      <div class="issue-meta">### Impact
+
+The serialize-javascript npm package (versions &lt;= 7.0.2) contains a code injection vulnerability. It is an incomplete fix for CVE-2020-7660.
+
+While `RegExp.source` is sanitized, `RegExp.fl</div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-qj8w-gfj5-8c6v</strong> (CVSS: 5.900000095367432)
+      <div class="issue-meta">### Impact
+
+**What kind of vulnerability is it?**
+
+It is a **Denial of Service (DoS)** vulnerability caused by CPU exhaustion. When serializing a specially crafted &quot;array-like&quot; object (an object that </div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>ws:7.4.5</strong> (2 CVEs) <span class="badge" style="background:#ed7d20">H1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-3h5v-q93c-6h6q</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Impact
+
+A request with a number of headers exceeding the[`server.maxHeadersCount`][] threshold could be used to crash a ws server.
+
+### Proof of concept
+
+```js
+const http = require(&#x27;http&#x27;);
+const </div>
+    </div>
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-6fc8-4gx4-v693</strong> (CVSS: 5.300000190734863)
+      <div class="issue-meta">### Impact
+
+A specially crafted value of the `Sec-Websocket-Protocol` header can be used to significantly slow down a ws server.
+
+### Proof of concept
+
+```js
+for (const length of [1000, 2000, 4000, 80</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>@babel/runtime:7.22.10</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-968p-4wvh-cqc8</strong> (CVSS: 6.199999809265137)
+      <div class="issue-meta">### Impact
+
+When using Babel to compile [regular expression named capturing groups](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Regular_expressions/Named_capturing_group), Babel </div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>@tootallnate/once:2.0.0</strong> (1 CVEs) <span class="badge" style="background:#67a513">L1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-vpq2-c234-7xj6</strong> (CVSS: 3.299999952316284)
+      <div class="issue-meta">Versions of the package @tootallnate/once before 3.0.1 are vulnerable to Incorrect Control Flow Scoping in promise resolving when AbortSignal option is used. The Promise remains in a permanently pendi</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>ajv:8.17.1</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-2g4f-4pwh-qvx6</strong>
+      <div class="issue-meta">ajv (Another JSON Schema Validator) through version 8.17.1 is vulnerable to Regular Expression Denial of Service (ReDoS) when the `$data` option is enabled. The pattern keyword accepts runtime data vi</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>babel-traverse:6.26.0</strong> (1 CVEs) <span class="badge" style="background:#d4333f">C1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#d4333f">CRITICAL</span> <strong>GHSA-67hx-6x53-jw92</strong> (CVSS: 9.399999618530273)
+      <div class="issue-meta">### Impact
+
+Using Babel to compile code that was specifically crafted by an attacker can lead to arbitrary code execution during compilation, when using plugins that rely on the `path.evaluate()`or `p</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>bn.js:4.12.2</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-378v-28hj-76wf</strong> (CVSS: 5.300000190734863)
+      <div class="issue-meta">This affects versions of the package bn.js before 4.12.3 and 5.2.3. Calling maskn(0) on any BN instance corrupts the internal state, causing toString(), divmod(), and other methods to enter an infinit</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>bn.js:5.2.2</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-378v-28hj-76wf</strong> (CVSS: 5.300000190734863)
+      <div class="issue-meta">This affects versions of the package bn.js before 4.12.3 and 5.2.3. Calling maskn(0) on any BN instance corrupts the internal state, causing toString(), divmod(), and other methods to enter an infinit</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>brace-expansion:1.1.12</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-f886-m6hf-6m8v</strong> (CVSS: 6.5)
+      <div class="issue-meta">### Impact
+
+A brace pattern with a zero step value (e.g., `{1..2..0}`) causes the sequence generation loop to run indefinitely, making the process hang for seconds and allocate heaps of memory.
+
+The l</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>brace-expansion:2.0.2</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-f886-m6hf-6m8v</strong> (CVSS: 6.5)
+      <div class="issue-meta">### Impact
+
+A brace pattern with a zero step value (e.g., `{1..2..0}`) causes the sequence generation loop to run indefinitely, making the process hang for seconds and allocate heaps of memory.
+
+The l</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>brace-expansion:5.0.4</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-f886-m6hf-6m8v</strong> (CVSS: 6.5)
+      <div class="issue-meta">### Impact
+
+A brace pattern with a zero step value (e.g., `{1..2..0}`) causes the sequence generation loop to run indefinitely, making the process hang for seconds and allocate heaps of memory.
+
+The l</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>diff:4.0.2</strong> (1 CVEs) <span class="badge" style="background:#67a513">L1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-73rr-hh4g-fpgx</strong>
+      <div class="issue-meta">### Impact
+
+Attempting to parse a patch whose filename headers contain the line break characters `\r`, `\u2028`, or `\u2029` can cause the `parsePatch` method to enter an infinite loop. It then consum</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>elliptic:6.6.1</strong> (1 CVEs) <span class="badge" style="background:#67a513">L1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-848j-6mx2-7j84</strong> (CVSS: 5.599999904632568)
+      <div class="issue-meta">The ECDSA implementation of the Elliptic package generates incorrect signatures if an interim value of &#x27;k&#x27; (as computed based on step 3.2 of  RFC 6979 https://datatracker.ietf.org/doc/html/rfc6979 ) h</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>form-data:2.3.3</strong> (1 CVEs) <span class="badge" style="background:#d4333f">C1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#d4333f">CRITICAL</span> <strong>GHSA-fjxv-7rqg-78g4</strong>
+      <div class="issue-meta">### Summary
+
+form-data uses `Math.random()` to select a boundary value for multipart form-encoded data. This can lead to a security issue if an attacker:
+1. can observe other values produced by Math.r</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>form-data:4.0.0</strong> (1 CVEs) <span class="badge" style="background:#d4333f">C1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#d4333f">CRITICAL</span> <strong>GHSA-fjxv-7rqg-78g4</strong>
+      <div class="issue-meta">### Summary
+
+form-data uses `Math.random()` to select a boundary value for multipart form-encoded data. This can lead to a security issue if an attacker:
+1. can observe other values produced by Math.r</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>glob:10.4.5</strong> (1 CVEs) <span class="badge" style="background:#ed7d20">H1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-5j98-mcp5-4vw2</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Summary
+
+The glob CLI contains a command injection vulnerability in its `-c/--cmd` option that allows arbitrary command execution when processing files with malicious names. When `glob -c &lt;command</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>immutable:3.7.6</strong> (1 CVEs) <span class="badge" style="background:#ed7d20">H1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-wf6x-7x77-mvgw</strong> (CVSS: 9.800000190734863)
+      <div class="issue-meta">## Impact
+_What kind of vulnerability is it? Who is impacted?_
+
+A Prototype Pollution is possible in immutable via the mergeDeep(), mergeDeepWith(), merge(), Map.toJS(), and Map.toObject() APIs.
+
+## A</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>immutable:5.1.3</strong> (1 CVEs) <span class="badge" style="background:#ed7d20">H1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-wf6x-7x77-mvgw</strong> (CVSS: 9.800000190734863)
+      <div class="issue-meta">## Impact
+_What kind of vulnerability is it? Who is impacted?_
+
+A Prototype Pollution is possible in immutable via the mergeDeep(), mergeDeepWith(), merge(), Map.toJS(), and Map.toObject() APIs.
+
+## A</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>js-yaml:3.14.1</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-mh29-5h37-fv8m</strong> (CVSS: 5.300000190734863)
+      <div class="issue-meta">### Impact
+
+In js-yaml 4.1.0, 4.0.0, and 3.14.1 and below, it&#x27;s possible for an attacker to modify the prototype of the result of a parsed yaml document via prototype pollution (`__proto__`). All user</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>js-yaml:4.1.0</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-mh29-5h37-fv8m</strong> (CVSS: 5.300000190734863)
+      <div class="issue-meta">### Impact
+
+In js-yaml 4.1.0, 4.0.0, and 3.14.1 and below, it&#x27;s possible for an attacker to modify the prototype of the result of a parsed yaml document via prototype pollution (`__proto__`). All user</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>lodash:4.17.21</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-xxjr-mmjv-4gpg</strong> (CVSS: 6.5)
+      <div class="issue-meta">### Impact
+
+Lodash versions 4.0.0 through 4.17.22 are vulnerable to prototype pollution in the `_.unset` and `_.omit` functions. An attacker can pass crafted paths which cause Lodash to delete methods</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>markdown-it:14.1.0</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-38c4-r59v-3vqw</strong> (CVSS: 5.300000190734863)
+      <div class="issue-meta">Versions of the package markdown-it from 13.0.0 and before 14.1.1 are vulnerable to Regular Expression Denial of Service (ReDoS) due to the use of the regex /\*+$/ in the linkify function. An attacker</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>minimatch:3.0.4</strong> (1 CVEs) <span class="badge" style="background:#ed7d20">H1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-f8q6-p94x-37v3</strong> (CVSS: 7.5)
+      <div class="issue-meta">A vulnerability was found in the minimatch package. This flaw allows a Regular Expression Denial of Service (ReDoS) when calling the braceExpand function with specific arguments, resulting in a Denial</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>node-fetch:2.6.1</strong> (1 CVEs) <span class="badge" style="background:#ed7d20">H1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-r683-j2x4-v87g</strong> (CVSS: 8.800000190734863)
+      <div class="issue-meta">node-fetch forwards secure headers such as `authorization`, `www-authenticate`, `cookie`, &amp; `cookie2` when redirecting to a untrusted site.</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>postcss:8.5.6</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-qx2v-qp2m-jg93</strong> (CVSS: 6.099999904632568)
+      <div class="issue-meta"># PostCSS: XSS via Unescaped `&lt;/style&gt;` in CSS Stringify Output
+
+## Summary
+
+PostCSS v8.5.5 (latest) does not escape `&lt;/style&gt;` sequences when stringifying CSS ASTs. When user-submitted CSS is parsed </div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>qs:6.14.0</strong> (1 CVEs) <span class="badge" style="background:#67a513">L1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#67a513">LOW</span> <strong>GHSA-w7fw-mjwx-w883</strong> (CVSS: 3.700000047683716)
+      <div class="issue-meta">### Summary
+The `arrayLimit` option in qs does not enforce limits for comma-separated values when `comma: true` is enabled, allowing attackers to cause denial-of-service via memory exhaustion. This is</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>qs:6.5.3</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-6rw7-vpxm-498p</strong> (CVSS: 3.700000047683716)
+      <div class="issue-meta">### Summary
+
+The `arrayLimit` option in qs did not enforce limits for bracket notation (`a[]=1&amp;a[]=2`), only for indexed notation (`a[0]=1`). This is a consistency bug; `arrayLimit` should apply unifo</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>request:2.88.2</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-p8p7-x288-28g6</strong> (CVSS: 6.099999904632568)
+      <div class="issue-meta">The `request` package through 2.88.2 for Node.js and the `@cypress/request` package prior to 3.0.0 allow a bypass of SSRF mitigations via an attacker-controller server that does a cross-protocol redir</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>rollup:4.52.4</strong> (1 CVEs) <span class="badge" style="background:#ed7d20">H1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-mw96-cpmx-2vgc</strong>
+      <div class="issue-meta">### Summary
+The Rollup module bundler (specifically v4.x and present in current source) is vulnerable to an Arbitrary File Write via Path Traversal. Insecure file name sanitization in the core engine </div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>storybook:8.6.15</strong> (1 CVEs) <span class="badge" style="background:#ed7d20">H1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-mjf5-7g4m-gx5w</strong>
+      <div class="issue-meta">### Summary
+
+The WebSocket functionality in Storybook&#x27;s dev server, used to create and update stories, is vulnerable to WebSocket hijacking. This vulnerability **only affects the Storybook dev server;</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>tough-cookie:2.5.0</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-72xf-g2v4-qvf3</strong> (CVSS: 6.5)
+      <div class="issue-meta">Versions of the package tough-cookie before 4.1.3 are vulnerable to Prototype Pollution due to improper handling of Cookies when using CookieJar in `rejectPublicSuffixes=false` mode. This issue arises</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>uuid:8.3.2</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-w5hq-g745-h8pq</strong>
+      <div class="issue-meta">### Summary
+
+`v3`, `v5`, and `v6` accept external output buffers but do not reject out-of-range writes (small `buf` or large `offset`).  
+By contrast, `v4`, `v1`, and `v7` explicitly throw `RangeError</div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>ws:8.13.0</strong> (1 CVEs) <span class="badge" style="background:#ed7d20">H1</span></summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#ed7d20">HIGH</span> <strong>GHSA-3h5v-q93c-6h6q</strong> (CVSS: 7.5)
+      <div class="issue-meta">### Impact
+
+A request with a number of headers exceeding the[`server.maxHeadersCount`][] threshold could be used to crash a ws server.
+
+### Proof of concept
+
+```js
+const http = require(&#x27;http&#x27;);
+const </div>
+    </div>
+  </div>
+</details>
+<details style="margin-bottom:2px">
+  <summary><strong>yaml:1.10.2</strong> (1 CVEs)</summary>
+  <div class="issue-list">
+    <div class="issue-item">
+      <span class="source source-dc">OWASP</span> <span class="badge" style="background:#999">MODERATE</span> <strong>GHSA-48c2-rrv3-qjmp</strong> (CVSS: 4.300000190734863)
+      <div class="issue-meta">Parsing a YAML document with `yaml` may throw a RangeError due to a stack overflow.
+
+The node resolution/composition phase uses recursive function calls without a depth bound. An attacker who can supp</div>
+    </div>
+  </div>
+</details>
+</div>
 </div>
 
 <script>
