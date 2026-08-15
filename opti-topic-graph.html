@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Production Analytics (Opti on Opti) - Semantic Topic Graph</title>
+  <script src="https://unpkg.com/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #0f1117; color: #e1e4e8; }
+    .header { padding: 16px 24px; border-bottom: 1px solid #21262d; display: flex; align-items: center; gap: 16px; }
+    .header h1 { font-size: 18px; font-weight: 600; color: #f0f6fc; }
+    .header .subtitle { font-size: 13px; color: #8b949e; }
+    .header .badge { font-size: 11px; background: #388bfd33; color: #58a6ff; padding: 2px 8px; border-radius: 10px; }
+    .topic-tabs { display: flex; padding: 0 24px; border-bottom: 1px solid #21262d; overflow-x: auto; flex-wrap: nowrap; }
+    .topic-tab { padding: 10px 14px; font-size: 12px; color: #8b949e; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; user-select: none; white-space: nowrap; }
+    .topic-tab:hover { color: #e1e4e8; }
+    .topic-tab.active { color: #58a6ff; border-bottom-color: #58a6ff; }
+    .main { display: flex; height: calc(100vh - 97px); }
+    #cy { flex: 1; min-height: 400px; }
+    .sidebar { width: 360px; border-left: 1px solid #21262d; overflow-y: auto; padding: 16px; flex-shrink: 0; }
+    .sidebar h2 { font-size: 14px; font-weight: 600; color: #f0f6fc; margin-bottom: 8px; }
+    .node-detail { background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 12px; margin-bottom: 16px; display: none; }
+    .node-detail.visible { display: block; }
+    .node-detail h3 { font-size: 13px; font-weight: 600; color: #f0f6fc; margin-bottom: 4px; }
+    .node-detail .type-badge { display: inline-block; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 2px 6px; border-radius: 4px; margin-bottom: 8px; }
+    .node-detail .desc { font-size: 12px; color: #8b949e; line-height: 1.5; }
+    .node-detail .edges-list { margin-top: 8px; font-size: 11px; color: #8b949e; }
+    .node-detail .edges-list div { padding: 2px 0; }
+    .controls { margin-bottom: 16px; }
+    .controls label { font-size: 12px; color: #8b949e; display: block; margin-bottom: 4px; }
+    .controls input[type="range"] { width: 100%; accent-color: #58a6ff; }
+    .depth-label { font-size: 11px; color: #58a6ff; text-align: right; }
+    .expansion-info { font-size: 11px; color: #8b949e; margin-top: 4px; }
+    .trust-toggle { display: flex; gap: 8px; margin-top: 8px; }
+    .trust-btn { font-size: 11px; padding: 4px 8px; border-radius: 4px; border: 1px solid #30363d; background: transparent; color: #8b949e; cursor: pointer; }
+    .trust-btn.active { border-color: #58a6ff; color: #58a6ff; background: rgba(88, 166, 255, 0.1); }
+    .legend { margin-bottom: 20px; }
+    .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; font-size: 11px; color: #8b949e; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .legend-line { width: 18px; height: 0; flex-shrink: 0; }
+    .stats { background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 12px; margin-bottom: 16px; }
+    .stats-row { display: flex; justify-content: space-between; padding: 3px 0; font-size: 12px; }
+    .stats-label { color: #8b949e; }
+    .stats-value { color: #e1e4e8; font-weight: 500; }
+    .shared-badge { background: #da3633; color: #fff; font-size: 9px; padding: 1px 4px; border-radius: 3px; margin-left: 4px; }
+    /* ── View toggle ── */
+    .view-toggle { display: flex; gap: 0; margin-left: auto; }
+    .view-btn { font-size: 12px; padding: 6px 14px; border: 1px solid #30363d; background: transparent; color: #8b949e; cursor: pointer; transition: all 0.15s; }
+    .view-btn:first-child { border-radius: 6px 0 0 6px; }
+    .view-btn:last-child { border-radius: 0 6px 6px 0; border-left: none; }
+    .view-btn.active { background: #21262d; color: #58a6ff; border-color: #58a6ff; }
+    /* ── Instructions panel ── */
+    #instructionsPanel { display: none; flex: 1; overflow-y: auto; padding: 32px 48px; max-width: 960px; margin: 0 auto; }
+    #instructionsPanel.visible { display: block; }
+    #cy.hidden { display: none; }
+    .sidebar.hidden { display: none; }
+    .instructions { font-size: 14px; line-height: 1.7; color: #c9d1d9; }
+    .instructions h1 { font-size: 22px; font-weight: 700; color: #f0f6fc; margin: 0 0 8px 0; border-bottom: 1px solid #21262d; padding-bottom: 12px; }
+    .instructions h2 { font-size: 16px; font-weight: 600; color: #f0f6fc; margin: 28px 0 12px 0; }
+    .instructions h3 { font-size: 14px; font-weight: 600; color: #e1e4e8; margin: 20px 0 8px 0; }
+    .instructions p { margin: 0 0 12px 0; }
+    .instructions ul, .instructions ol { margin: 0 0 12px 0; padding-left: 20px; }
+    .instructions li { margin-bottom: 4px; }
+    .instructions table { border-collapse: collapse; width: 100%; margin: 12px 0 20px 0; font-size: 13px; }
+    .instructions th { text-align: left; padding: 8px 12px; background: #161b22; border: 1px solid #21262d; color: #f0f6fc; font-weight: 600; }
+    .instructions td { padding: 8px 12px; border: 1px solid #21262d; color: #c9d1d9; }
+    .instructions code { background: #161b22; padding: 2px 6px; border-radius: 4px; font-size: 12px; color: #79c0ff; }
+    .instructions .gen-badge { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-left: 8px; }
+    .instructions .gen-auto { background: #238636; color: #fff; }
+    .instructions .gen-note { background: #30363d; color: #8b949e; font-size: 11px; padding: 8px 12px; border-radius: 6px; margin: 16px 0; border-left: 3px solid #58a6ff; }
+    .instructions blockquote { border-left: 3px solid #30363d; padding-left: 12px; color: #8b949e; margin: 12px 0; }
+    .instructions strong { color: #f0f6fc; }
+    .instructions .scope { font-style: italic; color: #8b949e; border-left: 3px solid #58a6ff; padding-left: 10px; margin-bottom: 16px; }
+    .instructions hr { border: none; border-top: 1px solid #21262d; margin: 24px 0; }
+    .copy-btn { position: fixed; bottom: 24px; right: 24px; padding: 10px 16px; background: #238636; color: #fff; border: none; border-radius: 8px; font-size: 13px; cursor: pointer; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+    .copy-btn:hover { background: #2ea043; }
+    .copy-btn.copied { background: #58a6ff; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Production Analytics (Opti on Opti)</h1>
+    <span class="subtitle">Semantic Topic Graph</span>
+    <span class="badge">229 datasets, 230 metrics, 342 dashboards</span>
+    <div class="view-toggle" id="viewToggle">
+      <button class="view-btn active" data-view="graph">Graph</button>
+      <button class="view-btn" data-view="instructions">Instructions</button>
+    </div>
+  </div>
+  <div class="topic-tabs" id="tabBar">
+    <div class="topic-tab active" data-topic="opal">Opal Usage & Adoption</div>
+    <div class="topic-tab" data-topic="exp">Experimentation</div>
+    <div class="topic-tab" data-topic="sales">Sales & Pipeline</div>
+    <div class="topic-tab" data-topic="cs">Customer Success</div>
+    <div class="topic-tab" data-topic="product">Product Engagement</div>
+    <div class="topic-tab" data-topic="marketing">Marketing</div>
+    <div class="topic-tab" data-topic="all">Full App View</div>
+  </div>
+  <div class="main">
+    <div id="cy"></div>
+    <div id="instructionsPanel"></div>
+    <button class="copy-btn" id="copyBtn" style="display:none" onclick="copyInstructions()">Copy as Markdown</button>
+    <div class="sidebar">
+      <div class="node-detail" id="nodeDetail">
+        <h3 id="detailName"></h3>
+        <span class="type-badge" id="detailBadge"></span>
+        <p class="desc" id="detailDesc"></p>
+        <div class="edges-list" id="detailEdges"></div>
+      </div>
+      <div class="controls">
+        <label>Expansion Depth</label>
+        <input type="range" id="depthSlider" min="1" max="3" value="2">
+        <div class="depth-label" id="depthLabel">Depth: 2</div>
+        <div class="expansion-info" id="expansionInfo"></div>
+        <label style="margin-top: 12px;">Trust Minimum</label>
+        <div class="trust-toggle" id="trustBar">
+          <button class="trust-btn active" data-trust="all">All</button>
+          <button class="trust-btn" data-trust="confirmed">Confirmed+</button>
+          <button class="trust-btn" data-trust="human">Human only</button>
+        </div>
+      </div>
+      <div class="legend">
+        <h2>Legend</h2>
+        <div class="legend-item"><div class="legend-dot" style="background:#f778ba"></div> Topic</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#79c0ff"></div> Concept (root)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#79c0ff; opacity:0.5"></div> Concept (supporting)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#7ee787"></div> Dataset</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#d2a8ff"></div> Metric</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ffa657"></div> Event stream</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ff7b72"></div> Dashboard</div>
+        <div class="legend-item"><div class="legend-line" style="border-top:2px solid #8b949e"></div> composes</div>
+        <div class="legend-item"><div class="legend-line" style="border-top:2px solid #58a6ff"></div> measured-by</div>
+        <div class="legend-item"><div class="legend-line" style="border-top:2px solid #ffa657"></div> signalled-by</div>
+        <div class="legend-item"><div class="legend-line" style="border-top:2px dashed #f778ba"></div> equivalent-to</div>
+        <div class="legend-item"><div class="legend-line" style="border-top:2px dashed #ff7b72"></div> distinct-from</div>
+      </div>
+      <div class="stats" id="statsPanel"></div>
+    </div>
+  </div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   Topic data - derived from Production Analytics (Opti on Opti)
+   polymon_oa_tool_testing_dev database, live entity extraction
+   ═══════════════════════════════════════════════════════════════════ */
+
+var TOPICS = {
+
+  /* ── Topic 1: Opal Usage & Adoption ── */
+  opal: {
+    name: "Opal Usage & Adoption",
+    description: "Credit consumption, account utilisation, agent activity, onboarding pipeline, and Opal feature adoption across paid and non-paid accounts.",
+    nodes: [
+      { id: "topic", label: "Opal Usage\n& Adoption", ntype: "topic", role: "root", trust: "human", depth: 0, desc: "Credit consumption, account utilisation, agent activity, onboarding pipeline, and Opal feature adoption across paid and non-paid accounts." },
+      // Root concepts
+      { id: "c_credit", label: "Credit\nConsumption", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "How Opal credits are consumed across accounts, tiers, and agents. Credits are the unit of Opal usage and billing." },
+      { id: "c_adoption", label: "Account\nUtilisation", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "Which accounts are actively using Opal features (purple button, specialised agents, chat). Broken down by paid/non-paid and product line." },
+      { id: "c_onboard", label: "Onboarding\nPipeline", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "Customer onboarding stages: recently signed, kickoff scheduled, kicked off, stalled, complete. Tracks time-to-value for new Opal customers." },
+      // Supporting concepts
+      { id: "c_agent", label: "Agent\nAnalytics", ntype: "concept", role: "supporting", trust: "human", depth: 2, desc: "Per-agent and per-workflow credit consumption. OOTB vs custom agents. Threads per user distribution." },
+      { id: "c_tier", label: "Tier\nBenchmarks", ntype: "concept", role: "supporting", trust: "ai-confirmed", depth: 2, desc: "Credit usage benchmarks across Opal tiers (Essential, Enhanced, Advanced). AI-identified correlation between tier and utilisation patterns." },
+      { id: "c_memory", label: "Opal Memory\nFeature", ntype: "concept", role: "supporting", trust: "ai", depth: 3, desc: "AI-inferred concept from Opal Memory Feature Usage dashboard. Tracks memory updates, retrievals, and page views." },
+      // Datasets
+      { id: "d_fine", label: "DWH_OPAL_\nFINE_GRAINED\n_USAGE", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Finest granularity Opal usage data from the monetisation team." },
+      { id: "d_daily_prod", label: "DWH_OPAL_\nDAILY_PRODUCT\n_ACCOUNT", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Daily Opal usage aggregated by product and account." },
+      { id: "d_daily_user", label: "DWH_OPAL_\nDAILY_USER\n_ACCOUNT", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Daily Opal usage aggregated by user and account." },
+      { id: "d_balances", label: "DWH_OPAL_\nCUSTOMER\n_BALANCES", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Opal credit balances with term length, months remaining, current term status." },
+      { id: "d_onboard_snap", label: "Opal Onboarding\nSnapshots", ntype: "dataset", role: "", trust: "human", depth: 2, desc: "Point-in-time analysis of customer onboarding status on a given day, with credit usage." },
+      { id: "d_agents_thread", label: "Opal Agents\nper Thread", ntype: "dataset", role: "", trust: "human", depth: 2, desc: "Buckets for histograms of Opal Agent runs per thread by date." },
+      { id: "d_ootb", label: "Opal OOTB\nAgents", ntype: "dataset", role: "", trust: "human", depth: 2, desc: "Mapping table joining agent name in Segment vs monetisation. Contains agent type (OOTB, Opal Agent) and release date." },
+      { id: "d_credit_status", label: "Opal Credit\nStatus", ntype: "dataset", role: "", trust: "human", depth: 2, desc: "Paying customers vs Bonus/Monthly Free credits. Contains Opal Tier and current onboarding status." },
+      // Metrics
+      { id: "m_avg_credit_paid", label: "Avg Credits\nPaid Accounts", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Average credits for purchased Opal accounts." },
+      { id: "m_median_credit_paid", label: "Median Credits\nPaid Accounts", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Median credits for purchased Opal accounts." },
+      { id: "m_pct_threads_agent", label: "% Threads\nw/ Agent", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Number of threads with any agent executed / Total threads in time period." },
+      { id: "m_tools_reg", label: "Tools Registered\nCumulative", ntype: "metric", role: "", trust: "ai-confirmed", depth: 2, desc: "Cumulative count of tools registered over time." },
+      { id: "m_personal_instr", label: "Personal Instr.\nper Active User", ntype: "metric", role: "", trust: "ai-confirmed", depth: 2, desc: "Number of personal instructions created divided by number of active users." },
+      // Event streams
+      { id: "ev_daily_usage", label: "Opal Daily\nUsage", ntype: "event", role: "", trust: "human", depth: 1, desc: "Daily credit usage event stream." },
+      { id: "ev_gen_data", label: "Opal Generation\nData", ntype: "event", role: "", trust: "human", depth: 2, desc: "Raw generation-level data from monetisation team at lowest level of granularity." },
+      // Dashboards
+      { id: "db_usage", label: "Opal Usage\n& Adoption", ntype: "dashboard", role: "", trust: "human", depth: 1, desc: "Comprehensive overview of credit usage by customer and product." },
+      { id: "db_consumption", label: "Opal Consumption\nby Account", ntype: "dashboard", role: "", trust: "human", depth: 1, desc: "Portfolio-level Opal adoption across paid, non-paid, and partner segments." },
+      { id: "db_agent", label: "Opal Consumption\nby Agent", ntype: "dashboard", role: "", trust: "human", depth: 2, desc: "Agent-level and workflow-level credit consumption and trigger activity." },
+      { id: "db_onboard", label: "Opal Onboarding\nDashboard", ntype: "dashboard", role: "", trust: "human", depth: 2, desc: "Customer onboarding pipeline health by tier - stage counts, monthly cohort usage, credit benchmarks." },
+      { id: "db_memory", label: "Opal Memory\nFeature Usage", ntype: "dashboard", role: "", trust: "ai", depth: 3, desc: "Tracks adoption of Opal Memory feature including memory updates, retrievals, and page views." }
+    ],
+    edges: [
+      { source: "topic", target: "c_credit", label: "root", etype: "root" },
+      { source: "topic", target: "c_adoption", label: "root", etype: "root" },
+      { source: "topic", target: "c_onboard", label: "root", etype: "root" },
+      { source: "c_credit", target: "c_agent", label: "related", etype: "related" },
+      { source: "c_credit", target: "c_tier", label: "related", etype: "related" },
+      { source: "c_adoption", target: "c_memory", label: "related", etype: "related" },
+      { source: "c_credit", target: "d_fine", label: "composes", etype: "composes" },
+      { source: "c_credit", target: "d_daily_prod", label: "composes", etype: "composes" },
+      { source: "c_adoption", target: "d_daily_user", label: "composes", etype: "composes" },
+      { source: "c_credit", target: "d_balances", label: "composes", etype: "composes" },
+      { source: "c_onboard", target: "d_onboard_snap", label: "composes", etype: "composes" },
+      { source: "c_agent", target: "d_agents_thread", label: "composes", etype: "composes" },
+      { source: "c_agent", target: "d_ootb", label: "composes", etype: "composes" },
+      { source: "c_tier", target: "d_credit_status", label: "composes", etype: "composes" },
+      { source: "c_credit", target: "m_avg_credit_paid", label: "measured-by", etype: "measured-by" },
+      { source: "c_credit", target: "m_median_credit_paid", label: "measured-by", etype: "measured-by" },
+      { source: "c_agent", target: "m_pct_threads_agent", label: "measured-by", etype: "measured-by" },
+      { source: "c_adoption", target: "m_tools_reg", label: "measured-by", etype: "measured-by" },
+      { source: "c_memory", target: "m_personal_instr", label: "measured-by", etype: "measured-by" },
+      { source: "c_credit", target: "ev_daily_usage", label: "signalled-by", etype: "signalled-by" },
+      { source: "c_agent", target: "ev_gen_data", label: "signalled-by", etype: "signalled-by" },
+      { source: "c_adoption", target: "db_usage", label: "visualised-in", etype: "composes" },
+      { source: "c_credit", target: "db_consumption", label: "visualised-in", etype: "composes" },
+      { source: "c_agent", target: "db_agent", label: "visualised-in", etype: "composes" },
+      { source: "c_onboard", target: "db_onboard", label: "visualised-in", etype: "composes" },
+      { source: "c_memory", target: "db_memory", label: "visualised-in", etype: "composes" }
+    ]
+  },
+
+  /* ── Topic 2: Experimentation ── */
+  exp: {
+    name: "Experimentation",
+    description: "Experiment velocity, engagement, and impact across Web Experimentation, Feature Experimentation, Personalisation (P13), and Experiment Collaboration.",
+    nodes: [
+      { id: "topic", label: "Experimentation", ntype: "topic", role: "root", trust: "human", depth: 0, desc: "Experiment velocity, engagement, and impact across WX, FX, P13, and Experiment Collaboration." },
+      { id: "c_exp_engage", label: "Experiment\nEngagement", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "Which accounts are actively running experiments. Engaged = 1 qualified experiment or 1 flag started in L30D." },
+      { id: "c_exp_impact", label: "Experiment\nImpact", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "What experiments achieve. Scorecard metrics, qualified experiment counts, results analysis." },
+      { id: "c_opal_exp", label: "Opal-Managed\nExperiments", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "Experiments created and managed through Opal. Dev Agent impact analysis, AI-assisted experiment creation." },
+      { id: "c_fx", label: "Feature\nExperimentation", ntype: "concept", role: "supporting", trust: "human", depth: 2, desc: "FX-specific engagement and adoption. Flags, feature management, server-side experiments." },
+      { id: "c_wx", label: "Web\nExperimentation", ntype: "concept", role: "supporting", trust: "human", depth: 2, desc: "WX-specific engagement. Client-side A/B tests, visual editor, URL targeting." },
+      { id: "c_p13", label: "Personalisation\n(P13)", ntype: "concept", role: "supporting", trust: "ai-confirmed", depth: 2, desc: "Personalisation campaigns and audience creation. Accounts creating behavioural/custom attribute audiences." },
+      { id: "c_exp_collab", label: "Experiment\nCollaboration", ntype: "concept", role: "supporting", trust: "ai", depth: 3, desc: "AI-inferred from EXP Collab metrics. Hypothesis creation/update, paying account login tracking." },
+      { id: "d_exp_usage", label: "DWH_CS_\nEXPERIMENTATION\n_USAGE", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Experimentation usage data from Customer Success data warehouse." },
+      { id: "d_exp_metrics", label: "DWH_CS_\nEXPERIMENT\n_METRICS", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Experiment metrics for all customers." },
+      { id: "d_opal_managed", label: "EXP - Opal\nManaged\nExperiments", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Tracks all Opal-managed experiments at experiment level. Qualifies as Opal-managed if at least one variation has an Opal-managed change." },
+      { id: "d_segment", label: "Segment\nEvent Data", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Source of truth from Segment Data Warehouse in Snowflake." },
+      { id: "d_ai_exp", label: "AI Assisted\nExperiments\nSummary", ntype: "dataset", role: "", trust: "human", depth: 2, desc: "Number of AI-assisted experiments by month, by customer, based on qualified date." },
+      { id: "m_exp_engaged_arr", label: "EXP Engaged\nARR Monthly", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Amount of ARR associated with accounts who have 1 qualified experiment or 1 flag started L30D." },
+      { id: "m_exp_engaged_accts", label: "EXP Engaged\nAccounts Monthly", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Number of accounts who have 1 qualified experiment or flag started L30D." },
+      { id: "m_fx_engaged", label: "FX Engaged\nARR Monthly", ntype: "metric", role: "", trust: "human", depth: 2, desc: "ARR associated with accounts who have 1 qualified FX experiment or 1 flag started L30D." },
+      { id: "m_wx_engaged", label: "WX Engaged\nARR Monthly", ntype: "metric", role: "", trust: "human", depth: 2, desc: "ARR associated with accounts who have 1 qualified WX experiment." },
+      { id: "ev_exp_usage", label: "Experimentation\nUsage Stream", ntype: "event", role: "", trust: "human", depth: 1, desc: "Experimentation usage event stream from CS data warehouse." },
+      { id: "db_exp_ua", label: "Experimentation\nUsage & Adoption", ntype: "dashboard", role: "", trust: "human", depth: 1, desc: "Experimentation usage and adoption tracking dashboard." },
+      { id: "db_fx_ua", label: "Feature Exp\nUsage & Adoption", ntype: "dashboard", role: "", trust: "human", depth: 2, desc: "Feature Experimentation specific usage and adoption." },
+      { id: "db_exp_results", label: "Experimentation\nResults Metrics", ntype: "dashboard", role: "", trust: "human", depth: 2, desc: "Experimentation results metrics dashboard." },
+      { id: "db_opal_exp", label: "EXP - Opal\nUsage & Adoption", ntype: "dashboard", role: "", trust: "human", depth: 2, desc: "Opal usage specifically within experimentation context." }
+    ],
+    edges: [
+      { source: "topic", target: "c_exp_engage", label: "root", etype: "root" },
+      { source: "topic", target: "c_exp_impact", label: "root", etype: "root" },
+      { source: "topic", target: "c_opal_exp", label: "root", etype: "root" },
+      { source: "c_exp_engage", target: "c_fx", label: "related", etype: "related" },
+      { source: "c_exp_engage", target: "c_wx", label: "related", etype: "related" },
+      { source: "c_exp_engage", target: "c_p13", label: "related", etype: "related" },
+      { source: "c_exp_engage", target: "c_exp_collab", label: "related", etype: "related" },
+      { source: "c_exp_engage", target: "d_exp_usage", label: "composes", etype: "composes" },
+      { source: "c_exp_impact", target: "d_exp_metrics", label: "composes", etype: "composes" },
+      { source: "c_opal_exp", target: "d_opal_managed", label: "composes", etype: "composes" },
+      { source: "c_exp_engage", target: "d_segment", label: "composes", etype: "composes" },
+      { source: "c_opal_exp", target: "d_ai_exp", label: "composes", etype: "composes" },
+      { source: "c_exp_engage", target: "m_exp_engaged_arr", label: "measured-by", etype: "measured-by" },
+      { source: "c_exp_engage", target: "m_exp_engaged_accts", label: "measured-by", etype: "measured-by" },
+      { source: "c_fx", target: "m_fx_engaged", label: "measured-by", etype: "measured-by" },
+      { source: "c_wx", target: "m_wx_engaged", label: "measured-by", etype: "measured-by" },
+      { source: "c_exp_engage", target: "ev_exp_usage", label: "signalled-by", etype: "signalled-by" },
+      { source: "c_exp_engage", target: "db_exp_ua", label: "visualised-in", etype: "composes" },
+      { source: "c_fx", target: "db_fx_ua", label: "visualised-in", etype: "composes" },
+      { source: "c_exp_impact", target: "db_exp_results", label: "visualised-in", etype: "composes" },
+      { source: "c_opal_exp", target: "db_opal_exp", label: "visualised-in", etype: "composes" },
+      { source: "c_exp_collab", target: "c_exp_engage", label: "distinct-from", etype: "distinct-from" }
+    ]
+  },
+
+  /* ── Topic 3: Sales & Pipeline ── */
+  sales: {
+    name: "Sales & Pipeline",
+    description: "GTM pipeline generation, bookings, opportunity management, and targeted plays across industry verticals and product cross-sell motions.",
+    nodes: [
+      { id: "topic", label: "Sales &\nPipeline", ntype: "topic", role: "root", trust: "human", depth: 0, desc: "GTM pipeline generation, bookings, opportunity management, and targeted plays." },
+      { id: "c_pipeline", label: "Pipeline\nGeneration", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "Pipeline creation, bookings, and win rates. Tracked by rep, region, and product." },
+      { id: "c_gtm", label: "GTM Targeted\nPlays", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "Industry and product-specific GTM motions: Opal cross-sell, Sitecore takeout, FSI, Healthcare, Software verticals." },
+      { id: "c_opal_sales", label: "Opal\nSales Motion", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "Opal-specific sales performance. Rep-level pipeline, attach rates, GTM dashboard." },
+      { id: "c_xsell", label: "Cross-Sell\nMotions", ntype: "concept", role: "supporting", trust: "ai-confirmed", depth: 2, desc: "Cross-sell plays: CMP into CMS, EO into CMS, Opal for Sitecore. Funnel tracking by tagged accounts." },
+      { id: "d_sfdc_opp", label: "SFDC\nOpportunity", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Salesforce opportunity data." },
+      { id: "d_sfdc_acct", label: "SFDC\nAccount", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Salesforce account data." },
+      { id: "d_gtm_forecast", label: "DWH_GTM_OPS\nFORECASTING\n_MODEL", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "GTM Ops forecasting model from the Snowflake reporting schema." },
+      { id: "d_opal_rep", label: "OPAL_PERF\n_BY_REP", ntype: "dataset", role: "", trust: "human", depth: 2, desc: "Opal performance by sales rep, quarterly." },
+      { id: "d_pipe_targets", label: "Pipe Gen &\nBookings Targets", ntype: "dataset", role: "", trust: "human", depth: 2, desc: "Pipeline generation and bookings targets by product analytics." },
+      { id: "m_win_rate", label: "Win Rate\n(Deal Count)", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Deal-count-based win rate." },
+      { id: "m_bookings_asp", label: "Bookings\nASP", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Average selling price of bookings." },
+      { id: "m_pipe_gen", label: "Pipe Gen", ntype: "metric", role: "", trust: "human", depth: 2, desc: "Pipeline generation metric." },
+      { id: "db_opal_gtm", label: "Opal GTM\n26Q1 Dashboard", ntype: "dashboard", role: "", trust: "human", depth: 1, desc: "Opal GTM quarterly dashboard." },
+      { id: "db_sales_profile", label: "Sales\nProfiling Tool", ntype: "dashboard", role: "", trust: "human", depth: 2, desc: "Sales profiling and account targeting tool." },
+      { id: "db_partner", label: "Opal Partner\nUsage", ntype: "dashboard", role: "", trust: "human", depth: 2, desc: "Partner credit usage monitoring dashboard." }
+    ],
+    edges: [
+      { source: "topic", target: "c_pipeline", label: "root", etype: "root" },
+      { source: "topic", target: "c_gtm", label: "root", etype: "root" },
+      { source: "topic", target: "c_opal_sales", label: "root", etype: "root" },
+      { source: "c_gtm", target: "c_xsell", label: "related", etype: "related" },
+      { source: "c_pipeline", target: "d_sfdc_opp", label: "composes", etype: "composes" },
+      { source: "c_pipeline", target: "d_sfdc_acct", label: "composes", etype: "composes" },
+      { source: "c_pipeline", target: "d_gtm_forecast", label: "composes", etype: "composes" },
+      { source: "c_opal_sales", target: "d_opal_rep", label: "composes", etype: "composes" },
+      { source: "c_pipeline", target: "d_pipe_targets", label: "composes", etype: "composes" },
+      { source: "c_pipeline", target: "m_win_rate", label: "measured-by", etype: "measured-by" },
+      { source: "c_pipeline", target: "m_bookings_asp", label: "measured-by", etype: "measured-by" },
+      { source: "c_opal_sales", target: "m_pipe_gen", label: "measured-by", etype: "measured-by" },
+      { source: "c_opal_sales", target: "db_opal_gtm", label: "visualised-in", etype: "composes" },
+      { source: "c_pipeline", target: "db_sales_profile", label: "visualised-in", etype: "composes" },
+      { source: "c_opal_sales", target: "db_partner", label: "visualised-in", etype: "composes" }
+    ]
+  },
+
+  /* ── Topic 4: Customer Success ── */
+  cs: {
+    name: "Customer Success",
+    description: "Renewal rates, churn analysis, account health scoring, and CTA campaign management for customer retention.",
+    nodes: [
+      { id: "topic", label: "Customer\nSuccess", ntype: "topic", role: "root", trust: "human", depth: 0, desc: "Renewal rates, churn analysis, account health scoring, and CTA campaign management." },
+      { id: "c_renewals", label: "Renewal\nRates", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "Renewal rates by customer, product group, and product solution. Key metric for board/exec deck." },
+      { id: "c_churn", label: "Product\nChurn", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "Product/SKU-level churn data. ARR bridge movements captured across product groups." },
+      { id: "c_health", label: "Account\nHealth", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "Account health signals: engagement tiers, collaborator activity, DQ buckets, renewal pipeline." },
+      { id: "c_cta", label: "CTA\nCampaigns", ntype: "concept", role: "supporting", trust: "human", depth: 2, desc: "Call-to-action campaign completion management. BRAVE CTA framework." },
+      { id: "c_dq", label: "Data Quality\nBuckets", ntype: "concept", role: "supporting", trust: "ai-confirmed", depth: 2, desc: "Account bucketing by data quality signals. AI-identified from DQ_Account_Buckets dataset." },
+      { id: "d_renewal_cust", label: "Renewal Rates\nCustomer", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Exec deck renewal rates by customer." },
+      { id: "d_renewal_prod", label: "Renewal Rates\nProduct Group", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Exec deck renewal rates by product group." },
+      { id: "d_arr_churn", label: "Product -\nARR Churn", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Monthly ARR bridge movements captured across Product Groups owned by Data Services." },
+      { id: "d_cust_detail", label: "DWH_CS_OA\nCUSTOMER\n_DETAIL", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Customer detail from Customer Success data warehouse." },
+      { id: "d_renewal_opp", label: "DWH_RENEWAL\nOPPORTUNITY", ntype: "dataset", role: "", trust: "human", depth: 2, desc: "Renewal opportunity pipeline data." },
+      { id: "d_cta_summary", label: "GS_CTA\nSUMMARY", ntype: "dataset", role: "", trust: "human", depth: 2, desc: "CTA campaign summary data from Gainsight." },
+      { id: "m_arr_report", label: "Total ARR", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Total ARR across all product groups." },
+      { id: "m_most_recent_arr", label: "Most Recent\nARR", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Most recent ARR snapshot." },
+      { id: "db_churn", label: "Churn\nDashboard", ntype: "dashboard", role: "", trust: "human", depth: 1, desc: "Product/SKU level churn data dashboard." },
+      { id: "db_sku_renewals", label: "SKU Renewals\nDashboard", ntype: "dashboard", role: "", trust: "human", depth: 1, desc: "SKU-level renewal tracking." },
+      { id: "db_exec_cs", label: "Exec Board\nDeck: Customer", ntype: "dashboard", role: "", trust: "human", depth: 2, desc: "Customer Success section of the Executive Board Deck." },
+      { id: "db_cta", label: "BRAVE CTA\nCompletion", ntype: "dashboard", role: "", trust: "human", depth: 2, desc: "CTA completion management report." }
+    ],
+    edges: [
+      { source: "topic", target: "c_renewals", label: "root", etype: "root" },
+      { source: "topic", target: "c_churn", label: "root", etype: "root" },
+      { source: "topic", target: "c_health", label: "root", etype: "root" },
+      { source: "c_health", target: "c_cta", label: "related", etype: "related" },
+      { source: "c_health", target: "c_dq", label: "related", etype: "related" },
+      { source: "c_renewals", target: "d_renewal_cust", label: "composes", etype: "composes" },
+      { source: "c_renewals", target: "d_renewal_prod", label: "composes", etype: "composes" },
+      { source: "c_churn", target: "d_arr_churn", label: "composes", etype: "composes" },
+      { source: "c_health", target: "d_cust_detail", label: "composes", etype: "composes" },
+      { source: "c_renewals", target: "d_renewal_opp", label: "composes", etype: "composes" },
+      { source: "c_cta", target: "d_cta_summary", label: "composes", etype: "composes" },
+      { source: "c_renewals", target: "m_arr_report", label: "measured-by", etype: "measured-by" },
+      { source: "c_health", target: "m_most_recent_arr", label: "measured-by", etype: "measured-by" },
+      { source: "c_churn", target: "db_churn", label: "visualised-in", etype: "composes" },
+      { source: "c_renewals", target: "db_sku_renewals", label: "visualised-in", etype: "composes" },
+      { source: "c_renewals", target: "db_exec_cs", label: "visualised-in", etype: "composes" },
+      { source: "c_cta", target: "db_cta", label: "visualised-in", etype: "composes" },
+      { source: "c_churn", target: "c_renewals", label: "distinct-from", etype: "distinct-from" }
+    ]
+  },
+
+  /* ── Topic 5: Product Engagement ── */
+  product: {
+    name: "Product Engagement",
+    description: "Usage and adoption metrics across the Optimizely product portfolio: CMP, CMS, ODP, Analytics, and individual feature releases.",
+    nodes: [
+      { id: "topic", label: "Product\nEngagement", ntype: "topic", role: "root", trust: "human", depth: 0, desc: "Usage and adoption across CMP, CMS, ODP, Analytics, and feature releases." },
+      { id: "c_analytics", label: "OA\nAdoption", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "Optimizely Analytics engagement. Accounts that created/updated/viewed explorations and dashboards in L30D." },
+      { id: "c_cmp", label: "CMP\nEngagement", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "Content Marketing Platform engagement tiers: Dormant, Casual (<1000 weekly events), Core (1000-4000), Power (>4000)." },
+      { id: "c_platform", label: "Platform\n(ODP/CMS)", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "ODP and CMS engagement metrics. Core vs Acquired ODP, CMS SaaS content item creation." },
+      { id: "c_retention", label: "OA\nRetention", ntype: "concept", role: "supporting", trust: "human", depth: 2, desc: "User retention analysis for OA: WAU trends, activation funnels, core/creator retention, error impact." },
+      { id: "c_feature", label: "Feature\nAdoption", ntype: "concept", role: "supporting", trust: "ai-confirmed", depth: 2, desc: "Tracking adoption of individual feature releases by quarter across the portfolio." },
+      { id: "c_psat", label: "Product\nSatisfaction", ntype: "concept", role: "supporting", trust: "ai", depth: 3, desc: "AI-inferred from PSAT dashboards. Customer satisfaction scores across all products." },
+      { id: "d_segment_users", label: "Segment\nUnify Users", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Unified user data from Segment. Every identified user by email creates a unique row." },
+      { id: "d_accounts", label: "Product -\nAccounts", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Account source of truth from Data Services. Opal should use this for all account attribute group-bys." },
+      { id: "d_arr_report", label: "Product -\nARR Report", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "ARR source of truth owned by Data Services." },
+      { id: "d_feature_map", label: "New Feature\nReleases Mapping", ntype: "dataset", role: "", trust: "human", depth: 2, desc: "Key features with tracking events, Q1-Q4 2025." },
+      { id: "d_userflow", label: "Userflow\nData", ntype: "dataset", role: "", trust: "human", depth: 2, desc: "Userflow Event Data from Segment." },
+      { id: "m_oa_engaged_arr", label: "Analytics\nEngaged ARR%", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Ratio of Engaged ARR over Overall Analytics ARR." },
+      { id: "m_oa_engaged_accts", label: "Analytics\nEngaged Paying", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Paying accounts who created/viewed/updated explorations and dashboards in L30D." },
+      { id: "m_cmp_engaged_arr", label: "CMP\nEngaged ARR%", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Engaged ARR% of Overall CMP ARR." },
+      { id: "m_cmp_high_risk", label: "CMP\nHigh Risk Accts", ntype: "metric", role: "", trust: "human", depth: 2, desc: "Casual accounts (<1000 weekly events) for 4 consecutive weeks + High ARR (>25k)." },
+      { id: "db_oa_adoption", label: "OA Adoption\nOverview", ntype: "dashboard", role: "", trust: "human", depth: 1, desc: "Active users, content creation, consumption, and AI (Opal) usage." },
+      { id: "db_oa_retention", label: "OA Retention\nDeep-Dive", ntype: "dashboard", role: "", trust: "human", depth: 2, desc: "WAU, retention curves, activation, errors, Opal AI, and power-user behaviours." },
+      { id: "db_cmp_ua", label: "CMP Usage\n& Adoption", ntype: "dashboard", role: "", trust: "human", depth: 2, desc: "Content Marketing Platform usage and adoption tracking." },
+      { id: "db_mau", label: "Monthly Active\nUsers & Accounts", ntype: "dashboard", role: "", trust: "human", depth: 1, desc: "MAU and MAA across all products." }
+    ],
+    edges: [
+      { source: "topic", target: "c_analytics", label: "root", etype: "root" },
+      { source: "topic", target: "c_cmp", label: "root", etype: "root" },
+      { source: "topic", target: "c_platform", label: "root", etype: "root" },
+      { source: "c_analytics", target: "c_retention", label: "related", etype: "related" },
+      { source: "c_platform", target: "c_feature", label: "related", etype: "related" },
+      { source: "c_cmp", target: "c_psat", label: "related", etype: "related" },
+      { source: "c_analytics", target: "d_segment_users", label: "composes", etype: "composes" },
+      { source: "c_analytics", target: "d_accounts", label: "composes", etype: "composes" },
+      { source: "c_platform", target: "d_arr_report", label: "composes", etype: "composes" },
+      { source: "c_feature", target: "d_feature_map", label: "composes", etype: "composes" },
+      { source: "c_retention", target: "d_userflow", label: "composes", etype: "composes" },
+      { source: "c_analytics", target: "m_oa_engaged_arr", label: "measured-by", etype: "measured-by" },
+      { source: "c_analytics", target: "m_oa_engaged_accts", label: "measured-by", etype: "measured-by" },
+      { source: "c_cmp", target: "m_cmp_engaged_arr", label: "measured-by", etype: "measured-by" },
+      { source: "c_cmp", target: "m_cmp_high_risk", label: "measured-by", etype: "measured-by" },
+      { source: "c_analytics", target: "db_oa_adoption", label: "visualised-in", etype: "composes" },
+      { source: "c_retention", target: "db_oa_retention", label: "visualised-in", etype: "composes" },
+      { source: "c_cmp", target: "db_cmp_ua", label: "visualised-in", etype: "composes" },
+      { source: "c_analytics", target: "db_mau", label: "visualised-in", etype: "composes" }
+    ]
+  },
+
+  /* ── Topic 6: Marketing ── */
+  marketing: {
+    name: "Marketing",
+    description: "Marketing campaign performance, SDR pipeline, contact engagement, and budget tracking.",
+    nodes: [
+      { id: "topic", label: "Marketing", ntype: "topic", role: "root", trust: "human", depth: 0, desc: "Marketing campaign performance, SDR pipeline, contact engagement, and budget tracking." },
+      { id: "c_campaigns", label: "Campaign\nPerformance", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "Marketing campaign responders, conversion tracking, and regional performance." },
+      { id: "c_sdr", label: "SDR\nPipeline", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "Sales Development Rep performance: full funnel SDR view from company to pipeline, contact history." },
+      { id: "c_budget", label: "Marketing\nBudget", ntype: "concept", role: "supporting", trust: "human", depth: 2, desc: "Marketing budget tracking and allocation." },
+      { id: "c_intent", label: "Buying\nIntent Signals", ntype: "concept", role: "supporting", trust: "ai-confirmed", depth: 2, desc: "AI-identified from GS_MARKETING_COMPANY dataset. Company-level socioeconomic data and buying-intent signals." },
+      { id: "d_mkt_company", label: "GS_MARKETING\nCOMPANY", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Pool of companies enriched with socioeconomic data and buying-intent signals." },
+      { id: "d_mkt_contacts", label: "GS_MARKETING\nCONTACTS", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "All contacts associated with each account, with persona profiles and engagement status." },
+      { id: "d_mkt_history", label: "GS_MARKETING\nCONTACT_HISTORY", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Marketing contact history from Salesforce, Marketo, and Outreach. Meetings, emails, calls, LinkedIn touchpoints." },
+      { id: "d_sdr_funnel", label: "SDR Full\nFunnel Company", ntype: "dataset", role: "", trust: "human", depth: 2, desc: "Company-level view of what is trending, current state, and Optimizely's existing relationship." },
+      { id: "d_mkt_budget", label: "GS_MARKETING\nBUDGET", ntype: "dataset", role: "", trust: "human", depth: 2, desc: "Marketing budget data." },
+      { id: "m_regional_perf", label: "Regional Perf\nQTR/YR", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Marketing exec deck regional performance, quarterly and yearly." },
+      { id: "db_mkt_board", label: "Marketing\nBoard Deck", ntype: "dashboard", role: "", trust: "human", depth: 1, desc: "Data set for quarterly Marketing Board Deck." },
+      { id: "db_sdr", label: "SDR Performance\nDashboard", ntype: "dashboard", role: "", trust: "human", depth: 1, desc: "Sales Development SDR Performance Dashboard." },
+      { id: "db_mkt_campaign", label: "Marketing Campaign\nResponders", ntype: "dashboard", role: "", trust: "human", depth: 2, desc: "Marketing campaign responders dashboard." },
+      { id: "db_mkt_budget", label: "Marketing\nBudget Dashboard", ntype: "dashboard", role: "", trust: "human", depth: 2, desc: "Marketing budget tracking dashboard." }
+    ],
+    edges: [
+      { source: "topic", target: "c_campaigns", label: "root", etype: "root" },
+      { source: "topic", target: "c_sdr", label: "root", etype: "root" },
+      { source: "c_campaigns", target: "c_budget", label: "related", etype: "related" },
+      { source: "c_campaigns", target: "c_intent", label: "related", etype: "related" },
+      { source: "c_campaigns", target: "d_mkt_company", label: "composes", etype: "composes" },
+      { source: "c_campaigns", target: "d_mkt_contacts", label: "composes", etype: "composes" },
+      { source: "c_sdr", target: "d_mkt_history", label: "composes", etype: "composes" },
+      { source: "c_sdr", target: "d_sdr_funnel", label: "composes", etype: "composes" },
+      { source: "c_budget", target: "d_mkt_budget", label: "composes", etype: "composes" },
+      { source: "c_campaigns", target: "m_regional_perf", label: "measured-by", etype: "measured-by" },
+      { source: "c_campaigns", target: "db_mkt_board", label: "visualised-in", etype: "composes" },
+      { source: "c_sdr", target: "db_sdr", label: "visualised-in", etype: "composes" },
+      { source: "c_campaigns", target: "db_mkt_campaign", label: "visualised-in", etype: "composes" },
+      { source: "c_budget", target: "db_mkt_budget", label: "visualised-in", etype: "composes" }
+    ]
+  }
+};
+
+/* ── Shared datasets that appear across topics ── */
+var SHARED_NODES = {
+  "d_segment": ["exp", "product"],
+  "d_accounts": ["product", "cs"],
+  "d_arr_report": ["product", "cs"],
+  "d_cust_detail": ["cs", "sales"]
+};
+
+/* ── Colours ── */
+var EDGE_COLOURS = {
+  "root": "#f778ba", "related": "#484f58", "composes": "#8b949e",
+  "measured-by": "#58a6ff", "signalled-by": "#ffa657",
+  "equivalent-to": "#f778ba", "distinct-from": "#ff7b72"
+};
+
+/* ── State ── */
+var currentTopic = "opal";
+var currentDepth = 2;
+var currentTrust = "all";
+var cy = null;
+
+function isNodeVisible(node) {
+  if (node.depth > currentDepth) return false;
+  if (currentTrust === "confirmed" && node.trust === "ai") return false;
+  if (currentTrust === "human" && (node.trust === "ai" || node.trust === "ai-confirmed")) return false;
+  return true;
+}
+
+function buildElements(topicKey) {
+  var topic = TOPICS[topicKey];
+  if (!topic) return buildAllView();
+  var elements = [];
+  for (var i = 0; i < topic.nodes.length; i++) {
+    var n = topic.nodes[i];
+    elements.push({ group: "nodes", data: { id: n.id, label: n.label, ntype: n.ntype, role: n.role, trust: n.trust, ndepth: n.depth, desc: n.desc, vis: isNodeVisible(n) ? "yes" : "no" } });
+  }
+  for (var j = 0; j < topic.edges.length; j++) {
+    var e = topic.edges[j];
+    elements.push({ group: "edges", data: { id: "e" + j, source: e.source, target: e.target, label: e.label, etype: e.etype } });
+  }
+  return elements;
+}
+
+function buildAllView() {
+  var elements = [];
+  var seenNodes = {};
+  var edgeCount = 0;
+
+  // App super-node
+  elements.push({ group: "nodes", data: { id: "app", label: "Opti on\nOpti", ntype: "topic", role: "root", trust: "human", ndepth: 0, desc: "Production Analytics - Optimizely's internal analytics platform. 229 datasets, 230 metrics, 342 dashboards.", vis: "yes" } });
+
+  var keys = Object.keys(TOPICS);
+  for (var k = 0; k < keys.length; k++) {
+    var key = keys[k];
+    var topic = TOPICS[key];
+
+    for (var i = 0; i < topic.nodes.length; i++) {
+      var n = topic.nodes[i];
+      var nodeId = n.id === "topic" ? key + "_topic" : n.id;
+      var label = n.id === "topic" ? n.label : n.label;
+      if (!seenNodes[nodeId]) {
+        seenNodes[nodeId] = true;
+        // Only show root concepts and topics in all-view (depth 0 and 1)
+        var showInAll = (n.depth <= 1) || n.id === "topic";
+        elements.push({ group: "nodes", data: { id: nodeId, label: label, ntype: n.ntype, role: n.role, trust: n.trust, ndepth: n.depth, desc: n.desc, vis: showInAll ? "yes" : "no" } });
+      }
+    }
+
+    elements.push({ group: "edges", data: { id: "ea" + k, source: "app", target: key + "_topic", label: "topic", etype: "root" } });
+
+    for (var j = 0; j < topic.edges.length; j++) {
+      var e = topic.edges[j];
+      var src = e.source === "topic" ? key + "_topic" : e.source;
+      var tgt = e.target === "topic" ? key + "_topic" : e.target;
+      // Only edges between visible nodes in all-view
+      var srcNode = topic.nodes.find(function(nn) { return nn.id === e.source; });
+      var tgtNode = topic.nodes.find(function(nn) { return nn.id === e.target; });
+      if (srcNode && tgtNode && srcNode.depth <= 1 && tgtNode.depth <= 1) {
+        elements.push({ group: "edges", data: { id: "e" + key + edgeCount, source: src, target: tgt, label: e.label, etype: e.etype } });
+      }
+      edgeCount++;
+    }
+  }
+  return elements;
+}
+
+function getStylesheet() {
+  return [
+    { selector: "node", style: { "label": "data(label)", "text-valign": "center", "text-halign": "center", "text-wrap": "wrap", "text-max-width": "65px", "font-size": "9px", "color": "#e1e4e8", "text-outline-color": "#0d1117", "text-outline-width": 2, "background-color": "#79c0ff", "border-width": 2, "border-color": "#79c0ff", "width": 55, "height": 55, "shape": "ellipse" } },
+    { selector: "node[ntype='topic']", style: { "background-color": "#f778ba", "border-color": "#f778ba", "border-width": 3, "shape": "diamond", "width": 80, "height": 80, "font-size": "11px", "text-max-width": "72px" } },
+    { selector: "node[ntype='concept']", style: { "background-color": "#79c0ff", "border-color": "#79c0ff", "shape": "round-rectangle", "width": 65, "height": 65, "font-size": "10px" } },
+    { selector: "node[ntype='dataset']", style: { "background-color": "#7ee787", "border-color": "#7ee787", "shape": "ellipse", "font-size": "8px", "text-max-width": "58px" } },
+    { selector: "node[ntype='metric']", style: { "background-color": "#d2a8ff", "border-color": "#d2a8ff", "shape": "hexagon" } },
+    { selector: "node[ntype='event']", style: { "background-color": "#ffa657", "border-color": "#ffa657", "shape": "star", "width": 60, "height": 60 } },
+    { selector: "node[ntype='dashboard']", style: { "background-color": "#ff7b72", "border-color": "#ff7b72", "shape": "rectangle", "width": 60, "height": 50, "font-size": "8px" } },
+    { selector: "node[role='supporting']", style: { "background-opacity": 0.6 } },
+    { selector: "node[trust='ai']", style: { "border-style": "dashed", "border-width": 1, "background-opacity": 0.4 } },
+    { selector: "node[trust='ai-confirmed']", style: { "background-opacity": 0.7 } },
+    { selector: "node[vis='no']", style: { "display": "none" } },
+    { selector: "edge", style: { "curve-style": "bezier", "target-arrow-shape": "triangle", "arrow-scale": 0.8, "width": 1.5, "line-color": "#484f58", "target-arrow-color": "#484f58", "opacity": 0.6, "label": "data(label)", "font-size": "7px", "color": "#484f58", "text-rotation": "autorotate", "text-margin-y": -8, "text-outline-color": "#0d1117", "text-outline-width": 1 } },
+    { selector: "edge[etype='root']", style: { "line-color": "#f778ba", "target-arrow-color": "#f778ba", "width": 2.5, "opacity": 0.8 } },
+    { selector: "edge[etype='composes']", style: { "line-color": "#8b949e", "target-arrow-color": "#8b949e" } },
+    { selector: "edge[etype='measured-by']", style: { "line-color": "#58a6ff", "target-arrow-color": "#58a6ff" } },
+    { selector: "edge[etype='signalled-by']", style: { "line-color": "#ffa657", "target-arrow-color": "#ffa657" } },
+    { selector: "edge[etype='related']", style: { "line-color": "#484f58", "target-arrow-color": "#484f58" } },
+    { selector: "edge[etype='distinct-from']", style: { "line-color": "#ff7b72", "target-arrow-color": "#ff7b72", "line-style": "dashed", "target-arrow-shape": "none" } },
+    { selector: "edge[etype='equivalent-to']", style: { "line-color": "#f778ba", "target-arrow-color": "#f778ba", "line-style": "dashed", "target-arrow-shape": "none" } },
+    { selector: ".dimmed", style: { "opacity": 0.08 } },
+    { selector: ".highlighted", style: { "opacity": 1 } }
+  ];
+}
+
+function render(topicKey) {
+  var container = document.getElementById("cy");
+  var elements = buildElements(topicKey);
+  if (cy) { cy.destroy(); cy = null; }
+
+  cy = cytoscape({
+    container: container,
+    elements: elements,
+    style: getStylesheet(),
+    layout: {
+      name: "cose",
+      idealEdgeLength: function() { return topicKey === "all" ? 100 : 130; },
+      nodeOverlap: 30,
+      nodeRepulsion: function() { return topicKey === "all" ? 20000 : 12000; },
+      edgeElasticity: function() { return 80; },
+      gravity: topicKey === "all" ? 0.15 : 0.25,
+      numIter: 1000,
+      animate: false,
+      padding: 40
+    },
+    minZoom: 0.2,
+    maxZoom: 3,
+    wheelSensitivity: 0.3
+  });
+
+  cy.on("tap", "node", function(evt) {
+    var node = evt.target;
+    showNodeDetail(node);
+    cy.elements().removeClass("highlighted dimmed");
+    var connected = node.neighborhood();
+    cy.elements().addClass("dimmed");
+    connected.addClass("highlighted").removeClass("dimmed");
+    node.addClass("highlighted").removeClass("dimmed");
+  });
+
+  cy.on("tap", function(evt) {
+    if (evt.target === cy) {
+      cy.elements().removeClass("highlighted dimmed");
+      document.getElementById("nodeDetail").classList.remove("visible");
+    }
+  });
+
+  updateStats(topicKey);
+}
+
+function showNodeDetail(node) {
+  var d = node.data();
+  var panel = document.getElementById("nodeDetail");
+  document.getElementById("detailName").textContent = d.label.replace(/\n/g, " ");
+  var badge = document.getElementById("detailBadge");
+  var colours = { topic: "#f778ba", concept: "#79c0ff", dataset: "#7ee787", metric: "#d2a8ff", event: "#ffa657", dashboard: "#ff7b72" };
+  var col = colours[d.ntype] || "#79c0ff";
+  var roleText = d.role && d.role !== "root" ? " (" + d.role + ")" : "";
+  badge.textContent = d.ntype + roleText + " \u00b7 " + d.trust;
+  badge.style.background = col + "33";
+  badge.style.color = col;
+  document.getElementById("detailDesc").textContent = d.desc || "";
+  var edgesDiv = document.getElementById("detailEdges");
+  edgesDiv.innerHTML = "<strong style='color:#e1e4e8'>Connections:</strong>";
+  var connEdges = node.connectedEdges();
+  connEdges.forEach(function(e) {
+    var other = e.source().id() === d.id ? e.target() : e.source();
+    if (other.data("vis") !== "no") {
+      var div = document.createElement("div");
+      div.textContent = e.data("label") + " \u2192 " + other.data("label").replace(/\n/g, " ");
+      edgesDiv.appendChild(div);
+    }
+  });
+  panel.classList.add("visible");
+}
+
+function updateStats(topicKey) {
+  var panel = document.getElementById("statsPanel");
+  var topic = TOPICS[topicKey];
+  if (!topic) {
+    var total = cy.nodes().filter(function(n) { return n.data("vis") === "yes"; }).length;
+    panel.innerHTML = '<h2 style="margin-bottom:8px">Full App View</h2>' +
+      '<div class="stats-row"><span class="stats-label">Visible nodes</span><span class="stats-value">' + total + '</span></div>' +
+      '<div class="stats-row"><span class="stats-label">Topics</span><span class="stats-value">6</span></div>' +
+      '<div class="stats-row"><span class="stats-label">Showing</span><span class="stats-value">Root concepts only</span></div>';
+    return;
+  }
+  var visible = topic.nodes.filter(function(n) { return isNodeVisible(n); });
+  var counts = { concept: 0, dataset: 0, metric: 0, event: 0, dashboard: 0 };
+  var trustCounts = { human: 0, "ai-confirmed": 0, ai: 0 };
+  for (var j = 0; j < visible.length; j++) {
+    var n = visible[j];
+    if (counts[n.ntype] !== undefined) counts[n.ntype]++;
+    if (trustCounts[n.trust] !== undefined) trustCounts[n.trust]++;
+  }
+  panel.innerHTML = '<h2 style="margin-bottom:8px">' + topic.name + '</h2>' +
+    '<div class="stats-row"><span class="stats-label">Concepts</span><span class="stats-value">' + counts.concept + '</span></div>' +
+    '<div class="stats-row"><span class="stats-label">Datasets</span><span class="stats-value">' + counts.dataset + '</span></div>' +
+    '<div class="stats-row"><span class="stats-label">Metrics</span><span class="stats-value">' + counts.metric + '</span></div>' +
+    '<div class="stats-row"><span class="stats-label">Events</span><span class="stats-value">' + counts.event + '</span></div>' +
+    '<div class="stats-row"><span class="stats-label">Dashboards</span><span class="stats-value">' + counts.dashboard + '</span></div>' +
+    '<div style="border-top:1px solid #21262d; margin:8px 0"></div>' +
+    '<div class="stats-row"><span class="stats-label">Human-authored</span><span class="stats-value">' + trustCounts.human + '</span></div>' +
+    '<div class="stats-row"><span class="stats-label">AI-confirmed</span><span class="stats-value">' + trustCounts["ai-confirmed"] + '</span></div>' +
+    '<div class="stats-row"><span class="stats-label">AI-generated</span><span class="stats-value">' + trustCounts.ai + '</span></div>';
+  document.getElementById("expansionInfo").textContent = "Showing " + visible.length + " of " + topic.nodes.length + " nodes at depth " + currentDepth;
+}
+
+/* ── Event handlers ── */
+document.getElementById("tabBar").addEventListener("click", function(evt) {
+  var tab = evt.target.closest(".topic-tab");
+  if (!tab) return;
+  var topicKey = tab.getAttribute("data-topic");
+  currentTopic = topicKey;
+  var tabs = document.querySelectorAll(".topic-tab");
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");
+  tab.classList.add("active");
+  render(topicKey);
+});
+
+document.getElementById("depthSlider").addEventListener("input", function() {
+  currentDepth = parseInt(this.value);
+  document.getElementById("depthLabel").textContent = "Depth: " + currentDepth;
+  render(currentTopic);
+});
+
+document.getElementById("trustBar").addEventListener("click", function(evt) {
+  var btn = evt.target.closest(".trust-btn");
+  if (!btn) return;
+  currentTrust = btn.getAttribute("data-trust");
+  var btns = document.querySelectorAll(".trust-btn");
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove("active");
+  btn.classList.add("active");
+  render(currentTopic);
+});
+
+/* ═══════════════════════════════════════════════════════════════════
+   Agent instructions generation - streamlined topic slice format
+   Disambiguation first, topic-specific questions only, flat tables.
+   Shared boilerplate (exclusions, output rules, Rule 3) belongs in
+   the base prompt that wraps these slices - not repeated per topic.
+   ═══════════════════════════════════════════════════════════════════ */
+
+function instrHeader(t) {
+  return '<div class="instructions">' +
+    '<h1>' + t.name + ' <span class="gen-badge gen-auto">auto-generated from topic graph</span></h1>';
+}
+
+function instrFooter(stats) {
+  return '<div class="gen-note">Auto-generated topic slice. ' + stats + ' Shared rules (standard exclusions, output formatting, OA descriptions) belong in the base prompt.</div></div>';
+}
+
+var INSTRUCTIONS = {
+
+opal: function(t) {
+  return instrHeader(t) +
+  '<p class="scope">Opal credit consumption, account utilisation, agent activity, onboarding pipeline health across paid/non-paid segments.</p>' +
+
+  '<h2>Terms</h2>' +
+  '<ul>' +
+  '<li><strong>"Usage"</strong> = credit consumption (billing). For event-level interactions (thumbs up, message sent), see Product Engagement topic.</li>' +
+  '<li><strong>"Active"</strong> = registered credits in <code>DWH_OPAL_FINE_GRAINED_USAGE</code> on a given day. Do NOT use Segment events as a proxy.</li>' +
+  '<li><strong>"Adoption"</strong> = account-level utilisation rate (accounts using / accounts eligible). Not individual feature adoption.</li>' +
+  '<li><strong>"Agent"</strong> can mean OOTB, custom, or workflow. Always clarify which. OOTB list in <code>Product - Opal OOTB Agents</code>.</li>' +
+  '</ul>' +
+
+  '<h2>Clarifying questions (topic-specific)</h2>' +
+  '<ul>' +
+  '<li><strong>Paid filter</strong>: Paid only, non-paid, partner, or all? (drives <code>Product - Opal Credit Status</code> join)</li>' +
+  '<li><strong>Tier</strong>: Essential / Enhanced / Advanced / all?</li>' +
+  '<li><strong>Onboarding status</strong>: Recently Signed / Kickoff Scheduled / Kicked Off / Stalled / Complete / all?</li>' +
+  '<li><strong>Agent scope</strong>: OOTB / custom / workflow / all?</li>' +
+  '</ul>' +
+
+  '<h2>Dashboards</h2>' +
+  '<table><thead><tr><th>Dashboard</th><th>Use for</th></tr></thead><tbody>' +
+  '<tr><td>Opal Usage &amp; Adoption Dashboard</td><td>High-level credit usage, product-level breakdown</td></tr>' +
+  '<tr><td>Opal Consumption by Account</td><td>Per-account drill-down, adoption rates, benchmarks</td></tr>' +
+  '<tr><td>Opal Consumption by Agent</td><td>OOTB vs custom agent usage, workflow adoption</td></tr>' +
+  '<tr><td>Opal Onboarding Dashboard</td><td>Onboarding pipeline, cohort progression, time-to-value</td></tr>' +
+  '</tbody></table>' +
+
+  '<h2>Data sources</h2>' +
+  '<h3>Credit Consumption</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>DWH_OPAL_FINE_GRAINED_USAGE</code></td><td>DAU, daily active accounts (1 row/user/day)</td></tr>' +
+  '<tr><td><code>DWH_OPAL_DAILY_PRODUCT_ACCOUNT_USAGE</code></td><td>Product-level aggregation per account per day</td></tr>' +
+  '<tr><td><code>DWH_OPAL_CUSTOMER_BALANCES</code></td><td>Burn rate, remaining credits, term status</td></tr>' +
+  '<tr><td><code>OPAL_DAILY_AGENT_ACCOUNT_GENERATION_USAGE</code></td><td>Credits by agent. NOT run counts</td></tr>' +
+  '</tbody></table>' +
+  '<h3>Account Utilisation</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>DWH_OPAL_DAILY_USER_ACCOUNT_USAGE</code></td><td>Per-user daily usage per account</td></tr>' +
+  '<tr><td><code>Product - Opal Credit Status</code></td><td>JOIN for paid/tier/onboarding filters</td></tr>' +
+  '<tr><td><code>Product - Opal OOTB Agents</code></td><td>Agent name normalisation, OOTB vs custom classification</td></tr>' +
+  '<tr><td><code>Product - Opal Agents per Thread</code></td><td>Histogram of agent runs per thread by date</td></tr>' +
+  '</tbody></table>' +
+  '<h3>Onboarding Pipeline</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>Product - Opal Onboarding Snapshots</code></td><td>Point-in-time onboarding status for cohort analysis</td></tr>' +
+  '</tbody></table>' +
+
+  '<h2>Metrics</h2>' +
+  '<ul>' +
+  '<li>Avg Credits - Paid Accounts</li>' +
+  '<li>Median Credits - Paid Accounts</li>' +
+  '<li>% Threads with Agent Triggered</li>' +
+  '<li>Tools Registered - Cumulative</li>' +
+  '<li>Personal Instructions per Active User</li>' +
+  '</ul>' +
+
+  instrFooter('3 root concepts, 9 datasets, 5 metrics, 4 dashboards.');
+},
+
+exp: function(t) {
+  return instrHeader(t) +
+  '<p class="scope">Experiment velocity, engagement rates, and impact measurement across WX, FX, P13, and Experiment Collaboration.</p>' +
+
+  '<h2>Terms</h2>' +
+  '<ul>' +
+  '<li><strong>"Engaged"</strong> = 1 qualified experiment or 1 flag started in L30D. Experiment Collaboration uses a different definition (hypothesis created/updated).</li>' +
+  '<li><strong>"Qualified"</strong> = experiment reached sufficient sample size. Check <code>Product - Experiment Lookup</code>.</li>' +
+  '<li><strong>FX vs WX vs P13</strong>: separate ARR and engagement metrics. Never combine unless "all experimentation" is requested.</li>' +
+  '<li><strong>"Opal-managed"</strong> = at least one variation has an Opal-managed change. Distinct from "AI-assisted" which is broader.</li>' +
+  '</ul>' +
+
+  '<h2>Clarifying questions (topic-specific)</h2>' +
+  '<ul>' +
+  '<li><strong>Product scope</strong>: WX / FX / P13 / all / Experiment Collaboration?</li>' +
+  '<li><strong>Engagement definition</strong>: Qualified experiments only, or flags started too?</li>' +
+  '<li><strong>Opal-managed filter</strong>: All / Opal-managed only / non-Opal only?</li>' +
+  '</ul>' +
+
+  '<h2>Dashboards</h2>' +
+  '<table><thead><tr><th>Dashboard</th><th>Use for</th></tr></thead><tbody>' +
+  '<tr><td>Experimentation Usage &amp; Adoption</td><td>High-level engagement, cross-product view</td></tr>' +
+  '<tr><td>Feature Experimentation Usage &amp; Adoption</td><td>FX engagement, feature flag adoption</td></tr>' +
+  '<tr><td>Experimentation Results Metrics</td><td>Scorecard results, win rates, impact analysis</td></tr>' +
+  '<tr><td>EXP - Opal Usage &amp; Adoption</td><td>Opal-managed experiments, AI-assisted creation</td></tr>' +
+  '</tbody></table>' +
+
+  '<h2>Data sources</h2>' +
+  '<h3>Experiment Engagement</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>DWH_CS_EXPERIMENTATION_USAGE</code></td><td>Experiment usage by account. Primary engagement source.</td></tr>' +
+  '<tr><td><code>DWH_CS_EXPERIMENT_METRICS_ALL_CUSTOMERS</code></td><td>Impact analysis, scorecard metrics</td></tr>' +
+  '<tr><td><code>Product - Segment Event Data</code></td><td>Event-level: experiment starts, qualified experiments, flag toggles</td></tr>' +
+  '</tbody></table>' +
+  '<h3>Opal-Managed Experiments</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>Product - EXP - Opal Managed Experiments</code></td><td>Opal-managed experiment list. Excludes internal/POC.</td></tr>' +
+  '<tr><td><code>Product - AI Assisted Experiments Summary</code></td><td>AI-assisted experiment counts by month/customer</td></tr>' +
+  '</tbody></table>' +
+
+  '<h2>Metrics</h2>' +
+  '<ul>' +
+  '<li>EXP Engaged ARR - Monthly</li>' +
+  '<li>EXP Engaged Accounts - Monthly</li>' +
+  '<li>FX Engaged ARR - Monthly</li>' +
+  '<li>WX Engaged ARR - Monthly</li>' +
+  '</ul>' +
+
+  instrFooter('3 root concepts, 5 datasets, 4 metrics, 4 dashboards.');
+},
+
+sales: function(t) {
+  return instrHeader(t) +
+  '<p class="scope">GTM pipeline generation, bookings, opportunity management, win rates, and targeted plays across verticals and cross-sell motions.</p>' +
+
+  '<h2>Terms</h2>' +
+  '<ul>' +
+  '<li><strong>"Pipeline"</strong> = open pipeline (not yet closed). Distinct from "Bookings" = closed-won.</li>' +
+  '<li><strong>"Targeted play"</strong> accounts are tagged in Salesforce. Each play has its own GTM funnel dashboard. Do not mix with general pipeline.</li>' +
+  '<li><strong>"Opal attach"</strong> = Opal sold alongside another product. Distinct from standalone.</li>' +
+  '</ul>' +
+
+  '<h2>Clarifying questions (topic-specific)</h2>' +
+  '<ul>' +
+  '<li><strong>Region</strong>: Global / NA / EMEA / APAC / specific territory?</li>' +
+  '<li><strong>Product</strong>: Opal / EXP / CMP / CMS / ODP / all?</li>' +
+  '<li><strong>GTM play</strong>: Sitecore takeout / FSI / Healthcare / Opal cross-sell / all?</li>' +
+  '<li><strong>Rep scope</strong>: All reps / specific rep / specific manager?</li>' +
+  '<li><strong>Pipeline stage</strong>: All stages / specific stage?</li>' +
+  '</ul>' +
+
+  '<h2>Dashboards</h2>' +
+  '<table><thead><tr><th>Dashboard</th><th>Use for</th></tr></thead><tbody>' +
+  '<tr><td>Opal GTM 26Q1 Dashboard</td><td>Opal-specific pipeline and bookings</td></tr>' +
+  '<tr><td>Sales Profiling Tool</td><td>Account research, targeting</td></tr>' +
+  '<tr><td>Opal Partner Usage Dashboard</td><td>Partner-specific usage and pipeline</td></tr>' +
+  '</tbody></table>' +
+
+  '<h2>Data sources</h2>' +
+  '<h3>Pipeline Generation</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>SFDC_OPPORTUNITY</code></td><td>Opportunity details, pipeline, close dates</td></tr>' +
+  '<tr><td><code>SFDC_ACCOUNT</code></td><td>Account firmographics, industry, segment</td></tr>' +
+  '<tr><td><code>SFDC_PIPE_GENERATION_BOOKINGS_TARGETS</code></td><td>Pipeline generation and bookings targets</td></tr>' +
+  '</tbody></table>' +
+  '<h3>GTM Targeted Plays</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>DWH_GTM_OPS_FORECASTING_MODEL</code></td><td>Forecasting and projections (Snowflake REPORTING)</td></tr>' +
+  '</tbody></table>' +
+  '<h3>Opal Sales Motion</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>OPAL_PERFORMANCE_BY_REP</code></td><td>Quarterly rep-level pipeline and bookings for Opal</td></tr>' +
+  '</tbody></table>' +
+
+  '<h2>Metrics</h2>' +
+  '<ul>' +
+  '<li>Win Rate (Deal Count)</li>' +
+  '<li>Bookings ASP</li>' +
+  '<li>Pipe Gen</li>' +
+  '</ul>' +
+
+  instrFooter('3 root concepts, 5 datasets, 3 metrics, 3 dashboards.');
+},
+
+cs: function(t) {
+  return instrHeader(t) +
+  '<p class="scope">Renewal rates, churn analysis, account health scoring, CTA campaign management, and retention across product groups.</p>' +
+
+  '<h2>Terms</h2>' +
+  '<ul>' +
+  '<li><strong>"Churn"</strong> = ARR lost from non-renewal or downgrade. Not product usage churn (see Product Engagement topic).</li>' +
+  '<li><strong>"Renewal rate"</strong> can be by logo count or by ARR value. Board deck uses ARR-weighted by default. Always clarify.</li>' +
+  '<li><strong>"Health"</strong> signals come from multiple sources: engagement tiers, DQ buckets, CTA completion, renewal pipeline status. Complementary, not interchangeable.</li>' +
+  '</ul>' +
+
+  '<h2>Clarifying questions (topic-specific)</h2>' +
+  '<ul>' +
+  '<li><strong>Product group</strong>: EXP / CMP / CMS / ODP / Opal / all?</li>' +
+  '<li><strong>Churn definition</strong>: ARR churn / logo churn / product SKU churn?</li>' +
+  '<li><strong>Renewal scope</strong>: Upcoming renewals only, or historical rates?</li>' +
+  '<li><strong>Health signals</strong>: Engagement-based / DQ bucket / CTA completion?</li>' +
+  '<li><strong>CSM portfolio</strong>: All, or specific CSM?</li>' +
+  '</ul>' +
+
+  '<h2>Dashboards</h2>' +
+  '<table><thead><tr><th>Dashboard</th><th>Use for</th></tr></thead><tbody>' +
+  '<tr><td>Churn Dashboard</td><td>Churn rates, ARR bridge movements</td></tr>' +
+  '<tr><td>SKU Renewals Dashboard</td><td>Renewal pipeline by product</td></tr>' +
+  '<tr><td>Exec Board Deck: Customer</td><td>Board-level renewal and retention metrics</td></tr>' +
+  '<tr><td>BRAVE CTA Completion</td><td>CTA campaign progress tracking</td></tr>' +
+  '</tbody></table>' +
+
+  '<h2>Data sources</h2>' +
+  '<h3>Renewal Rates</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>DWH_EXEC_DECK_RENEWAL_RATES_CUSTOMER</code></td><td>Renewal rates at customer level</td></tr>' +
+  '<tr><td><code>DWH_EXEC_DECK_RENEWAL_RATES_PRODUCT_GROUP</code></td><td>Renewal rates by product group</td></tr>' +
+  '<tr><td><code>DWH_RENEWAL_OPPORTUNITY</code></td><td>Renewal pipeline, upcoming renewals</td></tr>' +
+  '</tbody></table>' +
+  '<h3>Product Churn</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>Product - ARR Churn</code></td><td>Monthly ARR bridge movements (Data Services)</td></tr>' +
+  '</tbody></table>' +
+  '<h3>Account Health</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>DWH_CS_OA_CUSTOMER_DETAIL</code></td><td>Customer detail, account attributes</td></tr>' +
+  '<tr><td><code>GS_CTA_SUMMARY</code></td><td>Gainsight CTA campaign status</td></tr>' +
+  '</tbody></table>' +
+
+  '<h2>Metrics</h2>' +
+  '<ul>' +
+  '<li>Total ARR</li>' +
+  '<li>Most Recent ARR</li>' +
+  '</ul>' +
+
+  instrFooter('3 root concepts, 6 datasets, 2 metrics, 4 dashboards.');
+},
+
+product: function(t) {
+  return instrHeader(t) +
+  '<p class="scope">Usage and adoption across OA, CMP, CMS, ODP, and individual feature releases.</p>' +
+
+  '<h2>Terms</h2>' +
+  '<ul>' +
+  '<li><strong>"Engaged"</strong> differs per product. OA: created/viewed/updated explorations or dashboards L30D. CMP: weekly core event count tiers. EXP: qualified experiments. Always use the product-specific definition.</li>' +
+  '<li><strong>"Active"</strong> can mean MAU (logged in) or Engaged (created/updated). Clarify with user.</li>' +
+  '<li><strong>ODP Core vs Acquired ODP</strong>: separate engagement metrics. Do not combine unless "all ODP" is requested.</li>' +
+  '<li><strong>PSAT</strong> dashboards use different survey methodologies per product. Do not compare scores across products.</li>' +
+  '<li><strong>CMP engagement tiers</strong>: Dormant (0), Casual (&lt;1K weekly), Core (1K-4K), Power (&gt;4K core events)</li>' +
+  '</ul>' +
+
+  '<h2>Clarifying questions (topic-specific)</h2>' +
+  '<ul>' +
+  '<li><strong>Product scope</strong>: OA / CMP / CMS / ODP / portfolio-wide?</li>' +
+  '<li><strong>Engagement definition</strong>: Created/updated (active) or viewed only (passive)?</li>' +
+  '<li><strong>Feature</strong>: Specific feature release, or overall product?</li>' +
+  '<li><strong>User vs Account</strong>: Per-user or per-account aggregation?</li>' +
+  '</ul>' +
+
+  '<h2>Dashboards</h2>' +
+  '<table><thead><tr><th>Dashboard</th><th>Use for</th></tr></thead><tbody>' +
+  '<tr><td>OA Adoption Overview</td><td>OA-specific usage, Opal within OA</td></tr>' +
+  '<tr><td>Monthly Active Users &amp; Accounts</td><td>Portfolio-wide MAU/MAA, cross-product comparison</td></tr>' +
+  '<tr><td>OA Retention Deep-Dive</td><td>Retention curves, activation funnel, churn signals</td></tr>' +
+  '<tr><td>CMP Usage &amp; Adoption</td><td>CMP-specific engagement tiers</td></tr>' +
+  '</tbody></table>' +
+
+  '<h2>Data sources</h2>' +
+  '<h3>OA Adoption</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>Product - Segment Unify Users</code></td><td>User-level identity. Group-bys on user attributes.</td></tr>' +
+  '<tr><td><code>Product - Accounts</code></td><td>Account source of truth (Data Services). All account attribute filters.</td></tr>' +
+  '<tr><td><code>Product - Userflow Data</code></td><td>In-product behaviour analysis (Segment Userflow events)</td></tr>' +
+  '</tbody></table>' +
+  '<h3>CMP Engagement</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td colspan="2"><em>CMP uses engagement tiers (Dormant/Casual/Core/Power) based on weekly core event counts. See Terms section for thresholds.</em></td></tr>' +
+  '</tbody></table>' +
+  '<h3>Platform (ODP / CMS)</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>Product - ARR Report</code></td><td>ARR source of truth across all products</td></tr>' +
+  '<tr><td><code>Product - New Feature Releases Mapping</code></td><td>Feature release adoption tracking (Q1-Q4 2025)</td></tr>' +
+  '</tbody></table>' +
+
+  '<h2>Metrics</h2>' +
+  '<ul>' +
+  '<li>Analytics Engaged ARR%</li>' +
+  '<li>Analytics Engaged Paying Accounts</li>' +
+  '<li>CMP Engaged ARR%</li>' +
+  '<li>CMP High Risk Accounts (&lt;1K weekly events for 4 consecutive weeks + ARR &gt;25K)</li>' +
+  '</ul>' +
+
+  instrFooter('3 root concepts, 5 datasets, 4 metrics, 4 dashboards.');
+},
+
+marketing: function(t) {
+  return instrHeader(t) +
+  '<p class="scope">Campaign performance, SDR pipeline generation, contact engagement, budget tracking, and buying-intent signals.</p>' +
+
+  '<h2>Terms</h2>' +
+  '<ul>' +
+  '<li><strong>"Contacts"</strong> = marketing contacts (<code>GS_MARKETING_CONTACTS</code>). Distinct from <code>SFDC_CONTACT</code> (CRM-level).</li>' +
+  '<li><strong>"Pipeline"</strong> in marketing context = marketing-sourced or marketing-influenced. Distinct from total sales pipeline (see Sales topic).</li>' +
+  '<li><strong>"Intent signals"</strong> = third-party buying-intent from <code>GS_MARKETING_COMPANY</code> enrichment. Not product usage signals.</li>' +
+  '</ul>' +
+
+  '<h2>Clarifying questions (topic-specific)</h2>' +
+  '<ul>' +
+  '<li><strong>Region</strong>: Global / NA / EMEA / APAC / specific territory?</li>' +
+  '<li><strong>Campaign scope</strong>: Specific campaign / all campaigns / SDR outreach?</li>' +
+  '<li><strong>Channel</strong>: Email / events / LinkedIn / Outreach / all?</li>' +
+  '<li><strong>Funnel stage</strong>: Top (MQLs) / mid (meetings) / bottom (pipeline)?</li>' +
+  '<li><strong>Budget view</strong>: Spend vs allocation, or ROI/efficiency?</li>' +
+  '</ul>' +
+
+  '<h2>Dashboards</h2>' +
+  '<table><thead><tr><th>Dashboard</th><th>Use for</th></tr></thead><tbody>' +
+  '<tr><td>Marketing Board Deck</td><td>Board-level marketing summary</td></tr>' +
+  '<tr><td>SDR Performance Dashboard</td><td>SDR activity, pipeline contribution</td></tr>' +
+  '<tr><td>Marketing Campaign Responders</td><td>Campaign-level response rates, attribution</td></tr>' +
+  '<tr><td>Marketing Budget Dashboard</td><td>Spend tracking, budget utilisation</td></tr>' +
+  '</tbody></table>' +
+
+  '<h2>Data sources</h2>' +
+  '<h3>Campaign Performance</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>GS_MARKETING_COMPANY</code></td><td>Company enrichment, buying-intent signals</td></tr>' +
+  '<tr><td><code>GS_MARKETING_CONTACTS</code></td><td>Contact personas, engagement status per account</td></tr>' +
+  '<tr><td><code>GS_MARKETING_CONTACT_HISTORY</code></td><td>Contact history (meetings, emails, calls, LinkedIn)</td></tr>' +
+  '</tbody></table>' +
+  '<h3>SDR Pipeline</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>GS_MARKETING_FULL_FUNNEL_SDR_COMPANY</code></td><td>Company-level SDR funnel, trending state</td></tr>' +
+  '<tr><td><code>GS_MARKETING_FULL_FUNNEL_SDR_CONTACT_HISTORY</code></td><td>SDR contact history, campaigns, Outreach plays (6 months)</td></tr>' +
+  '</tbody></table>' +
+  '<h3>Budget</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>GS_MARKETING_BUDGET</code></td><td>Budget allocation and tracking</td></tr>' +
+  '</tbody></table>' +
+
+  '<h2>Metrics</h2>' +
+  '<ul>' +
+  '<li>Regional Performance QTR/YR</li>' +
+  '</ul>' +
+
+  instrFooter('2 root concepts, 6 datasets, 1 metric, 4 dashboards.');
+}
+
+};
+
+/* ── View toggle ── */
+var currentView = "graph";
+
+document.getElementById("viewToggle").addEventListener("click", function(evt) {
+  var btn = evt.target.closest(".view-btn");
+  if (!btn) return;
+  var view = btn.getAttribute("data-view");
+  currentView = view;
+  var btns = document.querySelectorAll(".view-btn");
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove("active");
+  btn.classList.add("active");
+
+  var cyEl = document.getElementById("cy");
+  var instrEl = document.getElementById("instructionsPanel");
+  var sidebarEl = document.querySelector(".sidebar");
+  var copyBtn = document.getElementById("copyBtn");
+
+  if (view === "graph") {
+    cyEl.classList.remove("hidden");
+    sidebarEl.classList.remove("hidden");
+    instrEl.classList.remove("visible");
+    copyBtn.style.display = "none";
+    if (cy) cy.resize();
+  } else {
+    cyEl.classList.add("hidden");
+    sidebarEl.classList.add("hidden");
+    instrEl.classList.add("visible");
+    copyBtn.style.display = currentTopic === "all" ? "none" : "block";
+    renderInstructions(currentTopic);
+  }
+});
+
+function renderInstructions(topicKey) {
+  var panel = document.getElementById("instructionsPanel");
+  if (topicKey === "all") {
+    panel.innerHTML = '<div class="instructions">' +
+      '<h1>Full App View</h1>' +
+      '<p>Select a specific topic tab to view its generated topic slice. Each slice is a self-contained instruction fragment covering terms, data sources, dashboards, and metrics for one domain.</p>' +
+      '<hr>' +
+      '<h2>Topic slices</h2>' +
+      '<table><thead><tr><th>Topic</th><th>Root concepts</th><th>Sources</th><th>Metrics</th></tr></thead><tbody>' +
+      '<tr><td>Opal Usage &amp; Adoption</td><td>Credit Consumption, Account Utilisation, Onboarding Pipeline</td><td>9</td><td>5</td></tr>' +
+      '<tr><td>Experimentation</td><td>Experiment Engagement, Experiment Impact, Opal-Managed Experiments</td><td>5</td><td>4</td></tr>' +
+      '<tr><td>Sales &amp; Pipeline</td><td>Pipeline Generation, GTM Targeted Plays, Opal Sales Motion</td><td>5</td><td>3</td></tr>' +
+      '<tr><td>Customer Success</td><td>Renewal Rates, Product Churn, Account Health</td><td>6</td><td>2</td></tr>' +
+      '<tr><td>Product Engagement</td><td>OA Adoption, CMP Engagement, Platform (ODP/CMS)</td><td>5</td><td>4</td></tr>' +
+      '<tr><td>Marketing</td><td>Campaign Performance, SDR Pipeline</td><td>6</td><td>1</td></tr>' +
+      '</tbody></table>' +
+      '<div class="gen-note">Shared rules (standard exclusions, output formatting, OA description matching, time grain rules) belong in the base prompt that wraps these slices.</div>' +
+      '</div>';
+    return;
+  }
+
+  var topic = TOPICS[topicKey];
+  if (!topic || !INSTRUCTIONS[topicKey]) {
+    panel.innerHTML = '<div class="instructions"><p>No instructions available for this topic.</p></div>';
+    return;
+  }
+
+  panel.innerHTML = INSTRUCTIONS[topicKey](topic);
+}
+
+function copyInstructions() {
+  // Convert the visible instructions to plain markdown-ish text
+  var panel = document.getElementById("instructionsPanel");
+  var text = panel.innerText;
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = document.getElementById("copyBtn");
+    btn.textContent = "Copied!";
+    btn.classList.add("copied");
+    setTimeout(function() {
+      btn.textContent = "Copy as Markdown";
+      btn.classList.remove("copied");
+    }, 2000);
+  });
+}
+
+// Update instructions when topic changes (if in instructions view)
+var origTabClick = document.getElementById("tabBar").onclick;
+document.getElementById("tabBar").addEventListener("click", function() {
+  if (currentView === "instructions") {
+    setTimeout(function() { renderInstructions(currentTopic); }, 50);
+    document.getElementById("copyBtn").style.display = currentTopic === "all" ? "none" : "block";
+  }
+});
+
+/* ── Init ── */
+render("opal");
+</script>
+</body>
+</html>

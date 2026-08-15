@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flix - Semantic Topic Graph</title>
+  <script src="https://unpkg.com/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: #0f1117;
+      color: #e1e4e8;
+    }
+    .header {
+      padding: 16px 24px;
+      border-bottom: 1px solid #21262d;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .header h1 { font-size: 18px; font-weight: 600; color: #f0f6fc; }
+    .header .subtitle { font-size: 13px; color: #8b949e; }
+    .topic-tabs {
+      display: flex;
+      padding: 0 24px;
+      border-bottom: 1px solid #21262d;
+    }
+    .topic-tab {
+      padding: 10px 16px;
+      font-size: 13px;
+      color: #8b949e;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .topic-tab:hover { color: #e1e4e8; }
+    .topic-tab.active { color: #58a6ff; border-bottom-color: #58a6ff; }
+    .main { display: flex; height: calc(100vh - 97px); }
+    #cy { flex: 1; min-height: 400px; }
+    .sidebar {
+      width: 340px;
+      border-left: 1px solid #21262d;
+      overflow-y: auto;
+      padding: 16px;
+      flex-shrink: 0;
+    }
+    .sidebar h2 { font-size: 14px; font-weight: 600; color: #f0f6fc; margin-bottom: 8px; }
+    .sidebar p { font-size: 13px; color: #8b949e; line-height: 1.5; margin-bottom: 16px; }
+    .legend { margin-bottom: 20px; }
+    .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 12px; color: #8b949e; }
+    .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .legend-line { width: 20px; height: 0; flex-shrink: 0; }
+    .stats {
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+    .stats-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 12px; }
+    .stats-label { color: #8b949e; }
+    .stats-value { color: #e1e4e8; font-weight: 500; }
+    .node-detail {
+      background: #161b22;
+      border: 1px solid #21262d;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .node-detail.visible { display: block; }
+    .node-detail h3 { font-size: 13px; font-weight: 600; color: #f0f6fc; margin-bottom: 4px; }
+    .node-detail .type-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .node-detail .desc { font-size: 12px; color: #8b949e; line-height: 1.5; }
+    .node-detail .edges-list { margin-top: 8px; font-size: 11px; color: #8b949e; }
+    .node-detail .edges-list div { padding: 2px 0; }
+    .controls { margin-bottom: 16px; }
+    .controls label { font-size: 12px; color: #8b949e; display: block; margin-bottom: 4px; }
+    .controls input[type="range"] { width: 100%; accent-color: #58a6ff; }
+    .depth-label { font-size: 11px; color: #58a6ff; text-align: right; }
+    .expansion-info { font-size: 11px; color: #8b949e; margin-top: 4px; }
+    .trust-toggle { display: flex; gap: 8px; margin-top: 8px; }
+    .trust-btn {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid #30363d;
+      background: transparent;
+      color: #8b949e;
+      cursor: pointer;
+    }
+    .trust-btn.active { border-color: #58a6ff; color: #58a6ff; background: rgba(88, 166, 255, 0.1); }
+    /* ── View toggle ── */
+    .view-toggle { display: flex; gap: 0; margin-left: auto; }
+    .view-btn { font-size: 12px; padding: 6px 14px; border: 1px solid #30363d; background: transparent; color: #8b949e; cursor: pointer; transition: all 0.15s; }
+    .view-btn:first-child { border-radius: 6px 0 0 6px; }
+    .view-btn:last-child { border-radius: 0 6px 6px 0; border-left: none; }
+    .view-btn.active { background: #21262d; color: #58a6ff; border-color: #58a6ff; }
+    /* ── Instructions panel ── */
+    #instructionsPanel { display: none; flex: 1; overflow-y: auto; padding: 32px 48px; max-width: 960px; margin: 0 auto; }
+    #instructionsPanel.visible { display: block; }
+    #cy.hidden { display: none; }
+    .sidebar.hidden { display: none; }
+    .instructions { font-size: 14px; line-height: 1.7; color: #c9d1d9; }
+    .instructions h1 { font-size: 22px; font-weight: 700; color: #f0f6fc; margin: 0 0 8px 0; border-bottom: 1px solid #21262d; padding-bottom: 12px; }
+    .instructions h2 { font-size: 16px; font-weight: 600; color: #f0f6fc; margin: 28px 0 12px 0; }
+    .instructions h3 { font-size: 14px; font-weight: 600; color: #e1e4e8; margin: 20px 0 8px 0; }
+    .instructions p { margin: 0 0 12px 0; }
+    .instructions ul, .instructions ol { margin: 0 0 12px 0; padding-left: 20px; }
+    .instructions li { margin-bottom: 4px; }
+    .instructions table { border-collapse: collapse; width: 100%; margin: 12px 0 20px 0; font-size: 13px; }
+    .instructions th { text-align: left; padding: 8px 12px; background: #161b22; border: 1px solid #21262d; color: #f0f6fc; font-weight: 600; }
+    .instructions td { padding: 8px 12px; border: 1px solid #21262d; color: #c9d1d9; }
+    .instructions code { background: #161b22; padding: 2px 6px; border-radius: 4px; font-size: 12px; color: #79c0ff; }
+    .instructions .gen-badge { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 10px; margin-left: 8px; }
+    .instructions .gen-auto { background: #238636; color: #fff; }
+    .instructions .gen-note { background: #30363d; color: #8b949e; font-size: 11px; padding: 8px 12px; border-radius: 6px; margin: 16px 0; border-left: 3px solid #58a6ff; }
+    .instructions blockquote { border-left: 3px solid #30363d; padding-left: 12px; color: #8b949e; margin: 12px 0; }
+    .instructions strong { color: #f0f6fc; }
+    .instructions .scope { font-style: italic; color: #8b949e; border-left: 3px solid #58a6ff; padding-left: 10px; margin-bottom: 16px; }
+    .instructions hr { border: none; border-top: 1px solid #21262d; margin: 24px 0; }
+    .copy-btn { position: fixed; bottom: 24px; right: 24px; padding: 10px 16px; background: #238636; color: #fff; border: none; border-radius: 8px; font-size: 13px; cursor: pointer; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+    .copy-btn:hover { background: #2ea043; }
+    .copy-btn.copied { background: #58a6ff; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Flix - Semantic Topic Graph</h1>
+    <span class="subtitle">Interactive topic visualisation from Flix test data</span>
+    <div class="view-toggle" id="viewToggle">
+      <button class="view-btn active" data-view="graph">Graph</button>
+      <button class="view-btn" data-view="instructions">Instructions</button>
+    </div>
+  </div>
+  <div class="topic-tabs" id="tabBar">
+    <div class="topic-tab active" data-topic="engagement">Content Engagement</div>
+    <div class="topic-tab" data-topic="monetisation">Monetisation &amp; Revenue</div>
+    <div class="topic-tab" data-topic="all">Full App View</div>
+  </div>
+  <div class="main">
+    <div id="cy"></div>
+    <div id="instructionsPanel"></div>
+    <button class="copy-btn" id="copyBtn" style="display:none">Copy as Markdown</button>
+    <div class="sidebar">
+      <div class="node-detail" id="nodeDetail">
+        <h3 id="detailName"></h3>
+        <span class="type-badge" id="detailBadge"></span>
+        <p class="desc" id="detailDesc"></p>
+        <div class="edges-list" id="detailEdges"></div>
+      </div>
+
+      <div class="controls">
+        <label>Expansion Depth</label>
+        <input type="range" id="depthSlider" min="1" max="3" value="2">
+        <div class="depth-label" id="depthLabel">Depth: 2</div>
+        <div class="expansion-info" id="expansionInfo"></div>
+        <label style="margin-top: 12px;">Trust Minimum</label>
+        <div class="trust-toggle" id="trustBar">
+          <button class="trust-btn active" data-trust="all">All</button>
+          <button class="trust-btn" data-trust="confirmed">Confirmed+</button>
+          <button class="trust-btn" data-trust="human">Human only</button>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h2>Legend</h2>
+        <div class="legend-item"><div class="legend-dot" style="background:#f778ba"></div> Topic</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#79c0ff"></div> Concept (root)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#79c0ff; opacity:0.5"></div> Concept (supporting)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#7ee787"></div> Dataset</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#d2a8ff"></div> Metric</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ffa657"></div> Event</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#ff7b72"></div> Dashboard</div>
+        <div class="legend-item"><div class="legend-line" style="border-top:2px solid #8b949e"></div> composes / tracked-in</div>
+        <div class="legend-item"><div class="legend-line" style="border-top:2px solid #58a6ff"></div> measured-by</div>
+        <div class="legend-item"><div class="legend-line" style="border-top:2px solid #ffa657"></div> signalled-by</div>
+        <div class="legend-item"><div class="legend-line" style="border-top:2px dashed #f778ba"></div> equivalent-to</div>
+        <div class="legend-item"><div class="legend-line" style="border-top:2px dashed #ff7b72"></div> distinct-from</div>
+      </div>
+
+      <div class="stats" id="statsPanel"></div>
+    </div>
+  </div>
+
+<script>
+/* ── Flix topic data (from real entity extractions) ── */
+
+var TOPICS = {
+  engagement: {
+    name: "Content Engagement",
+    description: "Understanding how users discover, consume, and engage with content on the Flix platform.",
+    nodes: [
+      { id: "topic", label: "Content\nEngagement", ntype: "topic", role: "root", trust: "human", depth: 0, desc: "Understanding how users discover, consume, and engage with content on the Flix platform." },
+      { id: "c_viewing", label: "Viewing\nBehaviour", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "How users consume content. Defined by play events, completion rates, and time watched. A 'regular watcher' plays content on at least 5 distinct days in 30 days." },
+      { id: "c_discovery", label: "Content\nDiscovery", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "How users find content to watch. Includes browse, search, recommendation funnels, and genre exploration." },
+      { id: "c_retention", label: "Viewer\nRetention", ntype: "concept", role: "supporting", trust: "ai-confirmed", depth: 2, desc: "Whether users come back to watch more content over time. Measured by repeat viewing sessions and active days." },
+      { id: "c_recommend", label: "Recommend\nContent", ntype: "concept", role: "supporting", trust: "human", depth: 2, desc: "The recommendation engine feature. Surfaces personalised content suggestions on the home page carousel." },
+      { id: "c_completion", label: "Completion\nRate", ntype: "concept", role: "supporting", trust: "ai", depth: 3, desc: "Fraction of content watched before the user stops. AI-inferred from completion_fraction column in Product Events." },
+      { id: "d_content", label: "Data.Content", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "List of all content available through Flix. Columns: id, title, genre, lang, duration, ppv, release_date, vote_avg, vote_count." },
+      { id: "d_sessions", label: "Data.Sessions", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Actor dataset for all Flix user sessions. Columns: id, user_id, Duration [derived], Start Time [derived]." },
+      { id: "d_events", label: "Data.Product\nEvents", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Product instrumentation events. Includes Play Content, Browse Content, View PDP, Sign Up, and 15+ other event types." },
+      { id: "d_users", label: "Data.Users", ntype: "dataset", role: "", trust: "human", depth: 2, desc: "Actor dataset listing all Flix users. 46 columns including platform, country, subscription_id, and 30+ derived cohort columns." },
+      { id: "m_ttv", label: "Total Time\nViewed", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Total time viewed in minutes on the platform. Can be sliced by genre, platform, subscription tier, and user cohort." },
+      { id: "m_avg_titles", label: "Avg Titles\nViewed/User", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Average number of content titles viewed by users on Flix. Key engagement depth indicator." },
+      { id: "m_avg_ttv", label: "Average\nTTV", ntype: "metric", role: "", trust: "ai-confirmed", depth: 2, desc: "Average total time viewed across all users. For a given user, this is the total time that user spent viewing content." },
+      { id: "e_play", label: "Play\nContent", ntype: "event", role: "", trust: "human", depth: 1, desc: "User starts playing a piece of content. Core engagement event." },
+      { id: "e_browse", label: "Browse\nContent", ntype: "event", role: "", trust: "human", depth: 1, desc: "User browses the content catalogue. Part of the discovery funnel." },
+      { id: "e_view_pdp", label: "View PDP", ntype: "event", role: "", trust: "ai-confirmed", depth: 2, desc: "User views a content detail page. Generated when viewing detailed information about a title." },
+      { id: "db_engage", label: "Product\nEngagement", ntype: "dashboard", role: "", trust: "human", depth: 1, desc: "A collection of several explorations related to Flix product engagement." },
+      { id: "db_recommend", label: "Recommend\nContent Launch", ntype: "dashboard", role: "", trust: "human", depth: 2, desc: "Understanding the impact of showing users Recommended Content." }
+    ],
+    edges: [
+      { source: "topic", target: "c_viewing", label: "root", etype: "root" },
+      { source: "topic", target: "c_discovery", label: "root", etype: "root" },
+      { source: "c_viewing", target: "c_retention", label: "related", etype: "related" },
+      { source: "c_discovery", target: "c_recommend", label: "related", etype: "related" },
+      { source: "c_viewing", target: "c_completion", label: "related", etype: "related" },
+      { source: "c_viewing", target: "d_events", label: "composes", etype: "composes" },
+      { source: "c_viewing", target: "d_sessions", label: "composes", etype: "composes" },
+      { source: "c_viewing", target: "d_content", label: "composes", etype: "composes" },
+      { source: "c_discovery", target: "d_events", label: "composes", etype: "composes" },
+      { source: "c_discovery", target: "d_content", label: "composes", etype: "composes" },
+      { source: "c_retention", target: "d_users", label: "composes", etype: "composes" },
+      { source: "c_retention", target: "d_sessions", label: "composes", etype: "composes" },
+      { source: "c_viewing", target: "m_ttv", label: "measured-by", etype: "measured-by" },
+      { source: "c_viewing", target: "m_avg_ttv", label: "measured-by", etype: "measured-by" },
+      { source: "c_discovery", target: "m_avg_titles", label: "measured-by", etype: "measured-by" },
+      { source: "c_viewing", target: "e_play", label: "signalled-by", etype: "signalled-by" },
+      { source: "c_discovery", target: "e_browse", label: "signalled-by", etype: "signalled-by" },
+      { source: "c_discovery", target: "e_view_pdp", label: "signalled-by", etype: "signalled-by" },
+      { source: "c_viewing", target: "db_engage", label: "visualised-in", etype: "composes" },
+      { source: "c_recommend", target: "db_recommend", label: "visualised-in", etype: "composes" },
+      { source: "c_completion", target: "c_viewing", label: "distinct-from", etype: "distinct-from" }
+    ]
+  },
+  monetisation: {
+    name: "Monetisation & Revenue",
+    description: "Revenue streams, subscription economics, and purchase behaviour across the Flix platform.",
+    nodes: [
+      { id: "topic", label: "Monetisation\n& Revenue", ntype: "topic", role: "root", trust: "human", depth: 0, desc: "Revenue streams, subscription economics, and purchase behaviour across the Flix platform." },
+      { id: "c_subs", label: "Subscription\nEconomics", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "Subscription tiers, pricing, conversion from free to paid, and subscriber retention. Flix has tiered subscriptions with download slots." },
+      { id: "c_ads", label: "Ad\nRevenue", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "Revenue from advertisements. Advertisers sign up, create campaigns with CPM pricing, and target content categories." },
+      { id: "c_ppv", label: "Pay-Per-View\nPurchases", ntype: "concept", role: "root", trust: "human", depth: 1, desc: "One-time content purchases (PPV). Some content is available for individual purchase outside the subscription." },
+      { id: "c_conversion", label: "Free-to-Paid\nConversion", ntype: "concept", role: "supporting", trust: "human", depth: 2, desc: "Funnel from free user signup through to paid subscription. Key growth lever for the platform." },
+      { id: "c_tier", label: "Tier\nAnalysis", ntype: "concept", role: "supporting", trust: "ai-confirmed", depth: 2, desc: "Comparing behaviour and value across subscription tiers. AI-identified from subscription_tier column." },
+      { id: "c_churn", label: "Subscription\nChurn", ntype: "concept", role: "supporting", trust: "ai", depth: 3, desc: "Users who cancel or fail to renew their subscription. AI-inferred from has_churned column. Distinct from viewing inactivity." },
+      { id: "d_subs", label: "Data.\nSubscriptions", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Actor dataset storing all Flix subscriptions. Multiple users may share a single subscription. Columns: id, subscription_tier, price, num_users, download_slots." },
+      { id: "d_users", label: "Data.Users", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Actor dataset listing all Flix users. Includes subscription_id, platform, country." },
+      { id: "d_advertisers", label: "Data.\nAdvertisers", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Advertisers who have signed up with Flix. Columns: id, name, domain." },
+      { id: "d_campaigns", label: "Data.\nCampaigns", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Ad campaigns set up on Flix. Columns: id, advertiser_id, cpm, duration." },
+      { id: "d_events", label: "Data.Product\nEvents", ntype: "dataset", role: "", trust: "human", depth: 1, desc: "Product instrumentation events including Make Purchase, Sign Up, Add to Cart, Begin Checkout." },
+      { id: "m_total_rev", label: "Total\nRevenue", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Total revenue across PPV purchases, advertisements, and monthly subscriptions." },
+      { id: "m_sub_rev", label: "Subscription\nRevenue", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Total revenue generated by Flix monthly subscriptions." },
+      { id: "m_ad_rev", label: "Total Ad\nRevenue", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Total revenue generated by advertisements on Flix." },
+      { id: "m_ppv_rev", label: "Purchase\nRevenue", ntype: "metric", role: "", trust: "human", depth: 1, desc: "Total revenue generated by Flix PPV purchases." },
+      { id: "m_avg_ad", label: "Avg Ad Rev\nper User", ntype: "metric", role: "", trust: "ai-confirmed", depth: 2, desc: "Average ad revenue per user. AI-identified metric." },
+      { id: "e_signup", label: "Sign Up", ntype: "event", role: "", trust: "human", depth: 1, desc: "User creates a Flix account. Entry point for the free-to-paid funnel." },
+      { id: "e_purchase", label: "Make\nPurchase", ntype: "event", role: "", trust: "human", depth: 1, desc: "User completes a PPV content purchase." },
+      { id: "e_add_cart", label: "Add to\nCart", ntype: "event", role: "", trust: "ai-confirmed", depth: 2, desc: "Event generated when product is added to shopping cart." },
+      { id: "e_checkout", label: "Begin\nCheckout", ntype: "event", role: "", trust: "ai-confirmed", depth: 2, desc: "Event generated when the user begins the checkout process." },
+      { id: "db_kpi", label: "Flix Core\nKPI Dashboard", ntype: "dashboard", role: "", trust: "human", depth: 1, desc: "Core KPIs for Flix streaming service, monitored weekly." },
+      { id: "db_conversion", label: "Subscription\nConversion KPIs", ntype: "dashboard", role: "", trust: "human", depth: 2, desc: "Key metrics for understanding and converting free users to paid subscribers." }
+    ],
+    edges: [
+      { source: "topic", target: "c_subs", label: "root", etype: "root" },
+      { source: "topic", target: "c_ads", label: "root", etype: "root" },
+      { source: "topic", target: "c_ppv", label: "root", etype: "root" },
+      { source: "c_subs", target: "c_conversion", label: "related", etype: "related" },
+      { source: "c_subs", target: "c_tier", label: "related", etype: "related" },
+      { source: "c_subs", target: "c_churn", label: "related", etype: "related" },
+      { source: "c_subs", target: "d_subs", label: "composes", etype: "composes" },
+      { source: "c_subs", target: "d_users", label: "composes", etype: "composes" },
+      { source: "c_ads", target: "d_advertisers", label: "composes", etype: "composes" },
+      { source: "c_ads", target: "d_campaigns", label: "composes", etype: "composes" },
+      { source: "c_ppv", target: "d_events", label: "composes", etype: "composes" },
+      { source: "c_conversion", target: "d_events", label: "composes", etype: "composes" },
+      { source: "c_conversion", target: "d_users", label: "composes", etype: "composes" },
+      { source: "c_subs", target: "m_sub_rev", label: "measured-by", etype: "measured-by" },
+      { source: "c_subs", target: "m_total_rev", label: "measured-by", etype: "measured-by" },
+      { source: "c_ads", target: "m_ad_rev", label: "measured-by", etype: "measured-by" },
+      { source: "c_ads", target: "m_avg_ad", label: "measured-by", etype: "measured-by" },
+      { source: "c_ppv", target: "m_ppv_rev", label: "measured-by", etype: "measured-by" },
+      { source: "c_conversion", target: "e_signup", label: "signalled-by", etype: "signalled-by" },
+      { source: "c_ppv", target: "e_purchase", label: "signalled-by", etype: "signalled-by" },
+      { source: "c_ppv", target: "e_add_cart", label: "signalled-by", etype: "signalled-by" },
+      { source: "c_ppv", target: "e_checkout", label: "signalled-by", etype: "signalled-by" },
+      { source: "c_subs", target: "db_kpi", label: "visualised-in", etype: "composes" },
+      { source: "c_conversion", target: "db_conversion", label: "visualised-in", etype: "composes" },
+      { source: "c_churn", target: "c_conversion", label: "distinct-from", etype: "distinct-from" }
+    ]
+  }
+};
+
+/* ── Colours ── */
+
+var COLOURS = {
+  topic:     "#f778ba",
+  concept:   "#79c0ff",
+  dataset:   "#7ee787",
+  metric:    "#d2a8ff",
+  event:     "#ffa657",
+  dashboard: "#ff7b72"
+};
+
+var EDGE_COLOURS = {
+  "root":         "#f778ba",
+  "related":      "#484f58",
+  "composes":     "#8b949e",
+  "measured-by":  "#58a6ff",
+  "signalled-by": "#ffa657",
+  "equivalent-to":"#f778ba",
+  "distinct-from":"#ff7b72"
+};
+
+var SHAPES = {
+  topic:     "diamond",
+  concept:   "round-rectangle",
+  dataset:   "ellipse",
+  metric:    "hexagon",
+  event:     "star",
+  dashboard: "rectangle"
+};
+
+/* ── State ── */
+
+var currentTopic = "engagement";
+var currentDepth = 2;
+var currentTrust = "all";
+var cy = null;
+
+/* ── Build elements ── */
+
+function isNodeVisible(node) {
+  if (node.depth > currentDepth) return false;
+  if (currentTrust === "confirmed" && node.trust === "ai") return false;
+  if (currentTrust === "human" && (node.trust === "ai" || node.trust === "ai-confirmed")) return false;
+  return true;
+}
+
+function buildElements(topicKey) {
+  var topic = TOPICS[topicKey];
+  if (!topic) return buildAllView();
+
+  var elements = [];
+
+  for (var i = 0; i < topic.nodes.length; i++) {
+    var n = topic.nodes[i];
+    var vis = isNodeVisible(n);
+    elements.push({
+      group: "nodes",
+      data: {
+        id: n.id,
+        label: n.label,
+        ntype: n.ntype,
+        role: n.role,
+        trust: n.trust,
+        ndepth: n.depth,
+        desc: n.desc,
+        vis: vis ? "yes" : "no"
+      }
+    });
+  }
+
+  for (var j = 0; j < topic.edges.length; j++) {
+    var e = topic.edges[j];
+    elements.push({
+      group: "edges",
+      data: {
+        id: "e" + j,
+        source: e.source,
+        target: e.target,
+        label: e.label,
+        etype: e.etype
+      }
+    });
+  }
+
+  return elements;
+}
+
+function buildAllView() {
+  var elements = [];
+  var seenNodes = {};
+
+  // App super-node
+  elements.push({
+    group: "nodes",
+    data: { id: "app", label: "Flix\nApp", ntype: "topic", role: "root", trust: "human", ndepth: 0, desc: "SpringWorks Flix streaming platform - demo app.", vis: "yes" }
+  });
+
+  var edgeCount = 0;
+  var keys = ["engagement", "monetisation"];
+  for (var k = 0; k < keys.length; k++) {
+    var key = keys[k];
+    var topic = TOPICS[key];
+
+    for (var i = 0; i < topic.nodes.length; i++) {
+      var n = topic.nodes[i];
+      var nodeId = n.id === "topic" ? key + "_topic" : n.id;
+      var label = n.id === "topic" ? topic.name.replace(/ & /g, "\n& ").replace(/ /g, "\n") : n.label;
+
+      if (!seenNodes[nodeId]) {
+        seenNodes[nodeId] = true;
+        elements.push({
+          group: "nodes",
+          data: { id: nodeId, label: label, ntype: n.ntype, role: n.role, trust: n.trust, ndepth: n.depth, desc: n.desc, vis: "yes" }
+        });
+      }
+    }
+
+    // App -> topic edges
+    elements.push({
+      group: "edges",
+      data: { id: "ea" + k, source: "app", target: key + "_topic", label: "topic", etype: "root" }
+    });
+
+    for (var j = 0; j < topic.edges.length; j++) {
+      var e = topic.edges[j];
+      var src = e.source === "topic" ? key + "_topic" : e.source;
+      var tgt = e.target === "topic" ? key + "_topic" : e.target;
+      elements.push({
+        group: "edges",
+        data: { id: "e" + key + j, source: src, target: tgt, label: e.label, etype: e.etype }
+      });
+      edgeCount++;
+    }
+  }
+
+  return elements;
+}
+
+/* ── Cytoscape stylesheet ── */
+
+function getStylesheet() {
+  return [
+    /* ── Default node ── */
+    {
+      selector: "node",
+      style: {
+        "label": "data(label)",
+        "text-valign": "center",
+        "text-halign": "center",
+        "text-wrap": "wrap",
+        "text-max-width": "60px",
+        "font-size": "9px",
+        "color": "#e1e4e8",
+        "text-outline-color": "#0d1117",
+        "text-outline-width": 2,
+        "background-color": "#79c0ff",
+        "border-width": 2,
+        "border-color": "#79c0ff",
+        "width": 55,
+        "height": 55,
+        "shape": "ellipse"
+      }
+    },
+
+    /* ── Node types ── */
+    { selector: "node[ntype='topic']", style: { "background-color": "#f778ba", "border-color": "#f778ba", "border-width": 3, "shape": "diamond", "width": 80, "height": 80, "font-size": "11px", "text-max-width": "72px" } },
+    { selector: "node[ntype='concept']", style: { "background-color": "#79c0ff", "border-color": "#79c0ff", "shape": "round-rectangle", "width": 65, "height": 65, "font-size": "10px" } },
+    { selector: "node[ntype='dataset']", style: { "background-color": "#7ee787", "border-color": "#7ee787", "shape": "ellipse" } },
+    { selector: "node[ntype='metric']", style: { "background-color": "#d2a8ff", "border-color": "#d2a8ff", "shape": "hexagon" } },
+    { selector: "node[ntype='event']", style: { "background-color": "#ffa657", "border-color": "#ffa657", "shape": "star", "width": 60, "height": 60 } },
+    { selector: "node[ntype='dashboard']", style: { "background-color": "#ff7b72", "border-color": "#ff7b72", "shape": "rectangle", "width": 60, "height": 50 } },
+
+    /* ── Supporting / AI nodes ── */
+    { selector: "node[role='supporting']", style: { "background-opacity": 0.6 } },
+    { selector: "node[trust='ai']", style: { "border-style": "dashed", "border-width": 1, "background-opacity": 0.4 } },
+    { selector: "node[trust='ai-confirmed']", style: { "background-opacity": 0.7 } },
+
+    /* ── Hidden nodes ── */
+    { selector: "node[vis='no']", style: { "display": "none" } },
+
+    /* ── Default edge ── */
+    {
+      selector: "edge",
+      style: {
+        "curve-style": "bezier",
+        "target-arrow-shape": "triangle",
+        "arrow-scale": 0.8,
+        "width": 1.5,
+        "line-color": "#484f58",
+        "target-arrow-color": "#484f58",
+        "opacity": 0.6,
+        "label": "data(label)",
+        "font-size": "7px",
+        "color": "#484f58",
+        "text-rotation": "autorotate",
+        "text-margin-y": -8,
+        "text-outline-color": "#0d1117",
+        "text-outline-width": 1
+      }
+    },
+
+    /* ── Edge types ── */
+    { selector: "edge[etype='root']", style: { "line-color": "#f778ba", "target-arrow-color": "#f778ba", "width": 2.5, "opacity": 0.8 } },
+    { selector: "edge[etype='composes']", style: { "line-color": "#8b949e", "target-arrow-color": "#8b949e" } },
+    { selector: "edge[etype='measured-by']", style: { "line-color": "#58a6ff", "target-arrow-color": "#58a6ff" } },
+    { selector: "edge[etype='signalled-by']", style: { "line-color": "#ffa657", "target-arrow-color": "#ffa657" } },
+    { selector: "edge[etype='related']", style: { "line-color": "#484f58", "target-arrow-color": "#484f58", "line-style": "solid" } },
+    { selector: "edge[etype='distinct-from']", style: { "line-color": "#ff7b72", "target-arrow-color": "#ff7b72", "line-style": "dashed", "target-arrow-shape": "none" } },
+    { selector: "edge[etype='equivalent-to']", style: { "line-color": "#f778ba", "target-arrow-color": "#f778ba", "line-style": "dashed", "target-arrow-shape": "none" } },
+
+    /* ── Interactive states ── */
+    { selector: ".dimmed", style: { "opacity": 0.08 } },
+    { selector: ".highlighted", style: { "opacity": 1 } }
+  ];
+}
+
+/* ── Render ── */
+
+function render(topicKey) {
+  var container = document.getElementById("cy");
+  var elements = buildElements(topicKey);
+
+  if (cy) { cy.destroy(); cy = null; }
+
+  cy = cytoscape({
+    container: container,
+    elements: elements,
+    style: getStylesheet(),
+    layout: {
+      name: "cose",
+      idealEdgeLength: function() { return 130; },
+      nodeOverlap: 30,
+      nodeRepulsion: function() { return 12000; },
+      edgeElasticity: function() { return 80; },
+      gravity: 0.25,
+      numIter: 800,
+      animate: false,
+      padding: 40
+    },
+    minZoom: 0.3,
+    maxZoom: 3,
+    wheelSensitivity: 0.3
+  });
+
+  // Tap node -> show detail + highlight
+  cy.on("tap", "node", function(evt) {
+    var node = evt.target;
+    showNodeDetail(node);
+    cy.elements().removeClass("highlighted dimmed");
+    var connected = node.neighborhood();
+    cy.elements().addClass("dimmed");
+    connected.addClass("highlighted").removeClass("dimmed");
+    node.addClass("highlighted").removeClass("dimmed");
+  });
+
+  // Tap background -> reset
+  cy.on("tap", function(evt) {
+    if (evt.target === cy) {
+      cy.elements().removeClass("highlighted dimmed");
+      document.getElementById("nodeDetail").classList.remove("visible");
+    }
+  });
+
+  updateStats(topicKey);
+}
+
+function showNodeDetail(node) {
+  var d = node.data();
+  var panel = document.getElementById("nodeDetail");
+  document.getElementById("detailName").textContent = d.label.replace(/\n/g, " ");
+
+  var badge = document.getElementById("detailBadge");
+  var col = COLOURS[d.ntype] || "#79c0ff";
+  var roleText = d.role && d.role !== "root" ? " (" + d.role + ")" : "";
+  badge.textContent = d.ntype + roleText + " \u00b7 " + d.trust;
+  badge.style.background = col + "33";
+  badge.style.color = col;
+
+  document.getElementById("detailDesc").textContent = d.desc || "";
+
+  var edgesDiv = document.getElementById("detailEdges");
+  edgesDiv.innerHTML = "<strong style='color:#e1e4e8'>Connections:</strong>";
+  var connEdges = node.connectedEdges();
+  connEdges.forEach(function(e) {
+    var other = e.source().id() === d.id ? e.target() : e.source();
+    if (other.data("vis") !== "no") {
+      var div = document.createElement("div");
+      div.textContent = e.data("label") + " \u2192 " + other.data("label").replace(/\n/g, " ");
+      edgesDiv.appendChild(div);
+    }
+  });
+
+  panel.classList.add("visible");
+}
+
+function updateStats(topicKey) {
+  var panel = document.getElementById("statsPanel");
+  var topic = TOPICS[topicKey];
+
+  if (!topic) {
+    var total = cy.nodes().length;
+    panel.innerHTML = '<h2 style="margin-bottom:8px">Full App View</h2>' +
+      '<div class="stats-row"><span class="stats-label">Total nodes</span><span class="stats-value">' + total + '</span></div>' +
+      '<div class="stats-row"><span class="stats-label">Topics</span><span class="stats-value">2</span></div>';
+    return;
+  }
+
+  var visible = [];
+  for (var i = 0; i < topic.nodes.length; i++) {
+    if (isNodeVisible(topic.nodes[i])) visible.push(topic.nodes[i]);
+  }
+
+  var counts = { concept: 0, dataset: 0, metric: 0, event: 0, dashboard: 0 };
+  var trustCounts = { human: 0, "ai-confirmed": 0, ai: 0 };
+  for (var j = 0; j < visible.length; j++) {
+    var n = visible[j];
+    if (counts[n.ntype] !== undefined) counts[n.ntype]++;
+    if (trustCounts[n.trust] !== undefined) trustCounts[n.trust]++;
+  }
+
+  panel.innerHTML = '<h2 style="margin-bottom:8px">' + topic.name + '</h2>' +
+    '<div class="stats-row"><span class="stats-label">Concepts</span><span class="stats-value">' + counts.concept + '</span></div>' +
+    '<div class="stats-row"><span class="stats-label">Datasets</span><span class="stats-value">' + counts.dataset + '</span></div>' +
+    '<div class="stats-row"><span class="stats-label">Metrics</span><span class="stats-value">' + counts.metric + '</span></div>' +
+    '<div class="stats-row"><span class="stats-label">Events</span><span class="stats-value">' + counts.event + '</span></div>' +
+    '<div class="stats-row"><span class="stats-label">Dashboards</span><span class="stats-value">' + counts.dashboard + '</span></div>' +
+    '<div style="border-top:1px solid #21262d; margin:8px 0"></div>' +
+    '<div class="stats-row"><span class="stats-label">Human-authored</span><span class="stats-value">' + trustCounts.human + '</span></div>' +
+    '<div class="stats-row"><span class="stats-label">AI-confirmed</span><span class="stats-value">' + trustCounts["ai-confirmed"] + '</span></div>' +
+    '<div class="stats-row"><span class="stats-label">AI-generated</span><span class="stats-value">' + trustCounts.ai + '</span></div>';
+
+  document.getElementById("expansionInfo").textContent =
+    "Showing " + visible.length + " of " + topic.nodes.length + " nodes at depth " + currentDepth;
+}
+
+/* ── Event handlers ── */
+
+document.getElementById("tabBar").addEventListener("click", function(evt) {
+  var tab = evt.target.closest(".topic-tab");
+  if (!tab) return;
+  var topicKey = tab.getAttribute("data-topic");
+  currentTopic = topicKey;
+  var tabs = document.querySelectorAll(".topic-tab");
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");
+  tab.classList.add("active");
+  render(topicKey);
+});
+
+document.getElementById("depthSlider").addEventListener("input", function() {
+  currentDepth = parseInt(this.value);
+  document.getElementById("depthLabel").textContent = "Depth: " + currentDepth;
+  render(currentTopic);
+});
+
+document.getElementById("trustBar").addEventListener("click", function(evt) {
+  var btn = evt.target.closest(".trust-btn");
+  if (!btn) return;
+  currentTrust = btn.getAttribute("data-trust");
+  var btns = document.querySelectorAll(".trust-btn");
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove("active");
+  btn.classList.add("active");
+  render(currentTopic);
+});
+
+/* ═══════════════════════════════════════════════════════════════════
+   Agent instructions - streamlined topic slice format
+   ═══════════════════════════════════════════════════════════════════ */
+
+function instrHeader(t) {
+  return '<div class="instructions">' +
+    '<h1>' + t.name + ' <span class="gen-badge gen-auto">auto-generated from topic graph</span></h1>';
+}
+
+function instrFooter(stats) {
+  return '<div class="gen-note">Auto-generated topic slice. ' + stats + ' Shared rules (standard exclusions, output formatting) belong in the base prompt.</div></div>';
+}
+
+var INSTRUCTIONS = {
+
+engagement: function(t) {
+  return instrHeader(t) +
+  '<p class="scope">How users discover, consume, and engage with content on the Flix platform.</p>' +
+
+  '<h2>Terms</h2>' +
+  '<ul>' +
+  '<li><strong>"Regular watcher"</strong> = plays content on at least 5 distinct days in 30 days. Do NOT use session count as a proxy.</li>' +
+  '<li><strong>"Viewing"</strong> = Play Content events. Distinct from "browsing" (Browse Content, View PDP) which is discovery, not consumption.</li>' +
+  '<li><strong>"Completion rate"</strong> = fraction of content watched before user stops. AI-inferred from <code>completion_fraction</code> column in Product Events. Treat as approximate.</li>' +
+  '<li><strong>"Retention"</strong> in this topic = repeat viewing sessions over time. Not subscription retention (see Monetisation topic).</li>' +
+  '</ul>' +
+
+  '<h2>Clarifying questions (topic-specific)</h2>' +
+  '<ul>' +
+  '<li><strong>Content scope</strong>: All content / specific genre / PPV-only / free-only?</li>' +
+  '<li><strong>Platform</strong>: All platforms / mobile / desktop / TV?</li>' +
+  '<li><strong>Funnel stage</strong>: Discovery (browse/search) / consumption (play) / both?</li>' +
+  '<li><strong>Cohort</strong>: All users / new users / returning / specific subscription tier?</li>' +
+  '</ul>' +
+
+  '<h2>Dashboards</h2>' +
+  '<table><thead><tr><th>Dashboard</th><th>Use for</th></tr></thead><tbody>' +
+  '<tr><td>Product Engagement</td><td>Overall engagement explorations</td></tr>' +
+  '<tr><td>Recommend Content Launch</td><td>Impact of recommendation engine on viewing</td></tr>' +
+  '</tbody></table>' +
+
+  '<h2>Data sources</h2>' +
+  '<h3>Viewing Behaviour</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>Data.Product Events</code></td><td>Play Content events, completion_fraction, view-level detail</td></tr>' +
+  '<tr><td><code>Data.Sessions</code></td><td>Session duration, start time, session-level aggregation</td></tr>' +
+  '<tr><td><code>Data.Content</code></td><td>Content catalogue: genre, duration, PPV flag, release date, ratings</td></tr>' +
+  '</tbody></table>' +
+  '<h3>Content Discovery</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>Data.Product Events</code></td><td>Browse Content, View PDP events (discovery funnel)</td></tr>' +
+  '<tr><td><code>Data.Content</code></td><td>Genre/category joins for discovery analysis</td></tr>' +
+  '</tbody></table>' +
+  '<h3>Viewer Retention</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>Data.Users</code></td><td>User cohort attributes, 30+ derived cohort columns</td></tr>' +
+  '<tr><td><code>Data.Sessions</code></td><td>Repeat session patterns over time</td></tr>' +
+  '</tbody></table>' +
+
+  '<h2>Metrics</h2>' +
+  '<ul>' +
+  '<li>Total Time Viewed (minutes, sliceable by genre/platform/tier/cohort)</li>' +
+  '<li>Avg Titles Viewed per User</li>' +
+  '<li>Average TTV (per-user total viewing time)</li>' +
+  '</ul>' +
+
+  '<h2>Signals</h2>' +
+  '<table><thead><tr><th>Event</th><th>Meaning</th></tr></thead><tbody>' +
+  '<tr><td><code>Play Content</code></td><td>User starts playing content (core engagement)</td></tr>' +
+  '<tr><td><code>Browse Content</code></td><td>User browses catalogue (discovery funnel)</td></tr>' +
+  '<tr><td><code>View PDP</code></td><td>User views content detail page</td></tr>' +
+  '</tbody></table>' +
+
+  instrFooter('2 root concepts, 4 datasets, 3 metrics, 3 events, 2 dashboards.');
+},
+
+monetisation: function(t) {
+  return instrHeader(t) +
+  '<p class="scope">Revenue streams, subscription economics, and purchase behaviour across the Flix platform.</p>' +
+
+  '<h2>Terms</h2>' +
+  '<ul>' +
+  '<li><strong>"Revenue"</strong> has three distinct streams: subscription, ad, and PPV. <code>Total Revenue</code> combines all three. Always clarify which stream.</li>' +
+  '<li><strong>"Churn"</strong> = subscription cancellation or non-renewal. Distinct from viewing inactivity (see Content Engagement topic). Derived from <code>has_churned</code> column (AI-inferred).</li>' +
+  '<li><strong>"Conversion"</strong> = free-to-paid subscription funnel. Not PPV purchase conversion.</li>' +
+  '<li><strong>"PPV"</strong> (Pay-Per-View) = one-time content purchases outside the subscription. Tagged via <code>ppv</code> flag in Data.Content.</li>' +
+  '<li><strong>"Tier"</strong> = subscription tier from <code>Data.Subscriptions</code>. Each tier has different price, download slots, and user limits.</li>' +
+  '</ul>' +
+
+  '<h2>Clarifying questions (topic-specific)</h2>' +
+  '<ul>' +
+  '<li><strong>Revenue stream</strong>: Subscription / ads / PPV / all combined?</li>' +
+  '<li><strong>Subscription tier</strong>: Specific tier or all tiers?</li>' +
+  '<li><strong>Funnel stage</strong>: Sign-up / add-to-cart / checkout / purchase?</li>' +
+  '<li><strong>Churn scope</strong>: Subscription churn only, or include viewing inactivity?</li>' +
+  '</ul>' +
+
+  '<h2>Dashboards</h2>' +
+  '<table><thead><tr><th>Dashboard</th><th>Use for</th></tr></thead><tbody>' +
+  '<tr><td>Flix Core KPI Dashboard</td><td>Weekly core KPIs across all revenue streams</td></tr>' +
+  '<tr><td>Subscription Conversion KPIs</td><td>Free-to-paid conversion funnel metrics</td></tr>' +
+  '</tbody></table>' +
+
+  '<h2>Data sources</h2>' +
+  '<h3>Subscription Economics</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>Data.Subscriptions</code></td><td>Tier, price, download slots, num_users per subscription</td></tr>' +
+  '<tr><td><code>Data.Users</code></td><td>User-to-subscription mapping, platform, country</td></tr>' +
+  '</tbody></table>' +
+  '<h3>Ad Revenue</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>Data.Advertisers</code></td><td>Advertiser details (name, domain)</td></tr>' +
+  '<tr><td><code>Data.Campaigns</code></td><td>Campaign CPM, duration, advertiser_id</td></tr>' +
+  '</tbody></table>' +
+  '<h3>Pay-Per-View Purchases</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>Data.Product Events</code></td><td>Make Purchase, Add to Cart, Begin Checkout events</td></tr>' +
+  '</tbody></table>' +
+  '<h3>Free-to-Paid Conversion</h3>' +
+  '<table><thead><tr><th>Source</th><th>Use when</th></tr></thead><tbody>' +
+  '<tr><td><code>Data.Product Events</code></td><td>Sign Up events (funnel entry point)</td></tr>' +
+  '<tr><td><code>Data.Users</code></td><td>User attributes for conversion cohort analysis</td></tr>' +
+  '</tbody></table>' +
+
+  '<h2>Metrics</h2>' +
+  '<ul>' +
+  '<li>Total Revenue (all streams combined)</li>' +
+  '<li>Subscription Revenue</li>' +
+  '<li>Total Ad Revenue</li>' +
+  '<li>Purchase Revenue (PPV)</li>' +
+  '<li>Avg Ad Revenue per User</li>' +
+  '</ul>' +
+
+  '<h2>Signals</h2>' +
+  '<table><thead><tr><th>Event</th><th>Meaning</th></tr></thead><tbody>' +
+  '<tr><td><code>Sign Up</code></td><td>Account creation (conversion funnel entry)</td></tr>' +
+  '<tr><td><code>Make Purchase</code></td><td>PPV purchase completed</td></tr>' +
+  '<tr><td><code>Add to Cart</code></td><td>Product added to cart (mid-funnel)</td></tr>' +
+  '<tr><td><code>Begin Checkout</code></td><td>Checkout started (mid-funnel)</td></tr>' +
+  '</tbody></table>' +
+
+  instrFooter('3 root concepts, 5 datasets, 5 metrics, 4 events, 2 dashboards.');
+}
+
+};
+
+/* ── View toggle ── */
+var currentView = "graph";
+
+document.getElementById("viewToggle").addEventListener("click", function(evt) {
+  var btn = evt.target.closest(".view-btn");
+  if (!btn) return;
+  var view = btn.getAttribute("data-view");
+  currentView = view;
+  var btns = document.querySelectorAll(".view-btn");
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove("active");
+  btn.classList.add("active");
+
+  var cyEl = document.getElementById("cy");
+  var instrEl = document.getElementById("instructionsPanel");
+  var sidebarEl = document.querySelector(".sidebar");
+  var copyBtn = document.getElementById("copyBtn");
+
+  if (view === "graph") {
+    cyEl.classList.remove("hidden");
+    sidebarEl.classList.remove("hidden");
+    instrEl.classList.remove("visible");
+    copyBtn.style.display = "none";
+    if (cy) cy.resize();
+  } else {
+    cyEl.classList.add("hidden");
+    sidebarEl.classList.add("hidden");
+    instrEl.classList.add("visible");
+    copyBtn.style.display = currentTopic === "all" ? "none" : "block";
+    renderInstructions(currentTopic);
+  }
+});
+
+function renderInstructions(topicKey) {
+  var panel = document.getElementById("instructionsPanel");
+  if (topicKey === "all") {
+    panel.innerHTML = '<div class="instructions">' +
+      '<h1>Full App View</h1>' +
+      '<p>Select a specific topic tab to view its generated topic slice.</p>' +
+      '<hr>' +
+      '<h2>Topic slices</h2>' +
+      '<table><thead><tr><th>Topic</th><th>Root concepts</th><th>Sources</th><th>Metrics</th></tr></thead><tbody>' +
+      '<tr><td>Content Engagement</td><td>Viewing Behaviour, Content Discovery</td><td>4</td><td>3</td></tr>' +
+      '<tr><td>Monetisation &amp; Revenue</td><td>Subscription Economics, Ad Revenue, Pay-Per-View Purchases</td><td>5</td><td>5</td></tr>' +
+      '</tbody></table>' +
+      '<div class="gen-note">Shared rules (standard exclusions, output formatting) belong in the base prompt that wraps these slices.</div>' +
+      '</div>';
+    return;
+  }
+
+  var topic = TOPICS[topicKey];
+  if (!topic || !INSTRUCTIONS[topicKey]) {
+    panel.innerHTML = '<div class="instructions"><p>No instructions available for this topic.</p></div>';
+    return;
+  }
+
+  panel.innerHTML = INSTRUCTIONS[topicKey](topic);
+}
+
+document.getElementById("copyBtn").addEventListener("click", function() {
+  var panel = document.getElementById("instructionsPanel");
+  var text = panel.innerText;
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = document.getElementById("copyBtn");
+    btn.textContent = "Copied!";
+    btn.classList.add("copied");
+    setTimeout(function() {
+      btn.textContent = "Copy as Markdown";
+      btn.classList.remove("copied");
+    }, 2000);
+  });
+});
+
+// Update instructions when topic changes (if in instructions view)
+document.getElementById("tabBar").addEventListener("click", function() {
+  if (currentView === "instructions") {
+    setTimeout(function() { renderInstructions(currentTopic); }, 50);
+    document.getElementById("copyBtn").style.display = currentTopic === "all" ? "none" : "block";
+  }
+});
+
+/* ── Init ── */
+render("engagement");
+</script>
+</body>
+</html>
