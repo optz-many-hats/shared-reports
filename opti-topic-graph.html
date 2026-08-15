@@ -134,6 +134,9 @@
         <div class="legend-item"><div class="legend-line" style="border-top:2px solid #ffa657"></div> signalled-by</div>
         <div class="legend-item"><div class="legend-line" style="border-top:2px dashed #f778ba"></div> equivalent-to</div>
         <div class="legend-item"><div class="legend-line" style="border-top:2px dashed #ff7b72"></div> distinct-from</div>
+        <div class="legend-item"><div class="legend-line" style="border-top:2px solid #7ee787"></div> data-link (joinable)</div>
+        <div class="legend-item"><div class="legend-line" style="border-top:2px dashed #e3b341"></div> informs (reasoning)</div>
+        <div class="legend-item"><div class="legend-line" style="border-top:2px dotted #e3b341"></div> correlates-with (reasoning)</div>
       </div>
       <div class="stats" id="statsPanel"></div>
     </div>
@@ -454,11 +457,28 @@ var SHARED_NODES = {
   "d_cust_detail": ["cs", "sales"]
 };
 
+/* ── Cross-topic links (only visible in Full App View) ── */
+var CROSS_TOPIC_LINKS = [
+  // DATA LINKS - concepts in different topics whose datasets share join keys (MASTER_CUSTOMER_ID, EPI_UNIVERSAL_ID)
+  { source: "c_credit",      target: "c_renewals",    label: "data-link",       etype: "data-link",       desc: "Opal credit usage and renewal rates share MASTER_CUSTOMER_ID. Joinable in a single query." },
+  { source: "c_adoption",    target: "c_analytics",   label: "data-link",       etype: "data-link",       desc: "Opal account utilisation and OA adoption share EPI_UNIVERSAL_ID via Product - Accounts." },
+  { source: "c_exp_engage",  target: "c_analytics",   label: "data-link",       etype: "data-link",       desc: "Experimentation usage and OA adoption share account keys through Product - Accounts." },
+  { source: "c_pipeline",    target: "c_renewals",    label: "data-link",       etype: "data-link",       desc: "SFDC opportunities and renewal rates share SFDC account IDs." },
+
+  // REASONING LINKS - concepts whose data is NOT joinable but whose results inform each other
+  { source: "c_cmp",         target: "c_churn",       label: "informs",         etype: "informs",         desc: "CMP engagement tiers (weekly core events) have no join key to ARR churn data. But engagement decline precedes renewal drop - the AI reasons across separate query results." },
+  { source: "c_exp_impact",  target: "c_pipeline",    label: "informs",         etype: "informs",         desc: "Experiment win rates have no FK to SFDC opportunities. But accounts that run winning experiments convert deals faster - discoverable through multi-step analysis." },
+  { source: "c_onboard",     target: "c_cmp",         label: "informs",         etype: "informs",         desc: "Onboarding pipeline stages (Opal-specific) share no key with CMP engagement tiers. But stalled onboarding correlates with Dormant CMP status." },
+  { source: "c_campaigns",   target: "c_analytics",   label: "correlates-with", etype: "correlates-with", desc: "Marketing intent signals (third-party enrichment) have no key into Segment event data. But high intent score accounts show faster OA feature adoption." },
+  { source: "c_credit",      target: "c_exp_engage",  label: "correlates-with", etype: "correlates-with", desc: "Opal credit consumption trends correlate with experiment velocity - discovered empirically, not from shared keys." }
+];
+
 /* ── Colours ── */
 var EDGE_COLOURS = {
   "root": "#f778ba", "related": "#484f58", "composes": "#8b949e",
   "measured-by": "#58a6ff", "signalled-by": "#ffa657",
-  "equivalent-to": "#f778ba", "distinct-from": "#ff7b72"
+  "equivalent-to": "#f778ba", "distinct-from": "#ff7b72",
+  "data-link": "#7ee787", "informs": "#e3b341", "correlates-with": "#e3b341"
 };
 
 /* ── State ── */
@@ -529,6 +549,23 @@ function buildAllView() {
       edgeCount++;
     }
   }
+
+  // Cross-topic links (data links + reasoning links)
+  for (var c = 0; c < CROSS_TOPIC_LINKS.length; c++) {
+    var cl = CROSS_TOPIC_LINKS[c];
+    elements.push({
+      group: "edges",
+      data: {
+        id: "cross" + c,
+        source: cl.source,
+        target: cl.target,
+        label: cl.label,
+        etype: cl.etype,
+        desc: cl.desc
+      }
+    });
+  }
+
   return elements;
 }
 
@@ -553,6 +590,9 @@ function getStylesheet() {
     { selector: "edge[etype='related']", style: { "line-color": "#484f58", "target-arrow-color": "#484f58" } },
     { selector: "edge[etype='distinct-from']", style: { "line-color": "#ff7b72", "target-arrow-color": "#ff7b72", "line-style": "dashed", "target-arrow-shape": "none" } },
     { selector: "edge[etype='equivalent-to']", style: { "line-color": "#f778ba", "target-arrow-color": "#f778ba", "line-style": "dashed", "target-arrow-shape": "none" } },
+    { selector: "edge[etype='data-link']", style: { "line-color": "#7ee787", "target-arrow-color": "#7ee787", "width": 2, "line-style": "solid", "target-arrow-shape": "none", "opacity": 0.7 } },
+    { selector: "edge[etype='informs']", style: { "line-color": "#e3b341", "target-arrow-color": "#e3b341", "width": 2, "line-style": "dashed", "opacity": 0.8 } },
+    { selector: "edge[etype='correlates-with']", style: { "line-color": "#e3b341", "target-arrow-color": "#e3b341", "width": 1.5, "line-style": "dotted", "target-arrow-shape": "none", "opacity": 0.7 } },
     { selector: ".dimmed", style: { "opacity": 0.08 } },
     { selector: ".highlighted", style: { "opacity": 1 } }
   ];
@@ -764,6 +804,15 @@ opal: function(t) {
   '<li>Personal Instructions per Active User</li>' +
   '</ul>' +
 
+  '<h2>Reasoning context</h2>' +
+  '<p>After answering from this topic\'s data, check these cross-topic signals:</p>' +
+  '<ul>' +
+  '<li><strong>Credit Consumption</strong> <span style="color:#7ee787">data-link</span> <strong>Renewal Rates</strong> (CS) - share MASTER_CUSTOMER_ID. Joinable: credit trends by account directly correlate with renewal outcomes.</li>' +
+  '<li><strong>Account Utilisation</strong> <span style="color:#7ee787">data-link</span> <strong>OA Adoption</strong> (Product) - share EPI_UNIVERSAL_ID. Joinable: Opal usage patterns co-occur with OA engagement.</li>' +
+  '<li><strong>Credit Consumption</strong> <span style="color:#e3b341">correlates-with</span> <strong>Experiment Engagement</strong> (Exp) - no shared key. Opal credit trends correlate empirically with experiment velocity.</li>' +
+  '<li><strong>Onboarding Pipeline</strong> <span style="color:#e3b341">informs</span> <strong>CMP Engagement</strong> (Product) - no shared key. Stalled onboarding correlates with Dormant CMP status.</li>' +
+  '</ul>' +
+
   instrFooter('3 root concepts, 9 datasets, 5 metrics, 4 dashboards.');
 },
 
@@ -813,6 +862,13 @@ exp: function(t) {
   '<li>EXP Engaged Accounts - Monthly</li>' +
   '<li>FX Engaged ARR - Monthly</li>' +
   '<li>WX Engaged ARR - Monthly</li>' +
+  '</ul>' +
+
+  '<h2>Reasoning context</h2>' +
+  '<ul>' +
+  '<li><strong>Experiment Engagement</strong> <span style="color:#7ee787">data-link</span> <strong>OA Adoption</strong> (Product) - share account keys. Joinable: experiment activity maps to OA engagement.</li>' +
+  '<li><strong>Experiment Impact</strong> <span style="color:#e3b341">informs</span> <strong>Pipeline Generation</strong> (Sales) - no shared key. Accounts that run winning experiments convert deals faster.</li>' +
+  '<li><strong>Credit Consumption</strong> (Opal) <span style="color:#e3b341">correlates-with</span> <strong>Experiment Engagement</strong> - no shared key. Opal credit trends correlate with experiment velocity.</li>' +
   '</ul>' +
 
   instrFooter('3 root concepts, 5 datasets, 4 metrics, 4 dashboards.');
@@ -868,6 +924,12 @@ sales: function(t) {
   '<li>Pipe Gen</li>' +
   '</ul>' +
 
+  '<h2>Reasoning context</h2>' +
+  '<ul>' +
+  '<li><strong>Pipeline Generation</strong> <span style="color:#7ee787">data-link</span> <strong>Renewal Rates</strong> (CS) - share SFDC account IDs. Joinable: pipeline and renewal data can be queried together.</li>' +
+  '<li><strong>Experiment Impact</strong> (Exp) <span style="color:#e3b341">informs</span> <strong>Pipeline Generation</strong> - no shared key. Winning experiments correlate with deal velocity.</li>' +
+  '</ul>' +
+
   instrFooter('3 root concepts, 5 datasets, 3 metrics, 3 dashboards.');
 },
 
@@ -920,6 +982,13 @@ cs: function(t) {
   '<ul>' +
   '<li>Total ARR</li>' +
   '<li>Most Recent ARR</li>' +
+  '</ul>' +
+
+  '<h2>Reasoning context</h2>' +
+  '<ul>' +
+  '<li><strong>Credit Consumption</strong> (Opal) <span style="color:#7ee787">data-link</span> <strong>Renewal Rates</strong> - share MASTER_CUSTOMER_ID. Joinable: credit trends predict renewal outcomes.</li>' +
+  '<li><strong>Pipeline Generation</strong> (Sales) <span style="color:#7ee787">data-link</span> <strong>Renewal Rates</strong> - share SFDC account IDs. Joinable: pipeline and renewal data together.</li>' +
+  '<li><strong>CMP Engagement</strong> (Product) <span style="color:#e3b341">informs</span> <strong>Product Churn</strong> - no shared key. CMP engagement decline precedes ARR churn by ~6 weeks.</li>' +
   '</ul>' +
 
   instrFooter('3 root concepts, 6 datasets, 2 metrics, 4 dashboards.');
@@ -979,6 +1048,15 @@ product: function(t) {
   '<li>CMP High Risk Accounts (&lt;1K weekly events for 4 consecutive weeks + ARR &gt;25K)</li>' +
   '</ul>' +
 
+  '<h2>Reasoning context</h2>' +
+  '<ul>' +
+  '<li><strong>Account Utilisation</strong> (Opal) <span style="color:#7ee787">data-link</span> <strong>OA Adoption</strong> - share EPI_UNIVERSAL_ID. Joinable: Opal usage patterns alongside OA engagement.</li>' +
+  '<li><strong>Experiment Engagement</strong> (Exp) <span style="color:#7ee787">data-link</span> <strong>OA Adoption</strong> - share account keys. Joinable: experiment activity maps to OA engagement.</li>' +
+  '<li><strong>CMP Engagement</strong> <span style="color:#e3b341">informs</span> <strong>Product Churn</strong> (CS) - no shared key. CMP engagement decline is a leading indicator of ARR churn.</li>' +
+  '<li><strong>Onboarding Pipeline</strong> (Opal) <span style="color:#e3b341">informs</span> <strong>CMP Engagement</strong> - no shared key. Stalled onboarding correlates with Dormant CMP tiers.</li>' +
+  '<li><strong>Campaign Performance</strong> (Mkt) <span style="color:#e3b341">correlates-with</span> <strong>OA Adoption</strong> - no shared key. High intent accounts show faster OA feature adoption.</li>' +
+  '</ul>' +
+
   instrFooter('3 root concepts, 5 datasets, 4 metrics, 4 dashboards.');
 },
 
@@ -1030,6 +1108,11 @@ marketing: function(t) {
   '<h2>Metrics</h2>' +
   '<ul>' +
   '<li>Regional Performance QTR/YR</li>' +
+  '</ul>' +
+
+  '<h2>Reasoning context</h2>' +
+  '<ul>' +
+  '<li><strong>Campaign Performance</strong> <span style="color:#e3b341">correlates-with</span> <strong>OA Adoption</strong> (Product) - no shared key. High intent score accounts show faster OA feature adoption. Third-party enrichment data has no key into Segment events.</li>' +
   '</ul>' +
 
   instrFooter('2 root concepts, 6 datasets, 1 metric, 4 dashboards.');
@@ -1084,6 +1167,25 @@ function renderInstructions(topicKey) {
       '<tr><td>Customer Success</td><td>Renewal Rates, Product Churn, Account Health</td><td>6</td><td>2</td></tr>' +
       '<tr><td>Product Engagement</td><td>OA Adoption, CMP Engagement, Platform (ODP/CMS)</td><td>5</td><td>4</td></tr>' +
       '<tr><td>Marketing</td><td>Campaign Performance, SDR Pipeline</td><td>6</td><td>1</td></tr>' +
+      '</tbody></table>' +
+      '<h2>Cross-topic links</h2>' +
+      '<p>These connections are only visible in the Full App View graph. They represent relationships between concepts in different topics.</p>' +
+      '<h3>Data links (joinable - single query)</h3>' +
+      '<p>Concepts whose datasets share join keys (<code>MASTER_CUSTOMER_ID</code>, <code>EPI_UNIVERSAL_ID</code>, SFDC account IDs). An agent can build a single query across these.</p>' +
+      '<table><thead><tr><th>From</th><th>To</th><th>Shared key</th></tr></thead><tbody>' +
+      '<tr><td>Credit Consumption (Opal)</td><td>Renewal Rates (CS)</td><td>MASTER_CUSTOMER_ID</td></tr>' +
+      '<tr><td>Account Utilisation (Opal)</td><td>OA Adoption (Product)</td><td>EPI_UNIVERSAL_ID</td></tr>' +
+      '<tr><td>Experiment Engagement (Exp)</td><td>OA Adoption (Product)</td><td>Account keys via Product - Accounts</td></tr>' +
+      '<tr><td>Pipeline Generation (Sales)</td><td>Renewal Rates (CS)</td><td>SFDC account IDs</td></tr>' +
+      '</tbody></table>' +
+      '<h3>Reasoning links (non-joinable - AI mediates)</h3>' +
+      '<p>Concepts whose data has no shared join key. The AI runs separate queries and reasons across intermediate results.</p>' +
+      '<table><thead><tr><th>From</th><th>To</th><th>Reasoning</th></tr></thead><tbody>' +
+      '<tr><td>CMP Engagement (Product)</td><td>Product Churn (CS)</td><td>Engagement decline precedes renewal drop. No shared key between CMP event tiers and ARR churn.</td></tr>' +
+      '<tr><td>Experiment Impact (Exp)</td><td>Pipeline Generation (Sales)</td><td>Winning experiments correlate with faster deal conversion. No FK between experiment metrics and SFDC opportunities.</td></tr>' +
+      '<tr><td>Onboarding Pipeline (Opal)</td><td>CMP Engagement (Product)</td><td>Stalled onboarding correlates with Dormant CMP. No shared key between onboarding snapshots and CMP event stream.</td></tr>' +
+      '<tr><td>Campaign Performance (Mkt)</td><td>OA Adoption (Product)</td><td>High intent score accounts show faster OA adoption. Third-party intent data has no key into Segment events.</td></tr>' +
+      '<tr><td>Credit Consumption (Opal)</td><td>Experiment Engagement (Exp)</td><td>Opal credit trends correlate with experiment velocity. Empirical, not structural.</td></tr>' +
       '</tbody></table>' +
       '<div class="gen-note">Shared rules (standard exclusions, output formatting, OA description matching, time grain rules) belong in the base prompt that wraps these slices.</div>' +
       '</div>';
