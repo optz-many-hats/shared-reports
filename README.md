@@ -6,6 +6,17 @@ Repository for sharing HTML reports and visualizations via GitHub Pages.
 
 Visit: https://optz-many-hats.github.io/shared-reports/
 
+## Semantic Topics - Interactive Graph + Instructions
+
+Interactive visualisations of the Semantic Topics design. Each report has two views toggled via the header: **Graph** (Cytoscape.js node graph with depth/trust controls) and **Instructions** (auto-generated LLM topic slice in streamlined format).
+
+| Report | App | Topics | Datasets | Notes |
+|--------|-----|--------|----------|-------|
+| [flix-topic-graph.html](https://optz-many-hats.github.io/shared-reports/flix-topic-graph.html) | Flix (test data) | 2 | 5 | Content Engagement, Monetisation & Revenue |
+| [opti-topic-graph.html](https://optz-many-hats.github.io/shared-reports/opti-topic-graph.html) | Production Analytics (Opti on Opti) | 6 | 229 | Opal, Experimentation, Sales, CS, Product, Marketing |
+
+---
+
 ## LsJoinable Benchmark Reports
 
 ### 3-Way Comparison
