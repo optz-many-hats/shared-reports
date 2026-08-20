@@ -23,6 +23,7 @@ from pathlib import Path
 
 BASE = Path(__file__).resolve().parent / "output"
 GRAPH_PATH = BASE / "full_graph_data.json"
+ENTITIES_PATH = BASE / "enriched_entities.json"
 TOPICS_DIR = BASE / "topics"
 OUT_GRAPH = BASE / "graph_with_topics.json"
 OUT_TOPICS = BASE / "topics_data.json"
@@ -73,6 +74,74 @@ def main() -> None:
             topic_data = json.load(f)
         topics[slug] = topic_data
         slug_to_members[slug] = collect_member_ids(topic_data)
+
+    # --- Add structural entity-to-entity edges ---
+    with open(ENTITIES_PATH) as f:
+        entities = json.load(f)
+
+    col_nodes = {nid for nid, n in nodes.items() if n.get("type") == "column"}
+    ds_nodes = {nid for nid, n in nodes.items() if n.get("type") == "dataset"}
+
+    # Build column short-name -> [dataset_id] lookup from enriched entities
+    name_to_datasets: dict[str, list[str]] = {}
+    for ds in entities.get("datasets", []):
+        for col in ds.get("columns", []):
+            short = col["name"].rsplit(".", 1)[-1]
+            name_to_datasets.setdefault(short, []).append(ds["id"])
+
+    # Use concept co-occurrence to disambiguate short column names
+    col_concepts: dict[str, set[str]] = {}
+    ds_concepts: dict[str, set[str]] = {}
+    for e in edges:
+        src_type = nodes.get(e["source"], {}).get("type")
+        tgt_type = nodes.get(e["target"], {}).get("type")
+        if src_type == "concept" and tgt_type == "column":
+            col_concepts.setdefault(e["target"], set()).add(e["source"])
+        if src_type == "concept" and tgt_type == "dataset":
+            ds_concepts.setdefault(e["target"], set()).add(e["source"])
+
+    structural_edges = 0
+    for cid in col_nodes:
+        ds_id = None
+        # Prefixed column IDs: dataset_id::COL or dataset_id.COL
+        if "::" in cid:
+            ds_id = cid.split("::")[0]
+        elif "." in cid:
+            ds_id = cid.split(".")[0]
+
+        if ds_id and ds_id in ds_nodes:
+            edges.append({
+                "source": cid, "target": ds_id,
+                "predicate": "belongs-to",
+                "reasoning": "Column is defined in this dataset.",
+            })
+            structural_edges += 1
+            continue
+
+        # Short-name column: resolve via enriched entities
+        name = nodes[cid].get("name", "")
+        candidates = [d for d in name_to_datasets.get(name, []) if d in ds_nodes]
+        if len(candidates) == 1:
+            ds_id = candidates[0]
+        elif len(candidates) > 1:
+            # Disambiguate by shared concepts
+            cc = col_concepts.get(cid, set())
+            best, best_n = None, 0
+            for d in candidates:
+                n = len(cc & ds_concepts.get(d, set()))
+                if n > best_n:
+                    best, best_n = d, n
+            ds_id = best
+
+        if ds_id:
+            edges.append({
+                "source": cid, "target": ds_id,
+                "predicate": "belongs-to",
+                "reasoning": "Column is defined in this dataset.",
+            })
+            structural_edges += 1
+
+    print(f"Structural edges added:       {structural_edges}")
 
     # --- Annotate nodes with topic membership ---
     nodes_with_topics_count = 0

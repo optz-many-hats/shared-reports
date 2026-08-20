@@ -331,6 +331,7 @@ def generate_html(graph_json: str, topics_json: str) -> str:
       <div class="legend-item"><div class="legend-line" style="border-top:2px solid #d2a8ff"></div> filtered-by</div>
       <div class="legend-item"><div class="legend-line" style="border-top:2px solid #ff7b72"></div> tracked-in</div>
       <div class="legend-item"><div class="legend-line" style="border-top:2px dotted #e3b341"></div> correlates-with</div>
+      <div class="legend-item"><div class="legend-line" style="border-top:2px solid #39d353"></div> belongs-to</div>
     </div>
 
     <div class="stats" id="statsPanel">
@@ -362,7 +363,8 @@ var EDGE_COLOURS = {{
   'composes': '#8b949e', 'measured-by': '#58a6ff', 'segmented-by': '#ffa657',
   'derives-from': '#7ee787', 'distinct-from': '#ff7b72', 'informs': '#e3b341',
   'filtered-by': '#d2a8ff', 'tracked-in': '#ff7b72', 'correlates-with': '#e3b341',
-  'implemented-by': '#8b949e', 'scoped-by': '#8b949e', 'produces': '#d2a8ff'
+  'implemented-by': '#8b949e', 'scoped-by': '#8b949e', 'produces': '#d2a8ff',
+  'belongs-to': '#39d353'
 }};
 
 // Connected node IDs
