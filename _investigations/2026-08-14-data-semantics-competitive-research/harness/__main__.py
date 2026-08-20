@@ -14,11 +14,12 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from . import client, clustering, graph
+from . import client, clustering, describer, graph
 
 OUTPUT_DIR = Path(__file__).resolve().parent / "output"
 GRAPH_PATH = OUTPUT_DIR / "concept_graph.json"
 TOPICS_DIR = OUTPUT_DIR / "topics"
+DESCRIPTIONS_DIR = OUTPUT_DIR / "descriptions"
 
 
 def cmd_list_agents(args: argparse.Namespace) -> None:
@@ -755,6 +756,196 @@ def cmd_stratified_extract(args: argparse.Namespace) -> None:
                 print(f"    {br['batch']}: +{br['concepts']}", file=sys.stderr)
 
 
+def cmd_describe_entities(args: argparse.Namespace) -> None:
+    """Generate descriptions for entities using the Entity Describer agent.
+
+    Batches entities by type (events -> metrics -> datasets+columns),
+    calls the agent for each batch, collects results, and presents
+    them for review (or auto-accepts in --auto mode).
+    """
+    entities_path = Path(args.entities)
+    if not entities_path.exists():
+        print(f"Error: entities file not found: {entities_path}", file=sys.stderr)
+        sys.exit(1)
+
+    entities = json.loads(entities_path.read_text())
+    all_datasets = entities.get("datasets", [])
+    all_metrics = entities.get("metrics", [])
+    all_events = entities.get("events", [])
+    print(
+        f"Loaded {len(all_datasets)} datasets, {len(all_metrics)} metrics, "
+        f"{len(all_events)} events from {entities_path}",
+        file=sys.stderr,
+    )
+
+    auto = getattr(args, "auto", False)
+    focus = getattr(args, "focus", "all")
+    round_num = getattr(args, "round", 1)
+
+    # Build the batch plan based on focus
+    batches: list[tuple[str, str, list[dict]]] = []  # (label, entity_type, items)
+
+    if focus in ("all", "event"):
+        if all_events:
+            label, items = describer.build_event_batch(all_events)
+            batches.append((label, "event", items))
+
+    if focus in ("all", "metric"):
+        for label, items in describer.build_metric_batches(all_metrics):
+            batches.append((label, "metric", items))
+
+    if focus in ("all", "dataset"):
+        for label, items in describer.build_dataset_batches(
+            all_datasets,
+            max_per_batch=args.max_per_batch,
+            max_cols_per_ds=args.max_cols,
+        ):
+            batches.append((label, "dataset", items))
+
+    print(f"\n{len(batches)} batches planned:", file=sys.stderr)
+    for label, etype, items in batches:
+        print(f"  {label}: {len(items)} {etype}s", file=sys.stderr)
+
+    # Load confirmed descriptions from previous rounds
+    confirmed_path = DESCRIPTIONS_DIR / "confirmed_descriptions.json"
+    confirmed_context: list[dict] = []
+    if confirmed_path.exists():
+        confirmed_context = json.loads(confirmed_path.read_text())
+        print(f"\nLoaded {len(confirmed_context)} confirmed descriptions from previous rounds", file=sys.stderr)
+
+    # Load concept graph context if available
+    concept_context = ""
+    graph_path = Path(args.concept_graph) if args.concept_graph else GRAPH_PATH
+    if graph_path.exists():
+        g = graph.ConceptGraph.load(graph_path)
+        concept_context = g.as_graph_context()
+        print(f"Loaded concept graph: {g.summary()}", file=sys.stderr)
+
+    # Load follow-up answers if provided
+    follow_up_answers: list[dict] = []
+    if args.answers:
+        answers_path = Path(args.answers)
+        if answers_path.exists():
+            follow_up_answers = json.loads(answers_path.read_text())
+            print(f"Loaded {len(follow_up_answers)} follow-up answers", file=sys.stderr)
+
+    all_candidates: list[describer.DescriptionCandidate] = []
+    all_follow_ups: list[describer.FollowUpQuestion] = []
+    all_confirmed: list[describer.DescriptionCandidate] = []
+    start_batch = args.start_batch or 0
+
+    for batch_idx, (label, etype, items) in enumerate(batches):
+        if batch_idx < start_batch:
+            print(f"\nSkipping batch {batch_idx}: {label}", file=sys.stderr)
+            continue
+
+        print(
+            f"\n{'='*60}\n"
+            f"Batch {batch_idx + 1}/{len(batches)}: {label}\n"
+            f"{'='*60}",
+            file=sys.stderr,
+        )
+
+        # Build the parameters
+        metadata = {"entities": items, "entity_type": etype}
+        parameters: dict[str, Any] = {
+            "metadata_image": json.dumps(metadata),
+            "focus": etype,
+        }
+        if confirmed_context:
+            parameters["confirmed_descriptions"] = json.dumps(confirmed_context)
+        if concept_context:
+            parameters["concept_context"] = concept_context
+        if follow_up_answers:
+            parameters["follow_up_answers"] = json.dumps(follow_up_answers)
+        if args.industry:
+            parameters["industry_context"] = args.industry
+
+        payload_size = sum(len(v) for v in parameters.values() if isinstance(v, str))
+        print(f"  Payload: {payload_size:,} chars", file=sys.stderr)
+
+        try:
+            result = client.execute_agent(
+                args.agent_id,
+                parameters,
+                args.env,
+                args.instance,
+            )
+        except Exception as e:
+            print(f"\n  ERROR: {e}", file=sys.stderr)
+            print(f"  Resume with --start-batch {batch_idx}", file=sys.stderr)
+            break
+
+        output = result.get("output")
+        if not output:
+            print(
+                f"  Warning: no parseable output. "
+                f"Raw: {result.get('raw_text', '')[:500]}",
+                file=sys.stderr,
+            )
+            continue
+
+        # Save raw output
+        describer.save_round_output(round_num, label, output, OUTPUT_DIR)
+
+        # Parse and review
+        round_result = describer.parse_description_output(output)
+        all_candidates.extend(round_result.candidates)
+        all_follow_ups.extend(round_result.follow_ups)
+
+        summary = round_result.summary
+        print(
+            f"\n  Generated: {summary.get('generated', '?')}, "
+            f"improved: {summary.get('improved', '?')}, "
+            f"skipped: {summary.get('skipped', '?')}",
+            file=sys.stderr,
+        )
+
+        # Review
+        confirmed = describer.present_review(round_result, auto=auto)
+        all_confirmed.extend(confirmed)
+
+        # Accumulate confirmed for subsequent batches
+        for c in confirmed:
+            confirmed_context.append({
+                "entity_id": c.entity_id,
+                "entity_type": c.entity_type,
+                "description": c.description,
+            })
+
+    # Save all confirmed descriptions
+    if all_confirmed:
+        describer.save_confirmed(all_confirmed, OUTPUT_DIR)
+
+    # Generate review report
+    if all_candidates:
+        describer.generate_review_report(all_candidates, all_follow_ups, OUTPUT_DIR)
+
+    # Merge into entities file and save enriched version
+    if all_confirmed:
+        enriched = describer.merge_descriptions_into_entities(entities, all_confirmed)
+        enriched_path = OUTPUT_DIR / "enriched_entities.json"
+        enriched_path.write_text(json.dumps(enriched, indent=2))
+        print(f"\n  Enriched entities saved to {enriched_path}", file=sys.stderr)
+
+    # Final summary
+    by_conf = {}
+    for c in all_confirmed:
+        by_conf[c.confidence] = by_conf.get(c.confidence, 0) + 1
+    print(f"\n{'='*60}", file=sys.stderr)
+    print(f"Description generation complete", file=sys.stderr)
+    print(
+        f"  {len(all_confirmed)} descriptions confirmed "
+        f"(high: {by_conf.get('high', 0)}, "
+        f"medium: {by_conf.get('medium', 0)}, "
+        f"low: {by_conf.get('low', 0)})",
+        file=sys.stderr,
+    )
+    if all_follow_ups:
+        print(f"  {len(all_follow_ups)} follow-up questions pending", file=sys.stderr)
+    print(f"{'='*60}", file=sys.stderr)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         prog="harness",
@@ -818,6 +1009,29 @@ def main() -> None:
     p_gen.add_argument("--start-topic", type=int, default=0, help="Resume from topic N (0-indexed)")
     p_gen.add_argument("--dry-run", action="store_true", help="Show topic candidates without generating")
 
+    # describe-entities
+    p_desc = sub.add_parser(
+        "describe-entities",
+        help="Generate descriptions for entities using the Entity Describer agent",
+    )
+    p_desc.add_argument("--agent-id", required=True, help="Agent UUID or slug")
+    p_desc.add_argument("--entities", required=True, help="Path to entities JSON file")
+    p_desc.add_argument("--focus", default="all",
+                        help="Focus: all, dataset, metric, event (default: all)")
+    p_desc.add_argument("--auto", action="store_true",
+                        help="Auto-accept high+medium confidence descriptions")
+    p_desc.add_argument("--round", type=int, default=1,
+                        help="Round number for output file naming (default: 1)")
+    p_desc.add_argument("--start-batch", type=int, default=0,
+                        help="Resume from batch N (0-indexed)")
+    p_desc.add_argument("--max-per-batch", type=int, default=15,
+                        help="Max datasets per batch (default: 15)")
+    p_desc.add_argument("--max-cols", type=int, default=50,
+                        help="Max columns per dataset in batch (default: 50)")
+    p_desc.add_argument("--concept-graph", help="Path to concept graph for context enrichment")
+    p_desc.add_argument("--answers", help="Path to follow-up answers JSON from previous round")
+    p_desc.add_argument("--industry", help="Industry context (free text)")
+
     args = parser.parse_args()
 
     if args.command == "list-agents":
@@ -832,6 +1046,8 @@ def main() -> None:
         cmd_create_topic(args)
     elif args.command == "generate-topics":
         cmd_generate_topics(args)
+    elif args.command == "describe-entities":
+        cmd_describe_entities(args)
 
 
 if __name__ == "__main__":
