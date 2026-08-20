@@ -14,6 +14,7 @@ Interactive visualisations of the Semantic Topics design. Each report has two vi
 |--------|-----|--------|----------|-------|
 | [flix-topic-graph.html](https://optz-many-hats.github.io/shared-reports/flix-topic-graph.html) | Flix (test data) | 2 | 5 | Content Engagement, Monetisation & Revenue |
 | [opti-topic-graph.html](https://optz-many-hats.github.io/shared-reports/opti-topic-graph.html) | Production Analytics (Opti on Opti) | 6 | 229 | Opal, Experimentation, Sales, CS, Product, Marketing |
+| [concept-graph.html](https://optz-many-hats.github.io/shared-reports/_investigations/2026-08-14-data-semantics-competitive-research/concept-graph.html) | Production Analytics (Opti on Opti) | 8 | 199 | Full concept graph (45 concepts) with topic lenses, prose descriptions, business rules, disambiguation |
 
 ---
 
