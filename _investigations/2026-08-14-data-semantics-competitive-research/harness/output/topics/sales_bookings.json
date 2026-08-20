@@ -1,0 +1,263 @@
+{
+  "name": "Sales Bookings",
+  "checklist_state": {
+    "1": {
+      "question": "What is the name and description of the business topic you want to create?\n\nPlease provide:\n- **Topic name** \u2013 a short, clear label (e.g. \"Customer Churn & Retention\")\n- **Description** \u2013 2\u20134 sentences explaining what this topic covers, what business questions it answers, and who uses it",
+      "answer": "Sales Bookings. Covers: Sales Bookings, Opportunity Product Mix & Pricing"
+    },
+    "2": {
+      "question": "Which core business concepts belong to this topic?\n\nThese become the anchor nodes for **Sales Bookings** \u2014 they determine which datasets, metrics, and events get pulled in automatically. Select all that apply, or add a new concept if something is missing.",
+      "selected": [
+        {
+          "id": "c-c2a5529f",
+          "type": "concept",
+          "label": "Sales Bookings",
+          "description": "Covers booking volume, deal-size ASP metrics (Bookings ASP, Addressable ASP), and closed-won opportunity data. Connects to booking targets and product-level pricing.",
+          "ai_reasoning": "Directly named as the primary subject of this topic \u2014 this is the root anchor node.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-dee6fd20",
+          "type": "concept",
+          "label": "Opportunity Product Mix & Pricing",
+          "description": "Captures the product-level composition of Salesforce opportunities \u2014 line items, quantity, discount, and pricebook entries linking each deal to its constituent products.",
+          "ai_reasoning": "Explicitly listed in the topic description alongside Sales Bookings; the graph has a direct 'informs' edge from this concept into Sales Bookings.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-4c065aa7",
+          "type": "concept",
+          "label": "Sales Targets & Quota",
+          "description": "Quarterly pipeline generation and bookings targets broken down by territory, segment, product group, customer type, and super-region.",
+          "ai_reasoning": "Has direct 'informs' and 'distinct-from' edges to Sales Bookings in the graph, making it essential context for measuring bookings attainment against goal.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "3": {
+      "question": "Which datasets power the **Sales Bookings** topic?\n\nThe options below are pre-selected based on direct `composes` edges between your chosen concepts (Sales Bookings, Opportunity Product Mix & Pricing, Sales Targets & Quota) and datasets in the knowledge graph. Deselect any that don't belong, or add datasets that are missing.",
+      "selected": [
+        {
+          "id": "433042682_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "GTM Bookings (unverified)",
+          "description": "The primary bookings dataset for Optimizely's GTM motion. Labelled 'unverified' \u2014 confirm with your data team whether this is the authoritative source or a staging view.",
+          "ai_reasoning": "Has a direct `composes` edge from the Sales Bookings concept \u2014 this is the root bookings data source identified in the graph for this topic.",
+          "pre_selected": true
+        },
+        {
+          "id": "433096552_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.SFDC_PIPE_GENERATION_BOOKINGS_PRODUCT_ANALYTICS_TARGETS",
+          "description": "Product-level pipeline generation and bookings targets from Salesforce, used for attainment tracking against analytics-defined goals.",
+          "ai_reasoning": "Directly composed by the Sales Bookings concept; also composed by ICP Account Targeting \u2014 contains the product-level target figures needed to compute bookings attainment.",
+          "pre_selected": true
+        },
+        {
+          "id": "433092707_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.SFDC_OPPORTUNITY_LINE_ITEM",
+          "description": "Salesforce opportunity line items \u2014 one row per product on each deal, with quantity, discount, and pricebook entry ID.",
+          "ai_reasoning": "Directly composed by the Opportunity Product Mix & Pricing concept; provides the product-level decomposition of every deal required for mix and pricing analysis.",
+          "pre_selected": true
+        },
+        {
+          "id": "433092787_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.SFDC_PRODUCT",
+          "description": "Active Salesforce product catalog, linking pricebook entries to product names, SKUs, and product families.",
+          "ai_reasoning": "Directly composed by the Opportunity Product Mix & Pricing concept; the reference table that resolves pricebook entry IDs to human-readable product identities for mix analysis.",
+          "pre_selected": true
+        },
+        {
+          "id": "433097319_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.SFDC_PIPE_GENERATION_BOOKINGS_TARGETS",
+          "description": "Quarterly bookings and pipe-gen goals broken down by territory, segment, product group, customer type, and super-region.",
+          "ai_reasoning": "Directly composed by the Sales Targets & Quota concept, which has an `informs` edge into Sales Bookings \u2014 essential for measuring bookings attainment vs. quota.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "4": {
+      "question": "Which metrics and KPIs should be tracked in the **Sales Bookings** topic?\n\nThe options below are pre-selected based on direct `measured-by` edges between your chosen concepts (Sales Bookings, Opportunity Product Mix & Pricing, Sales Targets & Quota) and metrics in the knowledge graph. Deselect any that don't belong, and add any missing KPIs using the custom option at the bottom.",
+      "selected": [
+        {
+          "id": "434536205_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Analytics & Data.Insight & Analysis.02 Sales.Bookings ASP",
+          "description": "Average Selling Price for closed-won bookings \u2014 the primary deal-size metric for the Sales Bookings concept.",
+          "ai_reasoning": "Direct `measured-by` edge from the Sales Bookings concept; this is the canonical ASP KPI for this topic and the most current bookings deal-size measure in the graph.",
+          "pre_selected": true
+        },
+        {
+          "id": "434536204_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Analytics & Data.Insight & Analysis.02 Sales.Addressable ASP",
+          "description": "Average Selling Price scoped to the addressable (ICP-qualified) opportunity set, excluding non-addressable deals from the denominator.",
+          "ai_reasoning": "Direct `measured-by` edge from the Sales Bookings concept; pairs with Bookings ASP to let the topic distinguish total deal size from the ICP-addressable subset.",
+          "pre_selected": true
+        },
+        {
+          "id": "433099789_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Opti on Opti.Archive.Pipeline and Booking Metrics.AVG Booking",
+          "description": "Archived average booking value metric from the Pipeline and Booking Metrics dashboard. May be superseded by Bookings ASP above.",
+          "ai_reasoning": "Direct `measured-by` edge from the Sales Bookings concept; included because it is a named graph edge, but the Archive path suggests it may be a legacy metric \u2014 confirm currency before relying on it.",
+          "pre_selected": true
+        },
+        {
+          "id": "433098929_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Opti on Opti.Archive.Pipeline and Booking Metrics.Bookings Dynamic",
+          "description": "Archived dynamic bookings volume metric from the Pipeline and Booking Metrics dashboard.",
+          "ai_reasoning": "Direct `measured-by` edge from the Sales Bookings concept; the Archive path flags this as a legacy metric \u2014 verify with your data team before including in live reporting.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "5": {
+      "question": "Which events signal activity in the **Sales Bookings** topic?\n\nEvents are discrete occurrences logged over time \u2014 e.g. a deal closes, a booking is recorded, or an opportunity line item is updated. The option below was surfaced through graph edges connecting adjacent concepts to opportunity-level event tracking. Select it if relevant, and add any custom events your team fires from Salesforce or your data pipeline.",
+      "selected": [
+        {
+          "id": "434564357_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Users.Scott Levine.Product - Opportunities",
+          "description": "Opportunity-level event stream built on Salesforce opportunity data. Tracks deal-stage transitions and opportunity status changes. While not directly composed by the Sales Bookings concept, it is composed by the adjacent Sales Pipeline concept and tracked-in by Customer Renewal \u2014 making it the closest available event-level proxy for closed-won transitions and bookings activity.",
+          "ai_reasoning": "This is the only event in the registry with direct graph edges to concepts that neighbour Sales Bookings: Sales Pipeline (composes predicate) and Customer Renewal (tracked-in predicate). As none of the selected SFDC datasets appear in the event registry as activity streams, this is the strongest available event-level signal for opportunity activity in this domain.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "6": {
+      "question": "What business rules and definitions should the AI know for the **Sales Bookings** topic?\n\nThe suggestions below were inferred from your selected concepts, datasets, and metrics. Confirm, deselect, or edit each rule inline \u2014 then add any additional definitions your team relies on.",
+      "selected": [
+        {
+          "id": "rule-closed-won-only",
+          "type": "custom",
+          "label": "A \"booking\" is counted only when a Salesforce opportunity reaches Closed-Won stage. Open pipeline, commit-stage, and best-case deals are excluded from all bookings figures.",
+          "description": "Prevents the AI from treating forecast pipeline or in-progress opportunities as booked revenue.",
+          "ai_reasoning": "The Sales Bookings concept description explicitly anchors bookings to 'closed-won opportunity data' \u2014 this is the root definitional rule for the entire topic and the primary distinction from the Sales Pipeline concept.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-asp-denominator-distinction",
+          "type": "custom",
+          "label": "Bookings ASP = total closed-won ACV \u00f7 all closed-won deal count. Addressable ASP = same calculation restricted to ICP-qualified (addressable) opportunities \u2014 non-addressable deals are excluded from both numerator and denominator.",
+          "description": "Ensures the AI picks the right ASP metric depending on whether the question is about the full book of business or the ICP-addressable subset.",
+          "ai_reasoning": "Both Bookings ASP and Addressable ASP are selected metrics whose denominators differ materially; without this rule the AI cannot distinguish between the two when answering deal-size questions.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-bookings-vs-arr",
+          "type": "custom",
+          "label": "Bookings \u2260 ARR. Bookings capture the signed contract value (ACV or TCV) at the moment of close. ARR is the annualised recurring revenue figure recognised after contract execution and is tracked in a separate topic.",
+          "description": "Guards against the AI conflating closed-won deal value with the ARR metric used in renewal and revenue reporting.",
+          "ai_reasoning": "A `distinct-from` edge exists between the Sales Bookings and Annual Recurring Revenue (ARR) concepts in the knowledge graph, flagging this as a known confusion vector that must be explicitly addressed.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-sales-type-segmentation",
+          "type": "custom",
+          "label": "SALES_TYPE segments bookings into New Logo, Expansion (upsell/cross-sell), and Renewal. Attainment targets and ASP benchmarks are set and evaluated per SALES_TYPE \u2014 always filter or break out by SALES_TYPE before comparing actuals to quota.",
+          "description": "Ensures the AI applies the correct target denominator when calculating attainment, since blended and per-type targets are not interchangeable.",
+          "ai_reasoning": "SALES_TYPE is a `segmented-by` column on the Sales Bookings concept, and the selected target datasets break goals out by customer type \u2014 mixing types would produce incorrect attainment figures.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-gtm-bookings-unverified",
+          "type": "custom",
+          "label": "GTM Bookings (unverified) is the primary source for booking volume. Any figures drawn from this dataset should be treated as provisional until the data team confirms it is the authoritative table \u2014 surface this caveat in AI-generated answers.",
+          "description": "Manages the risk of stakeholders trusting unverified booking volume figures without context.",
+          "ai_reasoning": "The GTM Bookings dataset carries an explicit 'unverified' label in the app registry, indicating its authoritative status is not yet confirmed \u2014 the AI must reflect this uncertainty when citing booking volume.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-archived-metrics",
+          "type": "custom",
+          "label": "AVG Booking and Bookings Dynamic are archived (legacy) metrics. Default to Bookings ASP and Addressable ASP for all current reporting. Reference archived metrics only if a user explicitly asks for historical trend continuity across the pre-migration period.",
+          "description": "Prevents the AI from surfacing stale metrics when current equivalents exist.",
+          "ai_reasoning": "Both AVG Booking and Bookings Dynamic sit under an 'Archive' dashboard path in the metric registry, signalling they have been superseded by the ASP metrics confirmed in step 4.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "7": {
+      "question": "Are there terms in the **Sales Bookings** topic that could be confused with terms in other topics or datasets?\n\nThe pairs below were identified from `distinct-from` edges in the knowledge graph, shared column names across your selected datasets, and the business rules confirmed in step 6. Select all disambiguation rules the AI should enforce \u2014 deselect any that don't apply, and add any custom pairs your team has run into.",
+      "selected": [
+        {
+          "id": "disambig-bookings-vs-pipeline",
+          "type": "custom",
+          "label": "\"Bookings\" \u2260 \"Pipeline\" \u2014 pipeline covers all open opportunity stages; bookings are Closed-Won only",
+          "description": "When a user asks about 'sales numbers', 'open deals', or 'opportunities', the AI must determine whether they mean open pipeline (tracked in the Sales Pipeline topic) or closed-won bookings (this topic). The two must never be blended in a single calculation or answer.",
+          "ai_reasoning": "A direct `distinct-from` edge exists between Sales Bookings and Sales Pipeline in the knowledge graph \u2014 conflating open pipeline with booked revenue is the single most common error in sales reporting and the primary reason the graph models these as distinct concepts.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-asp-bookings-vs-addressable",
+          "type": "custom",
+          "label": "\"ASP\" is ambiguous \u2014 Bookings ASP (all closed-won deals) vs Addressable ASP (ICP-qualified deals only) share the same acronym but have different denominators",
+          "description": "Both selected KPIs share the abbreviation 'ASP' but differ materially in scope. When a user asks for 'ASP' without qualification, the AI should default to Bookings ASP and surface a prompt asking whether they mean the ICP-addressable subset. The two metrics should never be averaged or combined.",
+          "ai_reasoning": "Both Bookings ASP and Addressable ASP carry `measured-by` edges from the Sales Bookings concept and were confirmed as active KPIs in step 4 \u2014 without a resolution rule, bare 'ASP' references are unresolvable by the AI.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-renewal-saletype-vs-topic",
+          "type": "custom",
+          "label": "\"Renewal\" in SALES_TYPE (a closed-won renewal booking) \u2260 the Customer Renewal topic (the pre-close renewal management process)",
+          "description": "Within this topic, SALES_TYPE = 'Renewal' identifies deals that were contract renewals at the moment of close \u2014 a bookings event counted in attainment. The Customer Renewal concept is a separate topic tracking the upstream renewal pipeline, CSM activity, and ICP prioritisation before close. The AI must not route 'renewal bookings' questions to the wrong topic.",
+          "ai_reasoning": "SALES_TYPE is a `segmented-by` column on the Sales Bookings concept; Customer Renewal is a distinct graph concept with its own datasets (DWH_RENEWAL_OPPORTUNITY, Product - Opportunities) \u2014 a question about 'renewal attainment vs quota' could be misrouted without this rule.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-opportunities-event-closedwon",
+          "type": "custom",
+          "label": "The \"Product - Opportunities\" event covers ALL deal stages \u2014 a Closed-Won stage filter must always be applied before using it for bookings calculations",
+          "description": "The selected event stream (Users.Scott Levine.Product - Opportunities) tracks stage transitions across all opportunity statuses, not just closed deals. Using it without an explicit STAGE_NAME = 'Closed-Won' filter will inflate booking counts with open, commit, and best-case pipeline. The AI should enforce this filter automatically when answering questions in this topic.",
+          "ai_reasoning": "This event is composed by the Sales Pipeline concept (all stages) and tracked-in by Customer Renewal \u2014 its native scope extends well beyond closed-won deals, making the required filter non-obvious to users who query it through this topic.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-targets-pipegen-vs-bookings",
+          "type": "custom",
+          "label": "\"Targets\" in the selected datasets contains both pipe-gen goals (PIPE_GEN_GOAL) and bookings goals (BOOKINGS_GOAL) \u2014 these are not interchangeable",
+          "description": "Both SFDC_PIPE_GENERATION_BOOKINGS_TARGETS and SFDC_PIPE_GENERATION_BOOKINGS_PRODUCT_ANALYTICS_TARGETS store dual goal columns in the same table. A question about 'target attainment' must specify which goal type is meant. The AI should never compute blended attainment across both goal columns in the same answer.",
+          "ai_reasoning": "Both selected target datasets use compound names that combine 'pipe generation' and 'bookings' targets in a single table \u2014 the shared dataset name creates structural ambiguity about which goal column should underlie any attainment calculation.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-product-sfdc-vs-opti",
+          "type": "custom",
+          "label": "\"Product\" in this topic means Salesforce pricebook / SKU items (SFDC_PRODUCT) \u2014 not Optimizely's own product lines (CMP, Experimentation, Opal)",
+          "description": "When users ask about 'product mix' or 'product-level bookings', they are asking which Salesforce catalogue items appear in opportunity line items. Optimizely's internal product suite (tracked via PRODUCT_SOLUTION and PRODUCT_GROUP in ARR, churn, and engagement topics) is a distinct concept and should not be substituted.",
+          "ai_reasoning": "SFDC_PRODUCT is a selected dataset composed by the Opportunity Product Mix & Pricing concept; 'product' is simultaneously a high-frequency term across Optimizely's product engagement, ARR, and usage topics \u2014 cross-topic collision without this rule is highly likely.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "8": {
+      "question": "How should the **Sales Bookings** topic grow over time?\n\nAs the knowledge graph evolves \u2014 new datasets are added, concepts get new edges, and the AI discovers indirect relationships \u2014 this policy controls how automatically the topic expands to absorb those new connections.\n\nChoose the expansion policy that best fits how tightly governed this topic needs to be.",
+      "selected": [
+        {
+          "id": "policy-moderate",
+          "type": "policy",
+          "label": "Moderate \u2014 2-hop discovery, human-confirmed (depth 2, human-confirmed) \u2726 Recommended",
+          "description": "The topic can automatically surface entities up to 2 hops from the confirmed root concepts, but each candidate still requires human confirmation before it is formally included. In practice this means the AI may propose: Sales Pipeline datasets (1 hop via `distinct-from` \u2014 useful for bookings-vs-pipeline context), Sales Rep Performance metrics (2 hops via Sales Targets & Quota \u2192 `informs`), and ICP Account Targeting columns (2 hops via SFDC_PIPE_GENERATION_BOOKINGS_PRODUCT_ANALYTICS_TARGETS). None of these are added silently \u2014 they appear as suggestions awaiting your approval.",
+          "ai_reasoning": "Moderate is the right default here because the Sales Bookings graph neighbourhood is dense with relevant concepts (Sales Pipeline, Sales Rep Performance, ICP Account Targeting) that provide meaningful context for bookings attainment questions, while the human-confirmation gate preserves the strict definitional boundaries established in steps 6 and 7 \u2014 particularly the Closed-Won only rule and the bookings \u2260 ARR separation.",
+          "pre_selected": true
+        }
+      ]
+    }
+  },
+  "concept_cluster": {
+    "concept_ids": [
+      "c-c2a5529f",
+      "c-dee6fd20"
+    ],
+    "concept_names": [
+      "Sales Bookings",
+      "Opportunity Product Mix & Pricing"
+    ],
+    "internal_edges": 1
+  }
+}

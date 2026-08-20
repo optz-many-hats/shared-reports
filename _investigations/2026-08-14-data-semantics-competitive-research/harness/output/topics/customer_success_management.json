@@ -1,0 +1,455 @@
+{
+  "name": "Customer Success Management",
+  "checklist_state": {
+    "1": {
+      "question": "What is the name and description of the business topic you want to create?\n\nProvide a short **topic name** (e.g. \"Customer Churn & Retention\") and a **1\u20133 sentence description** explaining what this topic is about, what business question it answers, and who the primary audience is.",
+      "answer": "Customer Success Management. Covers: Customer Success Management, Customer Product Onboarding, Partner Ecosystem Performance, Feature Adoption Tracking, Customer Risk Intervention (CTA) (+5 more)"
+    },
+    "2": {
+      "question": "Which core business concepts make up the **Customer Success Management** topic? Select all that apply \u2014 pre-selected options are drawn directly from your step 1 description and their closest graph neighbours.",
+      "selected": [
+        {
+          "id": "c-610385ef",
+          "type": "concept",
+          "label": "Customer Success Management",
+          "description": "Umbrella concept covering CSM-owned activities: onboarding, risk intervention, partner performance, feature adoption, and team hierarchy.",
+          "ai_reasoning": "This is the root concept you named as the topic; it already has graph edges connecting it to every other pre-selected concept.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-2da30e13",
+          "type": "concept",
+          "label": "Customer Product Onboarding",
+          "description": "Tracks Gainsight-managed onboarding engagements post-sale across all Optimizely product lines.",
+          "ai_reasoning": "Explicitly listed in your step 1 description; the graph shows it 'informs' Customer Success Management directly.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-9c11ecdb",
+          "type": "concept",
+          "label": "Partner Ecosystem Performance",
+          "description": "Measures channel partner network performance across coverage, opportunity generation, implementation activity, and CSAT.",
+          "ai_reasoning": "Explicitly listed in your step 1 description; the graph shows it 'informs' and is 'distinct-from' Customer Success Management.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-d3ec0a35",
+          "type": "concept",
+          "label": "Feature Adoption Tracking",
+          "description": "Tracks which Optimizely product features each customer account has adopted or has yet to adopt.",
+          "ai_reasoning": "Explicitly listed in your step 1 description; the graph shows it 'informs' both Customer Success Management and Product Engagement.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-d42acaed",
+          "type": "concept",
+          "label": "Customer Risk Intervention (CTA)",
+          "description": "Tracks Gainsight CTA records representing triggered risk interventions for at-risk customer accounts.",
+          "ai_reasoning": "Explicitly listed in your step 1 description; the graph shows it 'informs' Customer Success Management and 'correlates-with' Customer Churn & Downgrade.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-2b052d62",
+          "type": "concept",
+          "label": "Customer Health Monitoring",
+          "description": "Aggregates multi-signal health indicators (health scores, active users, product instances) at account level to support proactive CS intervention.",
+          "ai_reasoning": "The graph shows this concept 'informs' both Customer Risk Intervention (CTA) and Customer Churn & Downgrade \u2014 the primary upstream signal source for CSM action.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-30591dce",
+          "type": "concept",
+          "label": "Customer Churn & Downgrade",
+          "description": "Tracks customers who have cancelled or reduced Optimizely subscriptions, including downgrade amounts and CSM accountability.",
+          "ai_reasoning": "The graph shows Customer Health Monitoring 'informs' this concept, and Customer Risk Intervention 'correlates-with' it \u2014 churn is the outcome CSMs are measured against.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-ab4eedd6",
+          "type": "concept",
+          "label": "Customer Renewal",
+          "description": "Manages and tracks renewal opportunities for existing Optimizely customers at contract expiry, including ICP prioritisation.",
+          "ai_reasoning": "The graph shows Customer Risk Intervention (CTA) 'informs' Customer Renewal, making it a direct downstream outcome of CSM risk work.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "3": {
+      "question": "Which datasets power the **Customer Success Management** topic? Pre-selected datasets are directly connected to your 8 selected concepts via `composes` graph edges. Deselect any that are out of scope and add others as needed.",
+      "selected": [
+        {
+          "id": "440656914_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Rezwana Hasan.CHURN DATASET",
+          "description": "Tracks customer cancellations and subscription downgrades with ARR contraction amounts, CSM ownership, and product-level churn signals.",
+          "ai_reasoning": "Has direct `composes` edges to both Customer Success Management and Customer Churn & Downgrade \u2014 the primary churn record used across all CSM reporting.",
+          "pre_selected": true
+        },
+        {
+          "id": "434554945_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Wahid Tawsif Ratul.Zendesk TIcket Metrics",
+          "description": "Support ticket volumes and service metrics from Zendesk, aggregated per customer account.",
+          "ai_reasoning": "Has a direct `composes` edge to Customer Success Management \u2014 support ticket activity is a key health and sentiment signal for CSMs managing at-risk accounts.",
+          "pre_selected": true
+        },
+        {
+          "id": "434558274_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Wahid Tawsif Ratul.Uservoice Metrics",
+          "description": "Product feedback and feature request tracking from Uservoice, linked to customer accounts.",
+          "ai_reasoning": "Has a direct `composes` edge to Customer Success Management \u2014 product feedback volume and request patterns inform CSM conversations and advocacy tracking.",
+          "pre_selected": true
+        },
+        {
+          "id": "442779075_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.DWH_CS_EXPERIMENTATION_USAGE",
+          "description": "Experimentation usage data at the customer account level, tracking experiment creation and activity per customer.",
+          "ai_reasoning": "Has a direct `composes` edge to Customer Success Management \u2014 experimentation adoption is a feature engagement signal CSMs use to assess product stickiness and health.",
+          "pre_selected": true
+        },
+        {
+          "id": "446436854_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Sadman Sakib.GS_ONBOARDING_CUSTOMERS",
+          "description": "Gainsight-managed onboarding engagement records with onboarding element, stage, product group, and opportunity linkage per customer.",
+          "ai_reasoning": "Has a direct `composes` edge to Customer Product Onboarding \u2014 the primary Gainsight source for CSM-owned onboarding engagement tracking post-sale.",
+          "pre_selected": true
+        },
+        {
+          "id": "434321908_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Yunus Miah.Partner Health Score.PARTNER_PERFORMANCE_SCORE",
+          "description": "Partner-level performance scores aggregating implementation counts, ARC counts, and CSAT (good/bad) by partner type and region.",
+          "ai_reasoning": "Has a direct `composes` edge to Partner Ecosystem Performance \u2014 the primary partner scorecard dataset used in CSM partner reviews.",
+          "pre_selected": true
+        },
+        {
+          "id": "434558875_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Yunus Miah.Partner Health Score.PARTNER_PRODUCT_GROUP_AGGREGATE",
+          "description": "Aggregated partner activity broken down by product group, covering implementation counts and partner coverage metrics.",
+          "ai_reasoning": "Has a direct `composes` edge to Partner Ecosystem Performance \u2014 provides the product-group-level partner implementation data needed for detailed partner performance analysis.",
+          "pre_selected": true
+        },
+        {
+          "id": "434553160_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Scott Levine.Product - Partner Lookup",
+          "description": "Reference lookup table mapping Optimizely customer accounts to their associated implementation partners.",
+          "ai_reasoning": "Has a direct `composes` edge to Partner Ecosystem Performance \u2014 the join key needed to connect customer accounts to their partner relationships across all CSM datasets.",
+          "pre_selected": true
+        },
+        {
+          "id": "443562363_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Afsara Hannan.Datasets.Feature Adoption Matrix Account",
+          "description": "Positive adoption matrix showing which product features each customer account has confirmed in use, segmented by product group and technology maturity.",
+          "ai_reasoning": "Has direct `composes` edges to both Feature Adoption Tracking and Customer Health Monitoring \u2014 the core adoption dataset CSMs use to assess engagement depth and identify expansion opportunities.",
+          "pre_selected": true
+        },
+        {
+          "id": "443562381_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Afsara Hannan.Datasets.Features Not Adopted Account",
+          "description": "Inverse adoption matrix identifying features that customer accounts have yet to adopt, used for upsell targeting and CSM intervention planning.",
+          "ai_reasoning": "Has a direct `composes` edge to Feature Adoption Tracking \u2014 the counterpart to the adoption matrix, critical for CSMs to identify adoption gaps during QBRs.",
+          "pre_selected": true
+        },
+        {
+          "id": "434568132_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.GS_CTA_CAMPAIGN",
+          "description": "Gainsight CTA campaign records linking risk interventions to specific campaigns and CSM playbooks.",
+          "ai_reasoning": "Has a direct `composes` edge to Customer Risk Intervention (CTA) \u2014 captures the campaign context behind each risk intervention so CSM playbook effectiveness can be measured.",
+          "pre_selected": true
+        },
+        {
+          "id": "433093039_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.GS_CTA_SUMMARY",
+          "description": "Summary-level Gainsight CTA records with CTA ARR, reason codes, BRAVE type, territory, and contract renewal date per intervention.",
+          "ai_reasoning": "Has a direct `composes` edge to Customer Risk Intervention (CTA) \u2014 the primary summary table for quantifying ARR exposure from active risk interventions managed by CSMs.",
+          "pre_selected": true
+        },
+        {
+          "id": "443565734_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Afsara Hannan.Datasets.Active_Users_Projects_Workspaces",
+          "description": "Account-level activity data tracking 30-day active users, total licensed users, projects, and workspaces \u2014 core inputs for health score calculations.",
+          "ai_reasoning": "Has a direct `composes` edge to Customer Health Monitoring \u2014 provides the active-user and product-instance signals that feed the multi-signal health score used to trigger CSM interventions.",
+          "pre_selected": true
+        },
+        {
+          "id": "444179879_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Rezwana Hasan.Stalled & Ageing Pipe - Cohort 2",
+          "description": "Cohort dataset tracking stalled and ageing opportunities with churn-adjacent pipeline risk signals and account-level context.",
+          "ai_reasoning": "Has a direct `composes` edge to Customer Churn & Downgrade \u2014 captures account situations that correlate with churn risk and are reviewed in CSM at-risk account reporting.",
+          "pre_selected": true
+        },
+        {
+          "id": "434236834_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.DWH_RENEWAL_OPPORTUNITY",
+          "description": "Canonical renewal opportunity records from the data warehouse, covering product-line renewals, ICP prioritisation flags, opportunity line IDs, and close dates.",
+          "ai_reasoning": "Has a direct `composes` edge to Customer Renewal \u2014 the authoritative renewal pipeline dataset CSMs use to track upcoming contract renewals and prioritise effort by ICP.",
+          "pre_selected": true
+        },
+        {
+          "id": "434105072_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Scott Levine.Product - Opportunities",
+          "description": "Salesforce-sourced opportunity data scoped to product-line renewals, linked to ICP account flags and opportunity line items.",
+          "ai_reasoning": "Has a direct `composes` edge to Customer Renewal \u2014 provides opportunity-level renewal data with ICP segmentation used in CS prioritisation workflows.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "4": {
+      "question": "Which metrics and KPIs does your team measure in the **Customer Success Management** topic? Pre-selected metrics are directly connected to your chosen concepts via `measured-by` graph edges. Deselect any that are out of scope, and use **Add custom KPI** to register net-new metrics (e.g. *CTA ARR at Risk*, *Onboarding Completion Rate*, *Feature Adoption Rate*) that currently only exist as dataset columns.",
+      "selected": [
+        {
+          "id": "433098806_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "CMP - Dormant Accounts",
+          "description": "Count of CMP customer accounts with zero active usage \u2014 the most direct product-level churn signal available as a formal metric.",
+          "ai_reasoning": "Has a direct `measured-by` edge from the Customer Churn & Downgrade concept, making it the only metric in the app with a confirmed graph link to your selected concepts.",
+          "pre_selected": true
+        },
+        {
+          "id": "433097358_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "CMP - High Risk Accounts",
+          "description": "Count of CMP accounts flagged as high-risk based on Gainsight health score and engagement signals. (Label in app reads 'Hisk Risk' \u2014 likely a typo.)",
+          "ai_reasoning": "Directly measures the customer population that triggers Gainsight CTA interventions; semantically central to both Customer Risk Intervention (CTA) and Customer Health Monitoring \u2014 two of your selected concepts.",
+          "pre_selected": true
+        },
+        {
+          "id": "433101427_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "CMP - High Risk Accounts ARR",
+          "description": "ARR value exposed to risk across high-risk CMP accounts \u2014 the financial stake CSMs are accountable for protecting each quarter.",
+          "ai_reasoning": "Quantifies the ARR consequence of Customer Risk Intervention (CTA) records from GS_CTA_SUMMARY; CSMs use this figure to prioritise intervention effort by financial impact.",
+          "pre_selected": true
+        },
+        {
+          "id": "434430093_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Global Renewal Rate",
+          "description": "Overall renewal rate across all Optimizely product lines \u2014 the headline CS metric reported to executive leadership.",
+          "ai_reasoning": "Primary KPI for the Customer Renewal concept (one of your 8 selected concepts); this is the single number CS leadership is held accountable to at board level.",
+          "pre_selected": true
+        },
+        {
+          "id": "434427139_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Product Group Renewal Rate",
+          "description": "Renewal rate segmented by product group, enabling CS leadership to identify which product lines carry the highest churn exposure.",
+          "ai_reasoning": "Connects Customer Renewal to product-level detail \u2014 directly relevant to both Customer Churn & Downgrade and Customer Renewal concepts; commonly used in CSM QBR reporting.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "5": {
+      "question": "Which events signal activity in the **Customer Success Management** topic? Pre-selected events are drawn from your 16 step-3 datasets that also exist as trackable event sources in the app, and each has a direct graph edge to one of your 8 selected concepts. Use **Add custom event** to register events from systems not yet in the app (e.g. Gainsight timeline activities, Salesforce CTA status changes).",
+      "selected": [
+        {
+          "id": "434555018_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Users.Wahid Tawsif Ratul.Zendesk TIcket Metrics",
+          "description": "Support ticket events from Zendesk \u2014 each row signals a customer support interaction, capturing ticket volume, resolution time, and service quality indicators per account. Used by CSMs to spot accounts with elevated support burden as a leading risk indicator.",
+          "ai_reasoning": "Has a direct `composes` edge from the Customer Success Management concept in the graph, and its dataset counterpart was selected in step 3 as a key account health and sentiment signal for at-risk account identification.",
+          "pre_selected": true
+        },
+        {
+          "id": "434558314_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Users.Wahid Tawsif Ratul.Uservoice Metrics",
+          "description": "Product feedback and feature request events from Uservoice \u2014 signals customer advocacy activity, feature demand patterns, and unmet product needs per account. CSMs use these to inform QBR conversations and flag accounts with unresolved product gaps.",
+          "ai_reasoning": "Has a direct `composes` edge from the Customer Success Management concept in the graph, and its dataset counterpart was selected in step 3 for product feedback volume and advocacy tracking.",
+          "pre_selected": true
+        },
+        {
+          "id": "442811920_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Shared.DWH_CS_EXPERIMENTATION_USAGE",
+          "description": "Experimentation activity events at the customer account level \u2014 signals when accounts create or run experiments, a core product engagement and stickiness indicator. Low or declining experimentation activity is an early warning signal for CSM intervention.",
+          "ai_reasoning": "Has a direct `composes` edge from the Customer Success Management concept, and its dataset counterpart was selected in step 3 as the experimentation adoption signal CSMs use to assess product stickiness and health.",
+          "pre_selected": true
+        },
+        {
+          "id": "434564357_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Users.Scott Levine.Product - Opportunities",
+          "description": "Renewal opportunity events sourced from Salesforce \u2014 each event represents a change to a product-line renewal opportunity (stage movement, close date update, ICP flag change). These are the primary signals that drive CSM-led renewal workflows and prioritisation.",
+          "ai_reasoning": "Has a direct `tracked-in` edge from the Customer Renewal concept in the graph, and its dataset counterpart was selected in step 3 as the opportunity-level renewal dataset used in CS prioritisation workflows.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "6": {
+      "question": "What business rules and definitions should the AI know when answering questions in the **Customer Success Management** topic?\n\nPre-populated definitions are drawn from your selected concepts, datasets, and columns. **Confirm the ones that apply, edit wording where needed, and add custom rules** your team uses that aren't listed below \u2014 e.g. specific health score thresholds, territory exclusions, or fiscal quarter conventions.",
+      "selected": [
+        {
+          "id": "rule-cta-definition",
+          "type": "custom",
+          "label": "CTA = Gainsight Call-to-Action (leading risk signal, NOT confirmed churn)",
+          "description": "A CTA (Call-to-Action) is a triggered risk intervention record created in Gainsight when a customer account meets predefined risk thresholds. CTAs represent leading indicators that require CSM investigation \u2014 they do NOT confirm a customer will churn. CTA_ARR quantifies the ARR exposed to risk at the moment the CTA is opened, and should never be treated as lost ARR unless the CTA closes as churned.",
+          "ai_reasoning": "The term 'CTA' is central to the Customer Risk Intervention concept and appears across both GS_CTA_SUMMARY and GS_CTA_CAMPAIGN; without this definition the AI will conflate open CTAs with confirmed churn, inflating at-risk ARR figures.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-churn-vs-downgrade",
+          "type": "custom",
+          "label": "Churn \u2260 Downgrade: CHURN_DATE populated = full cancellation; DOWNGRADE_AMOUNT > 0 without CHURN_DATE = partial contraction",
+          "description": "In the CHURN DATASET, an account is classified as churned only when CHURN_DATE is populated. An account with a non-zero DOWNGRADE_AMOUNT but no CHURN_DATE is a downgrade (partial ARR contraction), not a full cancellation. These are mutually exclusive states \u2014 do not aggregate them without explicit filtering. AP_SPREAD_PCT captures the percentage contraction for downgrades.",
+          "ai_reasoning": "Churn and downgrade records coexist in the same CHURN DATASET under the Customer Churn & Downgrade concept; conflating them overstates churn volume and understates the true downgrade population.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-high-risk-definition",
+          "type": "custom",
+          "label": "High Risk Account = low Gainsight health score AND an active open CTA in GS_CTA_SUMMARY (note: app label reads 'Hisk Risk' \u2014 known typo)",
+          "description": "An account is 'High Risk' when its Gainsight health score falls below the defined threshold AND an active (open) CTA record exists in GS_CTA_SUMMARY. The formal metrics 'CMP - High Risk Accounts' and 'CMP - High Risk Accounts ARR' measure this population \u2014 note the label typo ('Hisk Risk') in the app is a known data entry error, not a separate category. Accounts with a low health score but no active CTA are 'at risk' but not classified as 'high risk'.",
+          "ai_reasoning": "Both CMP - High Risk Accounts metrics were selected in step 4 and the app contains a known label typo; this rule prevents the AI from treating 'Hisk Risk' as a distinct tier or missing the correct metric by name.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-icp-renewal-flag",
+          "type": "custom",
+          "label": "ICP Account for CS purposes = ICP_ACCOUNT flag in DWH_RENEWAL_OPPORTUNITY or Product - Opportunities (not the firmographic ICP flag)",
+          "description": "For Customer Success renewal prioritisation, the authoritative ICP flag is ICP_ACCOUNT in either DWH_RENEWAL_OPPORTUNITY or Product - Opportunities. This flag drives which accounts receive dedicated CSM effort at renewal. The ICP_ACCOUNT column in firmographic/Account Universe datasets serves marketing targeting and uses a different definition \u2014 do not substitute one for the other when filtering renewal pipelines.",
+          "ai_reasoning": "ICP_ACCOUNT appears in multiple datasets selected across steps 3 and 5 with subtly different business meanings; without this rule the AI may pull the wrong ICP definition when scoping renewal queries.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-brave-framework",
+          "type": "custom",
+          "label": "BRAVE = Budget / Risk / Alternatives / Value / Evaluation \u2014 use BRAVE_TYPE_GC (not REASON_NAME) to classify CTA intervention type",
+          "description": "BRAVE is Optimizely's internal CSM intervention taxonomy. Each CTA in GS_CTA_SUMMARY is categorised by BRAVE_TYPE_GC into one of the five BRAVE dimensions. When grouping or filtering CTAs by intervention type, always use BRAVE_TYPE_GC as the canonical field \u2014 REASON_NAME varies by territory and campaign and is not standardised for cross-regional comparison.",
+          "ai_reasoning": "BRAVE_TYPE_GC is a key segmentation column on the Customer Risk Intervention (CTA) concept and was selected in step 3; defining BRAVE prevents the AI from treating it as an unknown acronym and from using the non-standardised REASON_NAME as a substitute.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-active-user-window",
+          "type": "custom",
+          "label": "Active user = ACTIVE_USERS_30D (30-day rolling window); do NOT use TOTAL_USERS_WITH_ACCESS as a proxy for active usage",
+          "description": "In the context of Customer Health Monitoring, an active user is any licensed user who performed a product action within the last 30 calendar days, as captured by ACTIVE_USERS_30D in Active_Users_Projects_Workspaces. This signal feeds the multi-signal health score that triggers CTA creation. TOTAL_USERS_WITH_ACCESS represents licensed seat count \u2014 an account with 500 licensed seats but 2 active users in 30 days is disengaged, not healthy.",
+          "ai_reasoning": "ACTIVE_USERS_30D is the primary engagement signal driving health scores and CTA triggers; without this rule the AI conflates licensed seats with actual product activity, producing misleading health assessments.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-feature-adoption-datasets",
+          "type": "custom",
+          "label": "Feature 'adopted' = in Feature Adoption Matrix Account; 'not yet adopted' = in Features Not Adopted Account \u2014 never combine without explicit filtering",
+          "description": "Feature adoption uses two complementary datasets. A feature is adopted by an account only if it appears in 'Feature Adoption Matrix Account' (positive confirmation). 'Features Not Adopted Account' lists features the account is licensed for but has not yet used \u2014 these are upsell and CSM intervention opportunities. Combining both datasets without a filter produces double-counting. TECHNOLOGY_MATURITY and IS_OPTI_ONE are valid segmentation dimensions on both datasets.",
+          "ai_reasoning": "Both datasets were selected in step 3 under Feature Adoption Tracking; the two-dataset structure is non-obvious and the AI must know they represent opposite adoption states to avoid double-counting.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "7": {
+      "question": "Several terms used in the **Customer Success Management** topic also appear in other Optimizely Analytics topics with different meanings. Confirm the intended interpretation for each ambiguous term below \u2014 pre-selected rows reflect the meaning that aligns with your step 2\u20136 choices. Deselect any already sufficiently clear, and use **Add custom disambiguation** for any additional terms your team finds confusing.",
+      "selected": [
+        {
+          "id": "disambig-onboarding-scope",
+          "type": "custom",
+          "label": "\"Onboarding\" = CSM-managed Customer Product Onboarding (GS_ONBOARDING_CUSTOMERS) \u2014 NOT Opal's in-app onboarding wizard",
+          "description": "Two structurally distinct onboarding flows exist in the graph. In this topic, 'onboarding' refers exclusively to the Gainsight-managed, CSM-owned structured engagement delivered post-sale across product lines, tracked in GS_ONBOARDING_CUSTOMERS (ENGAGEMENT_NAME, ELEMENT_NAME, STAGE, PRODUCT_GROUP). It does NOT refer to Opal Onboarding \u2014 the automated in-app product wizard guiding new Opal AI users, tracked in Product - Opal Onboarding Snapshots and Userflow Data. Any query about onboarding completion, stage progression, or product group onboarding coverage must resolve to GS_ONBOARDING_CUSTOMERS only.",
+          "ai_reasoning": "The graph contains an explicit `distinct-from` edge between Customer Product Onboarding (selected in step 2) and Opal Onboarding (not selected), and both concepts share the word 'onboarding' in dataset names across the app \u2014 creating a high collision risk whenever a CSM asks an unqualified onboarding question.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-experimentation-usage-role",
+          "type": "custom",
+          "label": "DWH_CS_EXPERIMENTATION_USAGE in this topic = CSM product-stickiness health signal, NOT an A/B experimentation analytics source",
+          "description": "DWH_CS_EXPERIMENTATION_USAGE is referenced by both the Customer Success Management concept (selected) and the A/B Experimentation / Feature Experimentation (FX) concepts (not selected in this topic). Within this CSM topic, this dataset is used exclusively to measure whether a customer account is creating and running experiments \u2014 a product engagement and stickiness indicator for health assessment. It should NOT be used to analyse experiment outcomes, statistical results, variant performance, or test methodology \u2014 those queries belong to the A/B Experimentation topic and should be routed there.",
+          "ai_reasoning": "DWH_CS_EXPERIMENTATION_USAGE has `composes` edges into both the Customer Success Management and the A/B Experimentation / Feature Experimentation (FX) Usage & Entitlement concept clusters; without this rule the AI risks blending a CSM engagement interpretation with an experiment analytics interpretation on the same dataset.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-renewal-rate-source",
+          "type": "custom",
+          "label": "\"Renewal rate\" = Global Renewal Rate / Product Group Renewal Rate metrics (DWH_RENEWAL_OPPORTUNITY basis) \u2014 NOT the Renewal Rate Reporting exec deck datasets",
+          "description": "Renewal rate figures can be sourced from two distinct layers in the app. In this topic, the authoritative renewal rate metrics are Global Renewal Rate and Product Group Renewal Rate (both selected in step 4), built on DWH_RENEWAL_OPPORTUNITY and Product - Opportunities. The Renewal Rate Reporting concept uses a separate cluster \u2014 DWH_EXEC_DECK_RENEWAL_RATES_PRODUCT_GROUP, DWH_EXEC_DECK_RENEWAL_RATES_CUSTOMER, etc. \u2014 designed for executive deck presentations with potentially different denominators, fiscal-quarter bucketing, and ARR_RENEWAL/ARR_CHURN column definitions. These exec deck datasets were NOT selected in step 3. Do not mix sources in a single renewal rate calculation.",
+          "ai_reasoning": "The graph shows Renewal Rate Reporting `informs` Customer Renewal (a selected concept) and exposes ARR_RENEWAL/ARR_CHURN columns via its own dataset cluster, creating a risk that the AI pulls from the wrong reporting layer when a user asks an unqualified 'what is our renewal rate?' question.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-renewal-opp-authority",
+          "type": "custom",
+          "label": "\"Renewal pipeline\" primary source: DWH_RENEWAL_OPPORTUNITY for canonical ARR/counts; Product - Opportunities for ICP-segmented or stage-movement views \u2014 never SFDC_OPPORTUNITY (covers all deal types)",
+          "description": "Both DWH_RENEWAL_OPPORTUNITY and Product - Opportunities (both selected in step 3) cover renewal opportunities but serve different analytical purposes. DWH_RENEWAL_OPPORTUNITY is the canonical data warehouse table \u2014 use it for authoritative renewal ARR totals, close-date cohort reporting, and opportunity-line-level breakdown. Product - Opportunities is the Salesforce-sourced view \u2014 use it when filtering by ICP_ACCOUNT status or tracking stage movements as events. The broader SFDC_OPPORTUNITY table (not selected) covers all deal types including new business, expansion, and upsell \u2014 it must never be used as the source for CSM renewal pipeline queries as it will inflate figures.",
+          "ai_reasoning": "SFDC_OPPORTUNITY exists in the app and is superficially related to 'opportunities'; without an explicit disambiguation the AI may use it for renewal queries, pulling in new-business and upsell records that do not belong in CSM renewal reporting.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-partner-meaning",
+          "type": "custom",
+          "label": "\"Partner\" = Optimizely channel implementation partner (PARTNER_TYPE in PARTNER_PERFORMANCE_SCORE) \u2014 NOT the PARTNER_FLAG that tags partner-type customer accounts in product contract data",
+          "description": "The word 'partner' appears in two structurally distinct contexts across the app. In this topic, 'partner' exclusively refers to an organisation in Optimizely's channel reseller/implementation network, measured by PARTNER_PERFORMANCE_SCORE and PARTNER_PRODUCT_GROUP_AGGREGATE and segmented by PARTNER_TYPE and PARTNER_REGION. Separately, PARTNER_FLAG is a boolean column in product contract and utilisation datasets (not selected in this topic) that tags customer accounts which are themselves partners \u2014 i.e., accounts that also resell Optimizely. These are different entities: a channel partner organisation vs. a customer account flagged as a partner. Do not use PARTNER_FLAG to filter or identify channel partners in this topic.",
+          "ai_reasoning": "PARTNER_FLAG appears in the Product Contract Utilization concept cluster (graph-connected but not selected), while the three selected partner datasets use PARTNER_TYPE/PARTNER_REGION as the segmentation axis \u2014 both use the word 'partner' and the AI must not conflate partner-flagged customer accounts with channel partner performance records.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-cta-vs-marketing",
+          "type": "custom",
+          "label": "\"CTA\" always means a Gainsight risk intervention record \u2014 never a marketing call-to-action button, campaign link, or click-through prompt",
+          "description": "In general business, marketing, and product analytics contexts, 'CTA' commonly means a call-to-action element (button, link, campaign prompt). In the Customer Success Management topic, CTA is exclusively a Gainsight Call-to-Action record representing a triggered risk intervention for an at-risk account (defined fully in step 6). Any query mentioning 'CTA', 'open CTAs', or 'CTA ARR' must resolve to GS_CTA_SUMMARY or GS_CTA_CAMPAIGN \u2014 never to marketing campaign tables, Uservoice feature requests, or Zendesk ticket click data, even though those event sources are also selected in this topic.",
+          "ai_reasoning": "Uservoice Metrics and Zendesk Ticket Metrics (both selected as events in step 5) exist in a context where 'CTA' could plausibly be interpreted as a customer-facing prompt or marketing action; this disambiguation extends the step 6 rule to explicitly block the marketing interpretation across all selected datasets.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-churned-arr-source",
+          "type": "custom",
+          "label": "\"Churned ARR\" for CSM queries = derived from CHURN DATASET (CHURN_DATE + ANNUAL_PRICE_C) \u2014 NOT the aggregate ARR_CHURN column in exec deck renewal reporting tables",
+          "description": "Two separate ARR churn figures exist in the app with the same conceptual meaning but different granularity and sourcing. The account-level churn record lives in the CHURN DATASET (selected in step 3): CHURN_DATE populated = full cancellation; DOWNGRADE_AMOUNT = partial contraction; ANNUAL_PRICE_C = the ARR value lost. The aggregate ARR_CHURN column lives in DWH_EXEC_DECK_RENEWAL_RATES_* tables (NOT selected in step 3), which roll up churn differently for board-level reporting and may apply different fiscal-quarter boundaries or currency normalisation. When a CSM asks 'how much ARR churned this quarter?' or 'which accounts churned?', always resolve to the CHURN DATASET \u2014 not the exec deck tables.",
+          "ai_reasoning": "ARR_CHURN is a `measured-by` column on the Renewal Rate Reporting concept (graph-connected to selected concepts but not itself selected), while the CHURN DATASET is the step 3 selected authoritative source for account-level churn \u2014 without this rule the AI may return exec-deck aggregate figures in response to account-level CSM queries.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "8": {
+      "question": "How should the **Customer Success Management** topic grow over time as new datasets, concepts, and metrics are added to Optimizely Analytics?\n\nChoose an expansion policy that controls how far the AI can automatically incorporate new graph-connected entities without requiring explicit human review.",
+      "selected": [
+        {
+          "id": "policy-moderate",
+          "type": "policy",
+          "label": "Moderate \u2014 Depth 2 \u00b7 Human-confirmed or above  \u2726 Recommended",
+          "description": "The topic automatically incorporates entities up to 2 graph hops from your 8 root concepts, provided they are human-confirmed or AI-confirmed with high confidence. Candidate additions are surfaced to a topic owner for review before going live. Your step 6\u20137 exclusion rules are applied as filters during traversal, blocking exec deck tables, SFDC_OPPORTUNITY, and the firmographic ICP flag from automatic inclusion. At depth 2, new Gainsight CTA datasets, additional CS org hierarchy levels, or new partner datasets that compose into your selected concepts would be auto-proposed for review.",
+          "ai_reasoning": "Moderate balances growth \u2014 automatically surfacing new Gainsight or partner datasets that compose into Customer Risk Intervention or Partner Ecosystem Performance \u2014 with safety, since all step 6\u20137 hard exclusions still apply and a human reviews every candidate before it goes live. This is the right default for a mature, actively-maintained CS topic where boundaries are well-defined but the underlying data landscape evolves quarter to quarter.",
+          "pre_selected": true
+        }
+      ]
+    }
+  },
+  "concept_cluster": {
+    "concept_ids": [
+      "c-610385ef",
+      "c-2da30e13",
+      "c-9c11ecdb",
+      "c-d3ec0a35",
+      "c-d42acaed",
+      "c-ee6d805d",
+      "c-fa9f4306",
+      "c-2b052d62",
+      "c-30591dce",
+      "c-b80de4ba"
+    ],
+    "concept_names": [
+      "Customer Success Management",
+      "Customer Product Onboarding",
+      "Partner Ecosystem Performance",
+      "Feature Adoption Tracking",
+      "Customer Risk Intervention (CTA)",
+      "CS Team Organizational Hierarchy",
+      "Experiment Project Collaboration",
+      "Customer Health Monitoring",
+      "Customer Churn & Downgrade",
+      "Partner Certification & Enablement"
+    ],
+    "internal_edges": 10
+  }
+}

@@ -1,0 +1,543 @@
+{
+  "name": "Product In-App Behavioral Analytics",
+  "checklist_state": {
+    "1": {
+      "question": "What is the name of your new business topic, and how would you describe it? Please provide:\n\n1. **A short topic name** (e.g. \"Customer Churn & Retention\", \"Opal AI Adoption\", \"Sales Pipeline Health\")\n2. **A 1\u20133 sentence description** covering: what this topic tracks or measures, who the primary audience is (e.g. Sales, CS, Product, Finance), and what decisions or actions it is meant to support.",
+      "answer": "Product In-App Behavioral Analytics. Covers: Product In-App Behavioral Analytics, Opal Onboarding"
+    },
+    "2": {
+      "question": "Which core business concepts should this topic cover? We've pre-selected the concepts most closely related to **Product In-App Behavioral Analytics** and **Opal Onboarding** based on the knowledge graph. Review and adjust before we move on to data sources.",
+      "selected": [
+        {
+          "id": "c-78ea4219",
+          "type": "concept",
+          "label": "Product In-App Behavioral Analytics",
+          "description": "Captures how users interact with Optimizely's product UI through Segment event data (clicks, page views, audience interactions) and Userflow behavioral journeys.",
+          "ai_reasoning": "Exact match to the topic name supplied in step 1 \u2014 this is the root concept of the domain and already has edges to Segment Event Data and Userflow Data datasets.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-3ae07eba",
+          "type": "concept",
+          "label": "Opal Onboarding",
+          "description": "Tracks timestamped onboarding state snapshots, Userflow guided journeys, and raw Segment identify-call events capturing the first contact moment for users entering the Opal experience.",
+          "ai_reasoning": "Explicitly called out as a sub-domain in the admin's step 1 answer; the graph shows a direct 'informs' edge from Product In-App Behavioral Analytics into this concept.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-dca3b201",
+          "type": "concept",
+          "label": "Product Engagement",
+          "description": "Measures whether paying accounts are actively using subscribed products, classifying them into engaged vs. non-engaged states and tracking the ARR at risk from low engagement.",
+          "ai_reasoning": "The graph has a direct 'informs' edge from Product In-App Behavioral Analytics to Product Engagement \u2014 behavioral signals are the primary input for engagement classification.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-d3ec0a35",
+          "type": "concept",
+          "label": "Feature Adoption Tracking",
+          "description": "Tracks which specific Optimizely product features each customer account has adopted or has yet to adopt, covering both a positive adoption matrix and a gap (not-adopted) view.",
+          "ai_reasoning": "Feature-level behavioral signals are a key output of in-app behavioral analytics; this concept also informs Product Engagement, making it a natural companion in this domain.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-30fc2a3f",
+          "type": "concept",
+          "label": "Opal AI Platform Usage",
+          "description": "Daily usage at product-account and user-account level, fine-grained feature interactions, and thread-volume summaries for the Opal AI platform.",
+          "ai_reasoning": "The Opal Onboarding sub-domain requires visibility into post-onboarding activation and sustained usage \u2014 Opal platform usage data provides that continuity signal.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "3": {
+      "question": "Which datasets should power the **Product In-App Behavioral Analytics** topic? We've pre-selected every dataset connected to your 5 chosen concepts via `composes` or `tracked-in` graph edges. Review, deselect any that don't belong, and add any missing sources.",
+      "selected": [
+        {
+          "id": "433051760_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Product.Datasets.Product  - Segment Event Data",
+          "description": "Raw Segment behavioral event stream \u2014 clicks, page views, audience interactions, and all in-product UI events at the user level.",
+          "ai_reasoning": "Primary `composes` edge on both Product In-App Behavioral Analytics and Product Engagement \u2014 the foundational behavioral data source this entire topic is built on.",
+          "pre_selected": true
+        },
+        {
+          "id": "433094286_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Product.Datasets.Product - Userflow Data",
+          "description": "Userflow platform data capturing guided in-product flows, tooltips, checklists, and onboarding walkthroughs.",
+          "ai_reasoning": "`composes` edge exists on both Product In-App Behavioral Analytics and Opal Onboarding \u2014 required to distinguish guided from organic in-app behavior.",
+          "pre_selected": true
+        },
+        {
+          "id": "434633127_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Product.Datasets.Product - Opal Onboarding Snapshots",
+          "description": "Timestamped snapshots of each account's and user's onboarding state as they progress through the Opal experience.",
+          "ai_reasoning": "The canonical `composes` source for the Opal Onboarding concept \u2014 tracks onboarding stage transitions and completion status over time.",
+          "pre_selected": true
+        },
+        {
+          "id": "433269480_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Charlie Fitz.Opti Analytics Raw Identifies",
+          "description": "Raw Segment identify-call events capturing the precise first-contact moment for users entering the Opal experience.",
+          "ai_reasoning": "`composes` edge on Opal Onboarding \u2014 records the first time a user is identified in the Opal onboarding funnel, enabling top-of-funnel attribution.",
+          "pre_selected": true
+        },
+        {
+          "id": "443562363_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Afsara Hannan.Datasets.Feature Adoption Matrix Account",
+          "description": "Account-level positive adoption matrix \u2014 which Optimizely product features are confirmed in use per account.",
+          "ai_reasoning": "`composes` edge on Feature Adoption Tracking \u2014 the primary adoption-positive signal used to measure feature engagement breadth per account.",
+          "pre_selected": true
+        },
+        {
+          "id": "443562381_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Afsara Hannan.Datasets.Features Not Adopted Account",
+          "description": "Account-level gap view \u2014 features available to each account that have not yet been adopted.",
+          "ai_reasoning": "`composes` edge on Feature Adoption Tracking as the not-adopted counterpart; pairing with the adoption matrix gives a complete adoption picture.",
+          "pre_selected": true
+        },
+        {
+          "id": "433093079_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.DWH_OPAL_DAILY_PRODUCT_ACCOUNT_USAGE",
+          "description": "Canonical DWH daily Opal usage aggregated at product \u00d7 account level.",
+          "ai_reasoning": "`composes` edge on Opal AI Platform Usage \u2014 account-level daily grain is needed to measure post-onboarding Opal activation and sustained engagement.",
+          "pre_selected": true
+        },
+        {
+          "id": "433093086_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.DWH_OPAL_DAILY_USER_ACCOUNT_USAGE",
+          "description": "Canonical DWH daily Opal usage aggregated at user \u00d7 account level.",
+          "ai_reasoning": "`composes` edge on Opal AI Platform Usage \u2014 user-level grain is essential for DAU/WAU/MAU and stickiness metrics downstream in step 4.",
+          "pre_selected": true
+        },
+        {
+          "id": "433097547_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.DWH_OPAL_FINE_GRAINED_USAGE",
+          "description": "Fine-grained Opal feature interaction events at the individual action level.",
+          "ai_reasoning": "`composes` edge on Opal AI Platform Usage \u2014 provides per-interaction behavioral depth for understanding which specific Opal features users engage with.",
+          "pre_selected": true
+        },
+        {
+          "id": "434632149_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Product.Datasets.Product - Opal Agents per Thread",
+          "description": "Tracks the number and types of Opal agents invoked per conversation thread.",
+          "ai_reasoning": "`composes` edge on Opal AI Platform Usage \u2014 agent invocation breadth per thread is a key behavioral signal for measuring depth of Opal engagement.",
+          "pre_selected": true
+        },
+        {
+          "id": "434598650_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Scott Levine.Product - Opal Threads per User",
+          "description": "Per-user thread volume summary bucketed by Opal conversation activity level.",
+          "ai_reasoning": "`composes` edge on Opal AI Platform Usage \u2014 thread volume per user is the primary behavioural measure of Opal stickiness.",
+          "pre_selected": true
+        },
+        {
+          "id": "442487604_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Sterling Nostedt.Opal_Daily_Usage",
+          "description": "\u26a0\ufe0f Analyst-built daily Opal usage view \u2014 an alternative to the canonical DWH tables that may include additional transformations.",
+          "ai_reasoning": "`composes` edge on Opal AI Platform Usage \u2014 frequently referenced by analysts and may contain curated logic not yet promoted to the DWH layer.",
+          "pre_selected": true
+        },
+        {
+          "id": "446615124_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Scott Levine.Product - Opal U Daily Summary",
+          "description": "\u26a0\ufe0f Daily rollup of Opal University usage patterns per user and account.",
+          "ai_reasoning": "`composes` edge on Opal AI Platform Usage \u2014 tracks adoption of Opal University content alongside core platform usage, relevant for the onboarding sub-domain.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "4": {
+      "question": "Which key metrics and KPIs should the **Product In-App Behavioral Analytics** topic track? We've pre-selected metrics connected to your 5 chosen concepts via `measured-by` graph edges, plus high-signal Opal usage and onboarding metrics computable from your selected datasets. Review, deselect any that don't belong, and define any custom KPIs this domain should own.",
+      "selected": [
+        {
+          "id": "434036572_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Analytics - Monthly Engaged Paying Accounts",
+          "description": "Count of paying Analytics accounts that were actively engaged in the calendar month.",
+          "ai_reasoning": "Direct `measured-by` edge on the Product Engagement concept \u2014 the primary headcount KPI for active product adoption across paying accounts.",
+          "pre_selected": true
+        },
+        {
+          "id": "434036803_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Analytics - Monthly Non Engaged Paying Accounts",
+          "description": "Count of paying Analytics accounts that were NOT actively engaged in the calendar month.",
+          "ai_reasoning": "Direct `measured-by` edge on Product Engagement \u2014 the at-risk counterpart to engaged account count; essential for surfacing disengagement before it becomes churn.",
+          "pre_selected": true
+        },
+        {
+          "id": "434548245_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Analytics - Engaged ARR - Monthly",
+          "description": "ARR associated with engaged Analytics accounts in a given month.",
+          "ai_reasoning": "Direct `measured-by` edge on Product Engagement \u2014 ARR-weighted engagement translates behavioral signals into revenue health language for executive audiences.",
+          "pre_selected": true
+        },
+        {
+          "id": "434548246_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Analytics - Engaged ARR%",
+          "description": "Percentage of total Analytics ARR that is actively engaged.",
+          "ai_reasoning": "Direct `measured-by` edge on Product Engagement \u2014 the normalised engagement rate for benchmarking across periods, segments, and product lines.",
+          "pre_selected": true
+        },
+        {
+          "id": "433098804_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "CMP - Core Accounts",
+          "description": "Accounts classified in the highest active-usage tier of the CMP engagement model.",
+          "ai_reasoning": "Direct `measured-by` edge on Product Engagement \u2014 the 'Core' tier is assigned from Segment event data (the foundational dataset for this topic), making it a direct output of in-app behavioral analytics.",
+          "pre_selected": true
+        },
+        {
+          "id": "433098805_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "CMP - Casual Accounts",
+          "description": "Accounts classified in the mid-range usage tier of the CMP engagement model.",
+          "ai_reasoning": "Direct `measured-by` edge on Product Engagement \u2014 one of three behavioral tiers derived from Segment event signals; tracking tier distribution reveals engagement mix health.",
+          "pre_selected": true
+        },
+        {
+          "id": "433098806_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "CMP - Dormant Accounts",
+          "description": "Accounts with no recorded product activity \u2014 the early-warning disengagement signal.",
+          "ai_reasoning": "Direct `measured-by` edge on both Product Engagement and Customer Churn & Downgrade \u2014 dormancy is the critical at-risk behavioral KPI most actionable from this topic's data.",
+          "pre_selected": true
+        },
+        {
+          "id": "434670505_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Opal - Stickiness (DAU / WAU)",
+          "description": "Daily active Opal users as a proportion of weekly active users \u2014 the short-window stickiness ratio.",
+          "ai_reasoning": "Computable from DWH_OPAL_DAILY_USER_ACCOUNT_USAGE (selected in step 3) \u2014 DAU/WAU is the canonical stickiness KPI for this domain and a key post-onboarding activation health signal.",
+          "pre_selected": true
+        },
+        {
+          "id": "434670522_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Opal - Stickiness (WAU / MAU)",
+          "description": "Weekly active users as a proportion of monthly active users \u2014 the longer-window stickiness ratio.",
+          "ai_reasoning": "Computable from DWH_OPAL_DAILY_USER_ACCOUNT_USAGE \u2014 pairs with DAU/WAU to provide a full two-horizon stickiness picture, especially relevant for tracking post-onboarding habit formation.",
+          "pre_selected": true
+        },
+        {
+          "id": "434670506_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Opal - WAU",
+          "description": "Weekly active users on the Opal platform.",
+          "ai_reasoning": "Computable from DWH_OPAL_DAILY_USER_ACCOUNT_USAGE \u2014 provides the absolute active-user count that feeds stickiness ratios and tracks onboarding-to-activation conversion week over week.",
+          "pre_selected": true
+        },
+        {
+          "id": "434565452_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Opal - Total Threads",
+          "description": "Total conversation threads initiated across all Opal users.",
+          "ai_reasoning": "Derived from the Opal Threads per User dataset (selected in step 3) \u2014 thread volume is the primary depth-of-engagement behavioral KPI for the Opal sub-domain.",
+          "pre_selected": true
+        },
+        {
+          "id": "434565461_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Opal - % of Threads with an Agent Triggered",
+          "description": "Share of conversation threads in which at least one Opal agent (any type) was invoked.",
+          "ai_reasoning": "Derived from DWH_OPAL_FINE_GRAINED_USAGE and Opal Agents per Thread (both selected in step 3) \u2014 agent-trigger rate is the key feature-adoption depth signal within the Opal behavioral analytics sub-domain.",
+          "pre_selected": true
+        },
+        {
+          "id": "434565455_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Opal - % of Threads with an OOTB Agent Triggered",
+          "description": "Share of threads where an Optimizely out-of-the-box agent was invoked (excludes custom agents).",
+          "ai_reasoning": "Complements the all-agent metric by isolating adoption of platform-shipped agents \u2014 a quality adoption signal particularly meaningful during and immediately after onboarding.",
+          "pre_selected": true
+        },
+        {
+          "id": "434632167_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Opal - Average Credits Consumed \u2014 Onboarding Complete accounts",
+          "description": "Average credit consumption for paid accounts that have reached the 'Onboarding Complete' milestone stage.",
+          "ai_reasoning": "Computable from Opal Onboarding Snapshots + DWH_OPAL_DAILY_PRODUCT_ACCOUNT_USAGE (both selected in step 3) \u2014 measures activation depth at the most important onboarding milestone, directly supporting the Opal Onboarding sub-domain.",
+          "pre_selected": true
+        },
+        {
+          "id": "434106573_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Opal - Cumulative Users",
+          "description": "Running total of distinct users who have ever accessed the Opal platform.",
+          "ai_reasoning": "Tracks top-of-funnel user acquisition into the Opal experience \u2014 a leading growth indicator anchored to the Raw Identifies dataset (selected in step 3) that captures first-contact moments.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "5": {
+      "question": "Which events signal activity in the **Product In-App Behavioral Analytics** topic? We've pre-selected all events that originate from your 13 selected datasets (step 3) and are connected to your 5 concepts via `composes` or `tracked-in` graph edges. Review, deselect any that don't belong, and add any missing signals.",
+      "selected": [
+        {
+          "id": "433056930_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Product.Datasets.Product - Segment Event Data",
+          "description": "The core in-product behavioral event stream \u2014 clicks, page views, audience interactions, and all UI actions fired at the user level. The foundational signal for the entire topic.",
+          "ai_reasoning": "Direct `tracked-in` edge from the Product Engagement concept and `composes` edge from Product In-App Behavioral Analytics \u2014 the root behavioral event this topic is built on.",
+          "pre_selected": true
+        },
+        {
+          "id": "433094355_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Product.Datasets.Product - Userflow Data",
+          "description": "Events from Opal's guided in-product flows, tooltips, checklists, and onboarding walkthroughs \u2014 distinguishes guided from organic in-app behavior.",
+          "ai_reasoning": "`composes` edges from both Product In-App Behavioral Analytics and Opal Onboarding \u2014 essential for measuring guided journey completion and tooltip engagement alongside organic activity.",
+          "pre_selected": true
+        },
+        {
+          "id": "434633148_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Product.Datasets.Product - Opal Onboarding Snapshots",
+          "description": "Timestamped state-change events recording each account's and user's progression through Opal onboarding stages \u2014 the canonical onboarding funnel record.",
+          "ai_reasoning": "`composes` edge from the Opal Onboarding concept \u2014 the primary event source for tracking stage transitions, completion rates, and time-to-onboard milestones.",
+          "pre_selected": true
+        },
+        {
+          "id": "433269518_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Users.Charlie Fitz.Opti Analytics Raw Identifies",
+          "description": "Raw Segment identify-call events that fire the moment a user is first recognised in the Opal experience \u2014 the top-of-funnel entry signal that anchors onboarding cohort definition.",
+          "ai_reasoning": "`composes` edge from the Opal Onboarding concept \u2014 records the precise first-contact timestamp used for top-of-funnel attribution and onboarding cohort entry.",
+          "pre_selected": true
+        },
+        {
+          "id": "433107263_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Shared.DWH_OPAL_DAILY_PRODUCT_ACCOUNT_USAGE",
+          "description": "Canonical DWH daily Opal activity events at the product \u00d7 account grain \u2014 powers account-level engagement tracking and credit consumption analysis.",
+          "ai_reasoning": "`composes` edge from the Opal AI Platform Usage concept \u2014 the account-level daily event used for post-onboarding activation measurement and sustained engagement monitoring.",
+          "pre_selected": true
+        },
+        {
+          "id": "433107265_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Shared.DWH_OPAL_DAILY_USER_ACCOUNT_USAGE",
+          "description": "Canonical DWH daily Opal activity events at the user \u00d7 account grain \u2014 the direct input for DAU, WAU, MAU, and both stickiness ratio KPIs selected in step 4.",
+          "ai_reasoning": "`composes` edge from the Opal AI Platform Usage concept \u2014 user-level daily grain is required to compute the Opal DAU/WAU and WAU/MAU stickiness metrics confirmed in step 4.",
+          "pre_selected": true
+        },
+        {
+          "id": "433107256_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Shared.DWH_OPAL_FINE_GRAINED_USAGE",
+          "description": "Per-interaction feature-level events capturing every discrete Opal action \u2014 the highest-resolution behavioral signal in this topic.",
+          "ai_reasoning": "`composes` edge from the Opal AI Platform Usage concept \u2014 provides per-action depth required to compute agent-trigger rate and drive the '% of Threads with an Agent Triggered' KPI from step 4.",
+          "pre_selected": true
+        },
+        {
+          "id": "434632154_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Product.Datasets.Product - Opal Agents per Thread",
+          "description": "Events recording the number and types of Opal agents invoked per conversation thread \u2014 the feature-adoption depth signal within Opal platform usage.",
+          "ai_reasoning": "`composes` edge from the Opal AI Platform Usage concept \u2014 agent invocation breadth per thread is the direct basis for both agent-trigger rate KPIs confirmed in step 4.",
+          "pre_selected": true
+        },
+        {
+          "id": "434598654_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Users.Scott Levine.Product - Opal Threads per User",
+          "description": "Bucketed thread-volume events per user summarising Opal conversation activity levels \u2014 the primary depth-of-engagement signal at the user level.",
+          "ai_reasoning": "`composes` edge from the Opal AI Platform Usage concept \u2014 thread volume per user feeds the 'Opal - Total Threads' KPI and contributes to DAU/WAU stickiness calculations from step 4.",
+          "pre_selected": true
+        },
+        {
+          "id": "442488955_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Users.Sterling Nostedt.Opal_Daily_Usage",
+          "description": "\u26a0\ufe0f Analyst-built daily Opal usage events \u2014 an alternative to the canonical DWH tables that may include additional curated transformations not yet promoted to the DWH layer.",
+          "ai_reasoning": "`composes` edge from the Opal AI Platform Usage concept \u2014 frequently referenced in analyst workflows and may carry curated business logic absent from the canonical grain tables.",
+          "pre_selected": true
+        },
+        {
+          "id": "446615142_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Users.Scott Levine.Product - Opal U Daily Summary",
+          "description": "\u26a0\ufe0f Daily Opal University usage events per user and account \u2014 tracks adoption of Opal learning content alongside core platform usage, relevant to the onboarding sub-domain.",
+          "ai_reasoning": "`composes` edge from the Opal AI Platform Usage concept \u2014 Opal University completion is a meaningful onboarding activation signal when combined with the Opal Onboarding Snapshots event.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "6": {
+      "question": "What business rules and definitions should the AI know when answering questions in this topic? We've pre-populated the most critical definitions inferred from your dataset, metric, and event selections in steps 2\u20135. Confirm, edit, or add any rules that are missing.",
+      "selected": [
+        {
+          "id": "rule-cmp-engagement-tiers",
+          "type": "custom",
+          "label": "CMP engagement tiers: Core = highest activity; Casual = mid-range; Dormant = zero recorded activity in the measurement period.",
+          "description": "Defines the three behavioral tiers derived from Segment event signals that underpin CMP engagement classification across the topic.",
+          "ai_reasoning": "Three CMP tier metrics (Core, Casual, Dormant accounts) were selected in step 4 \u2014 the AI requires explicit tier boundaries to assign accounts correctly and avoid treating tiers as an ordered scale with arbitrary thresholds.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-analytics-engagement-binary",
+          "type": "custom",
+          "label": "Analytics engagement (binary): Engaged = \u22651 qualifying Segment event in the calendar month. Non-Engaged = zero qualifying events in the same period.",
+          "description": "Defines the binary Engaged / Non-Engaged classification used by the four Analytics engagement metrics selected in step 4.",
+          "ai_reasoning": "The Analytics Monthly Engaged/Non-Engaged Paying Accounts and Engaged ARR metrics were selected in step 4 \u2014 without a precise qualifying-event definition the AI cannot reliably filter the Segment Event Data stream to compute them.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-onboarding-stage-order",
+          "type": "custom",
+          "label": "Opal onboarding stages (ordered): Recently Signed \u2192 Kickoff Scheduled \u2192 Onboarding Kicked Off \u2192 [Onboarding Complete | Stalled Onboarding | Deprioritized Onboarding]. Success milestone = Onboarding Complete.",
+          "description": "Defines the six stage names, their ordering, and the three terminal states tracked in the Opal Onboarding Snapshots dataset.",
+          "ai_reasoning": "The Opal Onboarding Snapshots dataset (step 3) and the 'Average Credits \u2014 Onboarding Complete' metric (step 4) both reference stage names \u2014 the AI needs the stage order and terminal-state topology to compute funnel conversion rates and time-to-milestone correctly.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-active-user-windows",
+          "type": "custom",
+          "label": "Active user (Opal stickiness): active = \u22651 thread initiated in the window. DAU = calendar day; WAU = rolling 7 days; MAU = rolling 30 days.",
+          "description": "Provides the precise active-user and window definitions required to compute the DAU/WAU and WAU/MAU stickiness ratios from DWH_OPAL_DAILY_USER_ACCOUNT_USAGE.",
+          "ai_reasoning": "Both Opal stickiness KPIs selected in step 4 divide two active-user counts \u2014 inconsistent window definitions will produce materially different stickiness values and break period-over-period comparisons.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-paid-account-boundary",
+          "type": "custom",
+          "label": "Paid Opal account: active, non-expired credit allotment present. EAP and Purple-Button-only accounts excluded from all 'paid' scoped metrics unless explicitly requested.",
+          "description": "Defines the paid vs non-paid boundary applied to Opal credit consumption, stickiness, and onboarding metrics.",
+          "ai_reasoning": "Analytics Engaged ARR, per-stage credit metrics, and several utilisation KPIs from step 4 are all scoped to 'paid accounts' \u2014 without this boundary the AI may include EAP or free-tier accounts and overstate paid-customer adoption.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-source-of-truth-hierarchy",
+          "type": "custom",
+          "label": "Source-of-truth hierarchy: Canonical DWH tables (DWH_OPAL_DAILY_PRODUCT_ACCOUNT_USAGE, DWH_OPAL_DAILY_USER_ACCOUNT_USAGE, DWH_OPAL_FINE_GRAINED_USAGE) take precedence over analyst-built views (Opal_Daily_Usage, Opal U Daily Summary). Surface discrepancies; do not silently resolve.",
+          "description": "Establishes a tie-breaking rule when the canonical DWH grain tables and analyst-built alternatives return different numbers for the same metric.",
+          "ai_reasoning": "Two \u26a0\ufe0f-flagged analyst-built datasets were retained in step 3 alongside canonical DWH tables \u2014 without a documented precedence rule, the AI may alternate between sources across questions and produce inconsistent answers.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-standard-exclusions",
+          "type": "custom",
+          "label": "Exclusions: @optimizely.com accounts and test/sandbox accounts \u2192 always exclude from all metrics. Partner accounts (PARTNER_FLAG = TRUE) \u2192 exclude from standard reporting unless the query explicitly requests partner data.",
+          "description": "Defines the three standard exclusion classes applied across every engagement, stickiness, and onboarding metric in this topic.",
+          "ai_reasoning": "Internal Optimizely users and test accounts generate Segment events and Opal threads that flow through the same datasets as customer data \u2014 without explicit exclusions they will inflate engagement counts and onboarding funnels.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-opal-agent-taxonomy",
+          "type": "custom",
+          "label": "Opal agent types: OOTB = Optimizely-shipped (Opal OOTB Agents catalog). Custom = customer-created (Custom Agents catalog). '% Threads with OOTB Agent Triggered' excludes custom agents; '% Threads with Agent Triggered' includes all types.",
+          "description": "Distinguishes the two Opal agent classes and maps each to the correct agent-trigger-rate metric selected in step 4.",
+          "ai_reasoning": "Both agent-trigger rate KPIs selected in step 4 share similar names but cover different agent scopes \u2014 the AI needs the explicit OOTB vs Custom boundary to route questions to the right metric without conflating them.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-feature-adoption-two-dataset-model",
+          "type": "custom",
+          "label": "Feature adoption uses two complementary datasets: Feature Adoption Matrix Account (adopted features, positive signal) and Features Not Adopted Account (gap view). An account can appear in both for different features \u2014 this is valid, not a data error.",
+          "description": "Clarifies that the adopted and not-adopted datasets are feature-level views, not mutually exclusive account-level states, to prevent misinterpretation as conflicting data.",
+          "ai_reasoning": "Both Feature Adoption datasets were selected in step 3 \u2014 without this rule the AI may treat an account's simultaneous presence in both tables as a contradiction rather than a correct multi-feature adoption state.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "7": {
+      "question": "Are there terms in the **Product In-App Behavioral Analytics** topic that could be confused or carry different meanings in different contexts? We've identified **9 potential disambiguation pairs** by analysing your selected concepts, datasets, rules, and graph edges. Confirm which apply, remove any that don't belong, and add any we missed \u2014 these will be stored as `distinct-from` rules the AI uses to resolve ambiguous queries before answering.",
+      "selected": [
+        {
+          "id": "disambig-engagement-models",
+          "type": "custom",
+          "label": "\"Engagement\" is product-line-specific and must not be blended. Analytics engagement = binary (\u22651 qualifying Segment event / calendar month). CMP engagement = 3-tier (Core / Casual / Dormant). Opal engagement = stickiness ratios (DAU/WAU, WAU/MAU) + thread volume. Resolve unqualified \"engagement\" queries using the product line implied by context.",
+          "description": "Three separate engagement measurement models coexist in this topic. An unqualified query such as \"show me engagement\" or \"are these accounts engaged?\" must default to the product line implied by context rather than blending incompatible models into a single number.",
+          "ai_reasoning": "Steps 4 and 6 confirmed all three engagement definitions \u2014 Analytics binary, CMP 3-tier, and Opal thread/stickiness \u2014 as simultaneously active in this topic, making this the single highest-priority disambiguation to prevent the AI from averaging or mixing signals across models.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-onboarding-opal-vs-gainsight",
+          "type": "custom",
+          "label": "\"Onboarding\" in this topic = Opal in-product onboarding, tracked via Opal Onboarding Snapshots and Userflow Data. \"Customer Product Onboarding\" = Gainsight-managed post-sale onboarding across all Optimizely product lines \u2014 a separate concept that is NOT in scope for this topic. Resolve bare \"onboarding\" to the Opal context.",
+          "description": "Both onboarding types exist in the graph and share common stage language (kickoff, completion, stalled). The graph carries an explicit `distinct-from` edge between Opal Onboarding and Customer Product Onboarding, and the latter is powered by GS_ONBOARDING_CUSTOMERS, which is not a selected dataset in this topic.",
+          "ai_reasoning": "The graph has a direct `distinct-from` edge between these two concepts, and step 6 rule 3 defines Opal-specific stage names \u2014 without this disambiguation the AI may route onboarding queries to the Gainsight dataset instead of the Opal Onboarding Snapshots.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-active-user-context",
+          "type": "custom",
+          "label": "\"Active user\" is context-dependent: Opal context = \u22651 thread initiated in the window (DAU = calendar day; WAU = rolling 7 days; MAU = rolling 30 days, per step 6 rule). Analytics / CMP context = \u22651 qualifying Segment event in the measurement period. Always resolve with the product context; never cross-apply definitions.",
+          "description": "Both active-user criteria are live in this topic simultaneously. Cross-applying them would produce incorrect stickiness ratios or engagement counts depending on which dataset and window are used.",
+          "ai_reasoning": "Step 6 explicitly codified two different active-user thresholds, and the Opal stickiness KPIs selected in step 4 (DAU/WAU and WAU/MAU) are only valid if the thread-based Opal definition is consistently applied rather than the Segment-event threshold used for Analytics/CMP.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-segment-platform-vs-dimension",
+          "type": "custom",
+          "label": "\"Segment\" in this topic exclusively refers to the Twilio Segment event-tracking platform \u2014 the source of Product - Segment Event Data. It does NOT refer to a customer market segment or account grouping dimension. Queries about market segmentation should be flagged as outside this topic's scope.",
+          "description": "\"Segment\" appears as both the primary data platform (a proper noun) and a common business term for customer groups, creating a natural-language collision in queries like \"show me Segment data by segment.\"",
+          "ai_reasoning": "The Segment Event Data dataset is the foundational behavioral source selected in steps 3 and 5, and the term \"segment\" is also used as a business dimension (e.g., SEGMENT column in ICP Account Targeting) \u2014 the AI must treat the platform name as a distinct-from the segmentation concept.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-feature-adoption-vs-opal-agent-usage",
+          "type": "custom",
+          "label": "\"Feature adoption\" = whether an Optimizely product feature (CMP, EXP, etc.) appears in the Feature Adoption Matrix for an account \u2014 a binary, account-level, cross-product signal. \"Opal feature / agent usage\" = which Opal agents (OOTB or custom) a user invokes within conversation threads \u2014 measured by % Threads with Agent Triggered metrics. Do not use the Feature Adoption Matrix to assess Opal agent engagement depth.",
+          "description": "Both concepts share \"feature\" and \"adoption / usage\" vocabulary but reference entirely different datasets (Feature Adoption Matrix Account vs. DWH_OPAL_FINE_GRAINED_USAGE / Opal Agents per Thread) and measure fundamentally different things.",
+          "ai_reasoning": "Feature Adoption Tracking and Opal AI Platform Usage were both selected as core concepts in step 2, and the agent-trigger-rate KPIs from step 4 are easily confused with the Feature Adoption Matrix datasets from step 3 \u2014 step 6 rule 8 distinguishes OOTB vs. Custom agent types but does not address the cross-concept confusion.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-dormant-vs-churned",
+          "type": "custom",
+          "label": "\"Dormant\" (CMP tier) = a paying account with zero recorded product activity in the measurement period. It is an early-warning disengagement signal, NOT a churned account. Dormant accounts retain active subscriptions. Do not equate Dormant with Churned or route dormant-account queries to churn datasets.",
+          "description": "The CMP Dormant Accounts metric sits in this topic, but the graph also shows Customer Churn & Downgrade has a `measured-by` edge to this same metric, blurring the boundary between an at-risk behavioral state and an actual subscription cancellation.",
+          "ai_reasoning": "CMP Dormant Accounts was confirmed as a KPI in step 4, and the graph's `measured-by` edge connects it to both Product Engagement and Customer Churn & Downgrade \u2014 without this rule the AI may direct dormant-account queries toward the CHURN DATASET, which is not in scope for this topic.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-opal-university-vs-opal-platform",
+          "type": "custom",
+          "label": "\"Opal University\" (Opal U) = the self-serve training and learning content platform for users learning how to use Opal. \"Opal Platform\" = the AI assistant product itself (threads, agents, credits, stickiness). These have separate datasets: Opal U Daily Summary tracks learning-content engagement; DWH_OPAL_DAILY_USER_ACCOUNT_USAGE tracks core AI platform activity. Do not blend them.",
+          "description": "Both Opal University events and core Opal platform events were included in the step 5 event selection. An unqualified query about \"Opal usage\" could inadvertently blend or swap these distinct behavioral signals, inflating or deflating platform adoption metrics.",
+          "ai_reasoning": "The Opal U Daily Summary event was retained in step 5 alongside the canonical DWH usage events \u2014 the step 6 source-of-truth hierarchy rule establishes precedence between DWH and analyst-built tables but does not clarify that Opal U activity is a separate learning signal, not a proxy for platform engagement.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "8": {
+      "question": "How should the **Product In-App Behavioral Analytics** topic grow over time?\n\nChoose an expansion policy that governs two things:\n1. **Graph depth** \u2014 how many hops from your confirmed root concepts the AI is allowed to traverse when suggesting new entities to include.\n2. **Trust threshold** \u2014 whether AI-generated suggestions are accepted automatically or must be confirmed by a human first.\n\nAll three policies apply only to *additions*. Nothing you confirmed in steps 2\u20137 will ever be removed automatically.",
+      "selected": [
+        {
+          "id": "policy-moderate",
+          "type": "policy",
+          "label": "Moderate \u2014 Depth 2 \u00b7 Human-confirmed only  \u2726 Recommended",
+          "description": "The AI traverses up to 2 hops from your 5 confirmed root concepts and surfaces candidate entities for human review. Nothing is added without a human approving it first. This lets the topic grow naturally as the product evolves \u2014 for example, picking up a new Opal usage dataset or a new onboarding-stage metric \u2014 without requiring a full topic rebuild.\n\n**Best for:** Most teams. Allows meaningful discovery while keeping a human in the loop on every addition.",
+          "ai_reasoning": "Your confirmed concepts already have significant depth-2 neighbours that may become analytically relevant \u2014 Feature Adoption Tracking connects to A/B Experimentation (useful if feature-flag adoption is added to scope), and Opal AI Platform Usage has a `correlates-with` edge to Product ARR Bridge (relevant if the team starts tracking behavioural-to-revenue impact). Requiring human confirmation before accepting any depth-2 entity ensures the business rules and disambiguation pairs from steps 6\u20137 remain authoritative.",
+          "pre_selected": true
+        }
+      ]
+    }
+  },
+  "concept_cluster": {
+    "concept_ids": [
+      "c-78ea4219",
+      "c-3ae07eba"
+    ],
+    "concept_names": [
+      "Product In-App Behavioral Analytics",
+      "Opal Onboarding"
+    ],
+    "internal_edges": 1
+  }
+}

@@ -1,0 +1,321 @@
+{
+  "name": "Sales Rep Performance",
+  "checklist_state": {
+    "1": {
+      "question": "What is the name of this new business topic, and how would you describe it in 2\u20133 sentences? Be as specific as you can about the business process it covers, the team that owns it, and what decisions it should help answer.",
+      "answer": "Sales Rep Performance. Covers: Sales Rep Performance, GTM Account Coverage & Team Assignment, Opal GTM Cross-Sell Performance"
+    },
+    "2": {
+      "question": "Which core business concepts should this topic cover? These become the building blocks the AI uses to understand and answer questions in this domain.",
+      "selected": [
+        {
+          "id": "c-a8d736df",
+          "type": "concept",
+          "label": "Sales Rep Performance",
+          "description": "Measures individual AE effectiveness across win rates, territory coverage, ASP, and opportunity ownership. Provides quarterly and rolling views for coaching and quota attainment.",
+          "ai_reasoning": "Exact match to the primary topic name provided in step 1; this is the root concept for the domain.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-81194d68",
+          "type": "concept",
+          "label": "GTM Account Coverage & Team Assignment",
+          "description": "Captures the structured mapping of GTM team members (AE, CSM, SDR, SVP) to each Optimizely account, alongside customer lifecycle stage and territory.",
+          "ai_reasoning": "Explicitly named as a pillar of this topic in step 1; this concept informs Sales Rep Performance via account-to-rep assignment data.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-c990b866",
+          "type": "concept",
+          "label": "Opal GTM Cross-Sell Performance",
+          "description": "Measures Opal's sales motion within the existing CMP and Experimentation customer base on a per-rep, per-quarter basis.",
+          "ai_reasoning": "Explicitly named as a third pillar in step 1; the graph already shows a direct 'informs \u2192 Sales Rep Performance' edge from this concept.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-4c065aa7",
+          "type": "concept",
+          "label": "Sales Targets & Quota",
+          "description": "Quarterly pipeline generation and bookings targets broken down by territory, segment, product group, and customer type.",
+          "ai_reasoning": "Has a direct 'informs \u2192 Sales Rep Performance' edge in the graph; quota attainment is a fundamental dimension of rep evaluation.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-f70e4ec8",
+          "type": "concept",
+          "label": "Conversation Intelligence",
+          "description": "Structured insights from sales calls via ZRA \u2014 competitors mentioned, features discussed, topics raised, and call summaries by rep.",
+          "ai_reasoning": "Has a direct 'informs \u2192 Sales Rep Performance' edge in the graph; provides call-level coaching signals that complement the quantitative rep metrics.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "3": {
+      "question": "Which datasets power the Sales Rep Performance topic? We've pre-selected every dataset directly connected to your chosen concepts via graph edges. Confirm, deselect any that don't apply, or add others.",
+      "selected": [
+        {
+          "id": "434549387_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Afsara Hannan.Datasets.OPAL_PERFORMANCE_BY_REP",
+          "description": "Rolling, current-quarter rep-level Opal performance view tracking open/closed Opal deals and CMP & Exp cross-sell coverage per AE.",
+          "ai_reasoning": "Direct 'composes' edge from the 'Sales Rep Performance' concept in the graph \u2014 this is the primary live dataset for per-AE Opal pipeline metrics.",
+          "pre_selected": true
+        },
+        {
+          "id": "434549349_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Afsara Hannan.Datasets.OPAL_PERFORMANCE_BY_REP_26Q1",
+          "description": "Quarter-specific Opal rep performance snapshot for 26Q1, used for QoQ coaching and attainment review.",
+          "ai_reasoning": "Direct 'composes' edge from the 'Sales Rep Performance' concept \u2014 provides the 26Q1 quarterly slice for historical comparison.",
+          "pre_selected": true
+        },
+        {
+          "id": "434527561_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Yunus Miah.OPAL_PERFORMANCE_BY_REP_25Q4",
+          "description": "Quarter-specific Opal rep performance snapshot for 25Q4.",
+          "ai_reasoning": "Direct 'composes' edge from the 'Sales Rep Performance' concept \u2014 the 25Q4 historical benchmark for AE Opal performance.",
+          "pre_selected": true
+        },
+        {
+          "id": "433525783_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Sales.GS_OPAL_PERFORMANCE_BY_REP_25Q3",
+          "description": "Gainsight export of Opal cross-sell pipeline by rep for 25Q3, tracking open/closed Opal deals within the CMP and Experimentation base.",
+          "ai_reasoning": "Direct 'composes' edge from the 'Opal GTM Cross-Sell Performance' concept \u2014 the 25Q3 quarterly snapshot for cross-sell motion by AE.",
+          "pre_selected": true
+        },
+        {
+          "id": "433526242_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Sales.GS_OPAL_PERFORMANCE_BY_REP_25Q4",
+          "description": "Gainsight export of Opal cross-sell pipeline by rep for 25Q4.",
+          "ai_reasoning": "Direct 'composes' edge from the 'Opal GTM Cross-Sell Performance' concept \u2014 the 25Q4 quarterly snapshot for cross-sell motion by AE.",
+          "pre_selected": true
+        },
+        {
+          "id": "434633343_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.GS_MARKETING_CONTACTS",
+          "description": "Gainsight contacts dataset providing the structured AE, CSM, SDR, and SVP-to-account assignment map, including customer lifecycle stage.",
+          "ai_reasoning": "Direct 'composes' edge from the 'GTM Account Coverage & Team Assignment' concept \u2014 the canonical source for which rep owns which account.",
+          "pre_selected": true
+        },
+        {
+          "id": "434744147_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.SFDC_USER_ROLE",
+          "description": "Salesforce user role hierarchy defining rep-to-territory and parent-role-to-forecast-user assignment chains.",
+          "ai_reasoning": "Direct 'composes' edge from the 'GTM Account Coverage & Team Assignment' concept \u2014 powers territory segmentation and rep hierarchy resolution.",
+          "pre_selected": true
+        },
+        {
+          "id": "433097319_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.SFDC_PIPE_GENERATION_BOOKINGS_TARGETS",
+          "description": "Quarterly pipeline generation and bookings goals broken down by territory, segment, product group, and customer type.",
+          "ai_reasoning": "Direct 'composes' edge from the 'Sales Targets & Quota' concept \u2014 the source of truth for quota benchmarks used in AE attainment calculations.",
+          "pre_selected": true
+        },
+        {
+          "id": "446427729_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Despi Evangelakou.04 Datasets.myZRA",
+          "description": "Zoom Revenue Accelerator (ZRA) dataset capturing call-level signals per rep: competitors mentioned, features discussed, topics raised, participant lists, and call summaries.",
+          "ai_reasoning": "Direct 'composes' edge from the 'Conversation Intelligence' concept \u2014 the sole call-intelligence source for rep-level coaching signals in this topic.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "4": {
+      "question": "Which metrics and KPIs should the AI use to measure Sales Rep Performance? We've pre-selected every metric directly connected to your chosen concepts via graph edges. Confirm, deselect any that don't apply, or add a custom KPI definition.",
+      "selected": [
+        {
+          "id": "434536196_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Analytics & Data.Insight & Analysis.02 Sales.Win Rate (Deal Count)",
+          "description": "Percentage of closed opportunities that were won, measured by deal count. Core rep effectiveness indicator used in coaching and QBRs.",
+          "ai_reasoning": "Direct 'measured-by' edge from the Sales Rep Performance concept \u2014 win rate by deal count is the primary output metric for AE evaluation.",
+          "pre_selected": true
+        },
+        {
+          "id": "434536199_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Analytics & Data.Insight & Analysis.02 Sales.Win Rate (RSAC Converted)",
+          "description": "Win rate calculated on RSAC-converted opportunities, providing a revenue-weighted view of rep close effectiveness.",
+          "ai_reasoning": "Direct 'measured-by' edge from the Sales Rep Performance concept \u2014 the RSAC-converted variant gives a revenue-weighted complement to deal-count win rate.",
+          "pre_selected": true
+        },
+        {
+          "id": "434536204_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Analytics & Data.Insight & Analysis.02 Sales.Addressable ASP",
+          "description": "Average selling price scoped to addressable opportunities, excluding non-addressable deals from the denominator.",
+          "ai_reasoning": "Direct 'measured-by' edge from the Sales Rep Performance concept \u2014 Addressable ASP is explicitly called out in the concept description as a key rep-level dimension.",
+          "pre_selected": true
+        },
+        {
+          "id": "434536205_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Analytics & Data.Insight & Analysis.02 Sales.Bookings ASP",
+          "description": "Average selling price across closed-won bookings, used to benchmark deal size relative to territory and segment norms.",
+          "ai_reasoning": "Direct 'measured-by' edge from the Sales Bookings concept, which Sales Targets & Quota directly informs \u2014 Bookings ASP is the deal-size counterpart to Addressable ASP for rep coaching.",
+          "pre_selected": true
+        },
+        {
+          "id": "443824902_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Users.Afsara Hannan.01 Dashboard.target_achieved_pipe_gen",
+          "description": "Measures actual pipeline generated versus the quarterly pipe-gen target, expressed as an attainment percentage per rep or territory.",
+          "ai_reasoning": "Owned by the same analyst (Afsara Hannan) who built the OPAL_PERFORMANCE_BY_REP datasets selected in step 3; this is the canonical pipe-gen quota attainment metric for rep scorecards.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "5": {
+      "question": "Which events should the AI treat as meaningful activity signals for the Sales Rep Performance topic? The 9 datasets confirmed in step 3 (quarterly Opal rep snapshots, GS_MARKETING_CONTACTS, SFDC_USER_ROLE, SFDC targets, myZRA) are all batch or snapshot tables \u2014 they don't surface as event streams in the app. The options below are the closest real-time event proxies, derived from adjacent concepts in the graph that feed directly into this topic. Confirm the pre-selected option, deselect if it doesn't apply, or add a custom event definition.",
+      "selected": [
+        {
+          "id": "434564357_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Users.Scott Levine.Product - Opportunities",
+          "description": "Salesforce opportunity-level event stream capturing opportunity creation, stage progression, and close outcomes (won/lost) per account executive. The primary real-time signal for AE win/loss tracking, territory pipeline movement, and quota attainment.",
+          "ai_reasoning": "Sales Targets & Quota (selected in step 2) has a direct 'informs \u2192 Sales Pipeline' edge, and Sales Pipeline has a 'composes' edge to this event; Conversation Intelligence (also selected) similarly informs Sales Pipeline \u2014 making opportunity lifecycle events the strongest available real-time proxy for rep-level deal activity.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "6": {
+      "question": "Are there any business rules, definitions, or exclusions the AI should apply when reasoning about Sales Rep Performance? The suggestions below have been inferred from your selected concepts, datasets, and metrics. Confirm the ones that are accurate, deselect any that don't apply, and add custom rules your team relies on.",
+      "selected": [
+        {
+          "id": "rule-ae-single-ownership",
+          "type": "custom",
+          "label": "Single AE ownership for win/loss and quota attribution",
+          "description": "OPPORTUNITY_OWNER_NAME is the authoritative field assigning quota credit and win/loss attribution to exactly one AE. Do not split or share credit across multiple contributors unless the question explicitly asks for co-owner analysis.",
+          "ai_reasoning": "Sales Rep Performance is segmented-by OPPORTUNITY_OWNER_NAME in the graph; establishing a single-owner rule prevents double-counting across rep scorecards and coaching views.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-rsac-definition",
+          "type": "custom",
+          "label": "RSAC (Revenue-Scaled Addressable Count) definition",
+          "description": "Win Rate (RSAC Converted) counts only opportunities that have been converted into Revenue-Scaled Addressable Count format \u2014 a revenue-weighted normalisation that adjusts for deal size. It must not be compared directly with Win Rate (Deal Count), which weights every deal equally regardless of size.",
+          "ai_reasoning": "Both win rate variants were selected as key metrics in step 4; without this rule the AI may treat them as interchangeable, producing misleading rep comparisons.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-addressable-exclusion",
+          "type": "custom",
+          "label": "Addressable vs. non-addressable opportunity exclusion",
+          "description": "Addressable ASP and addressable win rates exclude non-addressable deals \u2014 typically partner-sourced, internal Optimizely, or flagged-out opportunities \u2014 from both numerator and denominator. Use the EXCLUDE_FROM_SALES_PIPELINE flag in SFDC as the primary exclusion filter.",
+          "ai_reasoning": "Addressable ASP is a confirmed KPI in step 4 and the concept description explicitly calls out this exclusion; omitting it inflates average deal size and distorts rep benchmarks.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-quarter-naming-convention",
+          "type": "custom",
+          "label": "Quarter naming convention across datasets",
+          "description": "All quarters use a two-digit calendar-year prefix: 26Q1 = Jan\u2013Mar 2026, 26Q2 = Apr\u2013Jun 2026, 26Q3 = Jul\u2013Sep 2026, 26Q4 = Oct\u2013Dec 2026. Dataset name suffixes (e.g., OPAL_PERFORMANCE_BY_REP_26Q1, GS_OPAL_PERFORMANCE_BY_REP_25Q3) follow this format and represent closed, snapshot-dated quarters.",
+          "ai_reasoning": "Six of the nine confirmed datasets in step 3 carry quarter-suffix names; without this convention the AI may apply incorrect date filters or conflate snapshots from different periods.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-opal-crosssell-base",
+          "type": "custom",
+          "label": "CMP / Experimentation base definition for Opal cross-sell",
+          "description": "For Opal cross-sell performance: an account qualifies as 'in the CMP base' if it holds an active CMP contract at the start of the evaluation quarter; 'in the Exp base' if it holds an active Experimentation contract. Accounts in both product lines count independently per base. Opal-only accounts are excluded from the cross-sell denominator.",
+          "ai_reasoning": "The Opal GTM Cross-Sell Performance concept and its GS_OPAL_PERFORMANCE_BY_REP datasets measure cross-sell within the CMP and Exp base; this rule defines which accounts are addressable and prevents the AI from over- or under-counting coverage.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-rep-assignment-source-of-truth",
+          "type": "custom",
+          "label": "Canonical rep-to-account assignment source",
+          "description": "GS_MARKETING_CONTACTS is the single source of truth for AE, CSM, SDR, and SVP assignments to each Optimizely account. When SFDC and Gainsight reflect different reps for the same account, GS_MARKETING_CONTACTS takes precedence within this topic.",
+          "ai_reasoning": "GS_MARKETING_CONTACTS was confirmed as the canonical assignment dataset in step 3; this rule prevents the AI from using conflicting SFDC field values when rep identity is ambiguous.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "7": {
+      "question": "Several terms in the Sales Rep Performance topic carry more than one meaning \u2014 either within the selected datasets or in relation to adjacent concepts in the graph. Confirm the pre-selected disambiguation rules below so the AI knows which interpretation to apply without asking users for clarification each time. Deselect any that don't apply, or add a custom rule.",
+      "selected": [
+        {
+          "id": "disambig-rep-scope",
+          "type": "custom",
+          "label": "\"Rep\" / \"Sales Rep\" = Account Executive (AE) only \u2014 not SDR, CSM, or SVP",
+          "description": "Within this topic, \"rep\" and \"sales rep\" refer exclusively to the Account Executive role. GS_MARKETING_CONTACTS also stores SDR, CSM, and SVP-to-account assignments, but those roles are supporting context \u2014 not primary performance subjects. Questions about SDR outreach or CSM performance fall outside this topic's scope.",
+          "ai_reasoning": "The three OPAL_PERFORMANCE_BY_REP datasets are AE-centric, yet GS_MARKETING_CONTACTS tracks four GTM roles; without this rule the AI may return CSM or SDR rows when a user asks 'how are my reps performing this quarter?'",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-win-rate-default",
+          "type": "custom",
+          "label": "Unqualified \"win rate\" defaults to Win Rate (Deal Count), not Win Rate (RSAC Converted)",
+          "description": "When a question mentions \"win rate\" without specifying a variant, the AI must return Win Rate (Deal Count) \u2014 the equal-weighted deal-count measure. Win Rate (RSAC Converted) applies only when the question explicitly requests a revenue-weighted or RSAC-adjusted view. The two must never be averaged or combined (per the step 6 RSAC definition rule).",
+          "ai_reasoning": "Both win rate variants are active KPIs in this topic and step 6 established they are not interchangeable; naming Deal Count as the default prevents the AI from silently picking the wrong variant on ambiguous queries.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-opal-performance",
+          "type": "custom",
+          "label": "\"Opal performance\" = GTM cross-sell sales motion, NOT product usage or customer adoption",
+          "description": "In this topic, \"Opal performance\" refers to how effectively AEs are selling Opal into the CMP and Experimentation customer base \u2014 open/closed Opal deals and cross-sell coverage rates per rep (OPAL_PERFORMANCE_BY_REP datasets). It does NOT refer to Opal AI Platform Usage (credit consumption, thread counts, daily active users), which belongs to a separate product analytics topic and is not in the confirmed dataset list.",
+          "ai_reasoning": "The graph carries an explicit distinct-from edge between Opal GTM Cross-Sell Performance and Opal AI Platform Usage; a question like 'how is Opal performing this quarter?' could otherwise pull product-usage metrics (credits, threads) from outside this topic's boundary.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-coverage-two-senses",
+          "type": "custom",
+          "label": "\"Coverage\" has two distinct meanings in this topic: territory/account assignment vs. Opal cross-sell penetration rate",
+          "description": "\"Account coverage\" or \"territory coverage\" = whether an AE (or CSM/SDR) is mapped to an account, sourced from GS_MARKETING_CONTACTS and SFDC_USER_ROLE. \"Opal coverage\" or \"cross-sell coverage\" = the percentage of the CMP or Experimentation base that has an open or closed Opal opportunity, sourced from OPAL_PERFORMANCE_BY_REP. When \"coverage\" appears without a qualifier, the AI should ask the user to specify which sense they mean before answering.",
+          "ai_reasoning": "GTM Account Coverage & Team Assignment (assignment sense) and Opal GTM Cross-Sell Performance (penetration-rate sense) are both active concepts in this topic and the word 'coverage' appears naturally in the description of each, creating a genuine collision.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-closed-opal-deal",
+          "type": "custom",
+          "label": "\"Closed Opal deals\" = closed-won Opal opportunities only \u2014 closed-lost outcomes are excluded from this count",
+          "description": "The 'Closed Opal deals' column in the OPAL_PERFORMANCE_BY_REP datasets counts closed-WON Opal opportunities within the CMP/Exp base. Closed-lost Opal opportunities are not reflected in this figure. For rep-level conversion rate calculations, the denominator is total eligible in-base accounts, not total closed outcomes (won + lost).",
+          "ai_reasoning": "The Opal cross-sell datasets label this column 'Closed Opal deals,' which superficially reads as any closed outcome; treating it as inclusive of closed-lost inflates the apparent numerator and produces misleading per-rep conversion rates.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-current-data",
+          "type": "custom",
+          "label": "\"Current,\" \"latest,\" or \"this quarter\" data = the rolling OPAL_PERFORMANCE_BY_REP view (no quarter suffix)",
+          "description": "OPAL_PERFORMANCE_BY_REP (no suffix) is the live, in-flight current-quarter view and must be used for any question referencing 'now,' 'current quarter,' 'latest,' or 'this quarter.' The suffixed datasets (OPAL_PERFORMANCE_BY_REP_26Q1, GS_OPAL_PERFORMANCE_BY_REP_25Q4, GS_OPAL_PERFORMANCE_BY_REP_25Q3) are closed, frozen snapshots for historical comparison only. Do not substitute a snapshot for the live view unless a specific past quarter is explicitly named in the question.",
+          "ai_reasoning": "Three frozen quarterly snapshots sit alongside the live rolling view in the confirmed dataset list; an unqualified 'current rep performance' query risks returning stale snapshot data if the AI does not distinguish the live view from the archived ones.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "8": {
+      "question": "How should the Sales Rep Performance topic grow over time? As new datasets, metrics, and concepts are added to Optimizely Analytics, the expansion policy controls which ones are automatically included in this topic \u2014 and how much AI inference is trusted without human review.",
+      "selected": [
+        {
+          "id": "policy-moderate",
+          "type": "policy",
+          "label": "Moderate \u2014 depth 2, human-confirmed (recommended)",
+          "description": "The topic can expand up to 2 hops from the 5 root concepts, but only includes entities that are human-confirmed or higher trust. In practice this means closely adjacent concepts \u2014 such as Sales Pipeline (which Conversation Intelligence and Sales Targets & Quota already feed into), Pipeline Quality & Deal Velocity, and new quarterly OPAL_PERFORMANCE_BY_REP snapshots \u2014 can be proposed for inclusion when first confirmed by a human reviewer. AI-generated entities alone are never auto-added.",
+          "ai_reasoning": "Balances growth with control: Sales Rep Performance is an evolving domain (new quarterly snapshots are added each quarter, new AE scorecard datasets appear regularly) and moderate policy ensures those are surfaced for review without pulling in unrelated product-usage or CS concepts 3+ hops away.",
+          "pre_selected": true
+        }
+      ]
+    }
+  },
+  "concept_cluster": {
+    "concept_ids": [
+      "c-a8d736df",
+      "c-81194d68",
+      "c-c990b866"
+    ],
+    "concept_names": [
+      "Sales Rep Performance",
+      "GTM Account Coverage & Team Assignment",
+      "Opal GTM Cross-Sell Performance"
+    ],
+    "internal_edges": 2
+  }
+}

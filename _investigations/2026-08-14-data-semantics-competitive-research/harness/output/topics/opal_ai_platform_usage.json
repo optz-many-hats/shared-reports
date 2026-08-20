@@ -1,0 +1,663 @@
+{
+  "name": "Opal AI Platform Usage",
+  "checklist_state": {
+    "1": {
+      "question": "What is the name of this business topic, and how would you describe what it covers? Please provide a short name (e.g. \"Customer Churn & Retention\") and a 1\u20133 sentence description explaining the business domain, what questions it should answer, and who the primary audience is.",
+      "answer": "Opal AI Platform Usage. Covers: Opal AI Platform Usage, Opal Agent Registry, Product ARR Bridge & Opal Cannibalization, Opal AI Content Generation, Annual Recurring Revenue (ARR) (+1 more)"
+    },
+    "2": {
+      "question": "Which core business concepts should be included in the **Opal AI Platform Usage** topic? These form the semantic backbone of the topic \u2014 the AI will use them to understand what questions belong here and how entities relate to each other. We've pre-selected the concepts you mentioned in your description, plus a few closely connected neighbours from the graph.",
+      "selected": [
+        {
+          "id": "c-30fc2a3f",
+          "type": "concept",
+          "label": "Opal AI Platform Usage",
+          "description": "Tracks daily Opal usage at the product-account and user-account level, including thread volumes, feature interactions, and fine-grained usage events across all Opal entry points.",
+          "ai_reasoning": "Explicitly named as the primary domain in your step 1 description; this is the root concept for the topic.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-c1121d27",
+          "type": "concept",
+          "label": "Opal Agent Registry",
+          "description": "Master reference catalog for all Opal AI agents (out-of-the-box and custom), including release dates, agent types, and product mappings.",
+          "ai_reasoning": "Explicitly named in your step 1 description; the registry informs Opal AI Platform Usage and Opal AI Content Generation, making it a structural dependency of this topic.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-e5ae80de",
+          "type": "concept",
+          "label": "Product ARR Bridge & Opal Cannibalization",
+          "description": "Analyses product-level ARR movement using a bridge/waterfall methodology, including OPAL_CANNIBALIZATION and OPAL_INCREMENTAL columns that isolate Opal's revenue impact.",
+          "ai_reasoning": "Explicitly named in your step 1 description; this concept directly measures whether Opal is growing net-new ARR or cannibalising existing product lines \u2014 a key question for this domain.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-de319aa6",
+          "type": "concept",
+          "label": "Opal AI Content Generation",
+          "description": "Covers AI content generation events, agent invocation breadth per conversation, daily agent-account generation usage, and AI-assisted experiment outcomes.",
+          "ai_reasoning": "Explicitly named in your step 1 description; distinct from platform usage but tightly coupled \u2014 content generation volume is a key depth-of-engagement signal.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-b143d3b5",
+          "type": "concept",
+          "label": "Annual Recurring Revenue (ARR)",
+          "description": "Tracks total and product-line ARR snapshots from the ARR Report and DWH SST ARR Report datasets, segmented by MCID and product.",
+          "ai_reasoning": "Explicitly named in your step 1 description; ARR is the financial outcome measure that contextualises whether Opal adoption is translating into commercial value.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "3": {
+      "question": "Which datasets should power the **Opal AI Platform Usage** topic? We've pre-selected every dataset directly connected to your 5 chosen concepts via graph edges \u2014 review the groupings, deselect anything out of scope, and add extras if needed.",
+      "selected": [
+        {
+          "id": "433093079_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.DWH_OPAL_DAILY_PRODUCT_ACCOUNT_USAGE",
+          "description": "Canonical DWH daily Opal usage aggregated at the product \u00d7 account level.",
+          "ai_reasoning": "Directly attached to the Opal AI Platform Usage concept via a 'composes' edge; the primary grain for product-account adoption analysis.",
+          "pre_selected": true
+        },
+        {
+          "id": "433093086_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.DWH_OPAL_DAILY_USER_ACCOUNT_USAGE",
+          "description": "Canonical DWH daily Opal usage aggregated at the user \u00d7 account level.",
+          "ai_reasoning": "Directly attached to the Opal AI Platform Usage concept via a 'composes' edge; required for user-level engagement and DAU/WAU/MAU calculations.",
+          "pre_selected": true
+        },
+        {
+          "id": "433097547_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.DWH_OPAL_FINE_GRAINED_USAGE",
+          "description": "Fine-grained feature-interaction event stream for all Opal entry points.",
+          "ai_reasoning": "Directly attached to the Opal AI Platform Usage concept via a 'composes' edge; the most granular source for feature-level behavioural analysis.",
+          "pre_selected": true
+        },
+        {
+          "id": "442487604_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Sterling Nostedt.Opal_Daily_Usage",
+          "description": "Analyst-built daily Opal usage view used in the Opal Usage and Adoption dashboard.",
+          "ai_reasoning": "Directly attached to the Opal AI Platform Usage concept via a 'composes' edge; currently the basis for the SST Max Date metric.",
+          "pre_selected": true
+        },
+        {
+          "id": "446615124_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Scott Levine.Product - Opal U Daily Summary",
+          "description": "Per-account daily Opal usage summary used in the Opal University dashboard.",
+          "ai_reasoning": "Directly attached to the Opal AI Platform Usage concept via a 'composes' edge; provides the account-level daily rollup view.",
+          "pre_selected": true
+        },
+        {
+          "id": "434598650_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Scott Levine.Product - Opal Threads per User",
+          "description": "Thread-volume distribution bucketed per user, powering the THREADS_PER_USER_BUCKET dimension.",
+          "ai_reasoning": "Directly attached to the Opal AI Platform Usage concept via a 'composes' edge; drives the threads-per-user engagement depth metric.",
+          "pre_selected": true
+        },
+        {
+          "id": "434632149_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Product.Datasets.Product - Opal Agents per Thread",
+          "description": "Agent invocation breadth per conversation, powering the AGENTS_PER_THREAD_BUCKET dimension.",
+          "ai_reasoning": "Connected to both Opal AI Platform Usage (composes) and Opal AI Content Generation (composes); measures how many agents are invoked per thread \u2014 a key depth-of-engagement signal.",
+          "pre_selected": true
+        },
+        {
+          "id": "434158271_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Product.Datasets.Product - Opal OOTB Agents",
+          "description": "Master catalog of all out-of-the-box Opal agents shipped with the platform.",
+          "ai_reasoning": "Directly attached to the Opal Agent Registry concept via a 'composes' edge; the reference dimension for all OOTB agent joins.",
+          "pre_selected": true
+        },
+        {
+          "id": "434377187_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Scott Levine.Product - Custom Agents",
+          "description": "Catalog of customer-built custom agents on the Opal platform.",
+          "ai_reasoning": "Directly attached to the Opal Agent Registry concept via a 'composes' edge; needed to distinguish OOTB vs. custom agent usage patterns.",
+          "pre_selected": true
+        },
+        {
+          "id": "434163882_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Scott Levine.Product - Opal Product Mapping",
+          "description": "Maps each Opal agent to its parent Optimizely product (CMP, EXP, etc.).",
+          "ai_reasoning": "Directly attached to the Opal Agent Registry concept via a 'composes' edge; essential for segmenting agent usage by product line.",
+          "pre_selected": true
+        },
+        {
+          "id": "433098899_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Product.Datasets.Product - ARR Churn",
+          "description": "Snapshot-dated, constant-currency ARR churn records at the product group level.",
+          "ai_reasoning": "Directly attached to the Product ARR Bridge & Opal Cannibalization concept via a 'composes' edge; provides the ARR baseline for waterfall decomposition.",
+          "pre_selected": true
+        },
+        {
+          "id": "434535446_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Analytics & Data.Insight & Analysis.04 Adhoc.GS_SST_PRODUCT_BRIDGE_PRODUCT_GROUP_EROSION_REGIONAL_BRIDGE",
+          "description": "Product-level ARR waterfall bridge with OPAL_CANNIBALIZATION and OPAL_INCREMENTAL columns.",
+          "ai_reasoning": "Directly attached to the Product ARR Bridge & Opal Cannibalization concept via a 'composes' edge; the only dataset containing the Opal-specific cannibalization and incremental ARR columns.",
+          "pre_selected": true
+        },
+        {
+          "id": "434159948_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Product.Datasets.Product - Opal Generation Data",
+          "description": "Core AI content generation event stream capturing every generation request.",
+          "ai_reasoning": "Directly attached to the Opal AI Content Generation concept via a 'composes' edge; the primary source for content generation volume and type analysis.",
+          "pre_selected": true
+        },
+        {
+          "id": "434136929_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Scott Levine.OPAL_DAILY_AGENT_ACCOUNT_GENERATION_USAGE",
+          "description": "Daily rollup of agent \u00d7 account generation usage.",
+          "ai_reasoning": "Directly attached to the Opal AI Content Generation concept via a 'composes' edge; enables per-agent, per-account daily generation trend analysis.",
+          "pre_selected": true
+        },
+        {
+          "id": "445847260_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Scott Levine.SL - Opal Generation Records",
+          "description": "Raw individual Opal generation records for ad-hoc analysis.",
+          "ai_reasoning": "Directly attached to the Opal AI Content Generation concept via a 'composes' edge; provides row-level generation data for exploratory queries.",
+          "pre_selected": true
+        },
+        {
+          "id": "446615088_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Scott Levine.Product - Opal U Agent Detail",
+          "description": "Per-agent detail view used in the Opal University dashboard.",
+          "ai_reasoning": "Directly attached to the Opal AI Content Generation concept via a 'composes' edge; provides agent-level detail for content generation breakdowns.",
+          "pre_selected": true
+        },
+        {
+          "id": "442778962_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Scott Levine.Product - AI Assisted Experiments Summary",
+          "description": "Analyst summary of AI-assisted experiment outcomes, including Opal-managed experiments.",
+          "ai_reasoning": "Directly attached to the Opal AI Content Generation concept via a 'composes' edge; links Opal content generation activity to experiment outcomes.",
+          "pre_selected": true
+        },
+        {
+          "id": "440154712_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Scott Levine.Product - EXP - Opal Managed Experiments",
+          "description": "Registry of experiments where Opal AI managed the experiment lifecycle.",
+          "ai_reasoning": "Directly attached to the Opal AI Content Generation concept via a 'composes' edge; tracks how many experiments are fully AI-driven vs. human-initiated.",
+          "pre_selected": true
+        },
+        {
+          "id": "436973513_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Users.Scott Levine.Product - EXP - Opal Managed Changes",
+          "description": "Records of individual experiment changes made by Opal AI agents.",
+          "ai_reasoning": "Directly attached to the Opal AI Content Generation concept via a 'composes' edge; measures the volume and type of AI-generated experiment modifications.",
+          "pre_selected": true
+        },
+        {
+          "id": "94965969_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Product.Datasets.Product - ARR Report",
+          "description": "Product-level ARR snapshot report segmented by MCID and product.",
+          "ai_reasoning": "Directly attached to the Annual Recurring Revenue (ARR) concept via a 'composes' edge; the primary ARR reference for contextualising Opal's commercial contribution.",
+          "pre_selected": true
+        },
+        {
+          "id": "433093747_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Shared.DHW_SST_ARR_REPORT",
+          "description": "Shared DWH SST ARR report used as the cross-product ARR source of truth.",
+          "ai_reasoning": "Directly attached to the Annual Recurring Revenue (ARR) concept via a 'composes' edge; serves as the canonical ARR figure used in executive-level reporting.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "4": {
+      "question": "Which metrics and KPIs should power the **Opal AI Platform Usage** topic? We've pre-selected metrics directly connected to your 5 chosen concepts via `measured-by` graph edges, plus the canonical Opal usage KPIs that align with this domain's core questions. Deselect anything out of scope and add custom KPIs if needed.",
+      "selected": [
+        {
+          "id": "433180193_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Opti on Opti.Opal Usage and Adoption Metrics.SST Max Date",
+          "description": "The latest snapshot date available in the Opal daily usage source tables \u2014 used as a data freshness sentinel for the Opal Usage & Adoption dashboard.",
+          "ai_reasoning": "Directly attached to the Opal AI Platform Usage concept via a `measured-by` edge in the graph; the canonical data-currency indicator for this domain.",
+          "pre_selected": true
+        },
+        {
+          "id": "127235101_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Product.Metrics.ARR.Most Recent ARR",
+          "description": "The most recent cross-product ARR snapshot across all Optimizely product lines.",
+          "ai_reasoning": "Directly attached to the Annual Recurring Revenue (ARR) concept via a `measured-by` edge; provides the revenue baseline for evaluating Opal's commercial contribution.",
+          "pre_selected": true
+        },
+        {
+          "id": "127117235_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Product.Metrics.ARR.Total ARR",
+          "description": "Total ARR summed across all product lines and MCIDs.",
+          "ai_reasoning": "Directly attached to the Annual Recurring Revenue (ARR) concept via a `measured-by` edge; needed to contextualise Opal's incremental vs. cannibalized ARR share.",
+          "pre_selected": true
+        },
+        {
+          "id": "434033960_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Product.Metrics.Analytics.Analytics - Most Recent ARR",
+          "description": "Most recent ARR snapshot scoped to the Analytics product line.",
+          "ai_reasoning": "Directly attached to the Annual Recurring Revenue (ARR) concept via a `measured-by` edge; relevant for segmenting ARR by product line within the Opal cannibalization analysis.",
+          "pre_selected": true
+        },
+        {
+          "id": "434565452_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Users.Scott Levine.Opal - Total Threads",
+          "description": "Total count of Opal conversation threads initiated across all accounts and entry points.",
+          "ai_reasoning": "Primary volume KPI for the Opal AI Platform Usage domain; thread count is the top-level activity signal and the denominator for most agent-adoption rate metrics.",
+          "pre_selected": true
+        },
+        {
+          "id": "434670506_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Users.Scott Levine.Opal - WAU",
+          "description": "Weekly Active Users on the Opal platform.",
+          "ai_reasoning": "Core recency metric for platform usage; WAU is the standard engagement denominator for stickiness calculations and trend monitoring in this domain.",
+          "pre_selected": true
+        },
+        {
+          "id": "434106573_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Users.Scott Levine.Opal - Cumulative Users",
+          "description": "Running total of unique users who have ever engaged with Opal.",
+          "ai_reasoning": "Tracks total adoption growth over time \u2014 a key headline KPI for product leadership questions about Opal platform reach.",
+          "pre_selected": true
+        },
+        {
+          "id": "434670505_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Users.Scott Levine.Opal - Stickiness (DAU / WAU)",
+          "description": "Ratio of daily to weekly active users, measuring how habitually users return to Opal within a week.",
+          "ai_reasoning": "Standard engagement-depth KPI; a rising DAU/WAU ratio signals Opal is becoming a regular workflow tool rather than a one-off trial.",
+          "pre_selected": true
+        },
+        {
+          "id": "434670522_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Users.Scott Levine.Opal - Stickiness (WAU / MAU)",
+          "description": "Ratio of weekly to monthly active users, measuring medium-window retention.",
+          "ai_reasoning": "Complements DAU/WAU by capturing monthly retention patterns \u2014 together the two stickiness ratios answer 'are users forming lasting Opal habits?'",
+          "pre_selected": true
+        },
+        {
+          "id": "434565461_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Product.Metrics.Opal.Opal - % of Threads with an Agent Triggered",
+          "description": "Percentage of Opal threads in which at least one agent (OOTB or custom) was invoked.",
+          "ai_reasoning": "The primary agent-adoption depth metric; measures how often users move beyond basic chat to agent-powered workflows \u2014 a critical signal for Opal AI Content Generation value.",
+          "pre_selected": true
+        },
+        {
+          "id": "434565455_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Product.Metrics.Opal.Opal - % of Threads with an OOTB Agent Triggered",
+          "description": "Percentage of threads where an out-of-the-box Opal agent was used, excluding custom agents.",
+          "ai_reasoning": "Splits agent adoption by OOTB vs. custom; essential for the Opal Agent Registry concept since OOTB agent mix informs product roadmap prioritisation.",
+          "pre_selected": true
+        },
+        {
+          "id": "434560753_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Product.Metrics.Opal.EXP Opal - Account Utilization - Accounts Utilization % - L90D - Paid Accounts",
+          "description": "Share of paid EXP accounts that have actively used Opal in the last 90 days.",
+          "ai_reasoning": "Key account-level adoption KPI scoped to the Experimentation product line; directly relevant to the Product ARR Bridge concept's question of whether Opal drives net-new EXP value.",
+          "pre_selected": true
+        },
+        {
+          "id": "434560805_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Product.Metrics.Opal.CMP Opal - Account Utilization - Accounts Utilization % - L90D - Paid Accounts",
+          "description": "Share of paid CMP accounts that have actively used Opal in the last 90 days.",
+          "ai_reasoning": "Parallel adoption KPI for the CMP product line; together with the EXP variant it provides full cross-product Opal penetration coverage for the cannibalization analysis.",
+          "pre_selected": true
+        },
+        {
+          "id": "434583689_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Users.Alexander Wald.EXP - AI Assisted Experiments",
+          "description": "Count of Experimentation experiments where Opal AI assisted in creation or management.",
+          "ai_reasoning": "Core output metric for the Opal AI Content Generation concept; measures how many real experiments are being generated or modified by Opal agents.",
+          "pre_selected": true
+        },
+        {
+          "id": "434528628_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Product.Metrics.Opal.Opal - Median Credits - Paid Accounts",
+          "description": "Median credit consumption per paid Opal account.",
+          "ai_reasoning": "Consumption depth signal for paid accounts; median is preferred over mean to avoid outlier distortion \u2014 directly ties platform usage intensity to the credit economy context.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "5": {
+      "question": "Which events should the **Opal AI Platform Usage** topic track as signals of domain activity? We've pre-selected every event sourced from your 21 chosen datasets (step 3) that has a direct graph edge to at least one of your 5 core concepts (step 2). Events are grouped into three activity clusters below. Deselect anything out of scope or add extras if needed.",
+      "selected": [
+        {
+          "id": "433107263_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Shared.DWH_OPAL_DAILY_PRODUCT_ACCOUNT_USAGE",
+          "description": "Daily Opal usage aggregated at the product \u00d7 account level; the canonical source for product-line adoption and per-account activity trends.",
+          "ai_reasoning": "Directly connected to the Opal AI Platform Usage concept via a `composes` edge; the primary grain for answering 'which accounts are active on which product today?'",
+          "pre_selected": true
+        },
+        {
+          "id": "433107265_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Shared.DWH_OPAL_DAILY_USER_ACCOUNT_USAGE",
+          "description": "Daily Opal usage at the user \u00d7 account grain; captures individual user activity needed for DAU, WAU, MAU and the Stickiness KPIs selected in step 4.",
+          "ai_reasoning": "Directly connected to the Opal AI Platform Usage concept via a `composes` edge; the source that underpins the DAU/WAU and WAU/MAU stickiness metrics selected in step 4.",
+          "pre_selected": true
+        },
+        {
+          "id": "433107256_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Shared.DWH_OPAL_FINE_GRAINED_USAGE",
+          "description": "Fine-grained feature-interaction event stream across all Opal entry points; the most granular behavioural signal in this domain.",
+          "ai_reasoning": "Directly connected to the Opal AI Platform Usage concept via a `composes` edge; the only source with sub-thread feature-interaction resolution, required for any behavioural funnel analysis.",
+          "pre_selected": true
+        },
+        {
+          "id": "442488955_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Users.Sterling Nostedt.Opal_Daily_Usage",
+          "description": "Analyst-built daily Opal usage view that powers the Opal Usage & Adoption dashboard and is the source for the SST Max Date data-freshness sentinel.",
+          "ai_reasoning": "Directly connected to the Opal AI Platform Usage concept via a `composes` edge; the SST Max Date KPI selected in step 4 reads exclusively from this event.",
+          "pre_selected": true
+        },
+        {
+          "id": "446615142_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Users.Scott Levine.Product - Opal U Daily Summary",
+          "description": "Per-account daily Opal usage summary used in the Opal University dashboard; provides the account-level daily rollup view.",
+          "ai_reasoning": "Directly connected to the Opal AI Platform Usage concept via a `composes` edge; the account-level daily rollup that complements the user-level grain from DWH_OPAL_DAILY_USER_ACCOUNT_USAGE.",
+          "pre_selected": true
+        },
+        {
+          "id": "434598654_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Users.Scott Levine.Product - Opal Threads per User",
+          "description": "Thread-volume distribution bucketed per user; signals engagement depth and drives the THREADS_PER_USER_BUCKET segmentation dimension.",
+          "ai_reasoning": "Directly connected to the Opal AI Platform Usage concept via a `composes` edge; the THREADS_PER_USER_BUCKET dimension (from step 2 concepts) is derived exclusively from this event.",
+          "pre_selected": true
+        },
+        {
+          "id": "434632154_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Product.Datasets.Product - Opal Agents per Thread",
+          "description": "Agent invocation breadth per conversation; measures how many agents are called within a single thread, powering the AGENTS_PER_THREAD_BUCKET dimension.",
+          "ai_reasoning": "Connected to both Opal AI Platform Usage and Opal AI Content Generation via `composes` edges; a dual-purpose event bridging platform activity (thread volume) and content generation depth (agent breadth per thread).",
+          "pre_selected": true
+        },
+        {
+          "id": "434159960_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Product.Datasets.Product - Opal Generation Data",
+          "description": "Core AI content generation event stream capturing every generation request across all agents and accounts.",
+          "ai_reasoning": "Directly connected to the Opal AI Content Generation concept via a `composes` edge; the primary source for generation volume, type, and agent-level content activity \u2014 the deepest signal for AI output measurement.",
+          "pre_selected": true
+        },
+        {
+          "id": "434140224_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Users.Scott Levine.OPAL_DAILY_AGENT_ACCOUNT_GENERATION_USAGE",
+          "description": "Daily rollup of agent \u00d7 account generation usage; enables per-agent, per-account generation trend analysis without scanning raw records.",
+          "ai_reasoning": "Directly connected to the Opal AI Content Generation concept via a `composes` edge; the pre-aggregated daily grain makes it the efficient query surface for agent-level generation trends.",
+          "pre_selected": true
+        },
+        {
+          "id": "445847283_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Users.Scott Levine.SL - Opal Generation Records",
+          "description": "Raw individual Opal generation records; provides row-level generation data for ad-hoc and exploratory queries.",
+          "ai_reasoning": "Directly connected to the Opal AI Content Generation concept via a `composes` edge; the row-level grain is necessary for edge-case and exploratory analyses not served by the daily rollup.",
+          "pre_selected": true
+        },
+        {
+          "id": "446615143_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Users.Scott Levine.Product - Opal U Agent Detail",
+          "description": "Per-agent detail view used in the Opal University dashboard; provides agent-level breakdown of content generation and invocation activity.",
+          "ai_reasoning": "Directly connected to the Opal AI Content Generation concept via a `composes` edge; agent-level detail is needed to populate the Opal University dashboard views referenced in step 3.",
+          "pre_selected": true
+        },
+        {
+          "id": "442778974_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Users.Scott Levine.Product - AI Assisted Experiments Summary",
+          "description": "Analyst summary of AI-assisted experiment outcomes; links Opal generation activity to downstream experiment creation and management events.",
+          "ai_reasoning": "Directly connected to the Opal AI Content Generation concept via a `composes` edge; this event ties the EXP - AI Assisted Experiments metric (selected in step 4) back to the generation activity that produces it.",
+          "pre_selected": true
+        },
+        {
+          "id": "94966041_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Product.Datasets.Product - ARR Report",
+          "description": "Product-level ARR snapshot report segmented by MCID and product; provides the financial baseline needed to contextualise Opal's incremental vs. cannibalised revenue contribution.",
+          "ai_reasoning": "Directly connected to the Annual Recurring Revenue (ARR) concept via a `composes` edge; required to join ARR context onto Opal usage and cannibalization bridge analyses.",
+          "pre_selected": true
+        },
+        {
+          "id": "433107291_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Shared.DHW_SST_ARR_REPORT",
+          "description": "Shared DWH SST ARR report; the canonical cross-product ARR figure used in executive-level reporting and the product ARR bridge waterfall.",
+          "ai_reasoning": "Directly connected to the Annual Recurring Revenue (ARR) concept via a `composes` edge; this is the ARR source of truth that feeds both the Most Recent ARR and Total ARR metrics selected in step 4.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "6": {
+      "question": "Which business rules and definitions should the AI know when answering questions about **Opal AI Platform Usage**? We've pre-drafted definitions inferred from your selected concepts, datasets, and metrics \u2014 confirm the ones that are accurate, edit any that need adjusting, and add any missing rules.",
+      "selected": [
+        {
+          "id": "rule-account-tiers",
+          "type": "custom",
+          "label": "Account Tiers: Paid vs. EAP vs. Non-Paid",
+          "description": "Three account tiers govern which accounts appear in Opal metrics: (1) **Paid Accounts** \u2014 accounts with a signed, active Opal commercial contract; (2) **EAP Accounts** \u2014 Early Access Program accounts with Opal access but no commercial contract, used for testing and early feedback; (3) **Non-Paid Accounts** \u2014 all remaining accounts with some Opal access but outside the paid or EAP cohorts. Metrics labelled 'Paid Accounts' exclude both EAP and Non-Paid unless otherwise stated.",
+          "ai_reasoning": "The selected metrics explicitly split across Paid, EAP, and Non-Paid tiers (e.g., 'Opal - Median Credits - Paid Accounts' vs. 'EAP Accounts' vs. 'Non Paid Accounts'), so the AI must understand this classification to correctly scope any question about 'Opal accounts'.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-active-user-dau-wau-mau",
+          "type": "custom",
+          "label": "Active User / Account Definitions \u2014 DAU, WAU, MAU, L90D",
+          "description": "A user is counted as **Daily Active (DAU)** if they triggered at least one Opal event on the calendar day in question. **Weekly Active (WAU)** = at least one event in a rolling 7-day window. **Monthly Active (MAU)** = at least one event in a rolling 30-day window. An account is counted as active in the **L90D** window if any user within that account triggered at least one Opal usage event in the past 90 calendar days. All windows are rolling, not calendar-period aligned, and are anchored to SST Max Date.",
+          "ai_reasoning": "The selected stickiness metrics (DAU/WAU and WAU/MAU) and both account utilization KPIs (EXP L90D, CMP L90D) depend on these exact thresholds; without them the AI cannot correctly interpret or reproduce engagement figures.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-thread-definition",
+          "type": "custom",
+          "label": "Thread = Atomic Unit of Opal Engagement",
+          "description": "A **thread** is a single end-to-end Opal conversation session \u2014 the primary unit of platform engagement. One thread may contain zero agent invocations (pure conversational chat) or multiple agent invocations. Thread count is the top-level volume KPI and the denominator for all agent-adoption rate metrics (e.g., '% of Threads with an Agent Triggered'). A user opening Opal and sending a message always starts a new thread; a thread is not re-used across sessions.",
+          "ai_reasoning": "Thread is the foundational unit referenced across all selected usage datasets and metrics; the AI must understand this definition to correctly interpret questions about volume, depth, and agent adoption without confusing threads with sessions, events, or generations.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-ootb-vs-custom-agents",
+          "type": "custom",
+          "label": "OOTB Agents vs. Custom Agents",
+          "description": "**OOTB (Out-of-the-Box) agents** are Optimizely-shipped agents bundled with the standard Opal product, catalogued in 'Product - Opal OOTB Agents' with release dates and product mappings. **Custom agents** are built by customers or partners for specific use cases, catalogued separately in 'Product - Custom Agents'. Metrics scoped to 'OOTB Agent Triggered' exclude custom agents and vice versa. The AGENTS_PER_THREAD_BUCKET dimension counts invocations of both types combined unless an explicit agent-type filter is applied.",
+          "ai_reasoning": "The selected Opal Agent Registry concept exists specifically to make this distinction; the graph has two separate catalog datasets (OOTB Agents vs. Custom Agents), and two separate adoption metrics split on this boundary, so the AI must understand it to avoid conflating agent categories.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-cannibalization-vs-incremental",
+          "type": "custom",
+          "label": "Opal Cannibalization vs. Opal Incremental ARR \u2014 Do Not Sum",
+          "description": "**OPAL_CANNIBALIZATION** = ARR that shifted from an existing Optimizely product line subscription into an Opal contract. It represents revenue retained at the company level but attributed to Opal at the expense of the originating product's ARR \u2014 it is a zero-sum transfer, not growth. **OPAL_INCREMENTAL** = net-new ARR directly attributable to Opal that would not have existed under any prior product line \u2014 this is genuine new revenue. These two columns must **never be summed together** into a single 'Opal ARR impact' figure; they answer fundamentally different questions and require separate analysis.",
+          "ai_reasoning": "The Product ARR Bridge & Opal Cannibalization concept is a core selected concept, and misinterpreting these two columns \u2014 e.g., summing them to show 'total Opal revenue contribution' \u2014 would produce a materially misleading figure that conflates growth with revenue migration.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-ccfx-constant-currency",
+          "type": "custom",
+          "label": "ARR Movement Figures Are Constant-Currency (CCFX) \u2014 Not Nominal",
+          "description": "All ARR movement columns in the product bridge dataset (PRODUCT_ARR_CHANGE_CCFX, OPAL_CANNIBALIZATION, OPAL_INCREMENTAL) are expressed in **constant-currency FX (CCFX)** \u2014 exchange-rate fluctuations are removed so that period-over-period changes reflect genuine business activity, not currency movements. When comparing Opal's ARR contribution across periods, always use CCFX figures. Point-in-time ARR snapshots from the ARR Report or DHW_SST_ARR_REPORT may be in local/nominal currency; do not mix CCFX and nominal values in the same analysis.",
+          "ai_reasoning": "The ARR Churn dataset description explicitly references constant-currency records, and the PRODUCT_ARR_CHANGE_CCFX column naming confirms CCFX adjustment; without this rule the AI may mix nominal and constant-currency figures in YoY or QoQ comparisons.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-generation-definition",
+          "type": "custom",
+          "label": "Generation = Discrete AI Content-Creation Request (\u2260 Thread, \u2260 Feature Event)",
+          "description": "A **generation** is a discrete AI content-creation request processed by an Opal agent \u2014 for example, drafting marketing copy, proposing experiment variants, or generating audience recommendations. It is distinct from a **thread** (the conversation container) and from a **fine-grained feature event** (a UI interaction such as opening the sidebar or clicking a button). A single thread may produce zero, one, or many generations. Generation volume and agent-level generation breakdowns should be sourced from 'Product - Opal Generation Data' or 'OPAL_DAILY_AGENT_ACCOUNT_GENERATION_USAGE', not from the thread-level usage tables.",
+          "ai_reasoning": "The Opal AI Content Generation concept has its own dedicated event sources distinct from platform usage tables; without this definition the AI may incorrectly use thread-level data to answer generation-volume questions or vice versa.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-opal-entry-points",
+          "type": "custom",
+          "label": "Opal Entry Points: Purple Button, Chat Sidebar, Standalone Agents",
+          "description": "Opal is accessible via multiple product entry points: the **Purple Button** (in-context AI assist embedded in the CMP and EXP UI), the **Opal Chat sidebar** (general-purpose conversational interface), and **Standalone Agents** (direct agent access outside a standard product workflow). Platform-level usage metrics in DWH_OPAL_DAILY_PRODUCT_ACCOUNT_USAGE and DWH_OPAL_DAILY_USER_ACCOUNT_USAGE aggregate across ALL entry points unless the question explicitly filters to one. The fine-grained usage dataset (DWH_OPAL_FINE_GRAINED_USAGE) is the only source that captures entry-point granularity.",
+          "ai_reasoning": "Several selected metrics explicitly reference the Purple Button separately from specialized agents (e.g., 'Total Accounts Using Purple Button - L90D - Paid Accounts'), making entry-point taxonomy essential for the AI to distinguish partial from total Opal engagement.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-account-utilization-formula",
+          "type": "custom",
+          "label": "Account Utilization % Formula: Active Paid Accounts \u00f7 Total Eligible Paid Accounts (L90D)",
+          "description": "The **Account Utilization %** KPI (for both CMP Opal and EXP Opal) is computed as: (number of paid accounts with at least one Opal usage event in the last 90 days) \u00f7 (total paid accounts eligible for Opal in that product). 'Eligible' means the account holds a valid Opal entitlement in the product, regardless of whether they have ever used it. The denominator comes from 'Total Accounts Eligible - Paid Accounts' metrics; the numerator from 'Accounts Utilization % - L90D - Paid Accounts'. L90D is a rolling window anchored to SST Max Date, not calendar month-end.",
+          "ai_reasoning": "The denominator definition ('eligible' vs. 'all accounts') is the most common source of incorrect utilization rate calculations; making this explicit ensures the AI computes and describes EXP and CMP adoption rates consistently with how they are defined in the selected metrics.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-sst-max-date",
+          "type": "custom",
+          "label": "SST Max Date Is a Data-Freshness Sentinel, Not a Business Metric",
+          "description": "**SST Max Date** represents the latest snapshot date for which Opal usage data has been loaded into the source tables. It is a data-freshness indicator used to anchor 'as-of' queries and prevent counting zero-activity days not yet ingested. It should never be interpreted as a business event date or included in trend calculations. If SST Max Date lags the current calendar date by more than 2 days, data should be flagged as potentially stale and downstream metrics treated with caution.",
+          "ai_reasoning": "SST Max Date is the sole freshness metric selected in step 4, and questions about 'current' Opal usage must be anchored to it \u2014 the AI must not confuse it with a KPI or treat missing data between SST Max Date and today as zero-activity.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-product-line-scope",
+          "type": "custom",
+          "label": "Opal Is Cross-Product: CMP, EXP, and Future Products",
+          "description": "Opal is not a standalone product \u2014 it is an AI layer deployed across multiple Optimizely product lines. For this topic, the primary host products are **CMP** (Content Marketing Platform) and **EXP** (Experimentation). Agent invocations are mapped to their parent product via 'Product - Opal Product Mapping'. Cross-product Opal usage (where a single account uses Opal within both CMP and EXP) should be counted once at the account level but separately at the product-account level to avoid double-counting in utilization metrics.",
+          "ai_reasoning": "The Opal Agent Registry maps agents to parent products (CMP, EXP), and the selected datasets are partitioned at the product-account grain; without this rule the AI may double-count accounts that use Opal across multiple products when answering 'how many accounts use Opal?' questions.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "7": {
+      "question": "Are there terms used in **Opal AI Platform Usage** that could be misinterpreted \u2014 either by the AI or by users querying this topic? Each pair below names an ambiguous term and clarifies which meaning applies *within this topic* versus how that term is used elsewhere in Optimizely Analytics. Confirm the pairs that are accurate, deselect any that don't apply, and add any ambiguities we may have missed.",
+      "selected": [
+        {
+          "id": "disambig-agent",
+          "type": "custom",
+          "label": "\"Agent\" = Opal AI Agent (OOTB or Custom) \u2014 NOT a Human Sales Rep, CSM, or Support Agent",
+          "description": "Within this topic, **agent** always refers to an Opal AI agent \u2014 either an out-of-the-box (OOTB) agent shipped by Optimizely or a customer-built custom agent, catalogued in `Product - Opal OOTB Agents` and `Product - Custom Agents`. It does NOT mean a human account executive, customer success manager, SDR, or support agent. A question like 'which agents are most active this quarter?' must be answered from the Opal agent registry and invocation datasets \u2014 not from `OPPORTUNITY_OWNER_NAME`, `CSM_NAME`, or `GS_OPAL_PERFORMANCE_BY_REP` tables.",
+          "ai_reasoning": "The term 'agent' is used in both the Opal AI domain (AI agents catalogued in the Opal Agent Registry) and throughout the GTM/CS domain (sales agents, CS agents); several selected metrics reference 'agent' (e.g., '% of Threads with an Agent Triggered') while the graph also contains Sales Rep Performance and GTM Account Coverage concepts with their own agent-like personnel fields \u2014 without this pair the AI may conflate the two.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-usage-vs-engagement",
+          "type": "custom",
+          "label": "\"Usage\" (in Opal context) = Opal Platform Activity (Threads, Users, Events) \u2014 NOT General CMP/EXP Product Engagement",
+          "description": "In this topic, **usage** refers exclusively to Opal AI platform activity: thread counts, user-level Opal events, and feature interactions sourced from `DWH_OPAL_DAILY_PRODUCT_ACCOUNT_USAGE`, `DWH_OPAL_DAILY_USER_ACCOUNT_USAGE`, and `DWH_OPAL_FINE_GRAINED_USAGE`. It does NOT refer to general CMP or EXP product engagement metrics such as `CMP - Monthly Engaged Paying Accounts` or `EXP - Engaged Accounts`, which belong to the separate **Product Engagement** concept. A question about 'Opal usage trends' should route to Opal daily usage tables \u2014 not to product engagement dashboards.",
+          "ai_reasoning": "The graph has an explicit `distinct-from` edge between Opal AI Platform Usage and Product Engagement; both domains share the MCID/account key and use the word 'usage', making it highly likely the AI will blend Opal-specific activity figures with CMP/EXP engaged-account counts when broad usage questions are asked.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-account-utilization",
+          "type": "custom",
+          "label": "\"Account Utilization\" = Opal Adoption Rate (Active Paid Accounts \u00f7 Eligible Paid Accounts, L90D) \u2014 NOT Product Contract Utilization (Monthly Usage vs. Contract Limit)",
+          "description": "In this topic, **account utilization** refers to the Opal-specific KPI defined in step 6: (active paid accounts with \u22651 Opal event in L90D) \u00f7 (total eligible paid accounts). This is sourced from `EXP Opal - Account Utilization % - L90D - Paid Accounts` and its CMP equivalent. It does NOT mean **Product Contract Utilization** \u2014 the separate graph concept that measures how much of a product's contracted consumption limit (`MONTHLY_USAGE` vs. `CONTRACT_USAGE`) a customer has used, sourced from `All_Prodcut_Usage`. These two questions require completely different datasets and denominators.",
+          "ai_reasoning": "The graph contains a distinct Product Contract Utilization concept with its own dataset; both concepts use 'utilization' in their names and both operate at the account level \u2014 without this pair the AI may route 'account utilization' questions to the contract consumption tables rather than the Opal adoption KPIs selected in step 4.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-generation",
+          "type": "custom",
+          "label": "\"Generation\" = Discrete Opal AI Content-Creation Request \u2014 NOT a Product Generation (Era), Customer Cohort Generation, or Marketing Lead Generation",
+          "description": "In this topic, **generation** means a single AI content-creation request processed by an Opal agent \u2014 for example, drafting marketing copy, proposing experiment variants, or generating audience recommendations \u2014 sourced from `Product - Opal Generation Data` or `OPAL_DAILY_AGENT_ACCOUNT_GENERATION_USAGE`. It does NOT mean a product generation (e.g., 'next-gen platform'), an age cohort, or marketing demand generation (leads/MQLs). Queries about 'generation counts' must route to Opal content generation tables, not to `GS_MARKETING_FULL_FUNNEL_SDR_*` or ARR cohort datasets.",
+          "ai_reasoning": "The term 'generation' is heavily overloaded; the Opal AI Content Generation concept was selected as a distinct concept from Opal AI Platform Usage precisely because it has its own event sources \u2014 the AI must not conflate generation-volume questions with thread-volume questions or route them to the Marketing Demand Generation & SDR Funnel concept that also uses 'generation' prominently.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-opal-engagement-vs-product-tiers",
+          "type": "custom",
+          "label": "\"Opal Engagement\" = Thread/User Activity Signals (DAU, WAU, Stickiness) \u2014 NOT CMP/EXP Engagement Tiers (Core, Casual, Dormant, Power)",
+          "description": "Within this topic, asking about **Opal engagement** should yield Opal-specific activity metrics: thread counts, DAU/WAU/MAU, and Stickiness ratios from the selected user/product account usage datasets. It does NOT refer to CMP engagement tier classifications (`CMP - Core Accounts`, `CMP - Casual Accounts`, `CMP - Dormant Accounts`, `CMP - Power Accounts`) or EXP engaged/non-engaged account splits \u2014 those belong to the Product Engagement concept and are computed from entirely different sources with different definitions of 'engaged'.",
+          "ai_reasoning": "Several selected metrics (Stickiness DAU/WAU, WAU/MAU) use the language of engagement, while the graph also contains a distinct Product Engagement concept with its own CMP tier metrics; both share account-level granularity and the word 'engaged', creating a strong risk of the AI blending Opal stickiness figures with CMP dormancy tier counts in response to broad questions like 'how engaged are our accounts with Opal?'",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-opal-arr",
+          "type": "custom",
+          "label": "\"Opal ARR\" = OPAL_INCREMENTAL Column Only \u2014 NOT OPAL_CANNIBALIZATION, Not Total Company ARR, Not Product-Line ARR Snapshots",
+          "description": "When a query asks about **Opal's ARR contribution or impact**, the correct answer depends critically on column choice: `OPAL_INCREMENTAL` = net-new ARR genuinely added by Opal (the right answer for 'how much ARR has Opal generated?'); `OPAL_CANNIBALIZATION` = ARR migrated from existing product lines into Opal contracts (a zero-sum transfer, not growth); Total Company ARR (from `Product - ARR Report` / `DHW_SST_ARR_REPORT`) = all Optimizely ARR across all products (not Opal-specific). These three must never be conflated. This topic does not track 'Opal ARR' as a standalone balance \u2014 it analyses Opal's revenue impact through the waterfall bridge methodology using the `GS_SST_PRODUCT_BRIDGE_PRODUCT_GROUP_EROSION_REGIONAL_BRIDGE` dataset.",
+          "ai_reasoning": "Step 6 already defines that OPAL_CANNIBALIZATION and OPAL_INCREMENTAL must not be summed; this disambiguation extends that rule to query routing \u2014 the AI must apply the correct column and ask a clarifying question when a user asks 'what is Opal's ARR?' without specifying incremental vs. cannibalized vs. total, rather than defaulting to Total ARR or summing all three.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-thread-vs-session",
+          "type": "custom",
+          "label": "\"Thread\" = Opal Conversation Unit \u2014 NOT a Web/Browser Session, Product Interaction Session, or Software Thread",
+          "description": "In this topic, **thread** is the atomic unit of Opal engagement: a single end-to-end Opal conversation from first message to close, as defined in step 6. It is NOT equivalent to a web analytics session in CMP/EXP (tracked via Segment in `Product - Segment Event Data`), a Userflow interaction session (`Product - Userflow Data`), or a software execution thread. Thread count is the top-level Opal volume KPI and the denominator for agent-adoption rate metrics. Questions about 'user sessions' or 'product visits' in CMP/EXP must not be answered using Opal thread-level tables.",
+          "ai_reasoning": "The selected usage datasets aggregate at the thread grain while the Product In-App Behavioral Analytics concept \u2014 which has an explicit `distinct-from` edge with Opal AI Platform Usage \u2014 tracks product sessions via Segment events; both operate on the same user/account identifiers, making it easy for the AI to inadvertently mix Opal thread counts with CMP/EXP session counts when answering user-activity questions.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-opal-usage-vs-onboarding",
+          "type": "custom",
+          "label": "\"Opal Adoption\" / \"Active Usage\" \u2260 \"Opal Onboarding Status\" \u2014 Onboarding Stage Labels Are Not Engagement Indicators",
+          "description": "An account can have `Onboarding Status = 'Onboarding Complete'` in `Product - Opal Onboarding Snapshots` yet show low or zero active Opal usage \u2014 and vice versa, an account can be actively generating threads and triggering agents before formal onboarding is completed. **Active Opal usage** must be measured from thread/user activity datasets (`DWH_OPAL_DAILY_USER_ACCOUNT_USAGE`, `DWH_OPAL_DAILY_PRODUCT_ACCOUNT_USAGE`), not from onboarding status flags. The onboarding stage labels that appear as sub-dimensions in credit metrics (e.g., 'Opal - Median Credits - Paid Accounts - Onboarding Kicked Off') are segmentation filters, not proxies for engagement level.",
+          "ai_reasoning": "The graph has a distinct Opal Onboarding concept (not selected for this topic) with its own dataset; the step 6 credit-tier metrics are broken down by onboarding stage, which could mislead the AI into treating onboarding completion as an active-usage signal \u2014 this pair prevents that misinterpretation.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "8": {
+      "question": "How should the **Opal AI Platform Usage** topic grow over time as new datasets, metrics, and concepts are added to Optimizely Analytics? Choose an expansion policy that controls how far the AI is allowed to automatically pull in related entities beyond the 5 concepts, 21 datasets, 15 metrics, and 14 events you have explicitly confirmed in steps 1\u20137.",
+      "selected": [
+        {
+          "id": "policy-moderate",
+          "type": "policy",
+          "label": "Moderate \u2014 Depth 2, Human-Confirmed \u2726 Recommended",
+          "description": "Entities up to 2 hops from your 5 confirmed root concepts are eligible for inclusion, but only after human confirmation. In practice this means new Opal-adjacent datasets (e.g., a future 'Opal Agent Performance' dataset connected to the Opal Agent Registry) will appear as pending suggestions in the topic review queue rather than being silently added. The AI may propose additions but cannot commit them unilaterally.",
+          "ai_reasoning": "Moderate is the right default for a topic that is tightly scoped today but is tracking an actively evolving product (Opal). New agents, entry points, and usage tables will continue to emerge; depth-2 coverage ensures those additions surface for review without requiring the admin to manually re-run the checklist each time, while the human-confirmation gate preserves the disambiguation boundaries established in step 7.",
+          "pre_selected": true
+        }
+      ]
+    }
+  },
+  "concept_cluster": {
+    "concept_ids": [
+      "c-30fc2a3f",
+      "c-c1121d27",
+      "c-e5ae80de",
+      "c-de319aa6",
+      "c-b143d3b5",
+      "c-f0f63ad8"
+    ],
+    "concept_names": [
+      "Opal AI Platform Usage",
+      "Opal Agent Registry",
+      "Product ARR Bridge & Opal Cannibalization",
+      "Opal AI Content Generation",
+      "Annual Recurring Revenue (ARR)",
+      "Product Contract Utilization"
+    ],
+    "internal_edges": 5
+  }
+}

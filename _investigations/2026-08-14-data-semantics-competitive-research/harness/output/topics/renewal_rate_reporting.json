@@ -1,0 +1,383 @@
+{
+  "name": "Renewal Rate Reporting",
+  "checklist_state": {
+    "1": {
+      "question": "What is this business topic about? Please provide a name and a short description (2\u20134 sentences) covering what this domain tracks, why it matters to your business, and who typically uses it.",
+      "answer": "Renewal Rate Reporting. Covers: Customer Renewal, Renewal Rate Reporting"
+    },
+    "2": {
+      "question": "Which core business concepts does this topic cover? These concepts become the semantic anchors connecting your datasets, metrics, and events. We've pre-selected the concepts already in the graph that are most strongly related to Renewal Rate Reporting \u2014 accept the defaults or adjust as needed.",
+      "selected": [
+        {
+          "id": "c-3e6a8fd4",
+          "type": "concept",
+          "label": "Renewal Rate Reporting",
+          "description": "Executive-level reporting suite measuring Optimizely's renewal performance by product group, product solution, and individual customer. Drives ARR_RENEWAL and ARR_CHURN metrics across five core datasets.",
+          "ai_reasoning": "Directly named in your step 1 description as the primary topic name \u2014 this is the root concept for the entire domain.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-ab4eedd6",
+          "type": "concept",
+          "label": "Customer Renewal",
+          "description": "Manages and tracks renewal opportunities for existing Optimizely customers at contract expiry, including product-line renewal opportunities and ICP prioritisation of renewal effort.",
+          "ai_reasoning": "Explicitly listed in your step 1 answer as one of the two named areas this topic covers; it is the operational process that Renewal Rate Reporting measures.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-30591dce",
+          "type": "concept",
+          "label": "Customer Churn & Downgrade",
+          "description": "Tracks customers who have cancelled or reduced their Optimizely subscriptions, covering downgrade amounts, annual price contraction, and CSM accountability.",
+          "ai_reasoning": "Renewal Rate Reporting has a direct 'informs' edge to this concept, and ARR_CHURN is a measured-by column in the renewal datasets \u2014 churn is the inverse outcome that defines a failed renewal.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-b143d3b5",
+          "type": "concept",
+          "label": "Annual Recurring Revenue (ARR)",
+          "description": "Tracks Optimizely's annual recurring revenue at product and account level, including snapshot and most-recent ARR metrics across all product lines.",
+          "ai_reasoning": "Renewal rates are fundamentally a ratio of ARR renewed vs. ARR at risk; the ARR_RENEWAL column in the renewal datasets is denominated in ARR terms, making this concept a core financial anchor.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-d42acaed",
+          "type": "concept",
+          "label": "Customer Risk Intervention (CTA)",
+          "description": "Tracks Gainsight Call-to-Action records representing discrete, triggered risk interventions for at-risk customer accounts, quantifying ARR exposed to risk.",
+          "ai_reasoning": "This concept has a direct 'informs' edge to Customer Renewal in the graph \u2014 CTAs are the proactive upstream signal that CS teams act on to protect renewal outcomes.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "3": {
+      "question": "Which datasets power your Renewal Rate Reporting topic? We've pre-selected every dataset connected to your 5 chosen concepts via graph edges \u2014 accept the defaults or adjust as needed.",
+      "selected": [
+        {
+          "id": "434426829_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "DWH_EXEC_DECK_RENEWAL_RATES_PRODUCT_GROUP",
+          "description": "DWH-layer executive deck renewal rates segmented by product group. Contains ARR_RENEWAL and ARR_CHURN columns and is the primary product-group analytics source for renewal performance.",
+          "ai_reasoning": "Directly attached to the Renewal Rate Reporting concept via a 'composes' edge \u2014 this is one of the five core datasets that define the topic.",
+          "pre_selected": true
+        },
+        {
+          "id": "434426812_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "DWH_EXEC_DECK_RENEWAL_RATES_PRODUCT_SOLUTION",
+          "description": "DWH-layer executive deck renewal rates segmented by product solution, providing the solution-level dimension of renewal performance.",
+          "ai_reasoning": "Directly attached to the Renewal Rate Reporting concept via a 'composes' edge \u2014 supplies the product-solution analytical lens used in exec reporting.",
+          "pre_selected": true
+        },
+        {
+          "id": "434426800_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "DWH_EXEC_DECK_RENEWAL_RATES_CUSTOMER",
+          "description": "DWH-layer executive deck renewal rates at individual customer level \u2014 enables drill-down from portfolio to account.",
+          "ai_reasoning": "Directly attached to the Renewal Rate Reporting concept via a 'composes' edge \u2014 provides the customer-level granularity needed for account-specific renewal analysis.",
+          "pre_selected": true
+        },
+        {
+          "id": "442784105_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "EXEC_DECK_RENEWAL_RATES_PRODUCT_GROUP (Despi Evangelakou)",
+          "description": "Analyst-maintained, user-space version of the product-group renewal rates dataset used in live executive dashboards.",
+          "ai_reasoning": "Directly attached to the Renewal Rate Reporting concept via a 'composes' edge \u2014 this is the analyst-owned copy likely powering active dashboard views.",
+          "pre_selected": true
+        },
+        {
+          "id": "442784083_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "EXEC_DECK_RENEWAL_RATES_CUSTOMER (Despi Evangelakou)",
+          "description": "Analyst-maintained, user-space version of the customer-level renewal rates dataset.",
+          "ai_reasoning": "Directly attached to the Renewal Rate Reporting concept via a 'composes' edge \u2014 the analyst-owned counterpart to DWH_EXEC_DECK_RENEWAL_RATES_CUSTOMER.",
+          "pre_selected": true
+        },
+        {
+          "id": "434236834_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "DWH_RENEWAL_OPPORTUNITY",
+          "description": "Shared DWH dataset of renewal opportunities for existing customers at contract expiry, including product-line opportunity records and ICP prioritisation flags.",
+          "ai_reasoning": "Directly attached to the Customer Renewal concept via a 'composes' edge \u2014 this is the canonical opportunity-level dataset that drives renewal pipeline tracking.",
+          "pre_selected": true
+        },
+        {
+          "id": "434105072_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Product - Opportunities (Scott Levine)",
+          "description": "Product-team view of renewal opportunities with ICP account flags, close dates, and opportunity line IDs; complements the DWH renewal opportunity dataset.",
+          "ai_reasoning": "Directly attached to the Customer Renewal concept via a 'composes' edge \u2014 adds ICP prioritisation and product-line detail on top of the core opportunity data.",
+          "pre_selected": true
+        },
+        {
+          "id": "440656914_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "CHURN DATASET",
+          "description": "Tracks cancelled and downgraded Optimizely subscriptions, including downgrade amounts, annual price contraction, and CSM attribution.",
+          "ai_reasoning": "Directly attached to the Customer Churn & Downgrade concept via a 'composes' edge \u2014 churn is the inverse outcome of renewal, and ARR_CHURN is a key measured column in renewal rate calculations.",
+          "pre_selected": true
+        },
+        {
+          "id": "444179879_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Stalled & Ageing Pipe - Cohort 2",
+          "description": "Tracks stalled and ageing pipeline deals; connected to both Customer Churn & Downgrade and Sales Pipeline concepts, surfacing renewal opportunities at risk of slipping to churn.",
+          "ai_reasoning": "Directly attached to the Customer Churn & Downgrade concept via a 'composes' edge \u2014 useful for identifying renewal deals that are ageing without progression, a leading churn signal.",
+          "pre_selected": true
+        },
+        {
+          "id": "434568132_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "GS_CTA_CAMPAIGN",
+          "description": "Gainsight Call-to-Action campaign records representing triggered risk interventions for at-risk accounts, with ARR exposure (CTA_ARR) and intervention reason.",
+          "ai_reasoning": "Directly attached to the Customer Risk Intervention (CTA) concept via a 'composes' edge \u2014 CTAs are the upstream proactive signals CS teams act on to protect renewal outcomes.",
+          "pre_selected": true
+        },
+        {
+          "id": "433093039_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "GS_CTA_SUMMARY",
+          "description": "Gainsight CTA summary records providing aggregated at-risk ARR, intervention status, and territory breakdown per account.",
+          "ai_reasoning": "Directly attached to the Customer Risk Intervention (CTA) concept via a 'composes' edge \u2014 provides the summary-level intervention view used to track renewal risk exposure.",
+          "pre_selected": true
+        },
+        {
+          "id": "433093747_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "DHW_SST_ARR_REPORT",
+          "description": "Shared DWH ARR report providing the ARR baseline across all products and accounts \u2014 the denominator in renewal rate calculations.",
+          "ai_reasoning": "Directly attached to the Annual Recurring Revenue (ARR) concept via a 'composes' edge \u2014 renewal rates are fundamentally ARR renewed \u00f7 ARR at risk, so this baseline is structurally required.",
+          "pre_selected": true
+        },
+        {
+          "id": "94965969_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Product - ARR Report",
+          "description": "Product-level ARR report with account and product-line ARR snapshots, used for product-group and customer-level segmentation.",
+          "ai_reasoning": "Directly attached to the Annual Recurring Revenue (ARR) concept via a 'composes' edge \u2014 enables ARR segmentation by product group needed for the product-group renewal rate view.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "4": {
+      "question": "Which metrics and KPIs should this topic track? We've pre-selected the metrics most strongly connected to your 5 chosen concepts \u2014 accept the defaults or adjust as needed. You can also define a new KPI if what you need isn't in the list yet.",
+      "selected": [
+        {
+          "id": "434430093_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Global Renewal Rate",
+          "description": "Company-wide renewal rate percentage \u2014 Optimizely's top-line executive KPI for renewal performance across all product groups.",
+          "ai_reasoning": "This is the headline KPI for this topic, authored by the same analyst (Michael Graves) who owns the DWH exec deck renewal datasets selected in step 3 \u2014 it is the direct output metric of those datasets.",
+          "pre_selected": true
+        },
+        {
+          "id": "434427139_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Product Group Renewal Rate",
+          "description": "Renewal rate percentage segmented by product group \u2014 the primary product-group-level breakdown in the exec renewal deck.",
+          "ai_reasoning": "Directly mirrors the DWH_EXEC_DECK_RENEWAL_RATES_PRODUCT_GROUP dataset selected in step 3; this is the product-group dimension of the global renewal rate.",
+          "pre_selected": true
+        },
+        {
+          "id": "434429918_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Product Group Renewal Rate MG newest",
+          "description": "The most recently updated iteration of the product group renewal rate metric \u2014 likely the version currently powering live executive dashboards.",
+          "ai_reasoning": "Flagged as 'newest' by the analyst, suggesting it supersedes the previous Product Group Renewal Rate version and is the active metric in use.",
+          "pre_selected": true
+        },
+        {
+          "id": "434427425_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Product Group Renewal",
+          "description": "Absolute ARR_RENEWAL amount by product group \u2014 the raw dollar numerator behind the Product Group Renewal Rate percentage.",
+          "ai_reasoning": "Provides the ARR-denominated renewal volume per product group, giving dollar context to accompany the renewal rate percentage KPIs.",
+          "pre_selected": true
+        },
+        {
+          "id": "127235101_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "ARR \u2014 Most Recent ARR",
+          "description": "The most recent ARR snapshot across all products and accounts \u2014 the portfolio-level denominator for renewal rate calculations.",
+          "ai_reasoning": "Directly connected to the Annual Recurring Revenue (ARR) concept via a 'measured-by' graph edge; renewal rate = ARR_RENEWAL \u00f7 ARR at risk, making this metric a structural dependency.",
+          "pre_selected": true
+        },
+        {
+          "id": "127117235_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "ARR \u2014 Total ARR",
+          "description": "Total ARR across all Optimizely products and accounts \u2014 the full portfolio baseline from which renewal exposure is calculated.",
+          "ai_reasoning": "Connected to the Annual Recurring Revenue (ARR) concept via a 'measured-by' edge; establishes the base ARR pool from which churn and renewal rates are derived.",
+          "pre_selected": true
+        },
+        {
+          "id": "433098806_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "CMP \u2014 Dormant Accounts",
+          "description": "Count of CMP accounts with no active usage \u2014 a leading churn signal and a proxy for high-risk renewal accounts in the CMP product line.",
+          "ai_reasoning": "Directly connected to the Customer Churn & Downgrade concept via a 'measured-by' graph edge; dormant accounts are a key leading indicator of non-renewal in the CMP line.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "5": {
+      "question": "Which events signal activity in your Renewal Rate Reporting topic? Events are the time-stamped data streams the AI monitors as activity indicators. We've pre-selected the events that are connected to your chosen concepts and datasets \u2014 accept the defaults or adjust as needed.",
+      "selected": [
+        {
+          "id": "434564357_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Product - Opportunities (Scott Levine)",
+          "description": "Event stream tracking renewal opportunity records for existing Optimizely customers \u2014 captures opportunity creation and updates including ICP flags, close dates, and product-line opportunity IDs.",
+          "ai_reasoning": "Directly linked to the Customer Renewal concept via a 'tracked-in' graph edge \u2014 this is the primary activity signal recording when a renewal opportunity is opened or progressed, making it the strongest renewal pipeline event in the system.",
+          "pre_selected": true
+        },
+        {
+          "id": "433107291_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Shared.DHW_SST_ARR_REPORT",
+          "description": "Shared DWH ARR report event providing the cross-product ARR baseline across all accounts \u2014 the denominator in renewal rate calculations.",
+          "ai_reasoning": "Connected to the Annual Recurring Revenue (ARR) concept via a 'composes' edge as an event-type entity, and DHW_SST_ARR_REPORT was selected in step 3 as a core dataset \u2014 ARR snapshot events are the foundational signal from which renewal rate percentages are computed.",
+          "pre_selected": true
+        },
+        {
+          "id": "94966041_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Product.Datasets.Product - ARR Report",
+          "description": "Product-level ARR report event with account and product-line ARR snapshots, enabling product-group and customer-level renewal rate segmentation.",
+          "ai_reasoning": "Connected to the Annual Recurring Revenue (ARR) concept via a 'composes' edge as an event-type entity, and Product - ARR Report was selected in step 3 \u2014 this event provides the ARR signal needed to calculate product-group-level renewal rates, complementing the DWH SST ARR event above.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "6": {
+      "question": "Which business rules and definitions should the AI know for Renewal Rate Reporting? We've pre-suggested rules inferred from your selected datasets, concepts, and columns \u2014 confirm, edit, or add your own. Accepted definitions will be stored as execution hints that guide the AI when answering renewal-related questions.",
+      "selected": [
+        {
+          "id": "rule-renewal-rate-formula",
+          "type": "custom",
+          "label": "Renewal Rate = ARR_RENEWAL \u00f7 (ARR_RENEWAL + ARR_CHURN), calculated separately at product-group, product-solution, and individual-customer grain using the three exec deck datasets.",
+          "description": "Defines the standard numerator and denominator for the renewal rate percentage shown in executive reporting.",
+          "ai_reasoning": "ARR_RENEWAL and ARR_CHURN are both measured-by columns on the Renewal Rate Reporting concept, and the three grain-level exec deck datasets selected in step 3 each carry these columns \u2014 the formula is directly implied by the dataset structure.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-churn-vs-downgrade",
+          "type": "custom",
+          "label": "Churn = full contract cancellation (100% of ARR lost, recorded in the CHURN DATASET). Downgrade = contract continues but ARR is reduced (AP_SPREAD_PCT < 0 and DOWNGRADE_AMOUNT > 0). Both contribute to ARR_CHURN but must not be aggregated interchangeably.",
+          "description": "Distinguishes full churn from partial downgrade, which are tracked as different record types and drive different CS responses.",
+          "ai_reasoning": "The Customer Churn & Downgrade concept has DOWNGRADE_AMOUNT and AP_SPREAD_PCT as distinct derives-from columns, signalling that the system treats these as separate outcomes rather than a single 'lost' category.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-icp-prioritization",
+          "type": "custom",
+          "label": "Renewal opportunities where ICP_ACCOUNT = TRUE are treated as priority pipeline. Non-ICP accounts are tracked but receive lower CS effort allocation and should be segmented separately in exec reporting.",
+          "description": "Defines how the ICP flag governs prioritisation logic across DWH_RENEWAL_OPPORTUNITY and Product - Opportunities datasets.",
+          "ai_reasoning": "ICP_ACCOUNT is a segmented-by column on the Customer Renewal concept and appears in both renewal opportunity datasets selected in step 3 \u2014 without this rule the AI would flatten ICP and non-ICP renewals into a single pool.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-qbr-filter",
+          "type": "custom",
+          "label": "QBR_CREATED = TRUE rows are the only rows that feed official QBR executive deck reporting. Queries reproducing exec-level renewal rates must filter to QBR_CREATED = TRUE; ad-hoc analysis may use all rows.",
+          "description": "Defines the filtering rule for the QBR_CREATED segmentation column present in the exec deck renewal datasets.",
+          "ai_reasoning": "QBR_CREATED is a segmented-by column on the Renewal Rate Reporting concept \u2014 misapplying this filter would cause the AI to produce renewal rate figures that diverge from the numbers executives see in the deck.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-cta-arr-snapshot",
+          "type": "custom",
+          "label": "CTA_ARR (from GS_CTA_CAMPAIGN and GS_CTA_SUMMARY) is a point-in-time ARR snapshot captured when the Gainsight CTA was triggered. It is NOT updated retroactively if the renewal outcome changes; do not use CTA_ARR as a proxy for current ARR.",
+          "description": "Prevents the AI from treating CTA_ARR as a live or current ARR value and confusing it with DHW_SST_ARR_REPORT figures.",
+          "ai_reasoning": "CTA_ARR is a measured-by column on the Customer Risk Intervention (CTA) concept, and the same topic includes DHW_SST_ARR_REPORT as a current-ARR source \u2014 without this rule the AI may conflate the two and overstate or understate at-risk ARR.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "7": {
+      "question": "The following terms appear in multiple places across your selected concepts, datasets, and metrics \u2014 each with potentially different meanings. Review each disambiguation pair and confirm the ones that apply to Renewal Rate Reporting. The AI will use confirmed pairs to avoid resolving these terms incorrectly when answering questions in this topic.",
+      "selected": [
+        {
+          "id": "disambig-arr-churn-col-vs-churn-dataset",
+          "type": "custom",
+          "label": "ARR_CHURN (column in exec deck datasets) \u2260 records in the CHURN DATASET",
+          "description": "ARR_CHURN in DWH_EXEC_DECK_RENEWAL_RATES_* is a pre-aggregated dollar figure that rolls up both full cancellations and downgrades into a single renewal-window number \u2014 it is the denominator component of the renewal rate formula. The CHURN DATASET contains individual account-level records with separate DOWNGRADE_AMOUNT and cancellation rows. Summing ARR_CHURN will not equal summing records from the CHURN DATASET; they serve different analytical purposes and must not be used interchangeably as renewal rate inputs.",
+          "ai_reasoning": "ARR_CHURN is a measured-by column on the Renewal Rate Reporting concept and drives the step 6 formula, while CHURN DATASET was independently selected in step 3 \u2014 the AI needs an explicit rule to avoid pulling the wrong source or double-counting churn in renewal rate queries.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-product-group-renewal-rate-newest-vs-legacy",
+          "type": "custom",
+          "label": "\"Product Group Renewal Rate MG newest\" is the active metric; the original \"Product Group Renewal Rate\" is a superseded legacy version",
+          "description": "Two nearly identically named metrics coexist: 'Product Group Renewal Rate' (id: 434427139) and 'Product Group Renewal Rate MG newest' (id: 434429918). The analyst's 'newest' label signals an intentional version replacement. For all live exec reporting and AI-generated answers about product-group renewal rates, the 'newest' version should be used. The original should only be referenced when explicitly conducting a historical comparison or investigating metric lineage.",
+          "ai_reasoning": "Both metrics were selected in step 4 because both are present in the graph, but allowing the AI to blend or freely choose between them would produce inconsistent renewal rate figures \u2014 the 'newest' naming convention is the only disambiguation signal available.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-opportunity-renewal-vs-new-business",
+          "type": "custom",
+          "label": "\"Opportunity\" in this topic = existing-customer renewal pipeline ONLY \u2014 not new-business sales opportunities",
+          "description": "The word 'opportunity' spans two entirely different pipeline types in Optimizely's data: (1) renewal opportunities in DWH_RENEWAL_OPPORTUNITY and Product - Opportunities, tracking contracts approaching expiry for existing customers, and (2) net-new business opportunities in SFDC_OPPORTUNITY, which is outside this topic. Within Renewal Rate Reporting, any reference to 'open opportunities', 'renewal pipeline', or OPPORTUNITY_LINE_ID should be resolved exclusively to the renewal datasets. Mixing in new-business opportunity data would inflate pipeline figures and distort renewal metrics.",
+          "ai_reasoning": "Customer Renewal has a distinct-from edge to Sales Pipeline in the graph, but the term 'opportunity' is shared vocabulary across both concepts \u2014 Product - Opportunities was selected in step 3 specifically for renewal tracking, so the AI needs an explicit scope boundary.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-cta-gainsight-vs-marketing",
+          "type": "custom",
+          "label": "\"CTA\" in this topic = Gainsight CS risk intervention \u2014 NOT a marketing call-to-action",
+          "description": "'CTA' is a widely used marketing abbreviation for 'call-to-action' (e.g. button clicks, campaign prompts). In this topic, CTA refers exclusively to Gainsight Call-to-Action records: triggered risk alerts assigned to CS teams when an account exhibits non-renewal or churn signals. All CTA references should resolve to GS_CTA_CAMPAIGN or GS_CTA_SUMMARY. REASON_NAME and BRAVE_TYPE_GC are the segmentation dimensions; CTA_ARR is the ARR at risk at the moment the alert was opened \u2014 not a marketing engagement metric.",
+          "ai_reasoning": "GS_CTA_CAMPAIGN and GS_CTA_SUMMARY were selected in step 3, and Customer Risk Intervention (CTA) was selected in step 2 \u2014 both surface 'CTA' in a CS risk context that could be silently misread by the AI as a marketing concept.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-dwh-canonical-vs-analyst-copies",
+          "type": "custom",
+          "label": "DWH_EXEC_DECK_RENEWAL_RATES_* = system-of-record source; analyst-space copies (Despi Evangelakou) = working dashboard views",
+          "description": "Two parallel sets of renewal rate datasets exist: DWH-prefixed versions (DWH_EXEC_DECK_RENEWAL_RATES_PRODUCT_GROUP, DWH_EXEC_DECK_RENEWAL_RATES_CUSTOMER) are the canonical data-engineering-maintained tables. The analyst-owned copies under Despi Evangelakou's workspace are user-space versions that power live dashboards and may include minor transformations or differ slightly in freshness. For definitional accuracy and audit purposes, prefer DWH_* sources. For reconciling what executives see in the dashboard, cross-reference the analyst copies. Discrepancies between the two should not be treated as data quality errors without first checking for intentional transformations.",
+          "ai_reasoning": "Both DWH and analyst-space versions were selected in step 3 because both are attached to the Renewal Rate Reporting concept via composes edges \u2014 without this disambiguation the AI may silently blend the two or fail to explain metric discrepancies that arise from the two-tier dataset structure.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-renewal-rate-vs-retention-rate",
+          "type": "custom",
+          "label": "\"Renewal Rate\" (this topic) \u2260 \"Retention Rate\" \u2014 different formulas, different measurement windows",
+          "description": "Renewal Rate in this topic is precisely defined in step 6 as ARR_RENEWAL \u00f7 (ARR_RENEWAL + ARR_CHURN), measured at contract renewal windows across three grains. 'Retention Rate' is a distinct industry concept sometimes used interchangeably by business users, but it is not tracked in this topic and may use a different formula (e.g. beginning-of-period ARR denominator, monthly vs. annual windows). If a user asks about 'customer retention', the AI should clarify whether they mean the renewal rate as defined here or a broader retention metric that falls outside this topic's scope.",
+          "ai_reasoning": "'Retention' and 'renewal' are the most commonly conflated terms in CS analytics \u2014 anchoring the step 6 formula to a specific definition is not sufficient unless the AI also knows to flag 'retention' queries as potentially out-of-scope.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-product-group-vs-product-solution",
+          "type": "custom",
+          "label": "\"Product Group\" and \"Product Solution\" are two distinct segmentation grains \u2014 not synonyms",
+          "description": "The exec renewal deck reports renewal rates at two independent levels of product hierarchy: Product Group (the higher-level roll-up, sourced from DWH_EXEC_DECK_RENEWAL_RATES_PRODUCT_GROUP) and Product Solution (a more granular sub-grouping, sourced from DWH_EXEC_DECK_RENEWAL_RATES_PRODUCT_SOLUTION). A question about 'CMP renewal rate' could legitimately refer to CMP as a Product Group or to a specific Product Solution within it \u2014 the AI should confirm the intended grain when the distinction is material and both datasets are in scope.",
+          "ai_reasoning": "Three exec deck datasets exist at different grains (product group, product solution, customer), all selected in step 3 \u2014 without this rule the AI may aggregate at an incorrect level or conflate a Product Group total with a Product Solution subtotal.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "8": {
+      "question": "How should the Renewal Rate Reporting topic grow over time? Choose an expansion policy that controls how the AI can autonomously extend this topic's scope \u2014 adding new datasets, concepts, and metrics \u2014 as the knowledge graph evolves.",
+      "selected": [
+        {
+          "id": "policy-moderate",
+          "type": "policy",
+          "label": "Moderate \u2014 depth 2, human-confirmed (recommended)",
+          "description": "The topic expands to include entities up to 2 hops from your 5 root concepts, but only those that have been human-confirmed in the graph. In practice, depth 2 would capture CS Team Organizational Hierarchy (which informs Renewal Rate Reporting and enables CSM/VP-level renewal segmentation), Customer Health Monitoring (which feeds leading churn signals into Customer Churn & Downgrade), and Product ARR Bridge & Opal Cannibalization (which contextualises ARR movement trends) \u2014 without crossing into unrelated domains like Sales Pipeline or Opal AI usage. The human-confirmation gate keeps AI-inferred noise out.",
+          "ai_reasoning": "Moderate expansion adds the CS org hierarchy needed to slice renewal rates by CSM, manager, and VP \u2014 a natural analytical extension \u2014 and health signals that contextualise at-risk renewals, while the human-confirmation requirement preserves the formula definitions and disambiguation rules you locked in steps 6 and 7.",
+          "pre_selected": true
+        }
+      ]
+    }
+  },
+  "concept_cluster": {
+    "concept_ids": [
+      "c-ab4eedd6",
+      "c-3e6a8fd4"
+    ],
+    "concept_names": [
+      "Customer Renewal",
+      "Renewal Rate Reporting"
+    ],
+    "internal_edges": 1
+  }
+}

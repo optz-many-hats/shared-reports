@@ -1,0 +1,468 @@
+{
+  "name": "Sales Pipeline",
+  "checklist_state": {
+    "1": {
+      "question": "What is this topic about? Give it a clear name and a short description that explains what business domain it covers, who uses it, and what decisions it supports.",
+      "answer": "Sales Pipeline. Topic covering Sales Pipeline."
+    },
+    "2": {
+      "question": "Which core business concepts are part of your Sales Pipeline topic? These are the key domain areas the AI should understand and connect when answering questions about this topic.",
+      "selected": [
+        {
+          "id": "c-c574a48b",
+          "type": "concept",
+          "label": "Pipeline Quality & Deal Velocity",
+          "description": "Measures the health of Optimizely's sales pipeline through deal age metrics, velocity benchmarks, and end-of-quarter snapshots.",
+          "ai_reasoning": "Directly informs the Sales Pipeline concept in the graph via an explicit `informs` edge, and its datasets (PIPELINE_QUALITY_END_OF_QUARTER_SNAPSHOT, PIPELINE_QUALITY_AGE_TREND, PIPELINE_QUALITY_BENCHMARK) are already bound to the Sales Pipeline concept \u2014 making it a core analytical sub-domain.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-a56e162c",
+          "type": "concept",
+          "label": "Sales Forecasting",
+          "description": "Models expected revenue outcomes from the active sales pipeline using sales-defined forecast categories and a dedicated forecasting model.",
+          "ai_reasoning": "Has a `distinct-from` edge to Sales Pipeline (meaning the graph already recognises them as siblings), and its primary dataset (DWH_GTM_OPS_FORECASTING_MODEL) is driven entirely by pipeline stage and forecast classification columns \u2014 making forecasting a natural lens within the Sales Pipeline topic.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-4c065aa7",
+          "type": "concept",
+          "label": "Sales Targets & Quota",
+          "description": "Captures quarterly pipeline generation and bookings targets broken down by territory, segment, product group, customer type, and super-region.",
+          "ai_reasoning": "Has an explicit `informs` edge pointing to Sales Pipeline in the graph, supplying the goal-setting layer (PIPE_GEN_GOAL, BOOKINGS_GOAL) against which pipeline volume is evaluated \u2014 essential for pipeline attainment analysis.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-a8d736df",
+          "type": "concept",
+          "label": "Sales Rep Performance",
+          "description": "Measures individual account executive effectiveness across win rates, territory coverage, average selling price, and opportunity ownership.",
+          "ai_reasoning": "Pipeline opportunities are owned by individual AEs; this concept shares key segmentation columns (OPPORTUNITY_OWNER_NAME, TERRITORY) with the core pipeline datasets and is a direct consumer of pipeline data for coaching and quota-attainment views.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-c703ebe4",
+          "type": "concept",
+          "label": "Marketing Demand Generation & SDR Funnel",
+          "description": "Tracks the end-to-end marketing-sourced demand generation and SDR outreach funnel from initial contact identification through MQL status to pipeline creation.",
+          "ai_reasoning": "Has a `distinct-from` and an `informs` edge to Sales Pipeline in the graph \u2014 it is the upstream source of net-new pipeline generation, so understanding pipe-gen volume requires this concept.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "3": {
+      "question": "Which datasets should power your Sales Pipeline topic? We've pre-selected every dataset directly connected to your 5 chosen concepts via graph edges \u2014 confirm, deselect any that feel out of scope, or add a custom source if your pipeline data lives elsewhere.",
+      "selected": [
+        {
+          "id": "434533560_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "DWH_GTM_OPP_LEVEL_SALES_DATASET",
+          "description": "GTM opportunity-level sales dataset \u2014 the primary sales-side view of the Salesforce opportunity record, covering stage, territory, and deal attributes.",
+          "ai_reasoning": "Directly composes the core Sales Pipeline concept (c-ffb00c54) via an explicit graph edge; it is the canonical opportunity-level table used across pipeline-stage analysis and territory reporting.",
+          "pre_selected": true
+        },
+        {
+          "id": "446224807_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "DWH_COMBINED_OPP_LEVEL_DATASET",
+          "description": "Shared combined opportunity-level dataset \u2014 merges sales and product dimensions into a single opportunity spine.",
+          "ai_reasoning": "Composes the core Sales Pipeline concept; the shared DWH version provides the cross-functional opportunity spine used for pipeline reporting across GTM and product teams.",
+          "pre_selected": true
+        },
+        {
+          "id": "445182696_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "SALES_COMBINED_OPP_LEVEL_DATASET",
+          "description": "Sales-owned combined opportunity-level dataset \u2014 the analytics-layer curated view of the Salesforce opportunity table.",
+          "ai_reasoning": "Composes the core Sales Pipeline concept; this is the analytics team's primary curated opportunity view that powers Sales pipeline dashboards and stage-movement analysis.",
+          "pre_selected": true
+        },
+        {
+          "id": "442987864_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "GS_GTM_OPS_WUMD_OPP_LEVEL",
+          "description": "Gainsight GTM Ops weekly-updated master data (WUMD) opportunity-level dataset.",
+          "ai_reasoning": "Composes the core Sales Pipeline concept; provides the Gainsight-side opportunity data that GTM Ops uses for pipeline management and weekly pipeline reviews.",
+          "pre_selected": true
+        },
+        {
+          "id": "442280081_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Pipeline Movement Dashboard",
+          "description": "Dataset backing the pipeline movement dashboard \u2014 tracks stage transitions and deal-velocity over time.",
+          "ai_reasoning": "Composes both the core Sales Pipeline concept and the Sales Forecasting concept; it is the primary dataset for visualising deal progression and forecast-category changes quarter-over-quarter.",
+          "pre_selected": true
+        },
+        {
+          "id": "444179879_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Stalled & Ageing Pipe - Cohort 2",
+          "description": "Cohort analysis of stalled and ageing pipeline deals \u2014 surfaces opportunities that have stopped progressing.",
+          "ai_reasoning": "Composes both the core Sales Pipeline concept and the Pipeline Quality & Deal Velocity concept; directly identifies deals at risk of dying in the funnel, a core health signal for this topic.",
+          "pre_selected": true
+        },
+        {
+          "id": "443928067_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "PIPELINE_QUALITY_END_OF_QUARTER_SNAPSHOT",
+          "description": "End-of-quarter snapshot of pipeline quality metrics \u2014 the definitive quarter-close view of deal age and quality.",
+          "ai_reasoning": "Directly composes the Pipeline Quality & Deal Velocity concept selected in Step 2; captures the quarter-close deal-age benchmarks (P90_DAYS, MEDIAN_DAYS) essential for pipeline health reporting.",
+          "pre_selected": true
+        },
+        {
+          "id": "443993307_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "PIPELINE_QUALITY_AGE_TREND",
+          "description": "Time-series trend of pipeline deal age metrics \u2014 tracks how deal age evolves across weeks and quarters.",
+          "ai_reasoning": "Composes the Pipeline Quality & Deal Velocity concept; provides the longitudinal age-trend data needed to track deal velocity degradation and benchmark against historical norms.",
+          "pre_selected": true
+        },
+        {
+          "id": "443928089_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "PIPELINE_QUALITY_BENCHMARK",
+          "description": "Benchmark dataset for pipeline quality \u2014 reference thresholds for deal age, velocity, and stage duration.",
+          "ai_reasoning": "Composes the Pipeline Quality & Deal Velocity concept; supplies the WON_P90_DAYS and MEDIAN_DAYS benchmark values against which live pipeline age is compared to flag unhealthy deals.",
+          "pre_selected": true
+        },
+        {
+          "id": "434528991_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "DWH_GTM_OPS_FORECASTING_MODEL",
+          "description": "GTM Ops forecasting model \u2014 drives the sales forecast using SALES_DEFINED_FORECAST categories and exclusion flags.",
+          "ai_reasoning": "Primary dataset of the Sales Forecasting concept selected in Step 2; contains forecast category, EXCLUDE_FROM_SALES_PIPELINE flag, and EVALUATION_QUARTER segmentation essential for pipeline-to-close projections.",
+          "pre_selected": true
+        },
+        {
+          "id": "433097319_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "SFDC_PIPE_GENERATION_BOOKINGS_TARGETS",
+          "description": "Salesforce pipe generation and bookings targets \u2014 quarterly goals by territory, segment, product group, and customer type.",
+          "ai_reasoning": "Directly composes the Sales Targets & Quota concept; supplies the PIPE_GEN_GOAL and BOOKINGS_GOAL columns that serve as the attainment benchmarks for pipeline volume analysis.",
+          "pre_selected": true
+        },
+        {
+          "id": "434549387_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "OPAL_PERFORMANCE_BY_REP",
+          "description": "Rep-level performance dataset (rolling / current view) \u2014 win rates, ASP, and territory coverage per AE.",
+          "ai_reasoning": "Composes the Sales Rep Performance concept; provides current AE-level pipeline attainment and conversion metrics needed to assess individual rep contribution to pipeline health.",
+          "pre_selected": true
+        },
+        {
+          "id": "434549349_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "OPAL_PERFORMANCE_BY_REP_26Q1",
+          "description": "Rep-level performance dataset for Q1 2026 \u2014 quarterly snapshot of AE-level pipeline and conversion metrics.",
+          "ai_reasoning": "Composes the Sales Rep Performance concept; Q1 2026 is the most recent completed quarter, making it the primary current-period reference for rep pipeline attainment trending.",
+          "pre_selected": true
+        },
+        {
+          "id": "434527561_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "OPAL_PERFORMANCE_BY_REP_25Q4",
+          "description": "Rep-level performance dataset for Q4 2025 \u2014 prior-quarter AE performance snapshot.",
+          "ai_reasoning": "Composes the Sales Rep Performance concept; provides the Q4 2025 baseline for quarter-over-quarter rep performance comparison within this topic.",
+          "pre_selected": true
+        },
+        {
+          "id": "434633396_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "GS_MARKETING_FULL_FUNNEL_SDR_COMPANY",
+          "description": "Company-level full-funnel SDR dataset \u2014 tracks account progression from identified through pipeline creation.",
+          "ai_reasoning": "Composes the Marketing Demand Generation & SDR Funnel concept; captures company-level demand gen inputs that feed net-new pipeline generation, the upstream source of new opportunities.",
+          "pre_selected": true
+        },
+        {
+          "id": "434644455_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "GS_MARKETING_FULL_FUNNEL_SDR_CONTACTS",
+          "description": "Contact-level full-funnel SDR dataset \u2014 tracks individual contacts through MQL to pipeline conversion.",
+          "ai_reasoning": "Composes the Marketing Demand Generation & SDR Funnel concept; provides contact-level funnel data showing how marketing contacts convert to pipeline opportunities by channel and campaign.",
+          "pre_selected": true
+        },
+        {
+          "id": "434651216_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "GS_MARKETING_FULL_FUNNEL_SDR_PIPELINE",
+          "description": "Marketing-sourced pipeline dataset \u2014 the direct bridge between SDR activities and created pipeline opportunities.",
+          "ai_reasoning": "Composes the Marketing Demand Generation & SDR Funnel concept; specifically maps SDR outreach outcomes to pipeline creation, making it the key dataset for pipe-gen attribution analysis.",
+          "pre_selected": true
+        },
+        {
+          "id": "434633292_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "GS_MARKETING_COMPANY",
+          "description": "Master company dataset from Gainsight Marketing \u2014 firmographic and channel-source data for marketing target accounts.",
+          "ai_reasoning": "Composes the Marketing Demand Generation & SDR Funnel concept; provides the account-level marketing context (ACCOUNT_SOURCE, EMPLOYEE_BANDS, COM_CHANNEL) needed to segment pipeline by market profile.",
+          "pre_selected": true
+        },
+        {
+          "id": "443300767_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "GS_MARKETING_ANALYSIS_FULL_FUNNEL_SDR_MQL_HISTORY",
+          "description": "MQL history dataset \u2014 time-series record of Marketing Qualified Lead status changes per account.",
+          "ai_reasoning": "Composes the Marketing Demand Generation & SDR Funnel concept; tracks the MQL funnel history that is the earliest measurable precursor to pipeline creation for marketing-sourced deals.",
+          "pre_selected": true
+        },
+        {
+          "id": "434633449_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "GS_MARKETING_FULL_FUNNEL_SDR_CONTACT_HISTORY",
+          "description": "Contact-level SDR funnel history \u2014 longitudinal record of individual contact stage transitions over time.",
+          "ai_reasoning": "Composes the Marketing Demand Generation & SDR Funnel concept; the contact-history dimension enables cohort analysis of how long contacts take to convert to pipeline opportunities.",
+          "pre_selected": true
+        },
+        {
+          "id": "443444348_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "PROJECT_PRISM_MARKETING_ANALYSIS_FULL_FUNNEL_SDR_PIPELINE",
+          "description": "Project PRISM variant of the full-funnel SDR pipeline dataset \u2014 an alternative analytical cut of marketing-sourced pipeline.",
+          "ai_reasoning": "Composes the Marketing Demand Generation & SDR Funnel concept; the PRISM version offers a parallel analytical view of the SDR pipeline that can validate or cross-reference GS_MARKETING_FULL_FUNNEL_SDR_PIPELINE.",
+          "pre_selected": true
+        },
+        {
+          "id": "434105072_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "Product - Opportunities (Scott Levine)",
+          "description": "Analyst-built Salesforce opportunity dataset used for cross-team pipeline analysis and product-side opportunity tracking.",
+          "ai_reasoning": "Bound to the Sales Pipeline concept via a composes edge (c-be037d2f); this product-team view of pipeline opportunities is useful for validating pipeline data across the Sales and Product analytics stacks.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "4": {
+      "question": "Which metrics and KPIs should your Sales Pipeline topic track? We've pre-selected every metric directly connected to your chosen concepts via graph edges \u2014 confirm, deselect any that feel out of scope, or define a new KPI if a key measure isn't captured yet.",
+      "selected": [
+        {
+          "id": "433099771_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Pipe Gen",
+          "description": "Total pipeline generated \u2014 archived metric tracking cumulative pipeline creation volume across the GTM motion.",
+          "ai_reasoning": "Directly connected to the core Sales Pipeline concept (c-ffb00c54) via a `measured-by` edge; this is the primary volume signal for new pipeline generation activity.",
+          "pre_selected": true
+        },
+        {
+          "id": "433099783_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "AVG Pipe Gen",
+          "description": "Average pipeline generated per period \u2014 normalises pipeline creation to a per-period rate.",
+          "ai_reasoning": "Measured-by edge to the Sales Pipeline concept; complements total Pipe Gen by tracking the velocity of new pipeline creation over time.",
+          "pre_selected": true
+        },
+        {
+          "id": "443824902_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Target Achieved \u2014 Pipe Gen",
+          "description": "Tracks whether pipeline generation targets (PIPE_GEN_GOAL) have been achieved for the current period.",
+          "ai_reasoning": "Directly surfaces attainment against the SFDC_PIPE_GENERATION_BOOKINGS_TARGETS dataset selected in Step 3, making it the core KPI for the Sales Targets & Quota concept included in this topic.",
+          "pre_selected": true
+        },
+        {
+          "id": "434536196_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Win Rate (Deal Count)",
+          "description": "Percentage of opportunities closed-won, measured by deal count volume.",
+          "ai_reasoning": "Measured-by edge to the Sales Rep Performance concept (c-a8d736df); the primary deal-conversion signal for AE pipeline-to-close analysis and rep coaching.",
+          "pre_selected": true
+        },
+        {
+          "id": "434536199_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Win Rate (RSAC Converted)",
+          "description": "Revenue-scaled win rate using RSAC (Revenue-Scaled Addressable Conversion) methodology \u2014 weights conversion by deal value.",
+          "ai_reasoning": "Measured-by edge to Sales Rep Performance; provides a revenue-weighted complement to the deal-count win rate, essential for territory-level pipeline quality assessment.",
+          "pre_selected": true
+        },
+        {
+          "id": "434536204_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "Addressable ASP",
+          "description": "Average selling price across addressable opportunities \u2014 excludes non-addressable deals from the calculation.",
+          "ai_reasoning": "Measured-by edge to Sales Rep Performance; tracks deal-size trends per AE and territory, a key input for quota attainment modelling and pipeline health benchmarking.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "5": {
+      "question": "Which events signal meaningful pipeline activity in your Sales Pipeline topic? Events capture row-level or real-time actions \u2014 such as an opportunity record appearing, a stage transition firing, or an MQL converting to pipeline \u2014 and let the AI detect live signals rather than waiting for the next batch snapshot.",
+      "selected": [
+        {
+          "id": "434564357_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "Product - Opportunities",
+          "description": "Opportunity-level event view (Scott Levine) \u2014 surfaces Salesforce opportunity records as individual row-level events, enabling detection of pipeline changes such as stage progression, close-date movement, and territory reassignment as they occur rather than waiting for a nightly snapshot.",
+          "ai_reasoning": "The only app event directly connected to the Sales Pipeline concept (c-be037d2f) via an explicit `composes` edge of type event \u2014 making it the graph-confirmed real-time signal counterpart to the batch SALES_COMBINED_OPP_LEVEL_DATASET and DWH_GTM_OPP_LEVEL_SALES_DATASET selected in step 3.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "6": {
+      "question": "Does the AI need to know any specific business rules or definitions to answer questions about your Sales Pipeline topic correctly? Review the pre-populated suggestions below \u2014 each was inferred from your selected concepts, datasets, and metrics \u2014 then confirm, deselect, or edit any that apply. Use 'Add custom rule' for anything not covered.",
+      "selected": [
+        {
+          "id": "rule-exclude-from-pipeline",
+          "type": "custom",
+          "label": "Opportunities with EXCLUDE_FROM_SALES_PIPELINE = TRUE must be excluded from all pipeline counts, coverage ratios, and forecast calculations",
+          "description": "The DWH_GTM_OPS_FORECASTING_MODEL contains an EXCLUDE_FROM_SALES_PIPELINE boolean column. When TRUE, the opportunity must not appear in any pipeline volume, attainment, or forecast query, regardless of its stage or close date.",
+          "ai_reasoning": "EXCLUDE_FROM_SALES_PIPELINE is an explicit `filtered-by` edge on the Sales Forecasting concept selected in Step 2 \u2014 failing to apply this filter is the most common cause of overstated pipeline coverage.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-forecast-categories",
+          "type": "custom",
+          "label": "SALES_DEFINED_FORECAST categories: Commit = high-confidence close this quarter; Best Case = possible close; Pipeline = active but early-stage; Omit = intentionally excluded from forecast",
+          "description": "The SALES_DEFINED_FORECAST column in DWH_GTM_OPS_FORECASTING_MODEL drives all forecast roll-ups. The in-quarter forecast = Commit + Best Case. 'Omit' deals remain in pipeline volume but are excluded from the forecast number.",
+          "ai_reasoning": "SALES_DEFINED_FORECAST is a `derives-from` edge on the Sales Forecasting concept and is the primary classification column powering quarter-end forecasts \u2014 without these definitions the AI cannot correctly answer 'what is the forecast?'.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-pipe-gen-definition",
+          "type": "custom",
+          "label": "Pipe Gen = net-new opportunities created in a period (measured by CREATED_DATE). Reactivated, recycled, or re-opened deals must NOT be counted as new Pipe Gen.",
+          "description": "Pipeline generation is triggered by a new Salesforce opportunity record creation, not by stage entry or re-qualification of a previously closed/lost deal. Recycled opportunities inflating Pipe Gen is a known data quality issue to guard against.",
+          "ai_reasoning": "Pipe Gen is the primary metric selected in Step 4 with a `measured-by` edge to the Sales Pipeline concept \u2014 a creation-date-based definition prevents the AI from double-counting reactivated deals in pipeline generation queries.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-pipeline-vs-bookings",
+          "type": "custom",
+          "label": "Pipeline = open (not yet closed) opportunities only. Closed-won deals = Bookings, which belongs to a separate topic. Never mix pipeline volume and bookings figures in the same calculation.",
+          "description": "The graph explicitly marks Sales Pipeline and Sales Bookings as `distinct-from` concepts. Pipeline covers active deals progressing through stages; Bookings covers realised new-revenue commitments from closed-won deals. Attainment calculations should always clarify which they reference.",
+          "ai_reasoning": "Sales Bookings has an explicit `distinct-from` edge to Sales Pipeline in the knowledge graph \u2014 this rule prevents the AI from blending open pipeline with closed-won bookings in coverage or quota-attainment queries.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-pipeline-vs-forecast",
+          "type": "custom",
+          "label": "Pipeline \u2260 Forecast. The pipeline is ALL open opportunities; the forecast is the SUBSET classified as Commit or Best Case in SALES_DEFINED_FORECAST that the team expects to close this quarter.",
+          "description": "When a user asks 'what is the forecast?', route to DWH_GTM_OPS_FORECASTING_MODEL filtered to Commit + Best Case for the current EVALUATION_QUARTER. When asked 'what is in the pipeline?', use the full opportunity-level datasets without forecast-category filtering.",
+          "ai_reasoning": "Sales Forecasting has a `distinct-from` edge to Sales Pipeline and shares the Pipeline Movement Dashboard dataset with it \u2014 this rule prevents the AI from conflating total pipeline volume with the committed forecast number.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-evaluation-quarter",
+          "type": "custom",
+          "label": "Use EVALUATION_QUARTER (not CLOSE_DATE) to assign a deal to an in-quarter forecast. If a deal slips, EVALUATION_QUARTER is updated; CLOSE_DATE may lag behind.",
+          "description": "When deals miss their original close date, the EVALUATION_QUARTER in the forecasting model is revised to the new target quarter while the Salesforce CLOSE_DATE is often only updated after the sales rep acts. For in-quarter pipeline and forecast questions always filter on EVALUATION_QUARTER.",
+          "ai_reasoning": "EVALUATION_QUARTER is a `segmented-by` edge on the Sales Forecasting concept selected in Step 2 \u2014 confusing it with CLOSE_DATE is the most common source of incorrect quarter-end pipeline-to-forecast variance.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-stalled-deal",
+          "type": "custom",
+          "label": "A deal is 'stalled' or 'ageing' when its DAYS_IN_CURRENT_STAGE exceeds the WON_P90_DAYS benchmark for that stage from PIPELINE_QUALITY_BENCHMARK",
+          "description": "The PIPELINE_QUALITY_BENCHMARK dataset provides WON_P90_DAYS (90th-percentile days-in-stage for historically won deals) as the health threshold per stage. Opportunities breaching this threshold are surfaced in the Stalled & Ageing Pipe \u2014 Cohort 2 dataset.",
+          "ai_reasoning": "WON_P90_DAYS is a `measured-by` edge on Pipeline Quality & Deal Velocity and DAYS_IN_CURRENT_STAGE is a `derives-from` edge on the core Sales Pipeline concept \u2014 this rule links the two and defines when the AI should flag a deal as at-risk.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-is-current-qtd",
+          "type": "custom",
+          "label": "Always apply IS_CURRENT_QTD = TRUE when answering 'how healthy is the pipeline right now?' questions against PIPELINE_QUALITY_AGE_TREND or PIPELINE_QUALITY_END_OF_QUARTER_SNAPSHOT",
+          "description": "Both pipeline quality datasets contain multi-quarter historical snapshots. Without IS_CURRENT_QTD = TRUE, queries return a mix of current and prior-quarter data, producing misleading deal-age figures.",
+          "ai_reasoning": "IS_CURRENT_QTD is an explicit `filtered-by` edge on the Pipeline Quality & Deal Velocity concept \u2014 it is the primary time-scoping filter the AI must apply for current-state pipeline health questions.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-rsac-definition",
+          "type": "custom",
+          "label": "Win Rate (RSAC Converted) is revenue-weighted \u2014 a single large won deal has more impact than on the deal-count win rate. Do not use the two win rate metrics interchangeably.",
+          "description": "RSAC (Revenue-Scaled Addressable Conversion) weights each won deal by its value relative to total addressable pipeline. Use Win Rate (Deal Count) for volume/velocity analysis; use RSAC for revenue-quality and territory-level comparisons where deal size varies significantly.",
+          "ai_reasoning": "Both win rate metrics were selected in Step 4 as `measured-by` edges on the Sales Rep Performance concept \u2014 without this distinction the AI will give ambiguous answers when a user simply asks 'what is our win rate?'.",
+          "pre_selected": true
+        },
+        {
+          "id": "rule-addressable-definition",
+          "type": "custom",
+          "label": "Addressable ASP and addressable win rates exclude non-addressable opportunities (renewals, partner-only deals, internal transactions) \u2014 they measure new-logo and expansion sales effectiveness only",
+          "description": "The 'Addressable' qualifier removes opportunities that AEs did not actively compete for, giving a cleaner signal of sales motion effectiveness. Always clarify whether the user wants total or addressable figures before returning ASP or win rate numbers.",
+          "ai_reasoning": "Addressable ASP is a `measured-by` edge on Sales Rep Performance selected in Step 4 \u2014 the AI must understand the addressable filter to avoid inflating or deflating deal-size and conversion benchmarks.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "7": {
+      "question": "Several terms in your Sales Pipeline topic could be interpreted in more than one way depending on who is asking. Each pair below identifies a potential confusion point and proposes a default resolution \u2014 confirm the ones that apply so the AI disambiguates automatically rather than guessing.",
+      "selected": [
+        {
+          "id": "disambig-pipeline-word",
+          "type": "custom",
+          "label": "\"Pipeline\" alone \u2192 all open (non-closed) opportunities; NOT the Pipe Gen metric and NOT the 'Pipeline' forecast category in SALES_DEFINED_FORECAST",
+          "description": "The word 'pipeline' carries three distinct meanings in this topic: (1) the full body of open opportunities (Sales Pipeline concept), (2) the Pipe Gen metric measuring new pipeline created in a period, and (3) the SALES_DEFINED_FORECAST value 'Pipeline' denoting early-stage deals in the forecasting model. Default to meaning (1). When context suggests meaning (2) \u2014 e.g. 'pipeline generated this quarter' \u2014 use CREATED_DATE on the opportunity datasets. When context suggests meaning (3), route to DWH_GTM_OPS_FORECASTING_MODEL filtered on SALES_DEFINED_FORECAST = 'Pipeline'.",
+          "ai_reasoning": "The Pipe Gen metric, the Sales Pipeline concept, and the SALES_DEFINED_FORECAST 'Pipeline' category all share the same word but produce materially different numbers \u2014 this is the single highest-risk lexical collision in the topic.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-win-rate-default",
+          "type": "custom",
+          "label": "\"Win Rate\" unqualified \u2192 Win Rate (Deal Count), not Win Rate (RSAC Converted)",
+          "description": "Both win rate metrics are in scope for this topic. When a user asks 'what is our win rate?' without further qualification, the AI should return the deal-count version and surface the RSAC alternative as a note. Use Win Rate (RSAC Converted) only when the user explicitly requests a revenue-weighted, value-adjusted, or RSAC rate.",
+          "ai_reasoning": "Two win rate metrics were selected in Step 4 with near-identical names \u2014 silently defaulting to the revenue-weighted version would surprise most users who expect a simple deal-count ratio and produces a different number.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-forecast-number-vs-field",
+          "type": "custom",
+          "label": "\"The forecast\" (a number) \u2192 Commit + Best Case sum from DWH_GTM_OPS_FORECASTING_MODEL; NOT the SALES_DEFINED_FORECAST column value on individual deal records",
+          "description": "A user asking 'what is the forecast?' wants an aggregated ARR figure: the sum of opportunities classified as Commit or Best Case for the current EVALUATION_QUARTER. They are not asking for a list of SALES_DEFINED_FORECAST field values per deal. Route aggregate forecast questions to DWH_GTM_OPS_FORECASTING_MODEL grouped by Commit + Best Case; route deal-level category questions to the SALES_DEFINED_FORECAST column itself.",
+          "ai_reasoning": "SALES_DEFINED_FORECAST is a deal-level classification field, but 'the forecast' is a rolled-up business number \u2014 conflating them is the most common cause of incorrect forecast answers and is a gap distinct from the Step 6 Pipeline \u2260 Forecast rule.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-quarter-date-field",
+          "type": "custom",
+          "label": "Quarter intent: 'pipeline in Q3' \u2192 EVALUATION_QUARTER; 'pipeline created in Q3' \u2192 CREATED_DATE; 'pipeline closing in Q3' \u2192 CLOSE_DATE",
+          "description": "Three date fields assign deals to a quarter and each produces a different row count. EVALUATION_QUARTER (in DWH_GTM_OPS_FORECASTING_MODEL) is authoritative for in-quarter forecasting and automatically updates when deals slip. CREATED_DATE is the correct field for Pipe Gen volume. CLOSE_DATE reflects rep-entered expectation but may lag behind for slipped deals. The AI must infer the user's intent from their phrasing before applying any quarter filter.",
+          "ai_reasoning": "All three date fields appear across the selected datasets and each produces a materially different pipeline number \u2014 this rule extends the Step 6 EVALUATION_QUARTER guidance to cover all three date dimensions in one place.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-stalled-vs-no-activity",
+          "type": "custom",
+          "label": "\"Stalled\" deal \u2192 DAYS_IN_CURRENT_STAGE > WON_P90_DAYS (quantitative benchmark); NOT informally 'no activity logged in the last N days'",
+          "description": "The Stalled & Ageing Pipe - Cohort 2 dataset and the PIPELINE_QUALITY_BENCHMARK define stalled using the stage-specific WON_P90_DAYS threshold. Many reps use 'stalled' informally to mean no email, call, or task in the last two weeks. The AI must apply the benchmark-based definition and prompt clarification if the user appears to be asking about activity recency rather than stage age.",
+          "ai_reasoning": "The WON_P90_DAYS rule was established in Step 6, and both the Stalled & Ageing Pipe and PIPELINE_QUALITY_BENCHMARK datasets were selected in Step 3 \u2014 locking in the quantitative definition here prevents the informal interpretation from leaking in.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-conversion-rate-context",
+          "type": "custom",
+          "label": "\"Conversion rate\" in this topic \u2192 Pipeline-to-Closed-Won (Win Rate); NOT MQL-to-Pipeline (marketing/SDR funnel conversion)",
+          "description": "The Marketing Demand Generation & SDR Funnel concept (selected in Step 2) also uses 'conversion' to mean MQL \u2192 Pipeline transitions. Within the Sales Pipeline topic, 'conversion rate' should default to deal-level win rate (Pipeline \u2192 Closed-Won). Redirect to SDR funnel datasets (GS_MARKETING_FULL_FUNNEL_SDR_* and GS_MARKETING_ANALYSIS_FULL_FUNNEL_SDR_MQL_HISTORY) only when the user explicitly asks about 'MQL conversion', 'SDR conversion', or 'top-of-funnel conversion'.",
+          "ai_reasoning": "Both Sales Pipeline and Marketing Demand Generation & SDR Funnel concepts are in scope and both legitimately use 'conversion' \u2014 without this rule the AI may answer an AE win-rate question using marketing funnel data.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-asp-default",
+          "type": "custom",
+          "label": "\"ASP\" or \"average deal size\" \u2192 Addressable ASP (excludes non-addressable deals); NOT Bookings ASP (all closed-won deals)",
+          "description": "Addressable ASP (selected in Step 4) removes renewals, partner-only deals, and internal transactions to measure new-logo and expansion sales effectiveness. Bookings ASP (on the Sales Bookings concept, which is out of scope here) includes all closed-won deals. In this topic, 'ASP' defaults to Addressable ASP for rep-performance and pipeline questions, consistent with the Step 6 addressable definition rule.",
+          "ai_reasoning": "Both ASP variants exist in the app \u2014 Addressable ASP on Sales Rep Performance and Bookings ASP on Sales Bookings \u2014 and a plain 'average selling price' question maps to both; this topic's focus on active pipeline warrants the addressable version as the correct default.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-target-vs-quota",
+          "type": "custom",
+          "label": "\"Target\" / \"quota\" \u2192 PIPE_GEN_GOAL for pipeline questions; BOOKINGS_GOAL for revenue/bookings questions; never a headcount or product-usage quota",
+          "description": "SFDC_PIPE_GENERATION_BOOKINGS_TARGETS contains both PIPE_GEN_GOAL and BOOKINGS_GOAL. When a user asks 'are we on track to hit target?', the AI must determine whether the question is about pipeline generation or bookings before selecting the correct column. Unqualified 'target' in a pipeline-volume question maps to PIPE_GEN_GOAL; in a closed-revenue question it maps to BOOKINGS_GOAL. The word 'quota' in this topic never refers to headcount hiring or product usage quotas.",
+          "ai_reasoning": "Both goal columns are in scope via SFDC_PIPE_GENERATION_BOOKINGS_TARGETS (Step 3) and the Target Achieved \u2014 Pipe Gen metric (Step 4) \u2014 mixing pipeline attainment with bookings attainment in the same answer is a common analytical error.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "8": {
+      "question": "How should your Sales Pipeline topic grow over time? Choose an expansion policy that controls how deeply the AI can draw in connected entities \u2014 datasets, concepts, and metrics \u2014 that aren't explicitly confirmed today but are reachable via graph relationships.",
+      "selected": [
+        {
+          "id": "policy-moderate",
+          "type": "policy",
+          "label": "Moderate \u2014 depth 2, human-confirmed or above  \u2726  Recommended",
+          "description": "Allows the AI to draw in entities up to 2 hops from your confirmed roots, provided they carry at least a human-confirmed trust level. In practice this adds directly adjacent concepts such as Conversation Intelligence (which informs both Sales Pipeline and Sales Rep Performance via the ZRA dataset), GTM Account Coverage & Team Assignment (which informs Sales Rep Performance for territory context), and ICP Account Targeting (which Marketing Demand Generation & SDR Funnel informs for deal-qualification context) \u2014 while stopping well short of distant domains like Customer Churn, ARR, or Product Engagement.",
+          "ai_reasoning": "Moderate expansion is the right balance for a topic this size: the 5 confirmed concepts already have rich, direct graph edges to immediately useful neighbours (Conversation Intelligence for rep coaching, GTM coverage for territory segmentation, ICP targeting for demand-gen qualification) while the 10 step-6 rules and 8 step-7 disambiguation rules provide a strong safety net that prevents conflation with bookings, forecast, or renewal data at depth 2.",
+          "pre_selected": true
+        }
+      ]
+    }
+  }
+}

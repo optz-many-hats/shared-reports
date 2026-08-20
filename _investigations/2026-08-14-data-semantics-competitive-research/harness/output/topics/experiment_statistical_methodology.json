@@ -1,0 +1,424 @@
+{
+  "name": "Experiment Statistical Methodology",
+  "checklist_state": {
+    "1": {
+      "question": "What is the name and description of the business topic you want to create?\n\nPlease provide:\n1. **Topic name** \u2014 a short, clear label (e.g. \"Customer Churn & Retention\", \"Opal AI Adoption\", \"Sales Pipeline Health\")\n2. **Description** \u2014 2\u20134 sentences explaining what this topic covers, what business question it answers, and who the primary audience is (e.g. Sales, CS, Product, Marketing, Finance)",
+      "answer": "Experiment Statistical Methodology. Covers: Experiment Statistical Methodology, A/B Experimentation, Opti ID & Product Instance Management"
+    },
+    "2": {
+      "question": "Which core business concepts belong to the **Experiment Statistical Methodology** topic?\n\nThese concepts form the knowledge backbone the AI will use to understand and answer questions in this domain. The three concepts you named in Step 1 are pre-selected. Review the additional suggestions below and deselect any that don't belong, or add concepts not yet in the graph.",
+      "selected": [
+        {
+          "id": "c-2558432c",
+          "type": "concept",
+          "label": "\u2605 Experiment Statistical Methodology",
+          "description": "Tracks statistical configuration choices made per experiment: model type (frequentist / Bayesian), CUPED variance reduction, guardrail metrics, and outlier filtering. Primary dataset: STATS_MODELS_EXP.",
+          "ai_reasoning": "Exact match \u2014 this is the primary concept named in your topic title and is the root node this topic will be built around.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-cc815ee3",
+          "type": "concept",
+          "label": "\u2605 A/B Experimentation",
+          "description": "Covers the end-to-end experiment lifecycle: creation, impression tracking, conclusion, AI-assisted variants, and Opal-managed experiments. Connects to both the unified experimentation dataset and experiment-action event streams.",
+          "ai_reasoning": "Directly named in your Step 1 description; the graph has an explicit 'informs' edge from Experiment Statistical Methodology into this concept, making it the primary downstream consumer of statistical choices.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-29131c0f",
+          "type": "concept",
+          "label": "\u2605 Opti ID & Product Instance Management",
+          "description": "Tracks the lifecycle and migration status of Optimizely product instances per customer organisation, including the Turnstile instance registry and Opti ID migration state.",
+          "ai_reasoning": "Directly named in your Step 1 description \u2014 provides the product-instance scoping layer needed to attribute statistical methodology choices to the correct customer environment.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-561d438d",
+          "type": "concept",
+          "label": "Feature Experimentation (FX) Usage & Entitlement",
+          "description": "Tracks usage and plan entitlement for Optimizely's Feature Experimentation (FX) product \u2014 the feature-flag and progressive-delivery layer, distinct from traditional web A/B testing.",
+          "ai_reasoning": "Shares the OUTLIER_FILTERING_ENABLED column with Experiment Statistical Methodology and represents the second major experimentation surface where statistical model configuration is directly relevant.",
+          "pre_selected": true
+        },
+        {
+          "id": "c-fa9f4306",
+          "type": "concept",
+          "label": "Experiment Project Collaboration",
+          "description": "Tracks which users collaborate on experimentation projects, their platform roles (ROLE_NAME), and job functions \u2014 the human layer of experiment activity.",
+          "ai_reasoning": "Graph has a direct 'informs' edge from this concept into A/B Experimentation; understanding who configures experiments (e.g. statisticians vs. marketers) is relevant context for statistical methodology adoption.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "3": {
+      "question": "Which datasets power the **Experiment Statistical Methodology** topic?\n\nThe datasets below were pre-selected because they are directly connected to the 5 concepts chosen in Step 2 via graph `composes` or `tracked-in` edges. Review, deselect any that don't belong, and add any datasets not yet listed.",
+      "selected": [
+        {
+          "id": "444177683_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 STATS_MODELS_EXP",
+          "description": "Captures statistical model configuration per experiment: STATS_MODEL_TYPE (frequentist / Bayesian), IS_CUPED (CUPED variance reduction flag), HAS_GUARDRAIL, OUTLIER_FILTERING_ENABLED, and CREATED_MONTH.",
+          "ai_reasoning": "The primary dataset for this topic \u2014 directly connected to Experiment Statistical Methodology via a `composes` edge and contains every core statistical configuration column the topic is built around.",
+          "pre_selected": true
+        },
+        {
+          "id": "434594751_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 OA_EXPERIMENTATION_UNIFIED",
+          "description": "Unified experiment registry covering the full lifecycle of Optimizely experiments across all customer accounts, including EXPERIMENT_TYPE and IS_EXPERIMENT_OPAL_MANAGED flags.",
+          "ai_reasoning": "Connected to A/B Experimentation via `composes` edge; the master experiment registry against which STATS_MODELS_EXP statistical configuration choices are attributed per experiment.",
+          "pre_selected": true
+        },
+        {
+          "id": "442778994_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 Shared.DWH_CS_EXPERIMENT_METRICS_ALL_CUSTOMERS",
+          "description": "Cross-customer experiment metrics dataset covering outcomes, impressions, and experiment-level performance signals across all Optimizely accounts.",
+          "ai_reasoning": "Connected to A/B Experimentation via `composes` edge; essential for understanding how statistical model choices (frequentist vs. Bayesian, CUPED on/off) translate to experiment outcomes at scale across the customer base.",
+          "pre_selected": true
+        },
+        {
+          "id": "443936486_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 AI Assisted Experiments - Experiment",
+          "description": "Primary registry for experiments generated or modified by Opal AI, enabling distinction between AI-created and human-created experiments.",
+          "ai_reasoning": "Connected to A/B Experimentation via `composes` edge; AI-created experiments may apply different statistical model defaults, making this dataset critical for comparing Opal-driven vs. human-configured methodology choices.",
+          "pre_selected": true
+        },
+        {
+          "id": "442011863_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 Product - Experiment Lookup - Qualified Experiments",
+          "description": "Lookup table of experiments that meet qualification criteria for analysis (e.g. minimum impressions, valid configuration).",
+          "ai_reasoning": "Connected to A/B Experimentation via `composes` edge; defines the eligible experiment population for statistical methodology adoption analysis, filtering out invalid or test experiments.",
+          "pre_selected": true
+        },
+        {
+          "id": "436973513_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 Product - EXP - Opal Managed Changes",
+          "description": "Records experiment changes made by the Opal AI agent, including variant and configuration modifications.",
+          "ai_reasoning": "Connected to A/B Experimentation via `composes` edge; needed to segment statistical methodology usage by Opal-managed vs. human-managed experiment changes.",
+          "pre_selected": true
+        },
+        {
+          "id": "440154712_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 Product - EXP - Opal Managed Experiments",
+          "description": "Registry of experiments fully managed end-to-end by the Opal AI platform, with the IS_EXPERIMENT_OPAL_MANAGED dimension.",
+          "ai_reasoning": "Connected to A/B Experimentation via `composes` edge; provides the Opal-managed flag needed to compare statistical methodology adoption between Opal-automated and manually configured experiments.",
+          "pre_selected": true
+        },
+        {
+          "id": "434188334_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 Product - Metric Count by Experiments",
+          "description": "Counts the number of metrics attached to each experiment, indicating the complexity of experiment design.",
+          "ai_reasoning": "Connected to A/B Experimentation via `composes` edge; metric count is a proxy for experiment sophistication and correlates with adoption of advanced statistical features such as guardrail metrics.",
+          "pre_selected": true
+        },
+        {
+          "id": "434558795_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 OA_EXPERIMENTATION_ACTIONS",
+          "description": "Consolidated experiment action table covering created, impression-reached, and concluded lifecycle events across all customer accounts.",
+          "ai_reasoning": "Connected to A/B Experimentation via `composes` edge; the unified action table that bridges statistical configuration choices to concrete experiment lifecycle events.",
+          "pre_selected": true
+        },
+        {
+          "id": "434558948_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 OA_EXPERIMENTATION_ACTIONS_CREATED",
+          "description": "Captures the experiment creation event, including the statistical configuration state at the time of launch.",
+          "ai_reasoning": "Connected to A/B Experimentation via `tracked-in` edge; creation events record the initial statistical model selection, enabling cohort analysis of configuration choices at experiment start.",
+          "pre_selected": true
+        },
+        {
+          "id": "434558953_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 OA_EXPERIMENTATION_ACTIONS_IMPRESSIONS_REACHED",
+          "description": "Tracks when experiments reach their impression or traffic targets.",
+          "ai_reasoning": "Connected to A/B Experimentation via `tracked-in` edge; time-to-impression-target is statistically meaningful and may differ across model types \u2014 Bayesian experiments may reach decision thresholds earlier than frequentist ones.",
+          "pre_selected": true
+        },
+        {
+          "id": "434558958_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 OA_EXPERIMENTATION_ACTIONS_CONCLUDED",
+          "description": "Tracks experiment conclusion events, including EXPERIMENT_OUTCOME (win / loss / inconclusive).",
+          "ai_reasoning": "Connected to A/B Experimentation via `tracked-in` edge; conclusion outcomes are the ultimate measure of whether statistical methodology choices lead to better decisions \u2014 directly links model type to result quality.",
+          "pre_selected": true
+        },
+        {
+          "id": "434559711_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 Product - Turnstile Instances Flattened",
+          "description": "Flattened registry of all Optimizely product instances per customer organisation, sourced from the Turnstile system.",
+          "ai_reasoning": "Connected to Opti ID & Product Instance Management via `composes` edge; provides the product-instance scoping layer needed to attribute statistical methodology choices to the correct customer environment and product line.",
+          "pre_selected": true
+        },
+        {
+          "id": "434094489_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 Opti ID Migration Statuses",
+          "description": "Tracks Opti ID migration state (OPTI_ID_ENABLED, STATUS, DELETED) per customer organisation.",
+          "ai_reasoning": "Connected to Opti ID & Product Instance Management via `composes` edge; migration status determines which unified statistical features are accessible to a customer's experiments, making it essential context for methodology analysis.",
+          "pre_selected": true
+        },
+        {
+          "id": "442011788_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 Temp Fix - Org ID to MCID",
+          "description": "Bridge table mapping Org IDs to Master Customer IDs (MCID) for cross-dataset identity resolution.",
+          "ai_reasoning": "Connected to Opti ID & Product Instance Management via `composes` edge; the Org-to-MCID join is required to link STATS_MODELS_EXP experiment data to customer-level dimensions such as ARR, migration status, and product instance.",
+          "pre_selected": true
+        },
+        {
+          "id": "434852798_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 FX Flag Raw data",
+          "description": "Raw feature flag data for the Feature Experimentation (FX) product, including OUTLIER_FILTERING_ENABLED, USAGE_LIMIT, IMPRESSIONS, and IS_ARCHIVED columns.",
+          "ai_reasoning": "Connected to Feature Experimentation (FX) via `composes` edge; shares the OUTLIER_FILTERING_ENABLED column with Experiment Statistical Methodology, enabling side-by-side comparison of statistical configuration adoption across WX and FX product lines.",
+          "pre_selected": true
+        },
+        {
+          "id": "442779075_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 Shared.DWH_CS_EXPERIMENTATION_USAGE",
+          "description": "CS-owned experimentation usage dataset covering both Web Experimentation (WX) and Feature Experimentation (FX) product lines.",
+          "ai_reasoning": "Connected to Feature Experimentation (FX) via `composes` edge and to A/B Experimentation via an event edge; provides the cross-product usage context required to compare statistical methodology adoption patterns between WX and FX experiment types.",
+          "pre_selected": true
+        },
+        {
+          "id": "442779055_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "dataset",
+          "label": "\u2b50 Shared.DWH_CS_COLLABORATOR",
+          "description": "Tracks which users collaborate on experimentation projects, including platform roles (ROLE_NAME), job departments (JOB_DEPARTMENT), and job roles (JOB_ROLE).",
+          "ai_reasoning": "Connected to Experiment Project Collaboration via `composes` edge; user role data reveals who is selecting statistical configurations (e.g. data scientists vs. marketers), providing the human context layer for methodology adoption analysis.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "4": {
+      "question": "Which metrics and KPIs should the **Experiment Statistical Methodology** topic track?\n\nThese are the measures the AI will surface when users ask about statistical model adoption, CUPED usage, guardrail configuration, and experiment quality. Pre-selected items are either directly connected to your chosen concepts via graph `measured-by` edges, or serve as essential adoption-rate denominators.\n\n\u26a0\ufe0f **Important:** The four core KPIs for this topic \u2014 `% Experiments Using Bayesian Model`, `CUPED Adoption Rate`, `Guardrail Metric Adoption Rate`, and `Outlier Filtering Adoption Rate` \u2014 **do not yet exist** as pre-built metrics in the app. They are pre-marked as custom KPIs to create, derived from the `STATS_MODELS_EXP` dataset selected in Step 3.",
+      "selected": [
+        {
+          "id": "434560274_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "\u2b50 Exp Purple Button Clicked",
+          "description": "Tracks the number of times the experiment creation button is clicked in the Optimizely UI \u2014 a leading signal for new experiment volume entering the statistical model pipeline.",
+          "ai_reasoning": "The only metric in the graph with a confirmed `measured-by` edge to a selected concept (A/B Experimentation); serves as the top-of-funnel volume signal for experiments that will later carry statistical methodology configurations.",
+          "pre_selected": true
+        },
+        {
+          "id": "433030981_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "\u2b50 EXP - Engaged Accounts - Monthly",
+          "description": "Monthly count of customer accounts actively running experiments across all experiment types.",
+          "ai_reasoning": "Essential denominator for computing statistical methodology adoption rates (e.g. '% of engaged accounts using Bayesian model') \u2014 without this baseline population metric, feature-specific adoption percentages cannot be calculated.",
+          "pre_selected": true
+        },
+        {
+          "id": "433058129_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "\u2b50 EXP - Engaged Accounts - WX - Monthly",
+          "description": "Monthly count of engaged Web Experimentation (WX) accounts.",
+          "ai_reasoning": "WX-specific denominator needed to compute statistical methodology adoption rates within the Web Experimentation product line, which is the primary surface for `STATS_MODELS_EXP` data selected in Step 3.",
+          "pre_selected": true
+        },
+        {
+          "id": "433058033_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "\u2b50 EXP - Engaged Accounts - FX - Monthly",
+          "description": "Monthly count of engaged Feature Experimentation (FX) accounts.",
+          "ai_reasoning": "FX-specific denominator enabling cross-product-line comparison of `OUTLIER_FILTERING_ENABLED` adoption between WX and FX \u2014 a direct analytical axis in STATS_MODELS_EXP and FX Flag Raw data.",
+          "pre_selected": true
+        },
+        {
+          "id": "433465850_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "\u2b50 Cumulative Accounts - Ratio Metric - WX",
+          "description": "Cumulative count of WX accounts that have created at least one ratio metric.",
+          "ai_reasoning": "Ratio metrics are an advanced statistical configuration closely coupled to Bayesian and CUPED features; this is the best existing proxy in the metric library for measuring sophisticated statistical methodology adoption in WX.",
+          "pre_selected": true
+        },
+        {
+          "id": "433465851_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "\u2b50 Cumulative Accounts - Ratio Metric - FX",
+          "description": "Cumulative count of FX accounts that have created at least one ratio metric.",
+          "ai_reasoning": "FX counterpart to the WX ratio metric measure \u2014 enables side-by-side comparison of advanced statistical feature adoption between both experimentation product lines selected in Step 3.",
+          "pre_selected": true
+        },
+        {
+          "id": "433466003_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "\u2b50 Cumulative Accounts - Metric Created Using Filtering on Event Properties - WX",
+          "description": "Cumulative count of WX accounts that have created metrics with event-property filtering enabled.",
+          "ai_reasoning": "Event-property filtering is the closest existing proxy signal for `OUTLIER_FILTERING_ENABLED` adoption in WX; useful as a leading indicator of statistical sophistication while the dedicated outlier filtering KPI is being built.",
+          "pre_selected": true
+        },
+        {
+          "id": "433466004_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "metric",
+          "label": "\u2b50 Cumulative Accounts - Metric Created Using Filtering on Event Properties - FX",
+          "description": "Cumulative count of FX accounts that have created metrics with event-property filtering enabled.",
+          "ai_reasoning": "FX counterpart for event-property filtering adoption \u2014 paired with the WX version above, this enables complete cross-product-line outlier filtering analysis from the datasets selected in Step 3.",
+          "pre_selected": true
+        },
+        {
+          "id": "custom-kpi-bayesian-adoption-rate",
+          "type": "custom",
+          "label": "\u2795 % Experiments Using Bayesian Model [New KPI]",
+          "description": "Percentage of experiments where `STATS_MODEL_TYPE = 'bayesian'` out of all experiments with a recorded statistical model in `STATS_MODELS_EXP`. Can be segmented by `CREATED_MONTH` to track adoption trend over time.",
+          "ai_reasoning": "This is the primary adoption KPI for this topic and does not exist in the metric library \u2014 it is the direct numerator/rate expression of the `STATS_MODEL_TYPE` column that the Experiment Statistical Methodology concept is built around.",
+          "pre_selected": true
+        },
+        {
+          "id": "custom-kpi-cuped-adoption-rate",
+          "type": "custom",
+          "label": "\u2795 CUPED Adoption Rate [New KPI]",
+          "description": "Percentage of experiments with `IS_CUPED = TRUE` in `STATS_MODELS_EXP`. Measures uptake of CUPED variance reduction. Can be trended monthly using `CREATED_MONTH`.",
+          "ai_reasoning": "CUPED adoption rate is a core KPI for this topic (`IS_CUPED` column in `STATS_MODELS_EXP`) and has no pre-built metric in the app \u2014 defining it here creates the measurement anchor the AI will use when answering any CUPED-related questions.",
+          "pre_selected": true
+        },
+        {
+          "id": "custom-kpi-guardrail-adoption-rate",
+          "type": "custom",
+          "label": "\u2795 Guardrail Metric Adoption Rate [New KPI]",
+          "description": "Percentage of experiments with `HAS_GUARDRAIL = TRUE` in `STATS_MODELS_EXP`. Measures how many experiments have at least one guardrail metric configured to protect against regressions.",
+          "ai_reasoning": "Guardrail metric adoption is a key product health signal stored directly in the `HAS_GUARDRAIL` column of `STATS_MODELS_EXP` \u2014 this KPI does not exist yet and is critical for the AI to answer any guardrail configuration questions.",
+          "pre_selected": true
+        },
+        {
+          "id": "custom-kpi-outlier-filtering-adoption-rate",
+          "type": "custom",
+          "label": "\u2795 Outlier Filtering Adoption Rate [New KPI]",
+          "description": "Percentage of experiments (WX) or feature flags (FX) with `OUTLIER_FILTERING_ENABLED = TRUE` across `STATS_MODELS_EXP` and `FX Flag Raw data`. Enables cross-product-line comparison.",
+          "ai_reasoning": "Outlier filtering adoption spans both WX and FX product lines (two datasets selected in Step 3) and has no pre-built metric \u2014 creating this KPI unlocks the cross-product-line comparison analysis that is a stated goal of this topic.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "5": {
+      "question": "Which events signal activity in the **Experiment Statistical Methodology** topic?\n\nThese are the event streams the AI will monitor to detect when experiments are created, reach thresholds, conclude, and when statistical configurations change. Events pre-selected below are connected to your chosen concepts via `tracked-in` or `composes` edges in the graph, and belong to datasets already selected in Step 3.",
+      "selected": [
+        {
+          "id": "442811920_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "\u2b50 Shared.DWH_CS_EXPERIMENTATION_USAGE",
+          "description": "Unified experimentation usage event stream spanning both Web Experimentation (WX) and Feature Experimentation (FX) product lines. Fires when customer accounts generate experimentation activity, capturing the cross-product usage patterns directly relevant to statistical methodology adoption analysis.",
+          "ai_reasoning": "The only event in the registry with both a `tracked-in` edge from Feature Experimentation (FX) Usage & Entitlement AND a `composes` edge from A/B Experimentation \u2014 two of the five selected concepts \u2014 making it the highest-signal event stream for this topic and the primary source for cross-product-line adoption comparisons identified in Step 4.",
+          "pre_selected": true
+        },
+        {
+          "id": "442778974_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "\u2b50 Users.Scott Levine.Product - AI Assisted Experiments Summary",
+          "description": "Analyst-level event summary of experiments created or modified by Opal AI, including configuration details and outcomes. Enables segmentation of statistical methodology adoption between AI-generated and human-configured experiments.",
+          "ai_reasoning": "Connected to A/B Experimentation via a `composes` edge; the `AI Assisted Experiments - Experiment` dataset (selected in Step 3) feeds this event \u2014 essential for detecting when Opal-managed experiments carry specific statistical configurations, which was flagged as a key analytical axis in Steps 2\u20134.",
+          "pre_selected": true
+        },
+        {
+          "id": "434559744_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "\u2b50 Users.Scott Levine.Product - Turnstile Instances Flattened",
+          "description": "Event representation of the Turnstile product instance registry per customer organisation. Signals product instance state, providing the customer-environment scoping layer needed to correctly attribute statistical methodology choices to the right account and product line.",
+          "ai_reasoning": "Connected via `composes` edges to both A/B Experimentation and Opti ID & Product Instance Management \u2014 the dataset counterpart (`Product - Turnstile Instances Flattened`) was selected in Step 3 precisely to scope STATS_MODELS_EXP data to correct customer environments.",
+          "pre_selected": true
+        },
+        {
+          "id": "442011809_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+          "type": "event",
+          "label": "\u2b50 Users.Scott Levine.Temp Fix - Org ID to MCID",
+          "description": "Identity resolution event bridging Org IDs to Master Customer IDs (MCID). Required for cross-dataset joins between STATS_MODELS_EXP experiment records and customer-level dimensions such as ARR, Opti ID migration status, and product instance.",
+          "ai_reasoning": "Connected to Opti ID & Product Instance Management via a `composes` edge; the dataset counterpart was selected in Step 3 specifically for this join \u2014 without it, statistical methodology data in STATS_MODELS_EXP cannot be attributed to the correct customer account.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "6": {
+      "question": "What business rules and definitions should the AI know when answering questions about **Experiment Statistical Methodology**?\n\nThe text below is pre-populated from your dataset selections, concept graph edges, and KPI definitions confirmed in Steps 2\u20135. Review each section and edit, remove, or extend anything that doesn't match how your team actually uses these terms.",
+      "answer": "Accept defaults."
+    },
+    "7": {
+      "question": "Are there terms in the **Experiment Statistical Methodology** topic that could be confused with other meanings?\n\nThe AI detected **6 ambiguous terms** across the concepts, datasets, and KPIs selected in Steps 2\u20135. Each rule below tells the AI how to interpret that term **within this topic only**. Review, confirm, or deselect any that don't match your intended meaning \u2014 and add your own if you spot a gap.",
+      "selected": [
+        {
+          "id": "disambig-model-statistical-not-ai",
+          "type": "custom",
+          "label": "\"Model\" = statistical inference type (frequentist or Bayesian) \u2014 NOT an Opal AI/ML model",
+          "description": "In this topic, \"model\" always refers to the STATS_MODEL_TYPE column in STATS_MODELS_EXP \u2014 either 'frequentist' or 'bayesian'. It must never be interpreted as an Opal large language model, an ML prediction model, or a data schema. If a user asks \"which model is most popular among customers?\", the AI must answer using STATS_MODEL_TYPE distribution \u2014 not Opal agent or thread usage data.",
+          "ai_reasoning": "Both Experiment Statistical Methodology and Opal AI concepts are in scope across this topic's selected datasets; in an AI-first product context, \"model\" is critically overloaded and will generate incorrect answers without an explicit disambiguation rule.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-experiment-wx-primary",
+          "type": "custom",
+          "label": "\"Experiment\" (unqualified) = Web Experimentation (WX) A/B test via STATS_MODELS_EXP \u2014 NOT an FX feature flag test",
+          "description": "STATS_MODELS_EXP is a WX-only dataset. When a user asks about \"experiments\" without specifying product line, the AI should default to WX experiments (STATS_MODELS_EXP + OA_EXPERIMENTATION_UNIFIED). FX feature flag tests should be explicitly qualified as \"FX experiments\" or \"feature flags\" to prevent denominator mixing. If cross-product comparison is intended, the user should say \"WX and FX experiments\".",
+          "ai_reasoning": "STATS_MODELS_EXP contains only WX experiments; conflating WX and FX experiment counts when computing Bayesian or CUPED adoption rates would produce inflated or deflated percentages that cannot be reconciled back to either product line.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-adoption-rate-experiment-level",
+          "type": "custom",
+          "label": "\"Adoption rate\" for the 4 custom KPIs = experiment-level percentage (% of experiments), NOT account-level (% of accounts)",
+          "description": "The four custom KPIs created in Step 4 (% Experiments Using Bayesian Model, CUPED Adoption Rate, Guardrail Metric Adoption Rate, Outlier Filtering Adoption Rate) are all **experiment-level** rates: numerator = experiments with the flag TRUE, denominator = all experiments in STATS_MODELS_EXP. The EXP Engaged Accounts metrics also selected in Step 4 are **account-level** measures. These are different denominators and should never be combined without explicit segmentation. If a user asks \"what is CUPED adoption?\", return the experiment-level rate by default.",
+          "ai_reasoning": "Step 4 selected both experiment-level custom KPIs (from STATS_MODELS_EXP) and account-level engagement metrics (EXP Engaged Accounts - Monthly/WX/FX) in the same topic; without this rule, the AI risks mixing denominators when computing or comparing adoption figures.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-outlier-filtering-crossproduct",
+          "type": "custom",
+          "label": "\"Outlier Filtering\" adoption = cross-product metric spanning STATS_MODELS_EXP (WX) AND FX Flag Raw data (FX) \u2014 report both side by side",
+          "description": "The custom Outlier Filtering Adoption Rate KPI (Step 4) intentionally spans both product lines, as OUTLIER_FILTERING_ENABLED exists in both STATS_MODELS_EXP (WX) and FX Flag Raw data (FX). When a user asks about outlier filtering adoption without specifying a product line, the AI must report WX and FX figures separately and compare them \u2014 not silently return only the WX number from STATS_MODELS_EXP.",
+          "ai_reasoning": "This shared column name across two selected datasets is the most structurally risky ambiguity in this topic; defaulting to one product line without disclosure would undercount or misrepresent total outlier filtering usage across the customer base.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-guardrail-experiment-not-ai-safety",
+          "type": "custom",
+          "label": "\"Guardrail\" = HAS_GUARDRAIL experiment configuration flag (statistical) \u2014 NOT an Opal AI content-safety guardrail",
+          "description": "In this topic, \"guardrail\" exclusively refers to a secondary metric attached to an experiment that must not regress for the experiment to be considered a success (HAS_GUARDRAIL = TRUE in STATS_MODELS_EXP). It is completely unrelated to Opal AI's content safety guardrails or product-level feature policies. If a user asks \"how many experiments use guardrails?\", the AI must query HAS_GUARDRAIL in STATS_MODELS_EXP \u2014 not Opal safety or compliance logs.",
+          "ai_reasoning": "Product - EXP - Opal Managed Experiments and AI Assisted Experiments datasets are in scope (selected in Steps 3\u20135), making the AI safety interpretation of \"guardrail\" a realistic mis-routing risk without an explicit rule.",
+          "pre_selected": true
+        },
+        {
+          "id": "disambig-opal-managed-vs-ai-assisted",
+          "type": "custom",
+          "label": "\"Opal-managed experiment\" (IS_EXPERIMENT_OPAL_MANAGED = TRUE) \u2260 \"AI-assisted experiment\" (AI Assisted Experiments dataset) \u2014 overlapping but distinct categories",
+          "description": "An **Opal-managed experiment** (IS_EXPERIMENT_OPAL_MANAGED = TRUE in OA_EXPERIMENTATION_UNIFIED; sourced from Product - EXP - Opal Managed Experiments) is fully automated end-to-end by Opal AI \u2014 Opal owns the entire experiment lifecycle. An **AI-assisted experiment** (AI Assisted Experiments - Experiment dataset) is one where Opal AI contributed a variant, description, or configuration element, but a human retains ownership. An experiment can be both, either, or neither. Do not treat these as synonyms when segmenting statistical methodology adoption by AI involvement.",
+          "ai_reasoning": "Both datasets were selected in Step 3 and serve as segmentation dimensions for methodology adoption; treating them as interchangeable would misrepresent the degree of human oversight \u2014 a key variable for understanding whether Opal or humans are driving statistical configuration choices.",
+          "pre_selected": true
+        }
+      ]
+    },
+    "8": {
+      "question": "How should the **Experiment Statistical Methodology** topic grow over time as the graph evolves?\n\nThis policy controls how the AI automatically expands your topic when new datasets, metrics, concepts, or events are added to Optimizely Analytics. Choose the expansion depth and trust threshold that match your team's governance tolerance.",
+      "selected": [
+        {
+          "id": "policy-moderate",
+          "type": "policy",
+          "label": "\u2696\ufe0f Moderate \u2014 Depth 2, human-confirmed (Recommended)",
+          "description": "The topic automatically **proposes** \u2014 but does not activate \u2014 entities that are 2 graph hops from your 5 root concepts, provided they carry a `human-confirmed` or higher trust score. An admin reviews and approves each proposal before it becomes part of the topic's AI context.\n\n**What this unlocks at depth 2 for this topic:**\n- Concepts reachable via A/B Experimentation: **Opal AI Content Generation** (AI-managed experiment configurations), **Feature Adoption Tracking** (statistical feature uptake signals)\n- Datasets reachable via Feature Experimentation (FX): **FX Status Timeseries** (longitudinal outlier filtering trends)\n- Metrics reachable via EXP Engaged Accounts: **EXP Engaged ARR \u2014 WX/FX** (ARR weighting of adoption rates)\n\n**Best for:** Most teams. Allows the topic to grow with the product without requiring manual curation of every new entity, while keeping a human review gate before the AI uses any expansion.",
+          "ai_reasoning": "Moderate is the right default for this topic because the statistical methodology space is actively evolving (new model types, CUPED enhancements, FX parity work), so the topic will need to grow \u2014 but the 6 disambiguation rules confirmed in Step 7 show the topic has meaningful ambiguity risk that warrants human review before new entities are activated.",
+          "pre_selected": true
+        }
+      ]
+    }
+  },
+  "concept_cluster": {
+    "concept_ids": [
+      "c-2558432c",
+      "c-cc815ee3",
+      "c-29131c0f"
+    ],
+    "concept_names": [
+      "Experiment Statistical Methodology",
+      "A/B Experimentation",
+      "Opti ID & Product Instance Management"
+    ],
+    "internal_edges": 1
+  }
+}

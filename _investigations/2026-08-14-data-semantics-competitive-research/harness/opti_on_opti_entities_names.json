@@ -1,0 +1,1857 @@
+{
+  "app_id": "8659eda3-d769-4af3-b93b-87bc0d6c8238",
+  "datasets": [
+    {
+      "id": "443936486_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "AI Assisted Experiments - Experiment"
+    },
+    {
+      "id": "434531588_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Analytics & Data.Insight & Analysis.01 Marketing.GS_MARKETING_EXECDECK_REGIONAL_PERFORMANCE_QTR"
+    },
+    {
+      "id": "434531595_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Analytics & Data.Insight & Analysis.01 Marketing.GS_MARKETING_EXECDECK_REGIONAL_PERFORMANCE_YR"
+    },
+    {
+      "id": "434533560_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Analytics & Data.Insight & Analysis.02 Sales.DWH_GTM_OPP_LEVEL_SALES_DATASET"
+    },
+    {
+      "id": "434528991_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Analytics & Data.Insight & Analysis.02 Sales.DWH_GTM_OPS_FORECASTING_MODEL"
+    },
+    {
+      "id": "445182696_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Analytics & Data.Insight & Analysis.02 Sales.SALES_COMBINED_OPP_LEVEL_DATASET"
+    },
+    {
+      "id": "434426800_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Analytics & Data.Insight & Analysis.03 Customer Success.DWH_EXEC_DECK_RENEWAL_RATES_CUSTOMER"
+    },
+    {
+      "id": "434426829_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Analytics & Data.Insight & Analysis.03 Customer Success.DWH_EXEC_DECK_RENEWAL_RATES_PRODUCT_GROUP"
+    },
+    {
+      "id": "434426812_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Analytics & Data.Insight & Analysis.03 Customer Success.DWH_EXEC_DECK_RENEWAL_RATES_PRODUCT_SOLUTION"
+    },
+    {
+      "id": "434542282_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Analytics & Data.Insight & Analysis.04 Adhoc.GS_OPAL_FINE_GRAINED_USAGE_OUTPUT"
+    },
+    {
+      "id": "434535446_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Analytics & Data.Insight & Analysis.04 Adhoc.GS_SST_PRODUCT_BRIDGE_PRODUCT_GROUP_EROSION_REGIONAL_BRIDGE"
+    },
+    {
+      "id": "443157841_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Execution_ID"
+    },
+    {
+      "id": "434776285_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "EXP ID"
+    },
+    {
+      "id": "433097428_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Experiment"
+    },
+    {
+      "id": "433030037_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Experiment ID"
+    },
+    {
+      "id": "434567934_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Finance.COA - Accounts"
+    },
+    {
+      "id": "434567983_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Finance.COA - Departments"
+    },
+    {
+      "id": "434567958_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Finance.COA - Subsidiaries"
+    },
+    {
+      "id": "434567974_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Finance.COA - Track Code GL"
+    },
+    {
+      "id": "434568652_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Finance.Deferred Revenue.Deferred Revenue"
+    },
+    {
+      "id": "434568682_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Finance.Deferred Revenue.NetSuite - Customers"
+    },
+    {
+      "id": "434568695_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Finance.Deferred Revenue.NetSuite Consolidated FX Rates"
+    },
+    {
+      "id": "443148020_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Finance.FF_Jira"
+    },
+    {
+      "id": "433042682_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "GTM Bookings (unverified)"
+    },
+    {
+      "id": "433416601_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Marketing.GS_MARKETING_BUDGET"
+    },
+    {
+      "id": "433097426_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Number of Variations"
+    },
+    {
+      "id": "442488981_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Opti on Opti.Opal Usage and Adoption Metrics.Opal_Daily_Usage_copy"
+    },
+    {
+      "id": "434533638_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.New Feature Releases Mapping"
+    },
+    {
+      "id": "433051760_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product  - Segment Event Data"
+    },
+    {
+      "id": "78408603_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - Accounts"
+    },
+    {
+      "id": "433098899_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - ARR Churn"
+    },
+    {
+      "id": "94965969_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - ARR Report"
+    },
+    {
+      "id": "433051552_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - ARR SCD Table"
+    },
+    {
+      "id": "434632149_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - Opal Agents per Thread"
+    },
+    {
+      "id": "434127554_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - Opal Credit Status"
+    },
+    {
+      "id": "434159948_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - Opal Generation Data"
+    },
+    {
+      "id": "442697894_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - Opal Master Table"
+    },
+    {
+      "id": "434633127_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - Opal Onboarding Snapshots"
+    },
+    {
+      "id": "434158271_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - Opal OOTB Agents"
+    },
+    {
+      "id": "433094021_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - Segment Unify Users"
+    },
+    {
+      "id": "433094286_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - Userflow Data"
+    },
+    {
+      "id": "433525783_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Sales.GS_OPAL_PERFORMANCE_BY_REP_25Q3"
+    },
+    {
+      "id": "433526242_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Sales.GS_OPAL_PERFORMANCE_BY_REP_25Q4"
+    },
+    {
+      "id": "433093747_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DHW_SST_ARR_REPORT"
+    },
+    {
+      "id": "446224807_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_COMBINED_OPP_LEVEL_DATASET"
+    },
+    {
+      "id": "442779055_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_CS_COLLABORATOR"
+    },
+    {
+      "id": "442778994_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_CS_EXPERIMENT_METRICS_ALL_CUSTOMERS"
+    },
+    {
+      "id": "442779075_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_CS_EXPERIMENTATION_USAGE"
+    },
+    {
+      "id": "442778977_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_CS_OA_CUSTOMER_DETAIL"
+    },
+    {
+      "id": "433091981_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_CUSTOMER_DETAIL"
+    },
+    {
+      "id": "433094707_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_CUSTOMER_DETAIL_BRIDGE"
+    },
+    {
+      "id": "443925126_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_MARKETING_ATTRIBUTION"
+    },
+    {
+      "id": "433093983_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_OPAL_CUSTOMER_BALANCES"
+    },
+    {
+      "id": "433097983_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_OPAL_CUSTOMER_OVERAGES"
+    },
+    {
+      "id": "433093988_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_OPAL_DAILY_ACCOUNT_USAGE"
+    },
+    {
+      "id": "433093079_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_OPAL_DAILY_PRODUCT_ACCOUNT_USAGE"
+    },
+    {
+      "id": "433093086_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_OPAL_DAILY_USER_ACCOUNT_USAGE"
+    },
+    {
+      "id": "433097547_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_OPAL_FINE_GRAINED_USAGE"
+    },
+    {
+      "id": "434236834_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_RENEWAL_OPPORTUNITY"
+    },
+    {
+      "id": "434568132_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.GS_CTA_CAMPAIGN"
+    },
+    {
+      "id": "433093039_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.GS_CTA_SUMMARY"
+    },
+    {
+      "id": "442778426_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.GS_GTM_DQ_ACCOUNT_BUCKETS"
+    },
+    {
+      "id": "442987864_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.GS_GTM_OPS_WUMD_OPP_LEVEL"
+    },
+    {
+      "id": "443300767_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.GS_MARKETING_ANALYSIS_FULL_FUNNEL_SDR_MQL_HISTORY"
+    },
+    {
+      "id": "434633292_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.GS_MARKETING_COMPANY"
+    },
+    {
+      "id": "434633380_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.GS_MARKETING_CONTACT_HISTORY"
+    },
+    {
+      "id": "434633343_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.GS_MARKETING_CONTACTS"
+    },
+    {
+      "id": "434633396_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.GS_MARKETING_FULL_FUNNEL_SDR_COMPANY"
+    },
+    {
+      "id": "434633449_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.GS_MARKETING_FULL_FUNNEL_SDR_CONTACT_HISTORY"
+    },
+    {
+      "id": "434644455_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.GS_MARKETING_FULL_FUNNEL_SDR_CONTACTS"
+    },
+    {
+      "id": "434651216_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.GS_MARKETING_FULL_FUNNEL_SDR_PIPELINE"
+    },
+    {
+      "id": "434542293_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.GS_OPAL_CREDIT_ALLOTMENTS_OUTPUT"
+    },
+    {
+      "id": "433091036_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.SFDC_ACCOUNT"
+    },
+    {
+      "id": "433093164_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.SFDC_CONTACT"
+    },
+    {
+      "id": "433092962_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.SFDC_CURRENCY_TYPE"
+    },
+    {
+      "id": "433098061_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.SFDC_CUSTOMER_USER_CSM"
+    },
+    {
+      "id": "433098070_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.SFDC_CUSTOMER_USER_CSM_MANAGER"
+    },
+    {
+      "id": "433098526_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.SFDC_CUSTOMER_USER_SVP"
+    },
+    {
+      "id": "433098299_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.SFDC_CUSTOMER_USER_VP"
+    },
+    {
+      "id": "433092113_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.SFDC_OPPORTUNITY"
+    },
+    {
+      "id": "433092707_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.SFDC_OPPORTUNITY_LINE_ITEM"
+    },
+    {
+      "id": "433096552_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.SFDC_PIPE_GENERATION_BOOKINGS_PRODUCT_ANALYTICS_TARGETS"
+    },
+    {
+      "id": "433097319_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.SFDC_PIPE_GENERATION_BOOKINGS_TARGETS"
+    },
+    {
+      "id": "433092787_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.SFDC_PRODUCT"
+    },
+    {
+      "id": "433091755_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.SFDC_USER"
+    },
+    {
+      "id": "434744147_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.SFDC_USER_ROLE"
+    },
+    {
+      "id": "434594023_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Threads"
+    },
+    {
+      "id": "433099867_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Total Experiments"
+    },
+    {
+      "id": "445124247_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "User (Test)"
+    },
+    {
+      "id": "443565734_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.Active_Users_Projects_Workspaces"
+    },
+    {
+      "id": "443563250_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.AI MATURITY MATRIX"
+    },
+    {
+      "id": "434566267_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.ARR_WATERFALL"
+    },
+    {
+      "id": "434566984_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.CUSTOMER_ONBOARDING"
+    },
+    {
+      "id": "434535634_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.DWH_OPAL_FUTURE_EXPIRING_LOTS"
+    },
+    {
+      "id": "434549593_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.DYNAMIC_YEAR_QUARTER"
+    },
+    {
+      "id": "443565726_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.Engagement_Tiers"
+    },
+    {
+      "id": "443562363_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.Feature Adoption Matrix Account"
+    },
+    {
+      "id": "443562381_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.Features Not Adopted Account"
+    },
+    {
+      "id": "434567197_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.GDR"
+    },
+    {
+      "id": "434594445_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.KIMBLE_DELIVERY_ELEMENT_C"
+    },
+    {
+      "id": "434594611_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.KIMBLE_DELIVERY_GROUP_C"
+    },
+    {
+      "id": "434522781_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.Opal_Accounts"
+    },
+    {
+      "id": "434535644_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.Opal_Accounts_derived"
+    },
+    {
+      "id": "434528824_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.Opal_Averages"
+    },
+    {
+      "id": "434549387_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.OPAL_PERFORMANCE_BY_REP"
+    },
+    {
+      "id": "434549349_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.OPAL_PERFORMANCE_BY_REP_26Q1"
+    },
+    {
+      "id": "434527835_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.Opal_User"
+    },
+    {
+      "id": "434535623_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.Opal_User_Derived"
+    },
+    {
+      "id": "442280081_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.Pipeline Movement Dashboard"
+    },
+    {
+      "id": "443562403_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.Product Usage Trend"
+    },
+    {
+      "id": "444177683_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.STATS_MODELS_EXP"
+    },
+    {
+      "id": "443562390_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.Usage Trend Capability Grouping"
+    },
+    {
+      "id": "444209723_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.Datasets.Zendesk_Ticket"
+    },
+    {
+      "id": "444368879_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Andrew Schreiner.Brivo"
+    },
+    {
+      "id": "434534537_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Andrew Schreiner.Customer Accounts"
+    },
+    {
+      "id": "434534663_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Andrew Schreiner.CustomerAI"
+    },
+    {
+      "id": "434534617_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Andrew Schreiner.Non Customer Accounts"
+    },
+    {
+      "id": "433269480_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Charlie Fitz.Opti Analytics Raw Identifies"
+    },
+    {
+      "id": "442784083_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Despi Evangelakou.04 Datasets.EXEC_DECK_RENEWAL_RATES_CUSTOMER"
+    },
+    {
+      "id": "442784105_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Despi Evangelakou.04 Datasets.EXEC_DECK_RENEWAL_RATES_PRODUCT_GROUP"
+    },
+    {
+      "id": "446427729_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Despi Evangelakou.04 Datasets.myZRA"
+    },
+    {
+      "id": "443844799_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Despi Evangelakou.04 Datasets.SNDB_CJ_DIGITAL_WEB_CUSTOMERS"
+    },
+    {
+      "id": "443831428_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Ehsanul Hoque.Internal AI Tools Usage Dashboard.Internal AI Tools"
+    },
+    {
+      "id": "443444348_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Mahmud Nabi.PROJECT_PRISM_MARKETING_ANALYSIS_FULL_FUNNEL_SDR_PIPELINE"
+    },
+    {
+      "id": "446218105_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Maliha Zerin.All_Prodcut_Usage"
+    },
+    {
+      "id": "442796199_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Oli Dorland.DQ_Account_Buckets"
+    },
+    {
+      "id": "446545752_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Oli Dorland.DQ_BACKLOG_WEEKLY"
+    },
+    {
+      "id": "442856932_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Oli Dorland.DQ_BUCKET_MOVEMENTS"
+    },
+    {
+      "id": "446612386_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Oli Dorland.DQ_CLEARANCE_WEEKLY"
+    },
+    {
+      "id": "434852798_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Peter Shao.FX Flag Raw data"
+    },
+    {
+      "id": "442765140_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Peter Shao.FX Flags Raw Data - no transform"
+    },
+    {
+      "id": "442031678_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Peter Shao.FX Status Timeseries"
+    },
+    {
+      "id": "440656914_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Rezwana Hasan.CHURN DATASET"
+    },
+    {
+      "id": "434555577_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Rezwana Hasan.Good Fit/ Bad Fit"
+    },
+    {
+      "id": "443935566_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Rezwana Hasan.S0 to S1"
+    },
+    {
+      "id": "443936497_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Rezwana Hasan.S1 to S2"
+    },
+    {
+      "id": "440316337_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Rezwana Hasan.SFDC_USER_MANAGER_DATA"
+    },
+    {
+      "id": "444179879_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Rezwana Hasan.Stalled & Ageing Pipe - Cohort 2"
+    },
+    {
+      "id": "445975556_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Rubaiya Imam.AE SCORECARD"
+    },
+    {
+      "id": "445617243_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Rubaiya Imam.AE Scorecard query based"
+    },
+    {
+      "id": "445975621_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Rubaiya Imam.AE_OPEN_OPPS_DETAIL_QUERY"
+    },
+    {
+      "id": "443993307_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Rubaiya Imam.PIPELINE_QUALITY_AGE_TREND"
+    },
+    {
+      "id": "443928089_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Rubaiya Imam.PIPELINE_QUALITY_BENCHMARK"
+    },
+    {
+      "id": "443928067_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Rubaiya Imam.PIPELINE_QUALITY_END_OF_QUARTER_SNAPSHOT"
+    },
+    {
+      "id": "446436854_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Sadman Sakib.GS_ONBOARDING_CUSTOMERS"
+    },
+    {
+      "id": "434558795_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Sadman Sakib.OA_EXPERIMENTATION_ACTIONS"
+    },
+    {
+      "id": "434558958_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Sadman Sakib.OA_EXPERIMENTATION_ACTIONS_CONCLUDED"
+    },
+    {
+      "id": "434558948_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Sadman Sakib.OA_EXPERIMENTATION_ACTIONS_CREATED"
+    },
+    {
+      "id": "434558953_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Sadman Sakib.OA_EXPERIMENTATION_ACTIONS_IMPRESSIONS_REACHED"
+    },
+    {
+      "id": "434558800_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Sadman Sakib.OA_EXPERIMENTATION_CUSTOMER_DETAILS"
+    },
+    {
+      "id": "435896830_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Sadman Sakib.OA_EXPERIMENTATION_DAILY_IMPRESSIONS"
+    },
+    {
+      "id": "435607954_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Sadman Sakib.OA_EXPERIMENTATION_MONTHLY_PROJECT_ROLLUP"
+    },
+    {
+      "id": "434594751_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Sadman Sakib.OA_EXPERIMENTATION_UNIFIED"
+    },
+    {
+      "id": "434558886_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Sadman Sakib.OA_OPTI_EXPERIMENT_METRICS"
+    },
+    {
+      "id": "434558812_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Sadman Sakib.OA_OPTI_EXPERIMENT_METRICS_RAW"
+    },
+    {
+      "id": "434584945_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Sadman Sakib.TEST_OA_EXPERIMENTATION_SINGLE_TABLE"
+    },
+    {
+      "id": "433359838_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal Consumption - User Email"
+    },
+    {
+      "id": "434136929_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.OPAL_DAILY_AGENT_ACCOUNT_GENERATION_USAGE"
+    },
+    {
+      "id": "434094489_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opti ID Migration Statuses"
+    },
+    {
+      "id": "443780513_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - AI Assisted Audiences"
+    },
+    {
+      "id": "443785133_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - AI Assisted Experiments - 90 Day Analysis - DO NOT USE"
+    },
+    {
+      "id": "442778962_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - AI Assisted Experiments Summary"
+    },
+    {
+      "id": "434549697_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - CMS Platform Version"
+    },
+    {
+      "id": "434377187_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Custom Agents"
+    },
+    {
+      "id": "436973513_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - EXP - Opal Managed Changes"
+    },
+    {
+      "id": "440154712_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - EXP - Opal Managed Experiments"
+    },
+    {
+      "id": "437192346_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - EXP Dev Agent Impact Analysis - WIP"
+    },
+    {
+      "id": "442011863_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Experiment Lookup - Qualified Experiments"
+    },
+    {
+      "id": "434568752_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Marketing User Roles"
+    },
+    {
+      "id": "434188334_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Metric Count by Experiments"
+    },
+    {
+      "id": "434632416_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Onboarding Data - WORK IN PROGRESS"
+    },
+    {
+      "id": "434105716_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Opal - EAP"
+    },
+    {
+      "id": "442313324_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Opal Contract Start Date"
+    },
+    {
+      "id": "434155119_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Opal Credit Balances"
+    },
+    {
+      "id": "435836607_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Opal Experimentation Analysis Cohorts - WIP"
+    },
+    {
+      "id": "434163882_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Opal Product Mapping"
+    },
+    {
+      "id": "434598650_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Opal Threads per User"
+    },
+    {
+      "id": "446615088_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Opal U Agent Detail"
+    },
+    {
+      "id": "446615124_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Opal U Daily Summary"
+    },
+    {
+      "id": "440323784_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Opal University Accounts"
+    },
+    {
+      "id": "440928444_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Opal University Users"
+    },
+    {
+      "id": "434105072_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Opportunities"
+    },
+    {
+      "id": "434553160_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Partner Lookup"
+    },
+    {
+      "id": "445113326_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Segment Unify Users_copy"
+    },
+    {
+      "id": "434559711_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Turnstile Instances Flattened"
+    },
+    {
+      "id": "446984727_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - VT Lookup"
+    },
+    {
+      "id": "445847260_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.SL - Opal Generation Records"
+    },
+    {
+      "id": "442011788_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Temp Fix - Org ID to MCID"
+    },
+    {
+      "id": "442487604_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Sterling Nostedt.Opal_Daily_Usage"
+    },
+    {
+      "id": "442834195_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Sterling Nostedt.VA_Maturity_Traits"
+    },
+    {
+      "id": "434567163_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Wahid Tawsif Ratul.CMS SaaS - Content Items Created"
+    },
+    {
+      "id": "434558274_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Wahid Tawsif Ratul.Uservoice Metrics"
+    },
+    {
+      "id": "434554945_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Wahid Tawsif Ratul.Zendesk TIcket Metrics"
+    },
+    {
+      "id": "434527561_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Yunus Miah.OPAL_PERFORMANCE_BY_REP_25Q4"
+    },
+    {
+      "id": "434594823_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Yunus Miah.Partner Health Score.PARTNER_CERTIFICATION"
+    },
+    {
+      "id": "434321789_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Yunus Miah.Partner Health Score.PARTNER_METRICS"
+    },
+    {
+      "id": "434594813_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Yunus Miah.Partner Health Score.PARTNER_ONBOARDING_SPECIALISTS"
+    },
+    {
+      "id": "434321908_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Yunus Miah.Partner Health Score.PARTNER_PERFORMANCE_SCORE"
+    },
+    {
+      "id": "434558875_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Yunus Miah.Partner Health Score.PARTNER_PRODUCT_GROUP_AGGREGATE"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "434536204_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Analytics & Data.Insight & Analysis.02 Sales.Addressable ASP"
+    },
+    {
+      "id": "434536205_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Analytics & Data.Insight & Analysis.02 Sales.Bookings ASP"
+    },
+    {
+      "id": "434536196_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Analytics & Data.Insight & Analysis.02 Sales.Win Rate (Deal Count)"
+    },
+    {
+      "id": "434536199_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Analytics & Data.Insight & Analysis.02 Sales.Win Rate (RSAC Converted)"
+    },
+    {
+      "id": "433099789_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Opti on Opti.Archive.Pipeline and Booking Metrics.AVG Booking"
+    },
+    {
+      "id": "433099783_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Opti on Opti.Archive.Pipeline and Booking Metrics.AVG Pipe Gen"
+    },
+    {
+      "id": "433098929_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Opti on Opti.Archive.Pipeline and Booking Metrics.Bookings Dynamic"
+    },
+    {
+      "id": "433099771_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Opti on Opti.Archive.Pipeline and Booking Metrics.Pipe Gen"
+    },
+    {
+      "id": "433180193_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Opti on Opti.Opal Usage and Adoption Metrics.SST Max Date"
+    },
+    {
+      "id": "434560274_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Dashboards.Exp Purple Button Clicked"
+    },
+    {
+      "id": "434548245_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Analytics.Analytics - Engaged ARR - Monthly"
+    },
+    {
+      "id": "434548246_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Analytics.Analytics - Engaged ARR%"
+    },
+    {
+      "id": "434036572_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Analytics.Analytics - Monthly Engaged Paying Accounts"
+    },
+    {
+      "id": "434036803_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Analytics.Analytics - Monthly Non Engaged Paying Accounts"
+    },
+    {
+      "id": "434033960_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Analytics.Analytics - Most Recent ARR"
+    },
+    {
+      "id": "127235101_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.ARR.Most Recent ARR"
+    },
+    {
+      "id": "127117235_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.ARR.Total ARR"
+    },
+    {
+      "id": "433098805_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.CMP.CMP - Casual Accounts"
+    },
+    {
+      "id": "433098804_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.CMP.CMP - Core Accounts"
+    },
+    {
+      "id": "433098806_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.CMP.CMP - Dormant Accounts"
+    },
+    {
+      "id": "433097891_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.CMP.CMP - Engaged ARR %"
+    },
+    {
+      "id": "433097358_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.CMP.CMP - Hisk Risk Accounts"
+    },
+    {
+      "id": "433101427_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.CMP.CMP - Hisk Risk Accounts ARR"
+    },
+    {
+      "id": "433097887_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.CMP.CMP - Monthly Engaged ARR"
+    },
+    {
+      "id": "433097888_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.CMP.CMP - Monthly Non-Engaged ARR"
+    },
+    {
+      "id": "433097360_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.CMP.CMP - Power Accounts"
+    },
+    {
+      "id": "433101428_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.CMP.CMP - Recent ARR"
+    },
+    {
+      "id": "433347435_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.CMP.CMP - Weekly Engaged Account"
+    },
+    {
+      "id": "434522859_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.CMS.CMS - Engaged ARR %"
+    },
+    {
+      "id": "434522855_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.CMS.CMS - Engaged ARR - Monthly"
+    },
+    {
+      "id": "433097602_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.CMS.CMS - Monthly Engaged Paying Accounts"
+    },
+    {
+      "id": "433097603_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.CMS.CMS - Monthly Non Engaged Paying Accounts"
+    },
+    {
+      "id": "433243612_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.CMS.CMS SaaS - Recent ARR"
+    },
+    {
+      "id": "434527583_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Commerce.Commerce Connect - Recent ARR"
+    },
+    {
+      "id": "434527584_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Commerce.Configured Commerce - Recent ARR"
+    },
+    {
+      "id": "433058033_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Engaged Accounts - FX - Monthly"
+    },
+    {
+      "id": "433030981_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Engaged Accounts - Monthly"
+    },
+    {
+      "id": "434523529_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Engaged Accounts - P13 - Monthly"
+    },
+    {
+      "id": "433058129_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Engaged Accounts - WX - Monthly"
+    },
+    {
+      "id": "434520706_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Engaged ARR % - FX - Monthly"
+    },
+    {
+      "id": "434521853_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Engaged ARR % - P13 - Monthly"
+    },
+    {
+      "id": "434521851_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Engaged ARR % - WX - Monthly"
+    },
+    {
+      "id": "433071202_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Engaged ARR - FX - Monthly"
+    },
+    {
+      "id": "433058394_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Engaged ARR - Monthly"
+    },
+    {
+      "id": "433099279_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Engaged ARR - P13 - Monthly"
+    },
+    {
+      "id": "433071201_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Engaged ARR - WX - Monthly"
+    },
+    {
+      "id": "433071197_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Non Engaged Accounts - FX - Monthly"
+    },
+    {
+      "id": "433068856_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Non Engaged Accounts - Monthly"
+    },
+    {
+      "id": "434523530_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Non Engaged Accounts - P13 - Monthly"
+    },
+    {
+      "id": "433068857_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Non Engaged Accounts - WX - Monthly"
+    },
+    {
+      "id": "433071205_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Non Engaged ARR - FX- Monthly"
+    },
+    {
+      "id": "433071203_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Non Engaged ARR - Monthly"
+    },
+    {
+      "id": "434565703_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Non Engaged ARR - P13 - Monthly"
+    },
+    {
+      "id": "433071204_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP - Non Engaged ARR - WX- Monthly"
+    },
+    {
+      "id": "434564979_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP Collab - Engaged Accounts - Monthly"
+    },
+    {
+      "id": "434564977_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP Collab - FX Paying Accounts - Monthly"
+    },
+    {
+      "id": "434564982_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP Collab - Non Engaged Accounts - Monthly"
+    },
+    {
+      "id": "434565143_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP Collab - Non Engaged ARR - Monthly"
+    },
+    {
+      "id": "434565657_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP Collab - Paying Accounts - Monthly"
+    },
+    {
+      "id": "434564978_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.EXP Collab - WX Paying Accounts - Monthly"
+    },
+    {
+      "id": "433099908_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.P13 - Accounts Creating Audiences"
+    },
+    {
+      "id": "433103024_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.P13 - Accounts Creating Behavioral Audiences"
+    },
+    {
+      "id": "433103031_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.EXP.P13 - Accounts Creating Custom Attribute Audiences"
+    },
+    {
+      "id": "434558626_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Accounts - Purple Button Usage Only - Non Paid"
+    },
+    {
+      "id": "434560810_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.CMP Opal - Account Utilization - Accounts Registering Credits - L90D - Paid Accounts "
+    },
+    {
+      "id": "434560018_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.CMP Opal - Account Utilization - Accounts Utilization % - All time"
+    },
+    {
+      "id": "434560804_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.CMP Opal - Account Utilization - Accounts Utilization % - All time - Paid Accounts"
+    },
+    {
+      "id": "434560806_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.CMP Opal - Account Utilization - Accounts Utilization % - L60D - Paid Accounts"
+    },
+    {
+      "id": "434560805_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.CMP Opal - Account Utilization - Accounts Utilization % - L90D - Paid Accounts"
+    },
+    {
+      "id": "434560673_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.CMP Opal - Account Utilization - Total Accounts Eligible - Paid Accounts"
+    },
+    {
+      "id": "434560808_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.CMP Opal - Account Utilization - Total Accounts Using Purple Button - L90D - Paid Accounts"
+    },
+    {
+      "id": "434560807_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.CMP Opal - Account Utilization - Total Accounts Using Specialized Agents - L90D - Paid Accounts"
+    },
+    {
+      "id": "434560655_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.EXP Opal - Account Utilization - Accounts Registering Credits - L90D"
+    },
+    {
+      "id": "434560744_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.EXP Opal - Account Utilization - Accounts Registering Credits - L90D - Paid Accounts"
+    },
+    {
+      "id": "434559776_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.EXP Opal - Account Utilization - Accounts Utilization % - All time"
+    },
+    {
+      "id": "434560751_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.EXP Opal - Account Utilization - Accounts Utilization % - All time - Paid Accounts"
+    },
+    {
+      "id": "434559803_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.EXP Opal - Account Utilization - Accounts Utilization % - L60D"
+    },
+    {
+      "id": "434560754_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.EXP Opal - Account Utilization - Accounts Utilization % - L60D - Paid Accounts"
+    },
+    {
+      "id": "434559804_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.EXP Opal - Account Utilization - Accounts Utilization % - L90D"
+    },
+    {
+      "id": "434560753_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.EXP Opal - Account Utilization - Accounts Utilization % - L90D - Paid Accounts"
+    },
+    {
+      "id": "434559709_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.EXP Opal - Account Utilization - Total Accounts Eligible - All Accounts"
+    },
+    {
+      "id": "434560743_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.EXP Opal - Account Utilization - Total Accounts Eligible - Paid Accounts"
+    },
+    {
+      "id": "434560747_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.EXP Opal - Account Utilization - Total Accounts Using Chat- L90D - Paid Accounts"
+    },
+    {
+      "id": "434560663_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.EXP Opal - Account Utilization - Total Accounts Using Purple Button - L90D"
+    },
+    {
+      "id": "434560748_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.EXP Opal - Account Utilization - Total Accounts Using Purple Button - L90D - Paid Accounts"
+    },
+    {
+      "id": "434560654_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.EXP Opal - Account Utilization - Total Accounts Using Specialized Agents - L90D"
+    },
+    {
+      "id": "434560749_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.EXP Opal - Account Utilization - Total Accounts Using Specialized Agents - L90D - Paid Accounts"
+    },
+    {
+      "id": "435641080_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal  - Cumulative Count - Org Instructions Created"
+    },
+    {
+      "id": "435638922_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal  - Cumulative Count - Personal Instructions Created"
+    },
+    {
+      "id": "434565461_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - % of Threads with an Agent Triggered"
+    },
+    {
+      "id": "434565455_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - % of Threads with an OOTB Agent Triggered"
+    },
+    {
+      "id": "434529118_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Average Credits - All Accounts"
+    },
+    {
+      "id": "434529119_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Average Credits - EAP Accounts"
+    },
+    {
+      "id": "434529117_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Average Credits - Non Paid Accounts"
+    },
+    {
+      "id": "434528638_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Average Credits - Paid Accounts"
+    },
+    {
+      "id": "434590984_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Average Credits - Paid Accounts- Advanced Tier"
+    },
+    {
+      "id": "434632170_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Average Credits - Paid Accounts- Deprioritized Onboarding"
+    },
+    {
+      "id": "434590985_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Average Credits - Paid Accounts- Enhanced Tier"
+    },
+    {
+      "id": "434590986_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Average Credits - Paid Accounts- Essential Tier"
+    },
+    {
+      "id": "434632169_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Average Credits - Paid Accounts- Kickoff Scheduled"
+    },
+    {
+      "id": "434632167_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Average Credits - Paid Accounts- Onboarding Complete"
+    },
+    {
+      "id": "434632168_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Average Credits - Paid Accounts- Onboarding Kicked Off"
+    },
+    {
+      "id": "434632171_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Average Credits - Paid Accounts- Recently Signed Onboarding"
+    },
+    {
+      "id": "434632172_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Average Credits - Paid Accounts- Stalled Onboarding"
+    },
+    {
+      "id": "434554590_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Average Credits - Partner Accounts"
+    },
+    {
+      "id": "434559629_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Average Opal Events- All Accounts"
+    },
+    {
+      "id": "434559631_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Average Opal Events- Paid Accounts"
+    },
+    {
+      "id": "434528637_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Median Credits - All Accounts"
+    },
+    {
+      "id": "434528627_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Median Credits - EAP Accounts"
+    },
+    {
+      "id": "434528629_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Median Credits - Non Paid Accounts"
+    },
+    {
+      "id": "434528628_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Median Credits - Paid Accounts"
+    },
+    {
+      "id": "434590979_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Median Credits - Paid Accounts - Advanced Tier"
+    },
+    {
+      "id": "434632162_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Median Credits - Paid Accounts - Deprioritized Onboarding"
+    },
+    {
+      "id": "434590982_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Median Credits - Paid Accounts - Enhanced Tier"
+    },
+    {
+      "id": "434590983_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Median Credits - Paid Accounts - Essential Tier"
+    },
+    {
+      "id": "434632163_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Median Credits - Paid Accounts - Kickoff Scheduled"
+    },
+    {
+      "id": "434632166_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Median Credits - Paid Accounts - Onboarding Complete"
+    },
+    {
+      "id": "434632157_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Median Credits - Paid Accounts - Onboarding Kicked off"
+    },
+    {
+      "id": "434632164_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Median Credits - Paid Accounts - Recently Signed Onboarding"
+    },
+    {
+      "id": "434632165_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Median Credits - Paid Accounts - Stalled Onboarding"
+    },
+    {
+      "id": "434554589_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Median Credits - Partner Accounts"
+    },
+    {
+      "id": "434559628_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Median Opal Events- All Accounts"
+    },
+    {
+      "id": "434559634_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Median Opal Events- Paid Accounts"
+    },
+    {
+      "id": "435641094_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Opal - Personal Instructions per Active User"
+    },
+    {
+      "id": "443149036_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Opal.Tools Registered - Cumulative"
+    },
+    {
+      "id": "433107625_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.Acquired ODP - Monthly Engaged ARR"
+    },
+    {
+      "id": "433107621_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.Acquired ODP - Monthly Engaged Paying Accounts"
+    },
+    {
+      "id": "433107624_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.Acquired ODP - Monthly Non Engaged ARR"
+    },
+    {
+      "id": "433107620_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.Acquired ODP - Monthly Non Engaged Paying Accounts"
+    },
+    {
+      "id": "434527254_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.Content Recs - Recent ARR"
+    },
+    {
+      "id": "433107613_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.ODP - Engaged ARR %"
+    },
+    {
+      "id": "433107649_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.ODP - Monthly Engaged ARR"
+    },
+    {
+      "id": "433107622_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.ODP - Monthly Engaged Paying Accounts"
+    },
+    {
+      "id": "433107650_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.ODP - Monthly Non Engaged ARR"
+    },
+    {
+      "id": "433107623_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.ODP - Monthly Non Engaged Paying Accounts"
+    },
+    {
+      "id": "433107653_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.ODP - Recent ARR"
+    },
+    {
+      "id": "433107667_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.ODP - Weekly Engaged Paying Accounts"
+    },
+    {
+      "id": "433107608_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.ODP Core - Monthly Engaged ARR"
+    },
+    {
+      "id": "433107618_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.ODP Core - Monthly Engaged Paying Accounts"
+    },
+    {
+      "id": "433107611_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.ODP Core - Monthly Non Engaged ARR"
+    },
+    {
+      "id": "433107619_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.ODP Core - Monthly Non Engaged Paying Accounts"
+    },
+    {
+      "id": "434527253_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Metrics.Platform.Product Recs - Recent ARR"
+    },
+    {
+      "id": "443824902_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Afsara Hannan.01 Dashboard.target_achieved_pipe_gen"
+    },
+    {
+      "id": "434562843_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Alexander Wald.% CMP Accounts That Have Bought Opal"
+    },
+    {
+      "id": "434562841_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Alexander Wald.% CMP Accounts That Have Used Opal (Includes Opal paying and non-Opal paying)"
+    },
+    {
+      "id": "434562839_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Alexander Wald.% Exp Accounts That Have Used Opal (Includes Opal paying and non-Opal paying)"
+    },
+    {
+      "id": "434564541_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Alexander Wald.Agent Executions per Thread"
+    },
+    {
+      "id": "442145716_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Alexander Wald.EXP  -Dev Agent Experiments Qualified"
+    },
+    {
+      "id": "434583669_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Alexander Wald.EXP - AI Assisted Experiment Ratio"
+    },
+    {
+      "id": "434583689_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Alexander Wald.EXP - AI Assisted Experiments"
+    },
+    {
+      "id": "442228526_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Alexander Wald.EXP - AI Assists"
+    },
+    {
+      "id": "434564681_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Alexander Wald.Exp - inactive L30D + active L180Do30 + paid"
+    },
+    {
+      "id": "434562840_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Alexander Wald.Exp Opal - % Accounts That Are Opal Paid"
+    },
+    {
+      "id": "434842938_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Alexander Wald.Exp Opal Adopted - 2 Unique Events L14D"
+    },
+    {
+      "id": "440306654_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Alexander Wald.Ideas Saved / User"
+    },
+    {
+      "id": "434571577_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Alexander Wald.Opal - % of Threads with an Agent Triggered (any type)"
+    },
+    {
+      "id": "434564680_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Alexander Wald.Re-Engagement Campaign"
+    },
+    {
+      "id": "444773131_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Alexander Whitney.Connector Status Update"
+    },
+    {
+      "id": "444773117_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Alexander Whitney.Opal Personalization Start"
+    },
+    {
+      "id": "434567522_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Amit Shimshi.Opal - % of Threads with an Agent Triggered"
+    },
+    {
+      "id": "434567524_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Amit Shimshi.Opal - % of Threads with an Agent Triggered_copy"
+    },
+    {
+      "id": "434567526_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Amit Shimshi.Opal - % of Threads with an Agent Triggered_copy1"
+    },
+    {
+      "id": "434567521_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Amit Shimshi.Opal - % of Threads with an OOTB Agent Triggered"
+    },
+    {
+      "id": "434141541_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Charlie Fitz.Analytics - Paying Accounts"
+    },
+    {
+      "id": "434560507_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Charlie Fitz.Analytics Data Users"
+    },
+    {
+      "id": "434523090_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Charlie Fitz.CF Metric"
+    },
+    {
+      "id": "434643480_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Charlie Fitz.CF Metric2"
+    },
+    {
+      "id": "436959865_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Charlie Fitz.Data Users"
+    },
+    {
+      "id": "433418431_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Charlie Fitz.OA Sharing Users"
+    },
+    {
+      "id": "445148354_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Charlie Fitz.Peter's Flag Metric"
+    },
+    {
+      "id": "434571720_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Charlie Fitz.Test123"
+    },
+    {
+      "id": "442760937_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Despi Evangelakou.Avg Emails Delivered"
+    },
+    {
+      "id": "442759896_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Despi Evangelakou.Bounce Rate"
+    },
+    {
+      "id": "442759634_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Despi Evangelakou.Click Rate"
+    },
+    {
+      "id": "442759633_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Despi Evangelakou.Open Rate"
+    },
+    {
+      "id": "442696464_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Despi Evangelakou.User Click Rate"
+    },
+    {
+      "id": "442759797_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Despi Evangelakou.User Open Rate"
+    },
+    {
+      "id": "442825366_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Despi Evangelakou.Volume of Emails Received - Cohorted by Sent Month"
+    },
+    {
+      "id": "434598564_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Jett Sy.Exps started that saved a dev agent change"
+    },
+    {
+      "id": "434430093_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Michael Graves.Global Renewal Rate"
+    },
+    {
+      "id": "434427350_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Michael Graves.MG_renewal_rate_%_attempt"
+    },
+    {
+      "id": "434427425_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Michael Graves.Product Group Renewal"
+    },
+    {
+      "id": "434427139_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Michael Graves.Product Group Renewal Rate"
+    },
+    {
+      "id": "434429918_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Michael Graves.Product Group Renewal Rate MG newest"
+    },
+    {
+      "id": "441975145_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Michiel Dorjee.Feedback"
+    },
+    {
+      "id": "434558394_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Neil Mullarkey.Simple Tools"
+    },
+    {
+      "id": "434556935_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Accounts - Over 250 Credit Threshold"
+    },
+    {
+      "id": "434556327_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Accounts - Purple Button Usage Only"
+    },
+    {
+      "id": "443879501_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.AI Assisted Experiments - L90D"
+    },
+    {
+      "id": "433347436_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.CMP - Weekly Engaged Account and Opal "
+    },
+    {
+      "id": "434560812_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.CMP Opal - Account Utilization - Total Accounts Using Chat- L90D - Paid Accounts"
+    },
+    {
+      "id": "433466004_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Cumulative Accounts - Metric Created Using Filtering on Event Properties - FX"
+    },
+    {
+      "id": "433466003_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Cumulative Accounts - Metric Created Using Filtering on Event Properties - WX"
+    },
+    {
+      "id": "433466005_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Cumulative Accounts - Metric Created Using Metrics Hub - EXP"
+    },
+    {
+      "id": "433465851_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Cumulative Accounts - Ratio Metric - FX"
+    },
+    {
+      "id": "433465850_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Cumulative Accounts - Ratio Metric - WX"
+    },
+    {
+      "id": "433569659_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Cumulative Accounts - UA"
+    },
+    {
+      "id": "434595776_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.EXP  -Dev Agent Experiments Qualified"
+    },
+    {
+      "id": "441454897_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.EXP - AI Assisted Experiment Ratio by Account"
+    },
+    {
+      "id": "436973204_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.EXP - Cumulative Experiments - Dev Agent"
+    },
+    {
+      "id": "434752322_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.EXP - Dev Agent Utilization (Engaged Accounts)"
+    },
+    {
+      "id": "433347514_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.EXP - Engaged Accounts with Opal - Monthly"
+    },
+    {
+      "id": "442110752_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.EXP - Qualified Experiments - TEST"
+    },
+    {
+      "id": "443952451_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.EXP - Total Experiments AI Assisted, L90D"
+    },
+    {
+      "id": "434559773_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.EXP Opal - Account Utilization - Total Accounts Using Chat- L90D"
+    },
+    {
+      "id": "434776266_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Mean Dev Agent Runs"
+    },
+    {
+      "id": "434323329_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Median Credits"
+    },
+    {
+      "id": "434323478_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Median Credits - Active Accounts"
+    },
+    {
+      "id": "434776253_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Median Dev Agent Runs"
+    },
+    {
+      "id": "434556689_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal - Accounts - Standalone Agents"
+    },
+    {
+      "id": "434556688_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal - Accounts - Workflow Agents"
+    },
+    {
+      "id": "436263584_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal - Average Experiment Started Increase / Decrease"
+    },
+    {
+      "id": "434106573_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal - Cumulative Users"
+    },
+    {
+      "id": "442322771_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal - Median Credits - Paid Accounts - Q1 2025 Cohort"
+    },
+    {
+      "id": "442322761_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal - Median Credits - Paid Accounts - Q1 2026 Cohort"
+    },
+    {
+      "id": "442322770_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal - Median Credits - Paid Accounts - Q2 2025 Cohort"
+    },
+    {
+      "id": "442322769_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal - Median Credits - Paid Accounts - Q3 2025 Cohort"
+    },
+    {
+      "id": "442322768_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal - Median Credits - Paid Accounts - Q4 2025 Cohort"
+    },
+    {
+      "id": "434670505_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal - Stickiness (DAU / WAU)"
+    },
+    {
+      "id": "434670522_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal - Stickiness (WAU/ MAU)"
+    },
+    {
+      "id": "433345124_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal - Total Eligible Users - CMP"
+    },
+    {
+      "id": "433345043_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal - Total Eligible Users - EXP"
+    },
+    {
+      "id": "434565452_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal - Total Threads"
+    },
+    {
+      "id": "434670506_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal - WAU"
+    },
+    {
+      "id": "434091893_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Opal Accounts"
+    },
+    {
+      "id": "433103022_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.P13 - Most Recent ARR"
+    },
+    {
+      "id": "433103023_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.P13 Accounts - Monthly"
+    },
+    {
+      "id": "436295072_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Qualified Experiments per Account - Customers not using Dev Agent"
+    },
+    {
+      "id": "436295071_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Qualified Experiments per Account - Customers using Dev Agent"
+    },
+    {
+      "id": "436295074_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Started Experiments per Account - Customers not using Dev Agent"
+    },
+    {
+      "id": "436295076_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Started Experiments per Account - Customers using Dev Agent"
+    },
+    {
+      "id": "433109299_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Talha Yamin.% of Credits Consumed"
+    },
+    {
+      "id": "433240861_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Talha Yamin.Latest Snapshot Date - Metric"
+    },
+    {
+      "id": "434598574_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Wahid Tawsif Ratul.Chats which called the search docs tool & created a zendesk ticket"
+    },
+    {
+      "id": "434598575_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Wahid Tawsif Ratul.Chats which called the search docs tool & didn't created a zendesk ticket"
+    },
+    {
+      "id": "434598592_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Wahid Tawsif Ratul.Users who called the search docs tool & didn't created a zendesk ticket"
+    }
+  ],
+  "events": [
+    {
+      "id": "433056930_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product  - Segment Event Data"
+    },
+    {
+      "id": "94966041_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - ARR Report"
+    },
+    {
+      "id": "434632154_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - Opal Agents per Thread"
+    },
+    {
+      "id": "434159960_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - Opal Generation Data"
+    },
+    {
+      "id": "434633148_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - Opal Onboarding Snapshots"
+    },
+    {
+      "id": "433094355_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Product.Datasets.Product - Userflow Data"
+    },
+    {
+      "id": "433107291_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DHW_SST_ARR_REPORT"
+    },
+    {
+      "id": "442811920_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_CS_EXPERIMENTATION_USAGE"
+    },
+    {
+      "id": "433107263_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_OPAL_DAILY_PRODUCT_ACCOUNT_USAGE"
+    },
+    {
+      "id": "433107265_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_OPAL_DAILY_USER_ACCOUNT_USAGE"
+    },
+    {
+      "id": "433107256_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Shared.DWH_OPAL_FINE_GRAINED_USAGE"
+    },
+    {
+      "id": "433269518_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Charlie Fitz.Opti Analytics Raw Identifies"
+    },
+    {
+      "id": "434140224_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.OPAL_DAILY_AGENT_ACCOUNT_GENERATION_USAGE"
+    },
+    {
+      "id": "442778974_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - AI Assisted Experiments Summary"
+    },
+    {
+      "id": "434632445_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Onboarding Data - WORK IN PROGRESS"
+    },
+    {
+      "id": "435836620_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Opal Experimentation Analysis Cohorts - WIP"
+    },
+    {
+      "id": "434598654_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Opal Threads per User"
+    },
+    {
+      "id": "446615143_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Opal U Agent Detail"
+    },
+    {
+      "id": "446615142_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Opal U Daily Summary"
+    },
+    {
+      "id": "434564357_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Opportunities"
+    },
+    {
+      "id": "434559744_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Product - Turnstile Instances Flattened"
+    },
+    {
+      "id": "445847283_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.SL - Opal Generation Records"
+    },
+    {
+      "id": "442011809_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Scott Levine.Temp Fix - Org ID to MCID"
+    },
+    {
+      "id": "442488955_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Sterling Nostedt.Opal_Daily_Usage"
+    },
+    {
+      "id": "434567173_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Wahid Tawsif Ratul.CMS SaaS - Content Items Created"
+    },
+    {
+      "id": "434558314_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Wahid Tawsif Ratul.Uservoice Metrics"
+    },
+    {
+      "id": "434555018_8659eda3-d769-4af3-b93b-87bc0d6c8238",
+      "name": "Users.Wahid Tawsif Ratul.Zendesk TIcket Metrics"
+    }
+  ]
+}
